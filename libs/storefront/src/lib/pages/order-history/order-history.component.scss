@@ -11,5 +11,9 @@
 
   @media (max-width: $xs-max) {
     padding: 10px;
+
+    .ccr-table mat-cell:first-of-type {
+      padding-left: 0 !important;
+    }
   }
 }

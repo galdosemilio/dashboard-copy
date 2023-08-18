@@ -39,13 +39,18 @@
         <div *ngFor="let option of options; let i = index" class="flavors-wrap" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
           <p class="flavor-title">{{ option.name }}</p>
           <div class="flavors" fxFlex fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
-            <mat-select [(value)]="option.selected" (selectionChange)="onSelectOption(i, $event.value)">
-              <mat-option *ngFor="let value of option.values" [value]="value.id">{{ value.name }}</mat-option>
-            </mat-select>
+            <mat-form-field>
+              <mat-select *ngIf="!isMobileDevice" [(value)]="option.selected" (selectionChange)="onSelectOption(i, $event.value)">
+                <mat-option *ngFor="let value of option.values" [value]="value.id">{{ value.name }}</mat-option>
+              </mat-select>
+              <select *ngIf="isMobileDevice" matNativeControl [(value)]="option.selected" (change)="onSelectOption(i, $event.target.value)">
+                <option *ngFor="let value of option.values" [value]="value.id">{{ value.name }}</option>
+              </select>
+            </mat-form-field>
           </div>
         </div>
       </div>
-      <button class="ccr-button" *ngIf="!planId" (click)="addItemToCart()"><mat-icon>shopping_cart</mat-icon>{{ 'GLOBAL.ADD_TO_CART' | translate }}</button>
+      <button [ngClass]="{'ccr-button': true, 'ccr-button-mobile': isMobileDevice}" class="" *ngIf="!planId" (click)="addItemToCart()"><mat-icon>shopping_cart</mat-icon>{{ 'GLOBAL.ADD_TO_CART' | translate }}</button>
       <button class="ccr-button" *ngIf="planId && !subscribed" [disabled]="isLoading" (click)="onSubscribe()">
         {{ 'GLOBAL.SUBSCRIBE' | translate }}
       </button>

@@ -38,7 +38,7 @@
       <h3>{{ 'GLOBAL.NO_SEARCH_RESULTS' | translate }}</h3>
       <a (click)="onClearSearch()">{{ 'GLOBAL.CLEAR_SEARCH' | translate }}</a>
     </div>
-    <div class="blank-slate" *ngIf="!displayCategories && !products.length">
+    <div class="blank-slate" *ngIf="!displayNoResults && !displayCategories && !products.length">
       <mat-icon>shopping_bag</mat-icon>
       <h3>{{ 'GLOBAL.NO_PRODUCTS_RESULTS' | translate }}</h3>
     </div>
@@ -55,7 +55,7 @@
         <img *ngIf="category.images?.length; else noCategoryImage" [src]="category.images[0]" alt=""/>
         <div class="category-content">
           <p>{{ category.attributes.name }}</p>
-          <p [innerHTML]="category.attributes.description"></p>
+          <p *ngIf="category.attributes.description" [innerHTML]="category.attributes.description"></p>
         </div>
       </div>
     </div>

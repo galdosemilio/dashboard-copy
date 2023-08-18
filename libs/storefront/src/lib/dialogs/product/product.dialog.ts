@@ -13,6 +13,7 @@ import {
   NgxGalleryOptions
 } from '@kolkov/ngx-gallery'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { DeviceDetectorService } from 'ngx-device-detector'
 
 @UntilDestroy()
 @Component({
@@ -31,6 +32,7 @@ export class StorefrontProductDialog implements OnInit {
   public planId: string
   public subscribed = false
   public isLoading = false
+  public isMobileDevice: boolean
   public get galleryOptions(): NgxGalleryOptions[] {
     return [
       {
@@ -42,6 +44,11 @@ export class StorefrontProductDialog implements OnInit {
         thumbnailSize: NgxGalleryImageSize.Contain,
         imageArrows: this.productImages.length > 1,
         thumbnails: this.productImages.length > 1
+      },
+      {
+        breakpoint: 450,
+        width: '100%',
+        preview: false
       }
     ]
   }
@@ -57,12 +64,14 @@ export class StorefrontProductDialog implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: StorefrontProduct,
     private dialogRef: MatDialogRef<{ id: string; quantity: number }>,
-    private storefront: StorefrontService
+    private storefront: StorefrontService,
+    private deviceDetector: DeviceDetectorService
   ) {
     dialogRef.disableClose = true
   }
 
   ngOnInit(): void {
+    this.isMobileDevice = this.deviceDetector.isMobile()
     this.product = this.data
     this.options = this.data.options
     this.defaultVariant = this.data.variants.find(
