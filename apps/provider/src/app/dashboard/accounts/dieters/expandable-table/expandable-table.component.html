@@ -42,6 +42,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
           <div>
             <ccr-table-sort-header property="metric.value">
               <span>{{ 'MEASUREMENT.BLOOD_PRESSURE' | translate }}</span>
+              <mat-icon (click)="openBloodChart(); $event.stopPropagation();">help_outline</mat-icon>
             </ccr-table-sort-header>
           </div>
         </td>

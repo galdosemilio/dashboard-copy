@@ -21,7 +21,8 @@ import {
   DieterListingOrgItem,
   DieterListingPackageItem,
   PromptDialog,
-  PromptDialogData
+  PromptDialogData,
+  ViewImageDialog
 } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import { Store } from '@ngrx/store'
@@ -175,6 +176,17 @@ export class DietersExpandableTableComponent implements OnDestroy, OnInit {
     return additionalClass
       ? { ...defaultClasses, [additionalClass]: true }
       : defaultClasses
+  }
+
+  openBloodChart() {
+    this.dialog.open(ViewImageDialog, {
+      data: {
+        imageUrl:
+          'https://cdn.coachcare.com/corporate/Other/blood-pressure-readings.png',
+        title: 'Blood pressure chart'
+      },
+      width: '40vw'
+    })
   }
 
   convertToReadableFormat(
