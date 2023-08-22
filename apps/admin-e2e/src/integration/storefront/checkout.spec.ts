@@ -15,7 +15,7 @@ describe('Loading Storefront product dialog', function () {
 
     cy.get('[data-cy="shipping-address"]')
       .find('[data-cy="shipping-address-name"]')
-      .contains('Admin Coachcare')
+      .contains('Zhang Xin')
     cy.get('[data-cy="shipping-address"]')
       .find('[data-cy="shipping-address-street"]')
       .contains('250 King St')
@@ -51,7 +51,7 @@ describe('Loading Storefront product dialog', function () {
 
     cy.get('mat-dialog-actions').find('.ccr-button').eq(0).click()
 
-    cy.wait('@apiCallUpdateAddress').should((xhr) => {
+    cy.wait('@apiCallPostAddress').should((xhr) => {
       expect(xhr.request.url).to.contain(`1.0/account`)
       expect(xhr.response.statusCode).to.equal(204)
     })

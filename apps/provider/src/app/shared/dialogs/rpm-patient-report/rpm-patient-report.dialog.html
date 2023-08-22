@@ -29,7 +29,7 @@
 
             <ccr-date-input [max]="maxDate" [min]="minEndDate" [placeholder]="'BOARD.END_DATE' | translate" formControlName="endDate"></ccr-date-input>
 
-            <mat-form-field *ngIf="serviceTypes.length > 0" cy-data="patient-reports-service-type">
+            <mat-form-field *ngIf="serviceTypes.length > 0" data-cy="patient-reports-service-type">
                 <mat-select formControlName="serviceType" [placeholder]="'BOARD.SERVICE_TYPE' | translate">
                     <mat-option *ngFor="let serviceType of serviceTypes" [value]="serviceType.value">{{ serviceType.viewValue }}</mat-option>
                 </mat-select>
@@ -58,6 +58,6 @@
     *ngIf="status === 'ready' || status === 'downloading'"
     [disabled]="!this.account || status !== 'ready' || form.invalid"
     (click)="onDownloadReport()"
-    cy-data="download-button"
+    data-cy="download-button"
     class="ccr-button" mat-button>{{ 'GLOBAL.DOWNLOAD' | translate }}</button>
 </mat-dialog-actions>

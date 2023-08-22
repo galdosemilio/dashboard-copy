@@ -38,14 +38,59 @@
       "public_metadata": {}
     },
     "relationships": {
-      "line_items": { "data": [{ "id": "506", "type": "line_item" }] },
-      "variants": { "data": [{ "id": "72", "type": "variant" }] },
-      "promotions": { "data": [] },
-      "payments": { "data": [{ "id": "305", "type": "payment" }] },
-      "shipments": { "data": [{ "id": "424", "type": "shipment" }] },
-      "user": { "data": { "id": "387", "type": "user" } },
-      "billing_address": { "data": { "id": "1434", "type": "address" } },
-      "shipping_address": { "data": { "id": "1433", "type": "address" } }
+      "line_items": {
+        "data": [
+          {
+            "id": "506",
+            "type": "line_item"
+          }
+        ]
+      },
+      "variants": {
+        "data": [
+          {
+            "id": "72",
+            "type": "variant"
+          }
+        ]
+      },
+      "promotions": {
+        "data": []
+      },
+      "payments": {
+        "data": [
+          {
+            "id": "305",
+            "type": "payment"
+          }
+        ]
+      },
+      "shipments": {
+        "data": [
+          {
+            "id": "424",
+            "type": "shipment"
+          }
+        ]
+      },
+      "user": {
+        "data": {
+          "id": "387",
+          "type": "user"
+        }
+      },
+      "billing_address": {
+        "data": {
+          "id": "1434",
+          "type": "address"
+        }
+      },
+      "shipping_address": {
+        "data": {
+          "id": "1433",
+          "type": "address"
+        }
+      }
     }
   },
   "included": [
@@ -77,8 +122,15 @@
         "public_metadata": {}
       },
       "relationships": {
-        "variant": { "data": { "id": "72", "type": "variant" } },
-        "digital_links": { "data": [] }
+        "variant": {
+          "data": {
+            "id": "72",
+            "type": "variant"
+          }
+        },
+        "digital_links": {
+          "data": []
+        }
       }
     },
     {
@@ -273,18 +325,47 @@
         "display_compare_at_price": "$0.00"
       },
       "relationships": {
-        "variants": { "data": [] },
-        "option_types": { "data": [] },
-        "product_properties": { "data": [] },
-        "taxons": { "data": [{ "id": "11", "type": "taxon" }] },
-        "images": {
+        "variants": {
+          "data": []
+        },
+        "option_types": {
+          "data": []
+        },
+        "product_properties": {
+          "data": []
+        },
+        "taxons": {
           "data": [
-            { "id": "113", "type": "image" },
-            { "id": "114", "type": "image" }
+            {
+              "id": "11",
+              "type": "taxon"
+            }
           ]
         },
-        "default_variant": { "data": { "id": "72", "type": "variant" } },
-        "primary_variant": { "data": { "id": "72", "type": "variant" } }
+        "images": {
+          "data": [
+            {
+              "id": "113",
+              "type": "image"
+            },
+            {
+              "id": "114",
+              "type": "image"
+            }
+          ]
+        },
+        "default_variant": {
+          "data": {
+            "id": "72",
+            "type": "variant"
+          }
+        },
+        "primary_variant": {
+          "data": {
+            "id": "72",
+            "type": "variant"
+          }
+        }
       }
     },
     {
@@ -309,14 +390,27 @@
         "display_compare_at_price": "$0.00"
       },
       "relationships": {
-        "product": { "data": { "id": "69", "type": "product" } },
+        "product": {
+          "data": {
+            "id": "69",
+            "type": "product"
+          }
+        },
         "images": {
           "data": [
-            { "id": "113", "type": "image" },
-            { "id": "114", "type": "image" }
+            {
+              "id": "113",
+              "type": "image"
+            },
+            {
+              "id": "114",
+              "type": "image"
+            }
           ]
         },
-        "option_values": { "data": [] }
+        "option_values": {
+          "data": []
+        }
       }
     },
     {
@@ -372,10 +466,16 @@
       },
       "relationships": {
         "default_billing_address": {
-          "data": { "id": "894", "type": "address" }
+          "data": {
+            "id": "894",
+            "type": "address"
+          }
         },
         "default_shipping_address": {
-          "data": { "id": "894", "type": "address" }
+          "data": {
+            "id": "894",
+            "type": "address"
+          }
         }
       }
     },
@@ -407,7 +507,12 @@
         "public_metadata": {}
       },
       "relationships": {
-        "payment_method": { "data": { "id": "2", "type": "payment_method" } }
+        "payment_method": {
+          "data": {
+            "id": "2",
+            "type": "payment_method"
+          }
+        }
       }
     },
     {
@@ -425,8 +530,18 @@
         "public_metadata": {}
       },
       "relationships": {
-        "source": { "data": { "id": "191", "type": "credit_card" } },
-        "payment_method": { "data": { "id": "2", "type": "payment_method" } }
+        "source": {
+          "data": {
+            "id": "191",
+            "type": "credit_card"
+          }
+        },
+        "payment_method": {
+          "data": {
+            "id": "2",
+            "type": "payment_method"
+          }
+        }
       }
     },
     {
@@ -445,14 +560,28 @@
       "relationships": {
         "shipping_rates": {
           "data": [
-            { "id": "524", "type": "shipping_rate" },
-            { "id": "525", "type": "shipping_rate" }
+            {
+              "id": "522",
+              "type": "shipping_rate"
+            },
+            {
+              "id": "525",
+              "type": "shipping_rate"
+            }
           ]
         },
         "selected_shipping_rate": {
-          "data": { "id": "524", "type": "shipping_rate" }
+          "data": {
+            "id": "522",
+            "type": "shipping_rate"
+          }
         },
-        "stock_location": { "data": { "id": "1", "type": "stock_location" } }
+        "stock_location": {
+          "data": {
+            "id": "1",
+            "type": "stock_location"
+          }
+        }
       }
     }
   ]

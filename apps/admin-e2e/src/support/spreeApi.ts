@@ -49,6 +49,10 @@ const interceptSpreeApiCalls = (): void => {
     fixture: 'spree/shippingRates'
   })
 
+  cy.intercept('PATCH', 'api/v2/storefront/checkout/advance', {
+    fixture: 'spree/placeOrder'
+  }).as('spreeCallAdvanceOrder')
+
   cy.intercept('PATCH', 'api/v2/storefront/checkout/complete', {
     fixture: 'spree/placeOrder'
   }).as('spreeCallPlaceOrder')
@@ -60,8 +64,16 @@ const interceptSpreeApiCalls = (): void => {
     }
   })
 
+  cy.intercept('POST', 'api/v2/storefront/checkout/create_payment', {
+    fixture: 'spree/placeOrder'
+  })
+
   cy.intercept('GET', 'api/v2/storefront/stripe/credit_cards', {
     fixture: 'spree/creditCards'
+  })
+
+  cy.intercept('GET', 'api/v2/storefront/checkout/payment_methods', {
+    fixture: 'spree/paymentMethods'
   })
 }
 

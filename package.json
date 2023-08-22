@@ -64,7 +64,7 @@
     "start:provider": "node --max-old-space-size=6144 node_modules/.bin/nx serve provider --port 4201",
     "start:provider-noSourceMap": "node --max-old-space-size=6144 node_modules/.bin/nx serve provider --sourceMap=false --port 4201 -c standalone",
     "start:chart": "nx serve measurement-charts --port 4202 --host 0.0.0.0",
-    "test:admin": "nx e2e admin-e2e --watch",
+    "test:admin": "TZ=America/New_York nx e2e admin-e2e --watch",
     "test:provider": "nx e2e provider-e2e -c e2e --watch",
     "test:chart": "nx e2e measurement-charts-e2e --watch",
     "build": "node --max-old-space-size=6144 node_modules/.bin/nx build",

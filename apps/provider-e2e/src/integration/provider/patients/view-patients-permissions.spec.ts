@@ -118,7 +118,7 @@ describe('Validate permissions on patient listing page', function () {
 
     cy.tick(10000)
 
-    cy.get('dieter-listing-no-phi').find('mat-row').should('have.length', 2)
+    cy.get('dieter-listing-no-phi').find('mat-row').should('have.length', 3)
 
     cy.get('[data-cy="patient-listing-actions-buttons"]')
       .first()

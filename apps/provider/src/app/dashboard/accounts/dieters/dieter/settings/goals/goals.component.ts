@@ -240,7 +240,6 @@ export class DieterGoalsComponent implements BindForm, OnInit {
     try {
       const res = await this.goalV2.fetch({ account: `${this.dieterId}` })
       this.goals = res.data
-
       const data: Goals = {
         calorie: this.goals.find(
           (entry) => entry.type.id === GoalTypeId.calorie

@@ -15,7 +15,7 @@ describe('Lefthand menu (standard)', function () {
       .find('app-sidenav-item')
       .not('.hidden')
       .as('menuLinks')
-    cy.get('@menuLinks').should('have.length', 25)
+    cy.get('@menuLinks').should('have.length', 26)
     cy.get('@menuLinks').eq(0).should('contain', 'Dashboard')
     cy.get('@menuLinks').eq(1).should('contain', 'Accounts')
     cy.get('@menuLinks').eq(2).should('contain', 'Patients')
@@ -34,14 +34,15 @@ describe('Lefthand menu (standard)', function () {
     cy.get('@menuLinks').eq(14).should('contain', 'Reports')
     cy.get('@menuLinks').eq(15).should('contain', 'Overview')
     cy.get('@menuLinks').eq(16).should('contain', 'User Statistics')
-    cy.get('@menuLinks').eq(17).should('contain', 'Communications')
-    cy.get('@menuLinks').eq(18).should('contain', 'Sequences')
-    cy.get('@menuLinks').eq(19).should('contain', 'Store')
-    cy.get('@menuLinks').eq(20).should('contain', 'Resources')
-    cy.get('@menuLinks').eq(21).should('contain', 'Updates')
-    cy.get('@menuLinks').eq(22).should('contain', 'Schedule Support Call')
-    cy.get('@menuLinks').eq(23).should('contain', 'Email Support')
-    cy.get('@menuLinks').eq(24).should('contain', 'FAQ & Support Guides')
+    cy.get('@menuLinks').eq(17).should('contain', 'Care Management')
+    cy.get('@menuLinks').eq(18).should('contain', 'Communications')
+    cy.get('@menuLinks').eq(19).should('contain', 'Sequences')
+    cy.get('@menuLinks').eq(20).should('contain', 'Store')
+    cy.get('@menuLinks').eq(21).should('contain', 'Store')
+    cy.get('@menuLinks').eq(22).should('contain', 'Resources')
+    cy.get('@menuLinks').eq(23).should('contain', 'Updates')
+    cy.get('@menuLinks').eq(24).should('contain', 'Contact Support')
+    cy.get('@menuLinks').eq(25).should('contain', 'FAQ & Support Guides')
 
     // Adding for Cypress issue where page continues to load after spec is done
     cy.get('ccr-dieters-table', {
@@ -49,7 +50,7 @@ describe('Lefthand menu (standard)', function () {
     })
   })
 
-  it('Hides the Schedule Support Call link if language is different from English', function () {
+  it('Translates left menu on language change', function () {
     cy.visit('/dashboard')
 
     cy.get('app-menu', {
@@ -59,13 +60,12 @@ describe('Lefthand menu (standard)', function () {
       .not('.hidden')
       .as('menuLinks')
 
-    cy.get('@menuLinks').should('have.length', 25)
+    cy.get('@menuLinks').should('have.length', 26)
 
-    cy.get('@menuLinks').eq(20).should('contain', 'Resources')
-    cy.get('@menuLinks').eq(21).should('contain', 'Updates')
-    cy.get('@menuLinks').eq(22).should('contain', 'Schedule Support Call')
-    cy.get('@menuLinks').eq(23).should('contain', 'Email Support')
-    cy.get('@menuLinks').eq(24).should('contain', 'FAQ & Support Guides')
+    cy.get('@menuLinks').eq(22).should('contain', 'Resources')
+    cy.get('@menuLinks').eq(23).should('contain', 'Updates')
+    cy.get('@menuLinks').eq(24).should('contain', 'Contact Support')
+    cy.get('@menuLinks').eq(25).should('contain', 'FAQ & Support Guides')
 
     cy.get('app-topbar').find('button').contains('Hello').click({ force: true })
     cy.tick(1000)
@@ -80,11 +80,11 @@ describe('Lefthand menu (standard)', function () {
       .click({ force: true })
     cy.tick(1000)
 
-    cy.get('@menuLinks').should('have.length', 24)
+    cy.get('@menuLinks').should('have.length', 26)
 
-    cy.get('@menuLinks').eq(20).should('contain', 'Recursos')
-    cy.get('@menuLinks').eq(21).should('contain', 'Novedades')
-    cy.get('@menuLinks').eq(22).should('contain', 'Contactar a Soporte')
-    cy.get('@menuLinks').eq(23).should('contain', 'FAQ y Guías')
+    cy.get('@menuLinks').eq(22).should('contain', 'Recursos')
+    cy.get('@menuLinks').eq(23).should('contain', 'Novedades')
+    cy.get('@menuLinks').eq(24).should('contain', 'Soporte de contacto')
+    cy.get('@menuLinks').eq(25).should('contain', 'FAQ y Guías')
   })
 })

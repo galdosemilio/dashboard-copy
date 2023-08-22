@@ -68,7 +68,7 @@ describe('Patient profile -> more -> profile', function () {
         cy.tick(1000)
 
         cy.get('.ccr-button')
-          .get('[cy-data="update-user-button"]')
+          .get('[data-cy="update-user-button"]')
           .eq(0)
           .click()
 

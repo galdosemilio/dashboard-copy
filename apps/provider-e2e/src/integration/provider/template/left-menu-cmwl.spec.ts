@@ -33,12 +33,12 @@ describe('Lefthand menu (CMWL)', function () {
       'Notifications',
       'Settings',
       'Reports',
-      'RPM',
+      'Care Management',
       'Communications',
+      'Store',
       'Resources',
       'Updates',
-      'Schedule Support Call',
-      'Email Support',
+      'Contact Support',
       'FAQ & Support Guides'
     ])
 

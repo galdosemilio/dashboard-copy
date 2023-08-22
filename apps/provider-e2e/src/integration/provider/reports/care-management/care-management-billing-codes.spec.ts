@@ -621,7 +621,7 @@ function checkRPMAndRTMRows(codes: string[]) {
     4,
     15,
     '[data-cy="cpt-code-claim-date"]',
-    '01/31/2020'
+    null
   )
   verifyCPTCode(
     `${codes[3]} (2)`,

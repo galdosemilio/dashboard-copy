@@ -165,7 +165,6 @@ export class StorefrontCheckoutComponent implements OnInit {
   public async resolvePaymentMethod() {
     try {
       const res = await this.spree.getCreditCards()
-
       const creditCards = res.credit_cards.filter((item) => item.source_id)
 
       this.creditCardList = creditCards.map((item) => ({

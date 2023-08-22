@@ -3,60 +3,14 @@ import { standardSetup } from '../../../support'
 describe('Dashboard -> Coach Listing', function () {
   it('Show Coach listing in Eastern Time (New York)', function () {
     cy.setTimezone('et')
-    standardSetup()
 
-    cy.visit(`/accounts/coaches`)
-
-    cy.get('app-coaches-table', { timeout: 12000 }).as('coachTable')
-
-    cy.tick(2000)
-
-    cy.get('@coachTable').find('mat-row').as('coachRows')
-
-    cy.get('@coachRows').should('have.length', 2)
-
-    cy.get('@coachRows')
-      .eq(0)
-      .should('contain', 'Eric')
-      .should('contain', 'Di Bari')
-      .should('contain', 'eric@websprout.org')
-      .should('contain', 'January 1, 2019')
-
-    cy.get('@coachRows')
-      .eq(1)
-      .should('contain', 'Eric')
-      .should('contain', 'Di Bari')
-      .should('contain', 'eric.dibari@gmail.com')
-      .should('contain', 'January 1, 2019')
+    loadsCorrectTimezone('January 1, 2019')
   })
 
   it('Show Coach listing in Eastern Time (Australia)', function () {
     cy.setTimezone('aet')
-    standardSetup()
 
-    cy.visit(`/accounts/coaches`)
-
-    cy.get('app-coaches-table', { timeout: 12000 }).as('coachTable')
-
-    cy.tick(2000)
-
-    cy.get('@coachTable').find('mat-row').as('coachRows')
-
-    cy.get('@coachRows').should('have.length', 2)
-
-    cy.get('@coachRows')
-      .eq(0)
-      .should('contain', 'Eric')
-      .should('contain', 'Di Bari')
-      .should('contain', 'eric@websprout.org')
-      .should('contain', 'January 2, 2019')
-
-    cy.get('@coachRows')
-      .eq(1)
-      .should('contain', 'Eric')
-      .should('contain', 'Di Bari')
-      .should('contain', 'eric.dibari@gmail.com')
-      .should('contain', 'January 2, 2019')
+    loadsCorrectTimezone('January 2, 2019')
   })
 
   it('Add new coach has correct fields', function () {
@@ -87,7 +41,7 @@ describe('Dashboard -> Coach Listing', function () {
       .find('mat-table mat-row')
       .as('clinicRows')
 
-    cy.get('@clinicRows').should('have.length', 10)
+    cy.get('@clinicRows').should('have.length', 11)
 
     cy.get('@clinicRows').eq(0).contains('CoachCare')
     cy.get('@clinicRows').eq(1).contains('Center for Medical Weight Loss')
@@ -101,3 +55,31 @@ describe('Dashboard -> Coach Listing', function () {
     cy.get('@clinicRows').eq(9).contains('Ideal You')
   })
 })
+
+function loadsCorrectTimezone(date) {
+  standardSetup()
+
+  cy.visit(`/accounts/coaches`)
+
+  cy.get('app-coaches-table', { timeout: 12000 }).as('coachTable')
+
+  cy.tick(2000)
+
+  cy.get('@coachTable').find('mat-row').as('coachRows')
+
+  cy.get('@coachRows').should('have.length', 3)
+
+  cy.get('@coachRows')
+    .eq(0)
+    .should('contain', 'Eric')
+    .should('contain', 'Di Bari')
+    .should('contain', 'eric@websprout.org')
+    .should('contain', date)
+
+  cy.get('@coachRows')
+    .eq(2)
+    .should('contain', 'Eric')
+    .should('contain', 'Di Bari')
+    .should('contain', 'eric.dibari@gmail.com')
+    .should('contain', date)
+}

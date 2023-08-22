@@ -1,7 +1,7 @@
 import { standardSetup } from '../../../../support'
 
 describe('Dashboard -> Patients -> Patient -> More -> Devices', function () {
-  before(() => {
+  beforeEach(() => {
     cy.setTimezone('et')
     standardSetup()
 
@@ -73,17 +73,27 @@ describe('Dashboard -> Patients -> Patient -> More -> Devices', function () {
   })
 
   it('Removes added cellular device device', function () {
-    cy.intercept('DELETE', '/1.0/account/**/cellular-device/**', (req) => {
-      req.reply({ statusCode: 200 })
-    }).as('removeAddedDevice')
+    let interceptCount = 0
 
     cy.intercept('GET', '/1.0/account/**/cellular-device', (req) => {
       req.reply((res) => {
-        res.send({
-          fixture: 'api/cellular-device/empty'
-        })
+        if (interceptCount === 0) {
+          interceptCount += 1
+          res.send({
+            fixture: 'api/cellular-device/getAddedDevice',
+            statusCode: 200
+          })
+        } else {
+          res.send({ fixture: 'api/cellular-device/empty', statusCode: 200 })
+        }
       })
-    }).as('removed')
+    }).as('getAddedDevice')
+
+    cy.wait('@getAddedDevice')
+
+    cy.intercept('DELETE', '/1.0/account/**/cellular-device/**', (req) => {
+      req.reply({ statusCode: 200 })
+    }).as('removeAddedDevice')
 
     cy.get('#delete-btn').click()
 
@@ -91,7 +101,7 @@ describe('Dashboard -> Patients -> Patient -> More -> Devices', function () {
       expect(interception.response.statusCode).to.equal(200)
     })
 
-    cy.wait('@removed')
+    cy.wait('@getAddedDevice')
 
     cy.get('app-cellular-device-table').within(() => {
       cy.get('mat-row').should('not.exist')

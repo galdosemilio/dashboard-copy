@@ -92,8 +92,6 @@ describe('Clinics -> Clinic -> Phases', function () {
       expect(xhr.request.body.title).to.equal('test title')
       expect(xhr.request.body.description).to.equal('test description')
     })
-
-    cy.wait(2000)
   })
 
   it('Allows the provider to delete a phase association', function () {
@@ -116,7 +114,5 @@ describe('Clinics -> Clinic -> Phases', function () {
       expect(xhr.request.body.id).to.equal('1')
       expect(xhr.request.body.isActive).to.equal(false)
     })
-
-    cy.wait(2000)
   })
 })

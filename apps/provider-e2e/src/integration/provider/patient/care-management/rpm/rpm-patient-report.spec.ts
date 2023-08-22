@@ -42,14 +42,14 @@ function checkServiceSelection(
 ) {
   standardSetup({ apiOverrides })
   cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-  cy.get('.ccr-dashboard').get('[cy-data="download-report-button"]').click()
+  cy.get('.ccr-dashboard').get('[data-cy="download-report-button"]').click()
 
   if (serviceType) {
-    cy.get('[cy-data="patient-reports-service-type"]')
+    cy.get('[data-cy="patient-reports-service-type"]')
       .find('mat-select')
       .should('contain', serviceType.name)
 
-    cy.get('[cy-data="patient-reports-service-type"]')
+    cy.get('[data-cy="patient-reports-service-type"]')
       .find('mat-select')
       .click()
 
@@ -63,10 +63,10 @@ function checkServiceSelection(
   } else {
     cy.tick(1000)
 
-    cy.get('[cy-data="patient-reports-service-type"]').should('not.exist')
+    cy.get('[data-cy="patient-reports-service-type"]').should('not.exist')
   }
 
-  cy.get('[cy-data="download-button"]').click()
+  cy.get('[data-cy="download-button"]').click()
 
   cy.wait('@downloadCareManagementReports').should((xhr) => {
     expect(xhr.response.statusCode).to.equal(200)

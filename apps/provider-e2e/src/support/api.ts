@@ -349,11 +349,21 @@ const interceptCoreApiCalls = (
     fixture: 'api/general/emptyObject'
   })
   cy.intercept('GET', '/1.0/goal?account=**', { fixture: 'api/goal/getGoal' })
-  cy.intercept('GET', '/2.0/goal?account=**', { fixture: 'api/goal/getGoal20' })
+  cy.intercept('GET', '/2.0/goal?account=**', {
+    fixture: 'api/goal/getGoal20'
+  }).as('goalGetRequest')
   cy.intercept('PUT', '/1.0/goal', {
     statusCode: 204,
     body: {}
   }).as('goalPutRequest')
+  cy.intercept('PATCH', '/2.0/goal/**', {
+    statusCode: 204,
+    body: {}
+  }).as('goalPatchRequest')
+  cy.intercept('POST', '/2.0/goal', {
+    statusCode: 204,
+    body: {}
+  }).as('goalPostRequest')
   cy.intercept('GET', '/2.0/access/account?**', {
     fixture: fetchOverride(
       '/2.0/access/account?**',
@@ -725,12 +735,29 @@ const interceptCoreApiCalls = (
     )
   })
 
+  cy.intercept('GET', '1.0/care-management/supervising-provider?**', {
+    fixture: fetchOverride(
+      '1.0/rpm/supervising-provider?**',
+      'api/rpm/supervisingProviders'
+    )
+  })
+
   cy.intercept('POST', '1.0/rpm/supervising-provider', {
     statusCode: 204,
     body: { id: '1' }
   }).as('supervisingProviderPostRequest')
 
+  cy.intercept('POST', '1.0/care-management/supervising-provider', {
+    statusCode: 204,
+    body: { id: '1' }
+  }).as('supervisingProviderPostRequest')
+
   cy.intercept('DELETE', '1.0/rpm/supervising-provider/**', {
+    statusCode: 204,
+    body: {}
+  }).as('supervisingProviderDeleteRequest')
+
+  cy.intercept('DELETE', '1.0/care-management/supervising-provider/**', {
     statusCode: 204,
     body: {}
   }).as('supervisingProviderDeleteRequest')
@@ -830,10 +857,6 @@ const interceptCoreApiCalls = (
     body: { enrolled: true }
   })
 
-  cy.intercept('GET', '2.0/package/enrollment/latest?**', {
-    body: { data: [], pagination: {} }
-  })
-
   cy.intercept('GET', '1.0/warehouse/measurement/cohort/listing**', {
     fixture: 'api/warehouse/cohortListing'
   }).as('getCohortListingRequest')
@@ -891,7 +914,10 @@ const interceptCoreApiCalls = (
   }).as('careManagementStates')
 
   cy.intercept('GET', '/1.0/care-management/supervising-provider?**', {
-    fixture: 'api/care-management/getSupervisingProvider'
+    fixture: fetchOverride(
+      '1.0/care-management/supervising-provider?**',
+      'api/care-management/getSupervisingProvider'
+    )
   })
 
   cy.intercept('POST', '/1.0/care-management/state', {

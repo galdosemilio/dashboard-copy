@@ -123,9 +123,9 @@ describe('Patient profile -> clinics', function () {
 
     cy.get('mat-dialog-container').should('contain', 'RPM')
 
-    cy.get('mat-dialog-container').should('contain', 'RPM enabled by')
+    cy.get('mat-dialog-container').should('contain', 'CCM enabled by')
     cy.get('mat-dialog-container').should('contain', 'Eric Di Bari')
-    cy.get('mat-dialog-container').should('contain', 'eric@websprout.org')
+    cy.get('mat-dialog-container').should('contain', 'eric.dibari@gmail.com')
 
     cy.get('mat-dialog-container').find('button').contains('Yes').click()
     cy.tick(1000)
@@ -146,12 +146,12 @@ describe('Patient profile -> clinics', function () {
 
     cy.get('ccr-account-associations').find('mat-row').as('clinicRows')
 
-    cy.get('@clinicRows').eq(0).find('mat-icon').contains('delete').click()
-
-    cy.intercept('GET', `/2.0/account/${Cypress.env('providerId')}`, {
+    cy.intercept('GET', `/2.0/account/**`, {
       statusCode: 403,
       body: {}
     })
+
+    cy.get('@clinicRows').eq(0).find('mat-icon').contains('delete').click()
 
     cy.tick(1000)
 

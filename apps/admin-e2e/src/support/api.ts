@@ -76,6 +76,10 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '1.0/account/*/address?*', {
     fixture: 'api/account/accountAddress'
   })
+  cy.intercept('POST', '1.0/account/*/address', {
+    statusCode: 204,
+    body: {}
+  }).as('apiCallPostAddress')
   cy.intercept('PATCH', '1.0/account/*/address/*', {
     statusCode: 204,
     body: {}

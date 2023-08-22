@@ -14,7 +14,7 @@ describe('Patient Integrations Page', () => {
 
     syncThirdPartyService(1, 'fitbit')
 
-    syncThirdPartyService(3, 'healthkit')
+    syncThirdPartyService(2, 'healthkit')
   })
 
   it('Shows an empty error message if there are no services', () => {

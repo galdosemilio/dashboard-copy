@@ -16,14 +16,28 @@
       "relationships": {
         "shipping_rates": {
           "data": [
-            { "id": "522", "type": "shipping_rate" },
-            { "id": "523", "type": "shipping_rate" }
+            {
+              "id": "522",
+              "type": "shipping_rate"
+            },
+            {
+              "id": "523",
+              "type": "shipping_rate"
+            }
           ]
         },
         "selected_shipping_rate": {
-          "data": { "id": "522", "type": "shipping_rate" }
+          "data": {
+            "id": "522",
+            "type": "shipping_rate"
+          }
         },
-        "stock_location": { "data": { "id": "1", "type": "stock_location" } }
+        "stock_location": {
+          "data": {
+            "id": "1",
+            "type": "stock_location"
+          }
+        }
       }
     }
   ],
@@ -60,6 +74,12 @@
         "free": true
       }
     },
-    { "id": "1", "type": "stock_location", "attributes": { "name": "default" } }
+    {
+      "id": "1",
+      "type": "stock_location",
+      "attributes": {
+        "name": "default"
+      }
+    }
   ]
 }

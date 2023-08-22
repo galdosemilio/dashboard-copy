@@ -310,7 +310,7 @@
           "eligibility": {
             "last": {
               "timestamp": "2020-02-01T00:00:00-04:00",
-              "count": 1
+              "count": 2
             },
             "next": {
               "earliestEligibleAt": "2020-01-01T04:00:00Z",

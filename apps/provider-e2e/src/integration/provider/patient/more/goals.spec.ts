@@ -44,26 +44,32 @@ describe('Dashboard -> Patients -> Patient -> More -> Goals', function () {
 
     cy.get('button').contains('Save').click()
 
-    cy.tick(1000)
-
-    cy.wait('@goalPutRequest').should((xhr) => {
-      expect(xhr.request.body.goal[0].goal).to.equal('calorie')
-      expect(xhr.request.body.goal[0].quantity).to.equal(2500)
-
-      expect(xhr.request.body.goal[1].goal).to.equal('dailySleep')
-      expect(xhr.request.body.goal[1].quantity).to.equal(420)
-
-      expect(xhr.request.body.goal[2].goal).to.equal('dailyStep')
-      expect(xhr.request.body.goal[2].quantity).to.equal(19000)
-
-      expect(xhr.request.body.goal[3].goal).to.equal('dailyHydration')
-      expect(xhr.request.body.goal[3].quantity).to.equal(3549)
-
-      expect(xhr.request.body.goal[4].goal).to.equal('weeklyExercise')
-      expect(xhr.request.body.goal[4].quantity).to.equal(180)
-
-      expect(xhr.request.body.goal[5].goal).to.equal('weight')
-      expect(xhr.request.body.goal[5].quantity).to.equal(90718)
+    cy.get('@goalPatchRequest.all').should('have.length', 4)
+    const goalPatchRequest = [
+      {
+        id: '44',
+        quantity: 2500
+      },
+      {
+        id: '45',
+        quantity: 19000
+      },
+      {
+        id: '43',
+        quantity: 3549
+      },
+      {
+        id: '42',
+        quantity: 90718
+      }
+    ]
+    goalPatchRequest.forEach((item, i) => {
+      cy.get(`@goalPatchRequest.${i + 1}`)
+        .its('request.body')
+        .should('deep.eq', {
+          id: item.id,
+          quantity: item.quantity
+        })
     })
   })
 

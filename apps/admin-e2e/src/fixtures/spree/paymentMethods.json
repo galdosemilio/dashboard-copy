@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "id": "2",
+      "type": "payment_method",
+      "attributes": {
+        "type": "Spree::Gateway::StripeElementsGateway",
+        "name": "Credit Card",
+        "description": "",
+        "public_metadata": {},
+        "preferences": {
+          "publishable_key": "pk_test_q5X8FrXn7vv7p3E5STRXFvtv",
+          "test_mode": true,
+          "intents": true
+        }
+      }
+    },
+    {
+      "id": "3",
+      "type": "payment_method",
+      "attributes": {
+        "type": "Spree::Gateway::Bogus",
+        "name": "Fake payment method",
+        "description": "",
+        "public_metadata": {},
+        "preferences": {
+          "dummy_key": "PUBLICKEY123"
+        }
+      }
+    }
+  ]
+}

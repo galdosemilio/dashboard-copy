@@ -34,6 +34,6 @@ describe('Patient profile -> more -> submenu (cmwl)', function () {
     cy.get('app-rpm', {
       timeout: 12000
     })
-    cy.wait('@getRpm')
+    cy.wait('@careManagementStates')
   })
 })

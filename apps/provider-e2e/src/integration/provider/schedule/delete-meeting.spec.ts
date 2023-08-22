@@ -208,9 +208,7 @@ function verifyDeleteApiCall(option: Option): void {
   switch (option) {
     case 'schedule-delete-after':
     case 'schedule-delete-this-and-future':
-      url = `https://test.api.coachcare.com/2.0/meeting/recurring/18073?after=${encodeURIComponent(
-        '2020-01-01'
-      )}`
+      url = 'https://test.api.coachcare.com/2.0/meeting/recurring/18073?after='
       break
     case 'schedule-delete-this-meeting':
       url = 'https://test.api.coachcare.com/2.0/meeting/single/18073'

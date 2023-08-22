@@ -1,5 +1,16 @@
 import { standardSetup } from '../../../support'
 
+const expectedLinks = [
+  'Dashboard',
+  'Messages',
+  'Digital Library',
+  'File Vault',
+  'Profile & Settings',
+  'Store',
+  'Resources',
+  'Contact Support'
+]
+
 describe('Patient Sidenav', function () {
   it('Loads properly for a generic organization', function () {
     cy.setOrganization('ccr')
@@ -10,14 +21,9 @@ describe('Patient Sidenav', function () {
     cy.get('app-menu').find('app-sidenav-item').not('.hidden').as('menuLinks')
     cy.get('@menuLinks').should('have.length', 8)
 
-    cy.get('@menuLinks').eq(0).should('contain', 'Dashboard')
-    cy.get('@menuLinks').eq(1).should('contain', 'Messages')
-    cy.get('@menuLinks').eq(2).should('contain', 'Digital Library')
-    cy.get('@menuLinks').eq(3).should('contain', 'File Vault')
-    cy.get('@menuLinks').eq(4).should('contain', 'Profile & Settings')
-    cy.get('@menuLinks').eq(5).should('contain', 'Resources')
-    cy.get('@menuLinks').eq(6).should('contain', 'Schedule Support Call')
-    cy.get('@menuLinks').eq(7).should('contain', 'Email Support')
+    expectedLinks.forEach((link, index) => {
+      getMenuLinkToContain(index, link)
+    })
   })
 
   it('Loads properly for MuscleWise', function () {
@@ -27,16 +33,16 @@ describe('Patient Sidenav', function () {
     cy.visit('/')
 
     cy.get('app-menu').find('app-sidenav-item').not('.hidden').as('menuLinks')
-    cy.get('@menuLinks').should('have.length', 9)
+    cy.get('@menuLinks').should('have.length', 8)
 
-    cy.get('@menuLinks').eq(0).should('contain', 'Dashboard')
-    cy.get('@menuLinks').eq(1).should('contain', 'Messages')
-    cy.get('@menuLinks').eq(2).should('contain', 'Digital Library')
-    cy.get('@menuLinks').eq(3).should('contain', 'File Vault')
-    cy.get('@menuLinks').eq(4).should('contain', 'Profile & Settings')
-    cy.get('@menuLinks').eq(5).should('contain', 'Manage My Subscription')
-    cy.get('@menuLinks').eq(6).should('contain', 'Resources')
-    cy.get('@menuLinks').eq(7).should('contain', 'Schedule Support Call')
-    cy.get('@menuLinks').eq(8).should('contain', 'Email Support')
+    expectedLinks.splice(5, 1, 'Manage My Subscription')
+
+    expectedLinks.forEach((link, index) => {
+      getMenuLinkToContain(index, link)
+    })
   })
 })
+
+function getMenuLinkToContain(index, content) {
+  cy.get('@menuLinks').eq(index).should('contain', content)
+}

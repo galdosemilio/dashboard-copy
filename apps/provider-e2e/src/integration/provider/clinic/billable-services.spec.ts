@@ -9,7 +9,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
           fixture: 'api/rpm/getOrgPreferenceInherited'
         },
         {
-          url: '1.0/rpm/supervising-provider?**',
+          url: '1.0/care-management/supervising-provider?**',
           fixture: 'api/rpm/supervisingProvidersInherited'
         }
       ]
@@ -76,7 +76,8 @@ describe('Clinics -> Clinic -> Billable Services', function () {
       .find('tr')
       .eq(0)
       .should('contain', '7357')
-      .should('contain', 'Test Coach')
+      .should('contain', 'Test')
+      .should('contain', 'Coach')
     cy.get('app-clinic-billable-services').should(
       'not.contain',
       'This Supervising Providers listing is inherited from'
@@ -125,7 +126,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
     standardSetup({
       apiOverrides: [
         {
-          url: '1.0/rpm/supervising-provider?**',
+          url: '1.0/care-management/supervising-provider?**',
           fixture: '/api/rpm/supervisingProvidersInherited'
         }
       ]
@@ -150,7 +151,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
     cy.tick(1000)
 
-    cy.get('tbody').should('contain', 'Test Coach')
+    cy.get('tbody').should('contain', 'Test').should('contain', 'Coach')
 
     cy.get('tbody').find('tr').eq(0).find('mat-icon').contains('delete').click()
 
@@ -169,7 +170,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
     standardSetup({
       apiOverrides: [
         {
-          url: '1.0/rpm/supervising-provider?**',
+          url: '1.0/care-management/supervising-provider?**',
           fixture: '/api/rpm/supervisingProvidersInherited'
         }
       ]
@@ -181,7 +182,7 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
     cy.tick(1000)
 
-    cy.get('tbody').should('contain', 'Test Coach')
+    cy.get('tbody').should('contain', 'Test').should('contain', 'Coach')
 
     cy.get('tbody')
       .find('tr')

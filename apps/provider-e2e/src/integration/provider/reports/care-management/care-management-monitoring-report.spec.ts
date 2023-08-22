@@ -247,8 +247,8 @@ function checkRPMAndRTMCsv(csv, requirements: string[]) {
   checkCsvData(csv, 4, 17, 'N/A')
   checkCsvData(csv, 4, 18, '01/31/2020')
   checkCsvData(csv, 4, 19, 'N/A')
-  checkCsvData(csv, 4, 20, '01/31/2020')
-  checkCsvData(csv, 4, 21, 'N/A')
+  checkCsvData(csv, 4, 20, 'N/A')
+  checkCsvData(csv, 4, 21, '')
 }
 
 function checkCsvData(csv, index: number, column: number, value: string) {

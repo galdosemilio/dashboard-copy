@@ -122,32 +122,17 @@ describe('Patient profile -> More -> Addresses', function () {
     })
   })
 
-  it('Allows the provider to update an address', function () {
+  it('Disables the provider to update an address', function () {
     cy.get('ccr-account-addresses')
     cy.tick(1000)
 
     cy.get('ccr-address-form')
 
-    cy.get('input[data-placeholder="Address Line 1"]')
-      .clear()
-      .type('Updated Address Line 1')
-    cy.get('input[data-placeholder="Address Line 2"]')
-      .clear()
-      .type('Updated Address Line 2')
-    cy.get('input[data-placeholder="City"]').clear().type('Updated City')
-    cy.get('input[data-placeholder="State"]').clear().type('Updated State')
-    cy.get('input[data-placeholder="Postal Code"]').clear().type('000000')
-
-    cy.tick(10000)
-
-    cy.wait('@patchAddressRequest').should((xhr) => {
-      expect(xhr.request.url).to.contain('1')
-      expect(xhr.request.body.address1).to.equal('Updated Address Line 1')
-      expect(xhr.request.body.address2).to.equal('Updated Address Line 2')
-      expect(xhr.request.body.city).to.equal('Updated City')
-      expect(xhr.request.body.stateProvince).to.equal('Updated State')
-      expect(xhr.request.body.postalCode).to.equal('000000')
-    })
+    cy.get('input[data-placeholder="Address Line 1"]').should('be.disabled')
+    cy.get('input[data-placeholder="Address Line 2"]').should('be.disabled')
+    cy.get('input[data-placeholder="City"]').should('be.disabled')
+    cy.get('input[data-placeholder="State"]').should('be.disabled')
+    cy.get('input[data-placeholder="Postal Code"]').should('be.disabled')
   })
 
   it('Allows the provider to delete an address', function () {

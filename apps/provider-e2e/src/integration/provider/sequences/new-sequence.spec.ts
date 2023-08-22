@@ -1,3 +1,4 @@
+import { Interception } from 'cypress/types/net-stubbing'
 import { standardSetup } from '../../../support'
 import {
   activateReorder,
@@ -471,7 +472,34 @@ describe('Sequences -> new', function () {
     setRepeatingAction('loop')
     saveSequence()
 
-    cy.wait('@sequencePostTransition', { timeout: 20000 }).should((xhr) => {
+    cy.wait('@sequencePostTransition')
+      .wait('@sequencePostTransition')
+      .wait('@sequencePostTransition')
+      .wait('@sequencePostTransition')
+
+    cy.get<Interception>('@sequencePostTransition.all')
+      .should('have.length', 4)
+      .then((xhrs) => {
+        console.log({
+          xhrs
+        })
+        expect(xhrs[0].request.body.delay).to.equal(undefined)
+        expect(xhrs[1].request.body.delay).to.equal('07:00:00')
+        expect(xhrs[2].request.body.delay).to.equal('01:00:00')
+        expect(xhrs[3].request.body.delay).to.equal('16:00:00')
+      })
+
+    cy.wait(['@sequencePostTransition', '@sequencePostTransition']).spread(
+      (xhr1, xhr2) => {
+        expect(xhr1.request.body.delay).to.equal(undefined)
+        expect(xhr2.request.body.delay).to.equal('07:00:00')
+      }
+    )
+
+    cy.wait('@sequencePostTransition').should((xhr) => {
+      console.log({
+        xhr
+      })
       expect(xhr.request.body.delay).to.equal(undefined)
     })
 

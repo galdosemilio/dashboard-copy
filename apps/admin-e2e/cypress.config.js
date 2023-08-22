@@ -27,7 +27,7 @@ module.exports = defineConfig({
       return require('./src/plugins/index.js')(on, config)
     },
     baseUrl: 'http://localhost:4200',
-    experimentalRunAllSpecs,
+    experimentalRunAllSpecs: true,
     specPattern: './src/integration/**/*.{js,jsx,ts,tsx}',
     supportFile: './src/support/index.ts'
   }

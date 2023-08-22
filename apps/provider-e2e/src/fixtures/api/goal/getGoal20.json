@@ -2,11 +2,38 @@
   "data": [
     {
       "id": "42",
-      "quantity": 89000,
+      "quantity": 83915,
       "type": {
-        "id": "1",
+        "id": "5",
         "name": "Weight goal",
         "code": "weight"
+      }
+    },
+    {
+      "id": "43",
+      "quantity": 2839,
+      "type": {
+        "id": "1",
+        "name": "Daily Hydration",
+        "code": "dailyHydration"
+      }
+    },
+    {
+      "id": "44",
+      "quantity": 2254,
+      "type": {
+        "id": "7",
+        "name": "Calorie goal",
+        "code": "calorie"
+      }
+    },
+    {
+      "id": "45",
+      "quantity": 17500,
+      "type": {
+        "id": "3",
+        "name": "Daily Step",
+        "code": "dailyStep"
       }
     }
   ],

@@ -132,10 +132,10 @@ describe('Patients -> Add Patient -> Select packages', function () {
       expect(xhr.request.body.timezone).to.equal('America/New_York')
     })
 
-    cy.wait('@goalPutRequest').should((xhr) => {
+    cy.wait('@goalPostRequest').should((xhr) => {
       expect(xhr.request.body.account).to.equal('1')
-      expect(xhr.request.body.goal[0].goal).to.equal('weight')
-      expect(xhr.request.body.goal[0].quantity).to.equal(90718)
+      expect(xhr.request.body.goals[0].type).to.equal('5')
+      expect(xhr.request.body.goals[0].quantity).to.equal(90718)
     })
 
     cy.wait('@postAddressRequest').should((xhr) => {
@@ -147,8 +147,6 @@ describe('Patients -> Add Patient -> Select packages', function () {
       expect(xhr.request.body.postalCode).to.equal('123456')
       expect(xhr.request.body.labels[0]).to.equal('1')
     })
-
-    cy.wait(2000)
   })
 
   it('Packages show in add patient modal', function () {
@@ -248,7 +246,10 @@ describe('Patients -> Add Patient -> Select packages', function () {
 
     cy.tick(1000)
 
-    cy.get('mat-option').contains('Codice Fiscale').should('exist')
+    cy.get('app-account-identifiers')
+      .find('mat-form-field')
+      .contains('Codice Fiscale')
+      .should('exist')
   })
 
   it('Does not show the Codice Fiscale account identifier if clinic is not in Italy', function () {

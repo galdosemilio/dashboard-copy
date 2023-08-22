@@ -2,6 +2,7 @@ declare namespace Cypress {
   interface Chainable<Subject> {
     setTimezone(value: string): Chainable<void>
     setOrganization(value: 'ccr' | 'cmwl' | 'test-ip-clinic'): Chainable<void>
+    setOrgCookie(value: string): Chainable<void>
   }
 }
 

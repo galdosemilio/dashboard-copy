@@ -19,14 +19,14 @@ describe('Lefthand menu (resources link)', function () {
     cy.get('app-menu').find('app-sidenav-item').not('.hidden').as('menuLinks')
 
     cy.get('@menuLinks')
-      .eq(20)
+      .eq(22)
       .should('contain', 'Resources')
       .find('mat-list-item')
       .first()
       .click()
 
     cy.get('@menuLinks')
-      .eq(21)
+      .eq(23)
       .should('contain', 'Updates')
       .find('mat-list-item')
       .first()
@@ -37,20 +37,8 @@ describe('Lefthand menu (resources link)', function () {
     })
 
     cy.get('@menuLinks')
-      .eq(22)
-      .should('contain', 'Schedule Support Call')
-      .find('mat-list-item')
-      .first()
-      .click()
-
-    cy.get('@openWindow').should(
-      'be.calledWithMatch',
-      'https://calendly.com/coachcarekjm/supportcall'
-    )
-
-    cy.get('@menuLinks')
-      .eq(23)
-      .should('contain', 'Email Support')
+      .eq(24)
+      .should('contain', 'Contact Support')
       .find('mat-list-item')
       .first()
       .click()
@@ -61,7 +49,7 @@ describe('Lefthand menu (resources link)', function () {
     )
 
     cy.get('@menuLinks')
-      .eq(24)
+      .eq(25)
       .should('contain', 'FAQ & Support Guides')
       .find('mat-list-item')
       .first()

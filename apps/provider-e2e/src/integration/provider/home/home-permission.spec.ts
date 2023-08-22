@@ -1,10 +1,6 @@
 import { standardSetup } from './../../../support'
 
 describe('Validate permissions on homepage', function () {
-  afterEach(() => {
-    cy.wait(3000)
-  })
-
   it('No permissions for associated organization', function () {
     cy.setTimezone('et')
     standardSetup({
@@ -53,7 +49,7 @@ describe('Validate permissions on homepage', function () {
     cy.get('[data-cy="view-all-patients-button"]').should('exist')
     cy.get('[data-cy="view-lastest-signups"]')
       .find('mat-row')
-      .should('have.length', 2)
+      .should('have.length', 3)
 
     cy.get('[data-cy="patient-listing-actions-buttons"]')
       .first()
@@ -107,7 +103,7 @@ describe('Validate permissions on homepage', function () {
     cy.get('[data-cy="view-all-patients-button"]').should('exist')
     cy.get('[data-cy="view-lastest-signups"]')
       .find('mat-row')
-      .should('have.length', 2)
+      .should('have.length', 3)
     cy.get('[data-cy="patient-listing-actions-buttons"]')
       .first()
       .find('button')
@@ -115,11 +111,11 @@ describe('Validate permissions on homepage', function () {
 
     cy.get('[data-cy="patient-listing-actions-button-open"]').should(
       'have.length',
-      2
+      3
     )
     cy.get('[data-cy="patient-listing-actions-button-edit"]').should(
       'have.length',
-      2
+      3
     )
     cy.get('[data-cy="patient-listing-actions-button-delete"]').should(
       'have.length',
@@ -147,7 +143,7 @@ describe('Validate permissions on homepage', function () {
     cy.get('[data-cy="view-all-patients-button"]').should('exist')
     cy.get('[data-cy="view-lastest-signups"]')
       .find('mat-row')
-      .should('have.length', 2)
+      .should('have.length', 3)
 
     cy.get('[data-cy="patient-listing-actions-buttons"]')
       .first()
@@ -156,15 +152,15 @@ describe('Validate permissions on homepage', function () {
 
     cy.get('[data-cy="patient-listing-actions-button-open"]').should(
       'have.length',
-      2
+      3
     )
     cy.get('[data-cy="patient-listing-actions-button-edit"]').should(
       'have.length',
-      2
+      3
     )
     cy.get('[data-cy="patient-listing-actions-button-delete"]').should(
       'have.length',
-      2
+      3
     )
   })
 })

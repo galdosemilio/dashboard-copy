@@ -91,7 +91,7 @@ function verifyTable(hasActions: boolean) {
   cy.get('[data-cy="coach-table"]')
   cy.clock().tick(10000)
 
-  cy.get('[data-cy="coach-table"]').find('mat-row').should('have.length', 2)
+  cy.get('[data-cy="coach-table"]').find('mat-row').should('have.length', 3)
 
   cy.get('[data-cy="coach-table"]').should(
     hasActions ? 'not.have.class' : 'have.class',
@@ -115,7 +115,7 @@ function verifyTable(hasActions: boolean) {
   cy.tick(10000)
 
   if (!hasActions) {
-    cy.get('app-coaches-table').find('mat-row').should('have.length', 2)
+    cy.get('app-coaches-table').find('mat-row').should('have.length', 3)
   } else {
     cy.get('app-coach').find('h2').should('have.length', 2)
   }

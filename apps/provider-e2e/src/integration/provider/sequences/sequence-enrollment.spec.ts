@@ -36,7 +36,7 @@ describe('Sequence -> View -> Enrollments', function () {
     attemptEnrollPatients()
 
     assertSequenceBulkEnrollmentRequest({
-      accounts: ['1', '3'],
+      accounts: ['1', '5'],
       organization: '1',
       sequence: `${Cypress.env('sequenceId')}`,
       executeAt: '2019-12-31T00:00:00',
@@ -64,7 +64,7 @@ describe('Sequence -> View -> Enrollments', function () {
     attemptEnrollPatients()
 
     assertSequenceBulkEnrollmentRequest({
-      accounts: ['1', '3'],
+      accounts: ['1', '5'],
       organization: '1',
       sequence: `${Cypress.env('sequenceId')}`,
       executeAt: '2020-01-02T03:00:00',
@@ -127,7 +127,7 @@ describe('Sequence -> View -> Enrollments', function () {
 
     cy.get('[aria-label="All patients in selected phase(s)"]').click()
 
-    cy.tick(5000)
+    cy.wait(500)
 
     cy.get('ccr-organization-search').find('input').type('Coachcare')
     selectAutocompleteOption(0)
@@ -238,7 +238,7 @@ describe('Sequence -> View -> Enrollments', function () {
     attemptEnrollPatients()
 
     assertSequenceBulkEnrollmentRequest({
-      accounts: ['3'],
+      accounts: ['5'],
       organization: '1',
       sequence: `${Cypress.env('sequenceId')}`,
       executeAt: '2019-12-24T00:00:00',
