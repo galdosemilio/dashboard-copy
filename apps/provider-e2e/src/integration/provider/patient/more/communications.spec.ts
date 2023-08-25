@@ -78,7 +78,15 @@ describe('Patient profile -> More -> Communications', function () {
     cy.get('button').contains('Add Manual Communication').click({ force: true })
     cy.tick(1000)
 
-    cy.wait(2000)
+    cy.get('input[formcontrolname="startTime"]')
+      .parent()
+      .parent()
+      .find('mat-datepicker-toggle')
+      .click()
+
+    cy.get('.mat-clock-hours')
+      .contains('7')
+      .should('have.class', 'mat-clock-cell-disabled')
 
     cy.get('mat-dialog-container')
       .find('button')
