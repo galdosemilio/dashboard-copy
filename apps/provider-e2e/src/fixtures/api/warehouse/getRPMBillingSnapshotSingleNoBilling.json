@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6154",
+        "firstName": "Lascario",
+        "lastName": "Pacheco",
+        "dateOfBirth": "1994-06-10",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "7556",
+        "name": "Alaska Premier Health - Parent Org",
+        "hierarchyPath": ["7556", "30"]
+      },
+      "billing": [],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "606",
+        "changedAt": "2023-05-01T03:49:05.376+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2023-05-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-05-01T10:00:00+00:00",
+        "educationProvidedAt": "2023-05-01T10:00:00+00:00",
+        "deviceProvidedAt": "2023-05-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "2852",
+          "firstName": "Lascario",
+          "lastName": "Pacheco Arrieta"
+        },
+        "diagnosis": {
+          "primary": "Primary Diagnosis 123",
+          "secondary": "Secondary Diagnosis 123",
+          "other": "Insurance Information 12345"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "totalCount": 1
+  }
+}

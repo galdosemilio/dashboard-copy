@@ -298,6 +298,12 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       this.currentBillingItem = this.resolveCurrentRPMBillingCode(
         rpmBillingReportEntry
       )
+
+      if (!this.currentBillingItem) {
+        this.cdr.detectChanges()
+        return
+      }
+
       this.requiredIterationSeconds =
         this.currentBillingItem?.eligibility?.next?.monitoring?.total?.seconds?.required
       this.currentCodeString = this.currentBillingItem.code

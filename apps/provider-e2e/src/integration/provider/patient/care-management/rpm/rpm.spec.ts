@@ -53,7 +53,7 @@ const testCurrentCTPCode = ({
   isCompleted
 }: {
   snapshot: string
-  code: string
+  code: string | null
   isCompleted?: boolean
 }) => {
   window.localStorage.setItem(STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE, '1')
@@ -82,14 +82,16 @@ const testCurrentCTPCode = ({
   cy.tick(1000)
   cy.wait(1000)
 
-  if (isCompleted) {
+  if (isCompleted || code === null) {
     cy.get('[data-cy="care-management-state"]')
       .find('.current-code')
       .should('not.exist')
 
-    cy.get('[data-cy="care-management-state"]')
-      .find('.rpm-status-completed-icon')
-      .should('exist')
+    if (isCompleted) {
+      cy.get('[data-cy="care-management-state"]')
+        .find('.rpm-status-completed-icon')
+        .should('exist')
+    }
 
     cy.get('[data-cy="care-management-state"]')
       .find('.timer')
@@ -291,6 +293,13 @@ describe('Patient profile -> dashboard -> rpm', function () {
           snapshot: 'getRPMBillingSnapshotSingleComplete99458-2',
           code: 'completed',
           isCompleted: true
+        })
+      })
+
+      it('should show as 00:00 with no billing', () => {
+        testCurrentCTPCode({
+          snapshot: 'getRPMBillingSnapshotSingleNoBilling',
+          code: null
         })
       })
     })
