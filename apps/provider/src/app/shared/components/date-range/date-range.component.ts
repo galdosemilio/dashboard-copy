@@ -141,11 +141,18 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   }
 
   get interval(): [number, unitOfTime.DurationConstructor] {
-    if (this.timeframe === 'week') {
+    if (this.timeframe.includes('week') || this.timeframe === 'last-7-days') {
       return [7, 'days']
+    } else if (this.timeframe === 'last-three-months') {
+      return [3, 'months']
+    } else if (
+      this.timeframe === 'last-12-months' ||
+      this.timeframe === 'this-year'
+    ) {
+      return [12, 'months']
+    } else {
+      return [1, 'month']
     }
-    const diff = moment(this._end).diff(this._start, 'days')
-    return diff >= 28 ? [1, 'month'] : [diff, 'days']
   }
 
   onQuickSelect(dateRange): void {
@@ -170,7 +177,7 @@ export class DateRangeNavigator implements AfterViewInit, OnChanges {
   }
 
   changeDate(next: boolean): void {
-    if (next && this._maxReached) {
+    if ((next && this._maxReached) || this.timeframe === 'all-time') {
       return
     }
 

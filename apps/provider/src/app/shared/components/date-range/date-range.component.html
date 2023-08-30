@@ -3,7 +3,7 @@
 
   <div class="container" fxFlex="75%">
     <mat-grid-list cols="6" rowHeight="30px">
-      <mat-grid-tile [colspan]="1" (click)="changeDate(false)" data-cy="date-ranger-picker-left-click">
+      <mat-grid-tile [colspan]="1" (click)="changeDate(false)" [class.disabled]="timeframe === 'all-time'" data-cy="date-ranger-picker-left-click">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </mat-grid-tile>
 
@@ -58,7 +58,7 @@
       <mat-grid-tile
         [colspan]="1"
         (click)="changeDate(true)"
-        [class.disabled]="_maxReached" data-cy="date-ranger-picker-right-click">
+        [class.disabled]="_maxReached || timeframe === 'all-time'" data-cy="date-ranger-picker-right-click">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </mat-grid-tile>
     </mat-grid-list>

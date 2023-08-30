@@ -17,6 +17,12 @@ interface DateRangeOption {
 }
 
 describe('Reports -> User Statistics -> Patient Activity', function () {
+  beforeEach(() => {
+    cy.setTimezone('et')
+    standardSetup()
+    cy.visit(`/reports/overview/signups`)
+  })
+
   it('Date range selector shows correct start and end dates when changes', function () {
     const dateRanges: Array<DateRangeOption> = [
       {
@@ -71,11 +77,7 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
       }
     ]
 
-    cy.setTimezone('et')
-    standardSetup()
-
     cy.log('Overview -> Patient Signups should be "Week"')
-    cy.visit(`/reports/overview/signups`)
 
     cy.wrap(dateRanges).each((rangeOption: DateRangeOption) => {
       changeDateRange(rangeOption.option)
@@ -87,11 +89,7 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
   })
 
   it('Date range selector shows correctly as different reports with different default options', function () {
-    cy.setTimezone('et')
-    standardSetup()
-
     cy.log('Overview -> Patient Signups should be "Week"')
-    cy.visit(`/reports/overview/signups`)
     cy.get('app-quick-date-range').should('contain', 'Week')
     cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
@@ -121,13 +119,9 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
   })
 
   it('Date range selector state should not be retained between page views', function () {
-    cy.setTimezone('et')
-    standardSetup()
-
     cy.log(
       'Overview -> Patient Signups should be "Week", then change to "Last Month"'
     )
-    cy.visit(`/reports/overview/signups`)
     cy.get('app-quick-date-range').should('contain', 'Week')
     cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
@@ -169,6 +163,47 @@ describe('Reports -> User Statistics -> Patient Activity', function () {
     cy.get('app-quick-date-range').should('contain', 'Week')
     cy.get('[data-cy="date-range-picker-start"]').contains('25 Dec 2019')
     cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2019')
+  })
+
+  it('Date range selector should change dates correcly Last Three Months', function () {
+    changeDateRange('Last Three Months')
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+
+    cy.get('[data-cy="date-range-picker-start"]').contains('1 Jul 2019')
+    cy.get('[data-cy="date-range-picker-end"]').contains('30 Sep 2019')
+  })
+
+  it('Date range selector should change dates correcly This Month', function () {
+    changeDateRange('This Month')
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+
+    cy.get('[data-cy="date-range-picker-start"]').contains('1 Mar 2019')
+    cy.get('[data-cy="date-range-picker-end"]').contains('31 Mar 2019')
+
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+
+    cy.get('[data-cy="date-range-picker-start"]').contains('1 Feb 2019')
+    cy.get('[data-cy="date-range-picker-end"]').contains('28 Feb 2019')
+
+    cy.get('[data-cy="date-ranger-picker-right-click"]').click()
+    cy.get('[data-cy="date-range-picker-start"]').contains('1 Mar 2019')
+    cy.get('[data-cy="date-range-picker-end"]').contains('31 Mar 2019')
+  })
+
+  it('Date range selector should change dates correcly This Year', function () {
+    changeDateRange('This Year')
+    cy.get('[data-cy="date-ranger-picker-left-click"]').click()
+
+    cy.get('[data-cy="date-range-picker-start"]').contains('1 Jan 2018')
+    cy.get('[data-cy="date-range-picker-end"]').contains('31 Dec 2018')
   })
 })
 
