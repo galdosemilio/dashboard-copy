@@ -1,4 +1,5 @@
 import { APP_INITIALIZER } from '@angular/core'
+import { Title } from '@angular/platform-browser'
 import {
   StorefrontPaymentMethodEntryComponent,
   StorefrontCategoryIconComponent,
@@ -58,6 +59,7 @@ export const StorefrontProviders = [
   StorefrontUserService,
   StorefrontOrdersDatabase,
   StorefrontPaymentMethodsDatabase,
+  Title,
   {
     provide: APP_INITIALIZER,
     useFactory: onAppInit,

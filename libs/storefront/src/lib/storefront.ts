@@ -13,6 +13,7 @@ import { User } from '@coachcare/sdk'
 import { AuthService } from '@coachcare/common/services'
 import { NavigationEnd, Router } from '@angular/router'
 import { updateFavIcon } from '@coachcare/common/shared'
+import { Title } from '@angular/platform-browser'
 
 @UntilDestroy()
 @Component({
@@ -44,7 +45,8 @@ export class Storefront implements OnInit {
     private renderer: Renderer2,
     private user: User,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) {
     this.store
       .pipe(
@@ -155,6 +157,7 @@ export class Storefront implements OnInit {
         filter((store) => !!store)
       )
       .subscribe((store) => {
+        this.title.setTitle(store?.name || 'eStore')
         this.currentStore = store
       })
   }
