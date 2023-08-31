@@ -33,6 +33,10 @@ export class AddManualInteractionDialog implements OnInit {
   public isLoading = false
   public now: moment.Moment = moment()
 
+  public get maxTime(): moment.Moment | null {
+    return this.now.isSame(this.form.value.startDate, 'day') ? this.now : null
+  }
+
   constructor(
     private context: ContextService,
     private dialogRef: MatDialogRef<AddManualInteractionDialog>,
@@ -103,12 +107,11 @@ export class AddManualInteractionDialog implements OnInit {
   private async fetchInteractionTypes(): Promise<void> {
     try {
       this.isLoading = true
-      const interactionTypeResponse = await this.interaction.getAllInteractionTypes(
-        {
+      const interactionTypeResponse =
+        await this.interaction.getAllInteractionTypes({
           status: 'active',
           limit: 'all'
-        }
-      )
+        })
 
       this.interactionTypes = interactionTypeResponse.data.map(
         (interactionType) => {

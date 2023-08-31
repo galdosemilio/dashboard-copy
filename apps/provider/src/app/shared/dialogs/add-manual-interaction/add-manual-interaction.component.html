@@ -38,7 +38,7 @@
 
             <mat-form-field hideRequiredMarker="true">
                 <input matInput required formControlName="startTime" readonly="true" (click)="pickerStart.open()"
-                [matDatepicker]="pickerStart" [max]="now" [placeholder]="'BOARD.START_TIME' | translate">
+                [matDatepicker]="pickerStart" [max]="maxTime" [placeholder]="'BOARD.START_TIME' | translate">
                 <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
                 <mat-datepicker type="time" clockStep="5" #pickerStart></mat-datepicker>
             </mat-form-field>
