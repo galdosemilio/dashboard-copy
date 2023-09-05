@@ -24,6 +24,7 @@ import { ClinicsDatabase, ClinicsDataSource } from './services'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { CSV } from '@coachcare/common/shared'
 import { AllOrgPermissions } from '@coachcare/sdk'
+import Papa from 'papaparse'
 
 @UntilDestroy()
 @Component({
@@ -116,44 +117,25 @@ export class ClinicsComponent implements OnInit, OnDestroy {
 
       const associations = await source.connect().pipe(first()).toPromise()
 
-      const csvSeparator = ','
       let csv = 'CLINICS REPORT\r\n'
-      csv +=
-        `"ID"${csvSeparator}` +
-        `"Hierarchy"${csvSeparator}` +
-        `"Name"${csvSeparator}` +
-        `"Country"${csvSeparator}` +
-        `"Address"${csvSeparator}` +
-        `"City"${csvSeparator}` +
-        `"State"${csvSeparator}` +
-        `"ZIP"${csvSeparator}` +
-        `"Contact Information"` +
-        '\r\n'
 
-      associations.forEach((association) => {
-        csv += `"${association.organization.id || ''}"${csvSeparator}`
-        csv += `"${association.organization.hierarchyPath.toString()}"${csvSeparator}`
-        csv += `"${association.organization.name || ''}"${csvSeparator}`
-        csv += `"${
-          association.organization.address.country || ''
-        }"${csvSeparator}`
-        csv += `"${
-          association.organization.address.street || ''
-        }"${csvSeparator}`
-        csv += `"${association.organization.address.city || ''}"${csvSeparator}`
-        csv += `"${
-          association.organization.address.state || ''
-        }"${csvSeparator}`
-        csv += `"${
-          association.organization.address.postalCode || ''
-        }"${csvSeparator}`
-        csv += `"${association.organization.contact.firstName || ''} ${
-          association.organization.contact.lastName || ''
-        }\n${association.organization.contact.email || ''}\n${
-          association.organization.contact.phone
-        }"`
-        csv += '\r\n'
-      })
+      const data = associations.map((association) => ({
+        ID: association.organization.id || '',
+        Hierarchy: association.organization.hierarchyPath.toString(),
+        Name: association.organization.name || '',
+        Country: association.organization.address.country || '',
+        Address: association.organization.address.street || '',
+        City: association.organization.address.city || '',
+        State: association.organization.address.state || '',
+        ZIP: association.organization.address.postalCode || '',
+        'Contact Information': `${
+          association.organization.contact.firstName || ''
+        } ${association.organization.contact.lastName || ''}\n${
+          association.organization.contact.email || ''
+        }\n${association.organization.contact.phone || ''}`
+      }))
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({
         content: csv,

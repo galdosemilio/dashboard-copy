@@ -9,6 +9,7 @@ import {
 } from '@angular/core'
 import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { MatSort, Sort } from '@coachcare/material'
+import Papa from 'papaparse'
 import {
   ContextService,
   DietersCriteria,
@@ -39,7 +40,6 @@ export class DieterListingNoPhiComponent
   paginator: CcrPaginatorComponent
 
   clinic: SelectedOrganization
-  csvSeparator = ','
   dietersSource: DietersDataSource
   refresh$: Subject<void> = new Subject<void>()
   sort: MatSort = new MatSort()
@@ -144,33 +144,9 @@ export class DieterListingNoPhiComponent
 
       const orgName = this.context.organization.name.replace(/\s/g, '_')
       const filename = `${orgName}_Patient_List.csv`
-      let csv = ''
-      csv += 'PATIENT LIST\r\n'
-      csv +=
-        'ID' +
-        this.csvSeparator +
-        'First Name' +
-        this.csvSeparator +
-        'Last Name' +
-        this.csvSeparator +
-        'Email' +
-        this.csvSeparator +
-        'Organization ID (1)' +
-        this.csvSeparator +
-        'Organization Name (1)' +
-        this.csvSeparator +
-        'Organization ID (2)' +
-        this.csvSeparator +
-        'Organization Name (2)' +
-        this.csvSeparator +
-        'Organization ID (3)' +
-        this.csvSeparator +
-        'Organization Name (3)' +
-        this.csvSeparator +
-        'More Organization Associations?' +
-        '\r\n'
+      let csv = 'PATIENT LIST\r\n'
 
-      res.data
+      const data = res.data
         .map(
           (element: any) =>
             new DieterListingItem({
@@ -180,31 +156,32 @@ export class DieterListingNoPhiComponent
               orgCount: element.organizations.length
             })
         )
-        .forEach((d) => {
-          csv +=
-            `"${d.id}"` +
-            this.csvSeparator +
-            `"${d.firstName}"` +
-            this.csvSeparator +
-            `"${d.lastName}"` +
-            this.csvSeparator +
-            `"${d.email}"` +
-            this.csvSeparator +
-            `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[0] ? d.organizations[0].name : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[1] ? d.organizations[1].id : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[1] ? d.organizations[1].name : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[2] ? d.organizations[2].id : ''}"` +
-            this.csvSeparator +
-            `"${d.organizations[2] ? d.organizations[2].name : ''}"` +
-            this.csvSeparator +
-            `"${d.orgCount > 3 ? 'Yes' : 'No'}"` +
-            '\r\n'
+        .map((d) => {
+          const organizationRows = {}
+
+          for (let i = 0; i < 3; i += 1) {
+            organizationRows[`Organization ID (${i + 1})`] = d.organizations[i]
+              ? d.organizations[i].id
+              : ''
+            organizationRows[`Organization Name (${i + 1})`] = d.organizations[
+              i
+            ]
+              ? d.organizations[i].name
+              : ''
+          }
+          const row = {
+            ID: d.id,
+            'First Name': d.firstName,
+            'Last Name': d.lastName,
+            Email: d.email,
+            ...organizationRows,
+            'More Organization Associations?': d.orgCount > 3 ? 'Yes' : 'No'
+          }
+
+          return row
         })
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
       return Promise.resolve()

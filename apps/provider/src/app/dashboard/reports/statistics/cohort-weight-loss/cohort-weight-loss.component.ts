@@ -22,6 +22,7 @@ import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
+import Papa from 'papaparse'
 import { Cohort } from '@coachcare/sdk'
 import { resolveConfig } from '@app/config/section'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -49,7 +50,6 @@ export class CohortWeightLossComponent
 
   // subscription for selector changes
   data: ReportsCriteria
-  csvSeparator = ','
 
   // refresh trigger
   refresh$ = new Subject<void>()
@@ -140,57 +140,42 @@ export class CohortWeightLossComponent
           ? '-Phase_' + CSV.sanitizeFileName(this.pkgFilter?.pkg[0].title)
           : ''
       }`
-      let csv = ''
-      csv += 'Cohort Weight Loss\r\n'
-      csv +=
-        '"ID"' +
-        this.csvSeparator +
-        '"First Name"' +
-        this.csvSeparator +
-        '"Last Name"' +
-        this.csvSeparator +
-        this.cohorts.reduce((prev, current) => {
-          return prev + `"${current.days} Days"` + this.csvSeparator
-        }, '') +
-        '"Organization ID"' +
-        this.csvSeparator +
-        '"Organization Name"' +
-        '\r\n'
 
       const pref = this.context.user.measurementPreference
-      res.data.forEach((d) => {
-        csv +=
-          `"${d.account.id}"` +
-          this.csvSeparator +
-          `"${d.account.firstName}"` +
-          this.csvSeparator +
-          `"${d.account.lastName}"` +
-          this.csvSeparator +
-          this.cohorts.reduce((prev, current, curIndex) => {
-            return (
-              prev +
-              unitConversion(
+      let csv = 'Cohort Weight Loss\r\n'
+
+      const data = res.data.map((d) => {
+        const row = {
+          ID: d.account.id,
+          'First Name': d.account.firstName,
+          'Last Name': d.account.lastName
+        }
+
+        this.cohorts.forEach((cohort, index) => {
+          row[`${cohort.days} Days`] =
+            unitConversion(
+              pref,
+              'composition',
+              d.cohorts[index]?.change.value || 0,
+              2
+            ) +
+            ' ' +
+            this.source.i18n[
+              unitLabel(
                 pref,
                 'composition',
-                d.cohorts[curIndex]?.change.value || 0,
-                2
-              ) +
-              ' ' +
-              this.source.i18n[
-                unitLabel(
-                  pref,
-                  'composition',
-                  d.cohorts[curIndex]?.change.value || 0
-                )
-              ] +
-              this.csvSeparator
-            )
-          }, '') +
-          `"${d.organization.id}"` +
-          this.csvSeparator +
-          `"${d.organization.name}"` +
-          '\r\n'
+                d.cohorts[index]?.change.value || 0
+              )
+            ]
+        })
+
+        row['Organization ID'] = d.organization.id
+        row['Organization Name'] = d.organization.name
+
+        return row
       })
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({
         filename,

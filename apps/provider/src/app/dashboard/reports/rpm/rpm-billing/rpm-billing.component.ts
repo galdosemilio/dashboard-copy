@@ -33,6 +33,7 @@ import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
 import { chain, times, isEmpty, countBy } from 'lodash'
 import * as moment from 'moment'
+import Papa from 'papaparse'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { firstValueFrom, Subject } from 'rxjs'
 import { debounceTime, filter, map } from 'rxjs/operators'
@@ -107,7 +108,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   public criteria: Partial<FetchCareManagementBillingSnapshotRequest> = {
     asOf: moment().format('YYYY-MM-DD')
   }
-  public csvSeparator = ','
   public defaultPageSizeStorageKey = STORAGE_PAGE_SIZE_RPM_BILLING
   public isDesktop: boolean
   public isLoading: boolean
@@ -372,53 +372,46 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   private addExternalIdentifierHeaders(
     externalIdentifierNames: string[],
-    headers: string,
-    firstRow: string,
-    secondRow?: string
+    headers: string[],
+    firstRows: string[],
+    secondRows?: string[]
   ) {
-    if (externalIdentifierNames.length > 0) {
-      firstRow += this.csvSeparator
-      headers += this.csvSeparator
-      if (secondRow) {
-        secondRow += this.csvSeparator
-      }
-    }
-
     externalIdentifierNames.forEach((entry, index) => {
-      if (secondRow) {
-        firstRow += ',,'
-        secondRow += ',Identifier,'
+      if (secondRows) {
+        firstRows.push('')
+        firstRows.push('')
+        firstRows.push('')
+
+        secondRows.push('')
+        secondRows.push('Identifier')
+        secondRows.push('')
       } else {
-        firstRow += ',Identifier,'
+        firstRows.push('')
+        firstRows.push('Identifier')
+        firstRows.push('')
       }
 
-      headers += 'ID,Name,Value'
-
-      if (index + 1 !== externalIdentifierNames.length) {
-        firstRow += this.csvSeparator
-        headers += this.csvSeparator
-        if (secondRow) {
-          secondRow += this.csvSeparator
-        }
-      }
+      headers.push('ID')
+      headers.push('Name')
+      headers.push('Value')
     })
 
     return {
-      firstRow,
-      secondRow,
+      firstRows,
+      secondRows,
       headers
     }
   }
 
   private addExternalIdentifierValues(
     externalIdentifierNames: string[],
-    externalIdentifiers: ExternalIdentifier[]
+    externalIdentifiers: ExternalIdentifier[],
+    row: string[]
   ) {
     if (externalIdentifierNames.length === 0) {
       return ''
     }
 
-    let values = this.csvSeparator
     const externalIdentifierNameGroup = countBy(externalIdentifierNames)
     const entries = Object.entries(externalIdentifierNameGroup)
     entries.forEach(([name, count], eIndex) => {
@@ -429,23 +422,16 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         const externalIdentifier = filteredExternalIdentifiers[index]
 
         if (externalIdentifier) {
-          values += externalIdentifier.id + this.csvSeparator
-          values += externalIdentifier.name + this.csvSeparator
-          values += externalIdentifier.value
+          row.push(externalIdentifier.id)
+          row.push(externalIdentifier.name)
+          row.push(externalIdentifier.value)
         } else {
-          values += ',,'
-        }
-        if (index + 1 !== count) {
-          values += this.csvSeparator
+          row.push('')
+          row.push('')
+          row.push('')
         }
       })
-
-      if (eIndex + 1 !== entries.length) {
-        values += this.csvSeparator
-      }
     })
-
-    return values
   }
 
   private async downloadMonitoringReport(): Promise<void> {
@@ -487,7 +473,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
       const filename = `${this.selectedServiceType.name}_${moment(
         criteria.asOf
       ).format('MMM_YYYY')}.csv`
-      let csv = ''
 
       const externalIdentifierNames = this.getExternalIdentifierNames(res)
 
@@ -498,147 +483,111 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         ? moment()
         : moment(this.criteria.asOf).endOf('day')
 
-      let firstRow = `"As of: ${currentAsOf.format('MMM D, YYYY')}"${
-        this.csvSeparator
-      }`
+      const firstRow = [`As of: ${currentAsOf.format('MMM D, YYYY')}`]
+      let secondRow = null
 
-      firstRow += ',,,,,,,,,,,'
-
-      let secondRow = ''
       if (this.timezoneName) {
-        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,`
+        secondRow = [`GENERATED IN ${this.timezoneName.toUpperCase()}`]
       }
 
+      const footerRow = [
+        `${currentAsOf.format('dddd, MMM D, YYYY HH:mm:ss A [GMT]Z')}`
+      ]
+
+      const headers = [
+        'ID',
+        'First Name',
+        'Last Name',
+        'Date of Birth',
+        'Device Type',
+        'Primary Diagnosis',
+        'Secondary Diagnosis',
+        'Supervising Provider',
+        'Organization ID',
+        'Organization Name',
+        'Status',
+        'Activation Date'
+      ]
+
+      headers.forEach((value, index) => {
+        if (!firstRow[index]) {
+          firstRow.push('')
+        }
+
+        if (secondRow && !secondRow[index]) {
+          secondRow.push('')
+        }
+
+        if (!footerRow[index]) {
+          return
+        }
+      })
+
       this.cptCodes.forEach((billingCode, index) => {
-        firstRow += `"${billingCode}"${this.csvSeparator}"${billingCode}"${
-          index === this.cptCodes.length - 1 ? '' : this.csvSeparator
-        }`
+        firstRow.push(billingCode)
+        firstRow.push(billingCode)
 
         if (secondRow) {
-          secondRow += this.csvSeparator + this.csvSeparator
+          secondRow.push('')
+          secondRow.push('')
         }
+
+        headers.push('Latest Claim Date')
+        headers.push('Next Claim Requirements')
       })
 
-      let headers =
-        'ID' +
-        this.csvSeparator +
-        'First Name' +
-        this.csvSeparator +
-        'Last Name' +
-        this.csvSeparator +
-        'Date of Birth' +
-        this.csvSeparator +
-        'Device Type' +
-        this.csvSeparator +
-        'Primary Diagnosis' +
-        this.csvSeparator +
-        'Secondary Diagnosis' +
-        this.csvSeparator +
-        'Supervising Provider' +
-        this.csvSeparator +
-        'Organization ID' +
-        this.csvSeparator +
-        'Organization Name' +
-        this.csvSeparator +
-        'Status' +
-        this.csvSeparator +
-        'Activation Date' +
-        this.csvSeparator
-
-      // We iterate through each billing entry code to set up the headers
-      this.cptCodes.forEach((code, index) => {
-        headers += `"Latest Claim Date"` + this.csvSeparator
-        headers += `"Next Claim Requirements"`
-        if (index !== this.cptCodes.length - 1) {
-          headers += this.csvSeparator
-        }
-      })
-
-      const headerData = this.addExternalIdentifierHeaders(
+      this.addExternalIdentifierHeaders(
         externalIdentifierNames,
         headers,
         firstRow,
         secondRow
       )
 
-      firstRow = headerData.firstRow
-      secondRow = headerData.secondRow
-      headers = headerData.headers
-
-      let dataRows = ''
-
-      // We just go through each row and fill the cells
-      res.forEach((entry) => {
-        dataRows +=
-          `"${entry.account.id}"` +
-          this.csvSeparator +
-          `"${entry.account.firstName}"` +
-          this.csvSeparator +
-          `"${entry.account.lastName}"` +
-          this.csvSeparator +
-          `"${moment(entry.account.dateOfBirth).format('MM/DD/YYYY')}"` +
-          this.csvSeparator +
-          `"${entry.device.name}"` +
-          this.csvSeparator +
-          `"${
-            (entry.state?.isActive && entry.state?.diagnosis?.primary) || ''
-          }"` +
-          this.csvSeparator +
-          `"${
-            (entry.state?.isActive && entry.state?.diagnosis?.secondary) || ''
-          }"` +
-          this.csvSeparator +
-          `"${
-            entry.state?.isActive && entry.state?.supervisingProvider
-              ? `${entry.state?.supervisingProvider.firstName} ${entry.state?.supervisingProvider.lastName}`
-              : ''
-          }"` +
-          this.csvSeparator +
-          `"${entry.organization.id}"` +
-          this.csvSeparator +
-          `"${entry.organization.name}"` +
-          this.csvSeparator +
-          `"${entry.state?.isActive ? 'Active' : 'Inactive'}"` +
-          this.csvSeparator +
-          `"${
-            entry.state?.isActive
-              ? moment(entry.state.startedAt).format('MM/DD/YYYY')
-              : 'No'
-          }"` +
-          this.csvSeparator
+      const dataRows = res.map((entry) => {
+        const row = [
+          entry.account.id,
+          entry.account.firstName,
+          entry.account.lastName,
+          moment(entry.account.dateOfBirth).format('MM/DD/YYYY'),
+          entry.device.name,
+          (entry.state?.isActive && entry.state?.diagnosis?.primary) || '',
+          (entry.state?.isActive && entry.state?.diagnosis?.secondary) || '',
+          entry.state?.isActive && entry.state?.supervisingProvider
+            ? `${entry.state?.supervisingProvider.firstName} ${entry.state?.supervisingProvider.lastName}`
+            : '',
+          entry.organization.id,
+          entry.organization.name,
+          entry.state?.isActive ? 'Active' : 'Inactive',
+          entry.state?.isActive
+            ? moment(entry.state.startedAt).format('MM/DD/YYYY')
+            : 'No'
+        ]
 
         this.cptCodes.forEach((code, index) => {
           const billingEntry = entry.billing.find(
             (billing) => billing.code === code
           )
           if (billingEntry) {
-            dataRows += this.getRPMBillingEntryContent(billingEntry, entry)
+            this.getRPMBillingEntryContent(billingEntry, entry, row)
           } else {
-            dataRows += 'N/A' + this.csvSeparator + 'N/A'
-          }
-
-          if (index !== this.cptCodes.length - 1) {
-            dataRows += this.csvSeparator
+            row.push('N/A')
+            row.push('N/A')
           }
         })
 
-        dataRows += this.addExternalIdentifierValues(
+        this.addExternalIdentifierValues(
           externalIdentifierNames,
-          entry.externalIdentifiers
+          entry.externalIdentifiers,
+          row
         )
 
-        dataRows += '\r\n'
+        return row
       })
 
-      csv += firstRow + '\r\n'
-      if (secondRow) {
-        csv += secondRow + '\r\n'
-      }
-      csv += headers + '\r\n'
-      csv += dataRows
-      csv +=
-        `\r\n"${currentAsOf.format('dddd, MMM D, YYYY HH:mm:ss A [GMT]Z')}"` +
-        this.csvSeparator
+      const csv = Papa.unparse(
+        [firstRow, secondRow, headers, ...dataRows, [''], footerRow],
+        { header: false }
+      )
 
       CSV.toFile({ content: csv, filename })
     } catch (error) {
@@ -712,142 +661,103 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         asOfDate
       ).format('MMM_YYYY')}.csv`
 
-      let csv = ''
-
       const currentAsOf = moment(asOfDate)
 
-      let firstRow = `"As of: ${currentAsOf.format('MMM, YYYY')}"${
-        this.csvSeparator
-      }`
-      firstRow += ',,,,,,,,,,,'
+      const firstRow = [`As of: ${currentAsOf.format('MMM, YYYY')}`]
 
-      let secondRow = ''
+      let secondRow = null
       if (this.timezoneName) {
-        secondRow += `GENERATED IN ${this.timezoneName.toUpperCase()},,,,,,,,,,,`
+        secondRow = [`GENERATED IN ${this.timezoneName.toUpperCase()}`]
       }
 
-      this.cptCodes.forEach((code, index) => {
-        firstRow += `"${code}"${
-          index === this.cptCodes.length - 1 ? '' : this.csvSeparator
-        }`
+      const headers = [
+        'ID',
+        'First Name',
+        'Last Name',
+        'Date of Birth',
+        'Device Type',
+        'Primary Diagnosis',
+        'Secondary Diagnosis',
+        'Supervising Provider',
+        'Organization ID',
+        'Organization Name',
+        'Status',
+        'Activation Date'
+      ]
 
-        if (secondRow) {
-          secondRow += this.csvSeparator
+      headers.forEach((value, index) => {
+        if (!firstRow[index]) {
+          firstRow.push('')
+        }
+
+        if (secondRow && !secondRow[index]) {
+          secondRow.push('')
         }
       })
 
-      let headers =
-        'ID' +
-        this.csvSeparator +
-        'First Name' +
-        this.csvSeparator +
-        'Last Name' +
-        this.csvSeparator +
-        'Date of Birth' +
-        this.csvSeparator +
-        'Device Type' +
-        this.csvSeparator +
-        'Primary Diagnosis' +
-        this.csvSeparator +
-        'Secondary Diagnosis' +
-        this.csvSeparator +
-        'Supervising Provider' +
-        this.csvSeparator +
-        'Organization ID' +
-        this.csvSeparator +
-        'Organization Name' +
-        this.csvSeparator +
-        'Status' +
-        this.csvSeparator +
-        'Activation Date' +
-        this.csvSeparator
-
-      this.cptCodes.forEach((billingCode, index) => {
-        headers += `"Claim Date"${
-          index === this.cptCodes.length - 1 ? '' : this.csvSeparator
-        }`
+      this.cptCodes.forEach((code, index) => {
+        firstRow.push(code)
+        headers.push('Claim Date')
+        if (secondRow) {
+          secondRow.push('')
+        }
       })
 
-      const headerData = this.addExternalIdentifierHeaders(
+      this.addExternalIdentifierHeaders(
         externalIdentifierNames,
         headers,
         firstRow,
         secondRow
       )
 
-      firstRow = headerData.firstRow
-      secondRow = headerData.secondRow
-      headers = headerData.headers
-
-      let dataRows = ''
-
-      for (const entry of data) {
+      const dataRows = data.map((entry) => {
         const eligibilityGroup = chain(entry.eligibility)
           .groupBy('code')
           .value()
 
-        dataRows +=
-          `"${entry.account.id}"` +
-          this.csvSeparator +
-          `"${entry.account.firstName}"` +
-          this.csvSeparator +
-          `"${entry.account.lastName}"` +
-          this.csvSeparator +
-          `"${moment.utc(entry.account.dateOfBirth).format('MM/DD/YYYY')}"` +
-          this.csvSeparator +
-          `"${entry.state?.billable?.plan?.name || ''}"` +
-          this.csvSeparator +
-          `"${entry.state?.billable?.diagnosis?.primary || ''}"` +
-          this.csvSeparator +
-          `"${entry.state?.billable?.diagnosis?.secondary || ''}"` +
-          this.csvSeparator +
-          `"${
-            entry.state?.billable?.supervisingProvider
-              ? `${entry.state.billable.supervisingProvider.firstName} ${entry.state.billable.supervisingProvider.lastName}`
-              : ''
-          }"` +
-          this.csvSeparator +
-          `"${entry.organization?.state?.id || ''}"` +
-          this.csvSeparator +
-          `"${entry.organization?.state?.name || ''}"` +
-          this.csvSeparator +
-          `"${entry.state?.current?.isActive ? 'Active' : 'Inactive'}"` +
-          this.csvSeparator +
-          `"${
-            entry.state?.billable?.isActive
-              ? moment(entry.state.billable.startedAt).format('MM/DD/YYYY')
-              : 'No'
-          }"` +
-          this.csvSeparator
+        const row = [
+          entry.account.id,
+          entry.account.firstName,
+          entry.account.lastName,
+          moment.utc(entry.account.dateOfBirth).format('MM/DD/YYYY'),
+          entry.state?.billable?.plan?.name || '',
+          entry.state?.billable?.diagnosis?.primary || '',
+          entry.state?.billable?.diagnosis?.secondary || '',
+          entry.state?.billable?.supervisingProvider
+            ? `${entry.state.billable.supervisingProvider.firstName} ${entry.state.billable.supervisingProvider.lastName}`
+            : '',
+          entry.organization?.state?.id || '',
+          entry.organization?.state?.name || '',
+          entry.state?.current?.isActive ? 'Active' : 'Inactive',
+          entry.state?.billable?.isActive
+            ? moment(entry.state.billable.startedAt).format('MM/DD/YYYY')
+            : 'No'
+        ]
 
         this.cptCodes.forEach((billingCode, index) => {
           if (eligibilityGroup[billingCode]?.length) {
-            dataRows += `"${moment(
-              eligibilityGroup[billingCode][0].eligibleAt
-            ).format('MM/DD/YYYY')}"`
+            row.push(
+              moment(eligibilityGroup[billingCode][0].eligibleAt).format(
+                'MM/DD/YYYY'
+              )
+            )
           } else {
-            dataRows += `"N/A"`
-          }
-
-          if (index !== this.cptCodes.length - 1) {
-            dataRows += this.csvSeparator
+            row.push('N/A')
           }
         })
 
-        dataRows += this.addExternalIdentifierValues(
+        this.addExternalIdentifierValues(
           externalIdentifierNames,
-          entry.externalIdentifiers
+          entry.externalIdentifiers,
+          row
         )
 
-        dataRows += '\r\n'
-      }
+        return row
+      })
 
-      csv += firstRow + '\r\n'
-      if (secondRow) {
-        csv += secondRow + '\r\n'
-      }
-      csv += headers + '\r\n'
-      csv += dataRows
+      const csv = Papa.unparse([firstRow, secondRow, headers, ...dataRows], {
+        header: false
+      })
 
       CSV.toFile({ content: csv, filename })
     } catch (error) {
@@ -1092,102 +1002,95 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   private getRPMBillingEntryContent(
     billingEntry: RPMStateSummaryBilling,
-    entry: RPMStateSummaryEntry
+    entry: RPMStateSummaryEntry,
+    row: string[]
   ): string {
-    let csv = ''
-    // Latest Eligibility
-    csv +=
-      `"${
-        billingEntry.eligibility.last
-          ? moment(billingEntry.eligibility.last.timestamp).format('MM/DD/YYYY')
-          : 'N/A'
-      }"` + this.csvSeparator
+    row.push(
+      billingEntry.eligibility.last
+        ? moment(billingEntry.eligibility.last.timestamp).format('MM/DD/YYYY')
+        : 'N/A'
+    )
 
-    // Next Eligibility
     if (
       !billingEntry.eligibility.next ||
       !entry.state?.isActive ||
       (billingEntry.trackableCode?.maxEligibleAmount >= 2 &&
         billingEntry.hasClaims)
     ) {
-      csv += '"N/A"'
-    } else {
-      // Means we have next eligibility requirements that we should display
-      csv += '"'
+      row.push('N/A')
 
-      const nextObjectKeys = Object.keys(billingEntry.eligibility.next).filter(
-        (key) =>
-          key !== 'earliestEligibleAt' &&
-          billingEntry.eligibility.next[key]?.remaining
-      )
-
-      // Previous code requirements (happens between 99458 and 99457, for example)
-      if (billingEntry.hasCodeRequirements) {
-        billingEntry.eligibility.next.relatedCodeRequirementsNotMet.forEach(
-          (code, index, array) => {
-            csv += `${code} requirements not satisfied`
-
-            if (index + 1 < array.length) {
-              csv += '; '
-            }
-          }
-        )
-
-        if (billingEntry.remainingDays || nextObjectKeys.length) {
-          csv += '; '
-        }
-      }
-
-      // Remaining days
-      if (billingEntry.remainingDays) {
-        csv += `${billingEntry.remainingDays} more calendar days`
-      }
-
-      // The only notable condition here is 99458, that one means
-      // that if there is an alreadyEligibleCount [meaning that the MONITORING TIME has
-      // been completed, not that the iteration is ACTUALLY eligibile.
-      // Don't be fooled by the name of the property like me!], then the requirements
-      // that appear as part of this object are not for 99458 x1 but for 99458 x2
-      // and that we should skip them.
-      if (!nextObjectKeys.length) {
-        csv += '"'
-      } else if (
-        billingEntry.code === '99458' &&
-        billingEntry.eligibility.next?.alreadyEligibleCount >= 1
-      ) {
-        csv += `"`
-        return csv
-      } else if (billingEntry.remainingDays) {
-        csv += '; '
-      }
-
-      // We navigate through each key on the 'next' object to display the missing requirements.
-      // Usually, these are 'monitoring time', 'live interactions', etc.
-      nextObjectKeys.forEach((nextKey, nextKeyIndex, nextKeyArray) => {
-        const remainingMetricString = this.getRemainingMetricString(
-          billingEntry.eligibility.next[nextKey].remainingRaw ||
-            billingEntry.eligibility.next[nextKey].remaining,
-          nextKey
-        )
-
-        if (!remainingMetricString) {
-          if (nextKeyIndex === nextKeyArray.length - 1) {
-            csv += '"'
-          }
-          return
-        }
-
-        csv += `${remainingMetricString}`
-
-        if (nextKeyIndex === nextKeyArray.length - 1) {
-          csv += '"'
-        } else {
-          csv += '; '
-        }
-      })
+      return
     }
 
-    return csv
+    // Means we have next eligibility requirements that we should display
+    let text = ''
+
+    const nextObjectKeys = Object.keys(billingEntry.eligibility.next).filter(
+      (key) =>
+        key !== 'earliestEligibleAt' &&
+        billingEntry.eligibility.next[key]?.remaining
+    )
+
+    // Previous code requirements (happens between 99458 and 99457, for example)
+    if (billingEntry.hasCodeRequirements) {
+      billingEntry.eligibility.next.relatedCodeRequirementsNotMet.forEach(
+        (code, index, array) => {
+          text += `${code} requirements not satisfied`
+
+          if (index + 1 < array.length) {
+            text += '; '
+          }
+        }
+      )
+
+      if (billingEntry.remainingDays || nextObjectKeys.length) {
+        text += '; '
+      }
+    }
+
+    // Remaining days
+    if (billingEntry.remainingDays) {
+      text += `${billingEntry.remainingDays} more calendar days`
+    }
+
+    // The only notable condition here is 99458, that one means
+    // that if there is an alreadyEligibleCount [meaning that the MONITORING TIME has
+    // been completed, not that the iteration is ACTUALLY eligibile.
+    // Don't be fooled by the name of the property like me!], then the requirements
+    // that appear as part of this object are not for 99458 x1 but for 99458 x2
+    // and that we should skip them.
+    if (
+      billingEntry.code === '99458' &&
+      billingEntry.eligibility.next?.alreadyEligibleCount >= 1
+    ) {
+      row.push(text)
+      return
+    }
+
+    if (billingEntry.remainingDays) {
+      text += '; '
+    }
+
+    // We navigate through each key on the 'next' object to display the missing requirements.
+    // Usually, these are 'monitoring time', 'live interactions', etc.
+    nextObjectKeys.forEach((nextKey, nextKeyIndex, nextKeyArray) => {
+      const remainingMetricString = this.getRemainingMetricString(
+        billingEntry.eligibility.next[nextKey].remainingRaw ||
+          billingEntry.eligibility.next[nextKey].remaining,
+        nextKey
+      )
+
+      if (!remainingMetricString) {
+        return
+      }
+
+      text += `${remainingMetricString}`
+
+      if (nextKeyIndex !== nextKeyArray.length - 1) {
+        text += '; '
+      }
+    })
+    row.push(text)
   }
 
   private getRemainingMetricString(value: number, type: string): string {

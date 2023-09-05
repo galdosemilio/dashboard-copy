@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import Papa from 'papaparse'
 
 import {
   ContextService,
@@ -32,7 +33,6 @@ export class FormSubmissionsComponent implements OnInit {
   public source: FormSubmissionsDatasource
   public title: string
 
-  private csvSeparator = ','
   private dates: { after: string; before: string }
   private dates$: EventEmitter<void> = new EventEmitter<void>()
   private form: Form
@@ -88,15 +88,7 @@ export class FormSubmissionsComponent implements OnInit {
     try {
       this.source.isLoading = true
       this.source.change$.next()
-      const headers = [
-        '"Submitter ID"',
-        '"Submitter Name"',
-        '"Patient ID"',
-        '"Patient Name"',
-        '"Organization"',
-        '"Date"',
-        '"Time"'
-      ]
+
       const questions = []
       let submissions: FormSubmission[] = (
         await this.database
@@ -114,47 +106,40 @@ export class FormSubmissionsComponent implements OnInit {
       submissions = submissions.filter((submission, index) => answers[index])
 
       answers = answers.filter((answer) => answer)
-      let csv = ''
 
       this.form.sections.forEach((section) => {
         section.questions.forEach((question) => {
           questions.push(question)
-          headers.push(`"${question.title}"`)
         })
       })
 
-      csv += `"${this.title}"\r\n`
-      csv += `${headers.join(this.csvSeparator)}\r\n`
+      let csv = `"${this.title}"\r\n`
 
-      submissions.forEach((submission: any, index) => {
-        csv += `"${submission.submittedBy.id}"${this.csvSeparator}`
-        csv += `"${submission.submittedBy.firstName} ${submission.submittedBy.lastName}"${this.csvSeparator}`
-        csv += `"${submission.account.id}"${this.csvSeparator}`
-        csv += `"${submission.account.firstName} ${submission.account.lastName}"${this.csvSeparator}`
-        csv += `"${submission.organization.name}"${this.csvSeparator}`
-        csv += `"${moment(submission.createdAt).format('ddd, MMM D YYYY')}"${
-          this.csvSeparator
-        }`
-        csv += `"${moment(submission.createdAt).format('h:mm a')}"${
-          this.csvSeparator
-        }`
+      const data = submissions.map((submission: any, index) => {
+        const row = {
+          'Submitter ID': submission.submittedBy.id,
+          'Submitter Name': `${submission.submittedBy.firstName} ${submission.submittedBy.lastName}`,
+          'Patient ID': submission.account.id,
+          'Patient Name': `${submission.account.firstName} ${submission.account.lastName}`,
+          Organization: submission.organization.name,
+          Date: moment(submission.createdAt).format('ddd, MMM D YYYY'),
+          Time: moment(submission.createdAt).format('h:mm a')
+        }
 
         const answer: any = answers[index]
 
         this.form.sections.forEach((section) => {
-          section.questions.forEach((question, questionIndex) => {
+          section.questions.forEach((question) => {
             const ans = answer.find((a) => a.question.id === question.id)
 
-            csv += `"${(ans && ans.response.value) || ' '}"${
-              questionIndex >= section.questions.length - 1
-                ? ''
-                : this.csvSeparator
-            }`
+            row[question.title] = (ans && ans.response.value) || ''
           })
         })
 
-        csv += `\r\n`
+        return row
       })
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({
         filename: this.title,

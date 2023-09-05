@@ -17,6 +17,7 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
 import { select, Store } from '@ngrx/store'
 import { _ } from '@app/shared'
 import { isEmpty } from 'lodash'
+import Papa from 'papaparse'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
@@ -63,7 +64,6 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // subscription for selector changes
   data: ReportsCriteria
-  csvSeparator = ','
 
   // refresh trigger
   refresh$ = new Subject<void>()
@@ -149,26 +149,8 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
           ? '-Phase_' + CSV.sanitizeFileName(this.pkgFilter?.pkg[0].title)
           : ''
       }`
-      let csv = ''
-      csv += 'Sharp Custom Report\r\n'
-      csv +=
-        '"ID"' +
-        this.csvSeparator +
-        '"First Name"' +
-        this.csvSeparator +
-        '"Last Name"' +
-        this.csvSeparator +
-        '"DOB"' +
-        this.csvSeparator +
-        '"KCAL"' +
-        this.csvSeparator +
-        '"EXERCISE MINUTES"' +
-        this.csvSeparator +
-        '"MEAL REPLACEMENT"' +
-        this.csvSeparator +
-        '"VEGETABLES & FRUITS"' +
-        '\r\n'
-      res.data
+
+      const data = res.data
         .map((item) => {
           return {
             ...item,
@@ -196,25 +178,19 @@ export class SharpReportComponent implements OnInit, AfterViewInit, OnDestroy {
             )
           }
         })
-        .forEach((d) => {
-          csv +=
-            `"${d.id}"` +
-            this.csvSeparator +
-            `"${d.firstName}"` +
-            this.csvSeparator +
-            `"${d.lastName}"` +
-            this.csvSeparator +
-            `"${d.dateOfBirth}"` +
-            this.csvSeparator +
-            `"${d.kcalTotalSum}"` +
-            this.csvSeparator +
-            `"${d.exerciseMinutesTotalSum}"` +
-            this.csvSeparator +
-            `"${d.mealReplacementTotalSum}"` +
-            this.csvSeparator +
-            `"${d.vegetablesFruitsTotalSum}"` +
-            '\r\n'
-        })
+        .map((d) => ({
+          ID: d.id,
+          'First Name': d.firstName,
+          'Last Name': d.lastName,
+          DOB: d.dateOfBirth,
+          KCAL: d.kcalTotalSum,
+          'EXERCISE MINUTES': d.exerciseMinutesTotalSum,
+          'MEAL REPLACEMENT': d.mealReplacementTotalSum,
+          'VEGETABLES & FRUITS': d.vegetablesFruitsTotalSum
+        }))
+
+      const csv = Papa.unparse(data)
+
       CSV.toFile({
         filename,
         content: csv

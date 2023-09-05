@@ -26,6 +26,7 @@ import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject, merge } from 'rxjs'
 import { filter } from 'rxjs/operators'
+import Papa from 'papaparse'
 import { Interaction, InteractionSingle } from '@coachcare/sdk'
 import { BILLABLE_SERVICES, BillableService, CallHistoryItem } from '../models'
 import { CallHistoryDatabase, CallHistoryDataSource } from '../services'
@@ -177,59 +178,25 @@ export class CallsComponent implements OnInit {
         .map((item) => new CallHistoryItem(item))
         .reverse()
 
-      const separator = ','
       const orgName = this.context.organization.name.replace(/\s/g, '_')
       const filename = `${orgName}_COMMS_REPORT_${tIndex + 1}.csv`
-      let highestParticipantAmount = 0
 
-      calls.forEach(
-        (call) =>
-          (highestParticipantAmount =
-            highestParticipantAmount > call.participants.length
-              ? highestParticipantAmount
-              : call.participants.length)
-      )
+      let csv = 'CALL HISTORY\r\n'
 
-      let csv = ''
-      csv += 'CALL HISTORY\r\n'
-
-      csv += `"INITIATOR"${separator}`
-      csv += `"ORGANIZATION"${separator}`
-      csv += `"TIMESTAMP"${separator}`
-      csv += `"TYPE"${separator}`
-      csv += `"DURATION"${separator}`
-      csv += `"ADDENDUM TEXT"${separator}`
-      csv += `"ADDENDUM CHANGE"${separator}`
-      csv += `"ADDENDUM CREATOR"${separator}`
-
-      for (let i = 0; i < highestParticipantAmount; ++i) {
-        csv += `"PARTICIPANT [${i + 1}]"`
-        if (i < highestParticipantAmount - 1) {
-          csv += `${separator}`
-        }
-      }
-
-      csv += '\r\n'
-
-      calls.forEach((call) => {
-        csv += `"${call.initiator.firstName} ${call.initiator.lastName}, ${call.initiator.email}, ID: ${call.initiator.id}"${separator}`
-        csv += `"${call.organization.name} (ID: ${call.organization.id})"${separator}`
-
-        csv += `"${moment(call.time.start).toISOString()}"${separator}`
-        csv += `"${
-          translations[call.type.displayName] || call.type.name
-        }"${separator}`
-        csv += `"${call.time.duration} minutes"${separator}`
-        csv += `"${
-          call.latestAuditLog.note ? call.latestAuditLog.note : '-'
-        }"${separator}`
-        if (Object.keys(call.latestAuditLog).length) {
-          csv += `"Changed from ${call.latestAuditLog.billableService.previous.name} to ${call.latestAuditLog.billableService.current.name}"${separator}`
-        } else {
-          csv += `"-"${separator}`
-        }
-        csv += `"${
-          call.latestAuditLog.createdBy
+      const data = calls.map((call) => {
+        const row = {
+          INITIATOR: `${call.initiator.firstName} ${call.initiator.lastName}, ${call.initiator.email}, ID: ${call.initiator.id}`,
+          ORGANIZATION: `${call.organization.name} (ID: ${call.organization.id})`,
+          TIMESTAMP: moment(call.time.start).toISOString(),
+          TYPE: translations[call.type.displayName] || call.type.name,
+          DURATION: `${call.time.duration} minutes`,
+          'ADDENDUM TEXT': call.latestAuditLog.note
+            ? call.latestAuditLog.note
+            : '-',
+          'ADDENDUM CHANGE': call.latestAuditLog?.billableService
+            ? `Changed from ${call.latestAuditLog.billableService.previous.name} to ${call.latestAuditLog.billableService.current.name}`
+            : '-',
+          'ADDENDUM CREATOR': call.latestAuditLog.createdBy
             ? call.latestAuditLog.createdBy.firstName +
               ' ' +
               call.latestAuditLog.createdBy.lastName +
@@ -237,17 +204,18 @@ export class CallsComponent implements OnInit {
               call.latestAuditLog.createdBy.id +
               ')'
             : '-'
-        }"${separator}`
+        }
 
         call.participants.forEach((participant, index) => {
-          csv += `"`
-          csv += `${participant.firstName} ${participant.lastName} (ID: ${participant.id})"`
-          if (index < call.participants.length - 1) {
-            csv += `${separator}`
-          }
+          row[
+            `PARTICIPANT [${index + 1}]`
+          ] = `${participant.firstName} ${participant.lastName} (ID: ${participant.id})`
         })
-        csv += `\r\n`
+
+        return row
       })
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
     })

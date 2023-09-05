@@ -18,11 +18,6 @@ export class CSV {
     document.body.removeChild(link)
   }
 
-  public static escapeCSVText(original: string): string {
-    const pattern = new RegExp(/"/, 'g')
-    return original.replace(pattern, `$&$&`)
-  }
-
   public static sanitizeContent(content: string): string {
     const pattern = new RegExp(/\"[\@\=\+\-]+/, 'gi')
     return content.replace(pattern, '"')

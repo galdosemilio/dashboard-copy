@@ -10,6 +10,7 @@ import { _ } from '@app/shared/utils'
 import { environment } from 'apps/provider/src/environments/environment'
 import * as moment from 'moment'
 import { flatten, orderBy, uniq, uniqBy } from 'lodash'
+import Papa from 'papaparse'
 import {
   CareManagementSnapshotBillingItem,
   FetchCareManagementBillingSnapshotResponse
@@ -89,7 +90,6 @@ export class ClinicPatientCodeComponent implements OnInit {
     private notifier: NotifierService
   ) {}
 
-  public csvSeparator = ','
   public tableData: ClinicPatientCodeReport[]
   public reportData: ClinicPatientCodeReport[]
   public headings: string[] = []
@@ -235,24 +235,6 @@ export class ClinicPatientCodeComponent implements OnInit {
         'YYYY-MM-DD'
       )}.csv`
 
-      let csv = ''
-      let headers =
-        'ID' +
-        this.csvSeparator +
-        'Name' +
-        this.csvSeparator +
-        'Unique Patients' +
-        this.csvSeparator
-
-      for (const serviceType of this.serviceTypes()) {
-        headers += `"${serviceType.name} Unique Episodes of Care"`
-        headers += this.csvSeparator
-        for (const heading of this.setHeadings(serviceType.id)) {
-          headers += `"${heading}"`
-          headers += this.csvSeparator
-        }
-      }
-
       const data: CsvRow = {}
 
       for (const serviceType of this.serviceTypes()) {
@@ -271,33 +253,38 @@ export class ClinicPatientCodeComponent implements OnInit {
         }
       }
 
-      csv += headers + '\n'
-
-      for (const row of orderBy(
+      const csvRows = orderBy(
         Object.values(data),
         (item) => item.patientsUniqueCount,
         ['desc']
-      )) {
-        csv += `"${row.organization.id}"`
-        csv += this.csvSeparator
-        csv += `"${row.organization.name}"`
-        csv += this.csvSeparator
-        csv += `"${row.patientsUniqueCount}"`
-        csv += this.csvSeparator
+      ).map((item) => {
+        const row = {
+          ID: item.organization.id,
+          Name: item.organization.name,
+          'Unique Patients': item.patientsUniqueCount
+        }
+
         for (const serviceType of this.serviceTypes()) {
           const uniqueRPMEpisodesOfCare =
-            row.codes[serviceType.id]?.uniqueRPMEpisodesOfCare
-          csv += `"${uniqueRPMEpisodesOfCare}"`
-          csv += this.csvSeparator
-          for (const code of row.codes[serviceType.id].codes) {
-            csv += `"${uniqueRPMEpisodesOfCare - code.satisfiedCount}"`
-            csv += this.csvSeparator
-            csv += `"${code.satisfiedCount}"`
-            csv += this.csvSeparator
+            item.codes[serviceType.id]?.uniqueRPMEpisodesOfCare || 0
+
+          row[`${serviceType.name} Unique Episodes of Care`] =
+            uniqueRPMEpisodesOfCare
+          const headings = this.setHeadings(serviceType.id)
+          for (let i = 0; i < headings.length; i += 1) {
+            const code = item.codes[serviceType.id].codes[Math.floor(i / 2)]
+            row[headings[i]] = code
+              ? i % 2 === 0
+                ? uniqueRPMEpisodesOfCare - code.satisfiedCount
+                : code.satisfiedCount
+              : 0
           }
         }
-        csv += '\n'
-      }
+
+        return row
+      })
+
+      const csv = Papa.unparse(csvRows)
 
       CSV.toFile({ content: csv, filename })
     } catch (error) {

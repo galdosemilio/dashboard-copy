@@ -13,6 +13,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty, merge } from 'lodash'
 import * as moment from 'moment-timezone'
+import Papa from 'papaparse'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { CSV } from '@coachcare/common/shared'
@@ -28,7 +29,6 @@ export class EnrollmentChartComponent implements OnInit, OnDestroy {
   simpleReport: EnrollmentSimpleReportResponse
   source: EnrollmentReportsDataSource
   chart: ChartData
-  csvSeparator = ','
   identifierNames: any = {}
 
   // subscription for selector changes
@@ -149,28 +149,15 @@ export class EnrollmentChartComponent implements OnInit, OnDestroy {
 
       const startDate = moment(this.data.startDate).format('YYYY-MM-DD')
       const endDate = moment(this.data.endDate).format('YYYY-MM-DD')
-      const headers = [
-        'Account ID',
-        'Account First Name',
-        'Account Last Name',
-        'Account Email',
-        'Account External Identifiers',
-        'Organization ID',
-        'Organization Name',
-        'Organization External Identifiers',
-        'Package ID',
-        'Package Name',
-        'Package Enrollment Start',
-        'Package Enrollment End'
-      ]
+
       const filename = `enrollment_details_${startDate}_${endDate}.csv`
 
-      let csv = ''
-      csv += `DIETER PHASE ENROLLMENT: ${startDate} - ${endDate}` + '\r\n'
-      csv += headers.join(this.csvSeparator) + '\r\n'
+      let csv = `DIETER PHASE ENROLLMENT: ${startDate} - ${endDate}` + '\r\n'
       const items = this.preprocessSimpleReportElements(this.simpleReport.data)
 
-      csv += this.renderDetailedCSV(items)
+      const data = this.getDetailedCSV(items)
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
     } catch (error) {
@@ -188,19 +175,19 @@ export class EnrollmentChartComponent implements OnInit, OnDestroy {
     let csv = ''
     csv += 'DIETER PHASE ENROLLMENT\r\n'
     csv += `${orgName}: ${startDate} - ${endDate}` + '\r\n'
-    csv += 'Enrollments' + this.csvSeparator
-    csv +=
-      dates.map((d) => moment(d).format('YYYY-MM-DD')).join(this.csvSeparator) +
-      '\r\n'
-    this.chart.datasets.forEach((d) => {
-      csv += d.label
-      d.data
-        .filter((o) => o.x)
-        .forEach((r) => {
-          csv += this.csvSeparator + r.y
-        })
-      csv += '\r\n'
-    })
+
+    const data = this.chart.datasets.map((dataset) => ({
+      Enrollments: dataset.label,
+      ...dataset.data.reduce(
+        (prev, current) => ({
+          ...prev,
+          [current.x]: [current.y]
+        }),
+        {}
+      )
+    }))
+
+    csv += Papa.unparse(data)
 
     CSV.toFile({ content: csv, filename })
   }
@@ -287,11 +274,10 @@ export class EnrollmentChartComponent implements OnInit, OnDestroy {
     return renderableItems
   }
 
-  private renderDetailedCSV(items: any[]): string {
-    let csv = ''
-
-    items.forEach((item) => {
-      if (item.enrollments && item.enrollments.length) {
+  private getDetailedCSV(items: any[]): any {
+    return items
+      .filter((item) => item.enrollments && item.enrollments.length > 0)
+      .map((item) => {
         const individualIdentifiers = item.externalIdentifiers.filter(
           (identifier) => identifier.isIndividual
         )
@@ -299,96 +285,79 @@ export class EnrollmentChartComponent implements OnInit, OnDestroy {
           (identifier) => !identifier.isIndividual
         )
 
-        csv +=
-          `"${item.account.id}"` +
-          this.csvSeparator +
-          `"${item.account.firstName}"` +
-          this.csvSeparator +
-          `"${item.account.lastName}"` +
-          this.csvSeparator +
-          `"${item.account.email}"` +
-          this.csvSeparator
-
+        let individualIdentifiersText = ''
         if (individualIdentifiers && individualIdentifiers.length) {
-          csv += `"`
           individualIdentifiers.forEach((identifier, index) => {
             const displayName =
               this.identifierNames[identifier.name] || undefined
-            csv += displayName
+            individualIdentifiersText += displayName
               ? `${displayName}: ${identifier.value}`
               : `${identifier.name}: ${identifier.value}`
-            csv += `${index < individualIdentifiers.length - 1 ? '\n' : ''}`
+            individualIdentifiersText += `${
+              index < individualIdentifiers.length - 1 ? '\n' : ''
+            }`
           })
-          csv += `"`
-          csv += this.csvSeparator
-        } else {
-          csv += `" "${this.csvSeparator}`
         }
 
-        csv += `"${item.organization.id}"` + this.csvSeparator
-        csv += `"${item.organization.name}"` + this.csvSeparator
-
+        let organizationIdentifiersText = ''
         if (organizationIdentifiers && organizationIdentifiers.length) {
-          csv += `"`
           organizationIdentifiers.forEach((identifier, index) => {
             const displayName =
               this.identifierNames[identifier.name] || undefined
-            csv += displayName
+            organizationIdentifiersText += displayName
               ? `${displayName}: ${identifier.value}`
               : `${identifier.name}: ${identifier.value}`
-            csv += `${index < organizationIdentifiers.length - 1 ? '\n' : ''}`
+            organizationIdentifiersText += `${
+              index < organizationIdentifiers.length - 1 ? '\n' : ''
+            }`
           })
-          csv += `"`
-          csv += this.csvSeparator
-        } else {
-          csv += `" "${this.csvSeparator}`
         }
 
-        csv += `"`
-        csv += item.enrollments.reduce((cell, enrollment, index) => {
-          cell += enrollment.package ? `${enrollment.package.id}` : ''
-          cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
-          return cell
-        }, '')
-        csv += `"`
-        csv += this.csvSeparator
+        const row = {
+          'Account ID': item.account.id,
+          'Account First Name': item.account.firstName,
+          'Account Last Name': item.account.lastName,
+          'Account Email': item.account.email,
+          'Account External Identifiers': individualIdentifiersText,
+          'Organization ID': item.organization.id,
+          'Organization Name': item.organization.name,
+          'Organization External Identifiers': organizationIdentifiersText,
+          'Package ID': item.enrollments.reduce((cell, enrollment, index) => {
+            cell += enrollment.package ? `${enrollment.package.id}` : ''
+            cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
+            return cell
+          }, ''),
+          'Package Name': item.enrollments.reduce((cell, enrollment, index) => {
+            cell += enrollment.package ? `${enrollment.package.title}` : ''
+            cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
+            return cell
+          }, ''),
+          'Package Enrollment Start': item.enrollments.reduce(
+            (cell, enrollment, index) => {
+              cell +=
+                enrollment.range && enrollment.range.start
+                  ? `${enrollment.range.start}`
+                  : ''
+              cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
+              return cell
+            },
+            ''
+          ),
+          'Package Enrollment End': item.enrollments.reduce(
+            (cell, enrollment, index) => {
+              cell +=
+                enrollment.range && enrollment.range.end
+                  ? `${enrollment.range.end}`
+                  : ''
+              cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
+              return cell
+            },
+            ''
+          )
+        }
 
-        csv += `"`
-        csv += item.enrollments.reduce((cell, enrollment, index) => {
-          cell += enrollment.package ? `${enrollment.package.title}` : ''
-          cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
-          return cell
-        }, '')
-        csv += `"`
-        csv += this.csvSeparator
-
-        csv += `"`
-        csv += item.enrollments.reduce((cell, enrollment, index) => {
-          cell +=
-            enrollment.range && enrollment.range.start
-              ? `${enrollment.range.start}`
-              : ''
-          cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
-          return cell
-        }, '')
-        csv += `"`
-        csv += this.csvSeparator
-
-        csv += `"`
-        csv += item.enrollments.reduce((cell, enrollment, index) => {
-          cell +=
-            enrollment.range && enrollment.range.end
-              ? `${enrollment.range.end}`
-              : ''
-          cell += `${index < item.enrollments.length - 1 ? '\n' : ''}`
-          return cell
-        }, '')
-        csv += `"`
-        csv += '\r\n'
-      }
-    })
-
-    return csv
+        return row
+      })
   }
 
   private resolveIdentifierNames() {

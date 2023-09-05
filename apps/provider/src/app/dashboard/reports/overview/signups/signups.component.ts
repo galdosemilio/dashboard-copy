@@ -5,6 +5,7 @@ import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
+import Papa from 'papaparse'
 
 import {
   ReportsCriteria,
@@ -26,7 +27,6 @@ import { CSV } from '@coachcare/common/shared'
 })
 export class SignupsComponent implements OnInit, AfterViewInit, OnDestroy {
   source: SignupsReportsDataSource
-  csvSeparator = ','
 
   // subscription for selector changes
   data: ReportsCriteria
@@ -119,20 +119,19 @@ export class SignupsComponent implements OnInit, AfterViewInit, OnDestroy {
     let csv = ''
     csv += 'PATIENT ENGAGEMENT\r\n'
     csv += `${ini} - ${end}` + '\r\n'
-    csv += 'Signups' + this.csvSeparator
-    csv +=
-      dates
-        .map((d) => `"${moment(d).format(format)}"`)
-        .join(this.csvSeparator) + '\r\n'
-    data.datasets.forEach((d) => {
-      csv += `"${d.label}"`
-      d.data
-        .filter((o) => o.x)
-        .forEach((r) => {
-          csv += this.csvSeparator + `"${r.y}"`
-        })
-      csv += '\r\n'
-    })
+
+    const csvData = data.datasets.map((dataset) => ({
+      Signups: dataset.label,
+      ...dataset.data.reduce(
+        (prev, current) => ({
+          ...prev,
+          [current.x]: [current.y]
+        }),
+        {}
+      )
+    }))
+
+    csv += Papa.unparse(csvData)
 
     CSV.toFile({
       content: csv,

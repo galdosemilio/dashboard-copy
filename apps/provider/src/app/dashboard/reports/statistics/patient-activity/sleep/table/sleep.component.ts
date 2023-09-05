@@ -19,6 +19,7 @@ import { NotifierService } from '@app/service'
 import { select, Store } from '@ngrx/store'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
+import Papa from 'papaparse'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { CSV } from '@coachcare/common/shared'
@@ -40,7 +41,6 @@ export class SleepTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // subscription for selector changes
   data: ReportsCriteria
-  csvSeparator = ','
 
   // refresh trigger
   refresh$ = new Subject<void>()
@@ -107,32 +107,17 @@ export class SleepTableComponent implements OnInit, AfterViewInit, OnDestroy {
       const filename = `${orgName}_Sleep_Report_${dates[0]}_${
         dates[dates.length - 1]
       }.csv`
-      let csv = ''
-      csv += 'SLEEP REPORT\r\n'
-      csv +=
-        'ID' +
-        this.csvSeparator +
-        'First Name' +
-        this.csvSeparator +
-        'Last Name' +
-        this.csvSeparator +
-        'Date' +
-        this.csvSeparator +
-        'Hours' +
-        '\r\n'
-      res.data.forEach((d) => {
-        csv +=
-          d.account.id +
-          this.csvSeparator +
-          d.account.firstName +
-          this.csvSeparator +
-          d.account.lastName +
-          this.csvSeparator +
-          d.date +
-          this.csvSeparator +
-          d.hoursSlept.sum +
-          '\r\n'
-      })
+      let csv = 'SLEEP REPORT\r\n'
+
+      const data = res.data.map((d) => ({
+        ID: d.account.id,
+        'First Name': d.account.firstName,
+        'Last Name': d.account.lastName,
+        Date: d.date,
+        Hours: d.hoursSlept.sum
+      }))
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
     })

@@ -8,6 +8,7 @@ import {
 } from '@coachcare/sdk'
 import { environment } from '../../../../../environments/environment'
 import { CSV } from '@coachcare/common/shared'
+import Papa from 'papaparse'
 
 @Component({
   selector: 'ccr-report-list',
@@ -51,41 +52,26 @@ export class ReportsListComponent implements OnInit {
   }
 
   private generateCSV(orgs: any[]): string {
-    let csv = ''
-    const separator = ','
-
     if (!orgs || !orgs.length) {
-      return csv
+      return ''
     }
 
-    csv += `"Organization ID"${separator}`
-    csv += `"Organization Name"${separator}`
-    csv += `"Organization Hierarchy"${separator}`
-    csv += `"Providers Total"${separator}`
-    csv += `"Providers Active Count"${separator}`
-    csv += `"Providers Active Percentage"${separator}`
-    csv += `"Clients Total"${separator}`
-    csv += `"Clients Active Count"${separator}`
-    csv += `"Clients Active Percentage"\r\n`
-
-    orgs.forEach((entry: OrganizationActivityAggregate) => {
-      csv += `"${entry.organization.id || ''}"${separator}`
-      csv += `"${entry.organization.name || ''}"${separator}`
-      csv += `"${entry.organization.hierarchyPath || ''}"${separator}`
-      csv += `"${entry.providers.total || '0'}"${separator}`
-      csv += `"${entry.providers.active || '0'}"${separator}`
-      csv += `"${
+    const data = orgs.map((entry: OrganizationActivityAggregate) => ({
+      'Organization ID': entry.organization.id || '',
+      'Organization Name': entry.organization.name || '',
+      'Organization Hierarchy': entry.organization.hierarchyPath || '',
+      'Providers Total': entry.providers.total || '0',
+      'Providers Active Count': entry.providers.active || '0',
+      'Providers Active Percentage':
         this.generatePercent(entry.providers.active, entry.providers.total) ||
-        '0'
-      }"${separator}`
-      csv += `"${entry.clients.total || '0'}"${separator}`
-      csv += `"${entry.clients.active || '0'}"${separator}`
-      csv += `"${
+        '0',
+      'Clients Total': entry.clients.total || '0',
+      'Clients Active Count': entry.clients.active || '0',
+      'Clients Active Percentage':
         this.generatePercent(entry.clients.active, entry.clients.total) || '0'
-      }"\r\n`
-    })
+    }))
 
-    return csv
+    return Papa.unparse(data)
   }
 
   private generatePercent(numerator: number, denominator: number): string {

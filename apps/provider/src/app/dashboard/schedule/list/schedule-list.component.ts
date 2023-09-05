@@ -13,6 +13,7 @@ import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { merge, Subject } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
+import Papa from 'papaparse'
 import { OrganizationEntity } from '@coachcare/sdk'
 import { CSV } from '@coachcare/common/shared'
 
@@ -73,7 +74,6 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
     try {
       this.meetingsSource.isLoading = true
       this.meetingsSource.change$.next()
-      const separator = ','
       const criteria: any = {
         ...this.meetingsSource.args,
         limit: 'all',
@@ -95,62 +95,33 @@ export class ScheduleListComponent implements OnDestroy, OnInit {
               : mostAttendees)
       )
 
-      let csv = ''
-      csv += 'SCHEDULE LIST\r\n'
-      csv +=
-        'ID' +
-        separator +
-        'TITLE' +
-        separator +
-        'START TIME' +
-        separator +
-        'END TIME' +
-        separator +
-        'MEETING TYPE' +
-        separator +
-        'ORGANIZATION NAME' +
-        separator
+      let csv = 'SCHEDULE LIST\r\n'
 
-      for (let i = 0; i < mostAttendees; ++i) {
-        csv += `ID (${i + 1})${separator}`
-        csv += `FIRST NAME (${i + 1})${separator}`
-        csv += `LAST NAME (${i + 1})${separator}`
-        csv += `EMAIL (${i + 1})${separator}`
-        csv += `ATTENDANCE (${i + 1})`
-
-        if (i + 1 < mostAttendees) {
-          csv += `${separator}`
+      const data = meetings.map((meeting) => {
+        const row = {
+          ID: meeting.id,
+          TITLE: meeting.title,
+          'START TIME': meeting.date.toISOString(),
+          'END TIME': meeting.endDate.toISOString(),
+          'MEETING TYPE': meeting.type.description,
+          'ORGANIZATION NAME': meeting.organization.name
         }
-      }
-
-      csv += '\r\n'
-
-      meetings.forEach((meeting) => {
-        csv += `"${meeting.id}"${separator}`
-        csv += `"${meeting.title}"${separator}`
-        csv += `"${meeting.date.toISOString()}"${separator}`
-        csv += `"${meeting.endDate.toISOString()}"${separator}`
-        csv += `"${meeting.type.description}"${separator}`
-        csv += `"${meeting.organization.name}"${separator}`
 
         meeting.attendees.forEach((attendee, index) => {
-          csv += `"${attendee.id}"${separator}`
-          csv += `"${attendee.firstName}"${separator}`
-          csv += `"${attendee.lastName}"${separator}`
-          csv += `"${attendee.email}"${separator}`
-          csv += `"${
+          row[`ID ${index + 1}`] = attendee.id
+          row[`FIRST NAME ${index + 1}`] = attendee.firstName
+          row[`LAST NAME ${index + 1}`] = attendee.lastName
+          row[`EMAIL ${index + 1}`] = attendee.email
+          row[`ATTENDANCE ${index + 1}`] =
             attendee.attendance && attendee.attendance.status
               ? attendee.attendance.status.name
               : '-'
-          }"`
-
-          if (index + 1 < meeting.attendees.length) {
-            csv += `${separator}`
-          }
         })
 
-        csv += '\r\n'
+        return row
       })
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
     } catch (error) {

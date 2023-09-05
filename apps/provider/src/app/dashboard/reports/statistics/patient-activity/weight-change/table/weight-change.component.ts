@@ -20,6 +20,7 @@ import { select, Store } from '@ngrx/store'
 import { TranslateService } from '@ngx-translate/core'
 import { isEmpty } from 'lodash'
 import * as moment from 'moment-timezone'
+import Papa from 'papaparse'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import { CSV } from '@coachcare/common/shared'
@@ -43,7 +44,6 @@ export class WeightChangeTableComponent
 
   // subscription for selector changes
   data: ReportsCriteria
-  csvSeparator = ','
 
   // refresh trigger
   refresh$ = new Subject<void>()
@@ -104,59 +104,33 @@ export class WeightChangeTableComponent
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
       }
       const filename = `Patient_Weight_Change_${criteria.startDate}_${criteria.endDate}.csv`
-      let csv = ''
-      csv += 'WEIGHT CHANGE REPORT\r\n'
-      csv +=
-        'ID' +
-        this.csvSeparator +
-        'First Name' +
-        this.csvSeparator +
-        'Last Name' +
-        this.csvSeparator +
-        'Start Weight' +
-        this.csvSeparator +
-        'End Weight' +
-        this.csvSeparator +
-        'Change Value' +
-        this.csvSeparator +
-        'Change Percentage' +
-        this.csvSeparator +
-        'Organization ID' +
-        this.csvSeparator +
-        'Organization' +
-        '\r\n'
-
+      let csv = 'WEIGHT CHANGE REPORT\r\n'
       const pref = this.context.user.measurementPreference
-      res.data.forEach((d) => {
-        csv +=
-          d.account.id +
-          this.csvSeparator +
-          d.account.firstName +
-          this.csvSeparator +
-          d.account.lastName +
-          this.csvSeparator +
+
+      const data = res.data.map((d) => ({
+        ID: d.account.id,
+        'First Name': d.account.firstName,
+        'Last Name': d.account.lastName,
+        'Start Weight':
           unitConversion(pref, 'composition', d.change.startWeight, 2) +
           ' ' +
           this.source.i18n[
             unitLabel(pref, 'composition', d.change.startWeight)
-          ] +
-          this.csvSeparator +
+          ],
+        'End Weight':
           unitConversion(pref, 'composition', d.change.endWeight, 2) +
           ' ' +
-          this.source.i18n[unitLabel(pref, 'composition', d.change.endWeight)] +
-          this.csvSeparator +
+          this.source.i18n[unitLabel(pref, 'composition', d.change.endWeight)],
+        'Change Value':
           unitConversion(pref, 'composition', d.change.value, 2) +
           ' ' +
-          this.source.i18n[unitLabel(pref, 'composition', d.change.value)] +
-          this.csvSeparator +
-          d.change.percentage +
-          ' %' +
-          this.csvSeparator +
-          d.organization.id +
-          this.csvSeparator +
-          d.organization.name +
-          '\r\n'
-      })
+          this.source.i18n[unitLabel(pref, 'composition', d.change.value)],
+        'Change Percentage': d.change.percentage,
+        'Organization ID': d.organization.id,
+        Organization: d.organization.name
+      }))
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
     })

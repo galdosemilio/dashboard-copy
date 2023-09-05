@@ -6,6 +6,7 @@ import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
 import * as tinycolor from 'tinycolor2'
+import Papa from 'papaparse'
 
 import {
   ReportsCriteria,
@@ -31,7 +32,6 @@ export class StepsChartComponent implements OnInit, OnDestroy {
   // subscription for selector changes
   data: ReportsCriteria
   timeout: any
-  csvSeparator = ','
 
   // refresh trigger
   refresh$ = new Subject<void>()
@@ -147,67 +147,25 @@ export class StepsChartComponent implements OnInit, OnDestroy {
     const criteria = this.source.args
     void this.database.fetchActivityLevel(criteria).then((res) => {
       const filename = `Patient_Steps_${criteria.startDate}_${criteria.endDate}.csv`
-      let csv = ''
-      csv += 'PATIENT STEPS REPORT\r\n'
-      csv +=
-        'Patient ID' +
-        this.csvSeparator +
-        'First Name' +
-        this.csvSeparator +
-        'Last Name' +
-        this.csvSeparator +
-        'Level' +
-        this.csvSeparator +
-        'Organization ID' +
-        this.csvSeparator +
-        'Organization Name' +
-        this.csvSeparator +
-        'Steps Avg' +
-        this.csvSeparator +
-        'Steps Max' +
-        this.csvSeparator +
-        'Steps Min' +
-        this.csvSeparator +
-        'Steps Sample Count' +
-        this.csvSeparator +
-        'Provider ID' +
-        this.csvSeparator +
-        'Provider First Name' +
-        this.csvSeparator +
-        'Provider Last Name' +
-        '\r\n'
-      res.forEach((d) => {
-        csv +=
-          d.account.id +
-          this.csvSeparator +
-          d.account.firstName +
-          this.csvSeparator +
-          d.account.lastName +
-          this.csvSeparator +
-          d.level.name +
-          this.csvSeparator +
-          d.organization.id +
-          this.csvSeparator +
-          d.organization.name +
-          this.csvSeparator +
-          d.steps.avg +
-          this.csvSeparator +
-          d.steps.max +
-          this.csvSeparator +
-          d.steps.min +
-          this.csvSeparator +
-          d.steps.sampleCount
-        if (d.assignedProvider) {
-          csv +=
-            this.csvSeparator +
-            d.assignedProvider.id +
-            this.csvSeparator +
-            d.assignedProvider.firstName +
-            this.csvSeparator +
-            d.assignedProvider.lastName
-        }
-        csv += '\r\n'
-      })
+      let csv = 'PATIENT STEPS REPORT\r\n'
+
+      const data = res.map((d) => ({
+        'Patient ID': d.account.id,
+        'First Name': d.account.firstName,
+        'Last Name': d.account.lastName,
+        Level: d.level.name,
+        'Organization ID': d.organization.id,
+        'Organization Name': d.organization.name,
+        'Steps Avg': d.steps.avg,
+        'Steps Max': d.steps.max,
+        'Steps Min': d.steps.min,
+        'Steps Sample Count': d.steps.sampleCount,
+        'Provider ID': d.assignedProvider?.id || '',
+        'Provider First Name': d.assignedProvider?.firstName || '',
+        'Provider Last Name': d.assignedProvider?.lastName || ''
+      }))
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
     })

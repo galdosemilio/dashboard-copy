@@ -25,6 +25,7 @@ import {
 import * as moment from 'moment'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
+import Papa from 'papaparse'
 import { debounceTime, delay, filter, take } from 'rxjs/operators'
 import { AccountCreateDialog } from '../../dialogs'
 import { DieterListingDatabase, DieterListingDataSource } from '../services'
@@ -66,7 +67,6 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
   paginator: CcrPaginatorComponent
 
   clinic: SelectedOrganization
-  csvSeparator = ','
   packageFilter?: PackageFilter
   refresh$: Subject<void> = new Subject<void>()
   source: DieterListingDataSource
@@ -307,102 +307,67 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
 
       const orgName = this.context.organization.name.replace(/\s/g, '_')
       const filename = `${orgName}_Patient_List.csv`
-      let csv = ''
-      csv += 'PATIENT LIST\r\n'
-      csv +=
-        'ID' +
-        this.csvSeparator +
-        'First Name' +
-        this.csvSeparator +
-        'Last Name' +
-        this.csvSeparator +
-        'Phone Number' +
-        this.csvSeparator +
-        'Birthday' +
-        this.csvSeparator +
-        'Email' +
-        this.csvSeparator +
-        this.extraColumns
-          .map((entry) => get(translations, entry.name) ?? entry.name)
-          .join(this.csvSeparator) +
-        (this.extraColumns.length ? this.csvSeparator : '') +
-        'Blood Pressure' +
-        this.csvSeparator +
-        'Start Weight' +
-        this.csvSeparator +
-        'Current Weight' +
-        this.csvSeparator +
-        'Weight Change' +
-        this.csvSeparator +
-        'Weight Change %' +
-        this.csvSeparator +
-        'Start Date' +
-        this.csvSeparator +
-        'Start Weight Date' +
-        this.csvSeparator +
-        'Current Weight Date' +
-        this.csvSeparator +
-        (this.showCurrentBmiColumns
-          ? `Current BMI Date${this.csvSeparator}Current BMI${this.csvSeparator}`
-          : '') +
-        'Organization ID (1)' +
-        this.csvSeparator +
-        'Organization Name (1)' +
-        this.csvSeparator +
-        'Organization ID (2)' +
-        this.csvSeparator +
-        'Organization Name (2)' +
-        this.csvSeparator +
-        'Organization ID (3)' +
-        this.csvSeparator +
-        'Organization Name (3)' +
-        this.csvSeparator +
-        'More Organization Associations?' +
-        this.csvSeparator +
-        'Phase ID (1)' +
-        this.csvSeparator +
-        'Phase Name (1)' +
-        this.csvSeparator +
-        'Phase ID (2)' +
-        this.csvSeparator +
-        'Phase Name (2)' +
-        this.csvSeparator +
-        'Phase ID (3)' +
-        this.csvSeparator +
-        'Phase Name (3)' +
-        this.csvSeparator +
-        'More Phase Enrollments?' +
-        '\r\n'
+      let csv = 'PATIENT LIST\r\n'
 
-      res.forEach((d: DieterListingItem) => {
-        csv +=
-          `"${d.id}"` +
-          this.csvSeparator +
-          `"${d.firstName}"` +
-          this.csvSeparator +
-          `"${d.lastName}"` +
-          this.csvSeparator +
-          `"${d.phone}"` +
-          this.csvSeparator +
-          `"${
-            d.dateOfBirth ? moment(d.dateOfBirth).format('YYYY-MM-DD') : ''
-          }"` +
-          this.csvSeparator +
-          `"${d.email}"` +
-          this.csvSeparator +
-          this.extraColumns
-            .map((entry) =>
-              d.dataPoints?.[entry.id]?.value
-                ? `"${convertToReadableFormat(
-                    d.dataPoints[entry.id].value,
-                    d.dataPoints[entry.id].type,
-                    rawPreference
-                  )} ${d.dataPoints[entry.id].type.unit}"`
-                : ''
-            )
-            .join(this.csvSeparator) +
-          (this.extraColumns.length ? this.csvSeparator : '') +
-          `"${
+      const data = res.map((d: DieterListingItem) => {
+        const extraRows = this.extraColumns.map((entry) => ({
+          [get(translations, entry.name) ?? entry.name]: d.dataPoints?.[
+            entry.id
+          ]?.value
+            ? `"${convertToReadableFormat(
+                d.dataPoints[entry.id].value,
+                d.dataPoints[entry.id].type,
+                rawPreference
+              )} ${d.dataPoints[entry.id].type.unit}"`
+            : ''
+        }))
+
+        const bmiRows = {}
+
+        if (this.showCurrentBmiColumns) {
+          bmiRows['Current BMI Date'] = d.dataPoints[DataPointTypes.BMI]
+            ? moment(d.dataPoints[DataPointTypes.BMI].recordedAt.local).format(
+                'YYYY-MM-DD'
+              )
+            : ''
+          bmiRows['Current BMI'] = d.dataPoints[DataPointTypes.BMI]
+            ? convertToReadableFormat(
+                d.dataPoints[DataPointTypes.BMI].value,
+                d.dataPoints[DataPointTypes.BMI].type,
+                rawPreference
+              ).toFixed()
+            : ''
+        }
+
+        const organizationRows = {}
+        const phaseRows = {}
+
+        for (let i = 0; i < 3; i += 1) {
+          organizationRows[`Organization ID (${i + 1})`] = d.organizations[i]
+            ? d.organizations[i].id
+            : ''
+          organizationRows[`Organization Name (${i + 1})`] = d.organizations[i]
+            ? d.organizations[i].name
+            : ''
+          phaseRows[`Phase ID (${i + 1})`] = d.packages[i]
+            ? d.packages[i].id
+            : ''
+          phaseRows[`Phase Name (${i + 1})`] = d.packages[i]
+            ? d.packages[i].name
+            : ''
+        }
+
+        const row = {
+          ID: d.id,
+          'First Name': d.firstName,
+          'Last Name': d.lastName,
+          'Phone Number': d.phone,
+          Birthday: d.dateOfBirth
+            ? moment(d.dateOfBirth).format('YYYY-MM-DD')
+            : '',
+          Email: d.email,
+          ...extraRows,
+          'Blood Pressure':
             d.dataPoints?.[DataPointTypes.BLOOD_PRESSURE_SYSTOLIC] &&
             d.dataPoints?.[DataPointTypes.BLOOD_PRESSURE_DIASTOLIC]
               ? `${convertToReadableFormat(
@@ -417,93 +382,58 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
                   d.dataPoints[DataPointTypes.BLOOD_PRESSURE_DIASTOLIC].type
                     .unit
                 }`
-              : ''
-          }"` +
-          this.csvSeparator +
-          `"${
-            d.weight?.start
-              ? unitConversion(
-                  rawPreference,
-                  'composition',
-                  d.weight.start.value,
-                  1
-                ) +
-                ' ' +
-                weightUnit
-              : ''
-          }"` +
-          this.csvSeparator +
-          `"${
-            d.weight?.end
-              ? unitConversion(
-                  rawPreference,
-                  'composition',
-                  d.weight.end.value,
-                  1
-                ) +
-                ' ' +
-                weightUnit
-              : ''
-          }"` +
-          this.csvSeparator +
-          `"${
-            d.weight?.change
-              ? unitConversion(
-                  rawPreference,
-                  'composition',
-                  d.weight.change.value,
-                  1
-                ) +
-                ' ' +
-                weightUnit
-              : ''
-          }"` +
-          this.csvSeparator +
-          `"${d.weight?.change ? d.weight.change.percent + ' ' + '%' : ''}"` +
-          this.csvSeparator +
-          `"${d.startedAt}"` +
-          this.csvSeparator +
-          `"${
-            d.weight?.start
-              ? moment(d.weight.start.date).format('YYYY-MM-DD')
-              : ''
-          }"` +
-          this.csvSeparator +
-          `"${
-            d.weight?.end ? moment(d.weight.end.date).format('YYYY-MM-DD') : ''
-          }"` +
-          this.csvSeparator +
-          this.generateCurrentBmiColumns(d, rawPreference) +
-          this.csvSeparator +
-          `"${d.organizations[0] ? d.organizations[0].id : ''}"` +
-          this.csvSeparator +
-          `"${d.organizations[0] ? d.organizations[0].name : ''}"` +
-          this.csvSeparator +
-          `"${d.organizations[1] ? d.organizations[1].id : ''}"` +
-          this.csvSeparator +
-          `"${d.organizations[1] ? d.organizations[1].name : ''}"` +
-          this.csvSeparator +
-          `"${d.organizations[2] ? d.organizations[2].id : ''}"` +
-          this.csvSeparator +
-          `"${d.organizations[2] ? d.organizations[2].name : ''}"` +
-          this.csvSeparator +
-          `"${d.orgCount > 3 ? 'Yes' : 'No'}"` +
-          this.csvSeparator +
-          `"${d.packages[0] ? d.packages[0].id : ''}"` +
-          this.csvSeparator +
-          `"${d.packages[0] ? d.packages[0].name : ''}"` +
-          this.csvSeparator +
-          `"${d.packages[1] ? d.packages[1].id : ''}"` +
-          this.csvSeparator +
-          `"${d.packages[1] ? d.packages[1].name : ''}"` +
-          this.csvSeparator +
-          `"${d.packages[2] ? d.packages[2].id : ''}"` +
-          this.csvSeparator +
-          `"${d.packages[2] ? d.packages[2].name : ''}"` +
-          this.csvSeparator +
-          `"${d.packageCount > 3 ? 'Yes' : 'No'}"` +
-          '\r\n'
+              : '',
+          'Start Weight': d.weight?.start
+            ? unitConversion(
+                rawPreference,
+                'composition',
+                d.weight.start.value,
+                1
+              ) +
+              ' ' +
+              weightUnit
+            : '',
+          'Current Weight': d.weight?.end
+            ? unitConversion(
+                rawPreference,
+                'composition',
+                d.weight.end.value,
+                1
+              ) +
+              ' ' +
+              weightUnit
+            : '',
+          'Weight Change': d.weight?.change
+            ? unitConversion(
+                rawPreference,
+                'composition',
+                d.weight.change.value,
+                1
+              ) +
+              ' ' +
+              weightUnit
+            : '',
+          'Weight Change %': d.weight?.change
+            ? d.weight.change.percent + ' ' + '%'
+            : '',
+          'Start Date': d.startedAt,
+          'Start Weight Date': d.weight?.start
+            ? moment(d.weight.start.date).format('YYYY-MM-DD')
+            : '',
+          'Current Weight Date': d.weight?.end
+            ? moment(d.weight.end.date).format('YYYY-MM-DD')
+            : '',
+          ...bmiRows,
+          ...organizationRows,
+          'More Organization Associations?': d.orgCount > 3 ? 'Yes' : 'No',
+          ...phaseRows,
+          'More Phase Enrollments?': d.packageCount > 3 ? 'Yes' : 'No'
+        }
+
+        return row
       })
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
       return Promise.resolve()
@@ -530,34 +460,5 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
     this.initialPackages = filters.packages?.pkg ?? []
     this.cdr.detectChanges()
     this.refresh$.next()
-  }
-
-  private generateCurrentBmiColumns(
-    d: DieterListingItem,
-    rawPreference
-  ): string {
-    if (!this.showCurrentBmiColumns) {
-      return ''
-    }
-
-    return (
-      `"${
-        d.dataPoints[DataPointTypes.BMI]
-          ? moment(d.dataPoints[DataPointTypes.BMI].recordedAt.local).format(
-              'YYYY-MM-DD'
-            )
-          : ''
-      }"` +
-      this.csvSeparator +
-      `"${
-        d.dataPoints[DataPointTypes.BMI]
-          ? convertToReadableFormat(
-              d.dataPoints[DataPointTypes.BMI].value,
-              d.dataPoints[DataPointTypes.BMI].type,
-              rawPreference
-            ).toFixed()
-          : ''
-      }"`
-    )
   }
 }

@@ -5,6 +5,7 @@ import { CSV } from '@coachcare/common/shared'
 import { NamedEntity, Reports } from '@coachcare/sdk'
 import { environment } from '../../../../../environments/environment'
 import * as moment from 'moment'
+import Papa from 'papaparse'
 
 @Component({
   selector: 'ccr-ecommerce-report',
@@ -47,87 +48,54 @@ export class EcommerceReportComponent implements OnInit {
         limit: 'all'
       })
 
-      let csv = ''
-      const separator = ','
-
-      csv += `"ORGANIZATION ID"${separator}`
-      csv += `"ORGANIZATION NAME"${separator}`
-      csv += `"NUMBER OF LOCATIONS"${separator}`
-      csv += `"REGISTERED PATIENTS - LAST THREE MONTHS"${separator}`
-      csv += `"ACTIVE PATIENTS - LAST THREE MONTHS"${separator}`
-      csv += `"RPM-ENABLED PATIENTS"${separator}`
-      csv += `"TOTAL PATIENTS"${separator}`
-      csv += `"REGISTERED COACHES"${separator}`
-      csv += `"ACTIVE COACHES"${separator}`
-      csv += `"VIDEO CALL AMOUNT"${separator}`
-      csv += `"PLAN ID"${separator}`
-      csv += `"PLAN NAME"${separator}`
-      csv += `"IS BILLABLE"${separator}`
-      csv += `"ENTITY ID"${separator}`
-      csv += `"ENTITY TYPE"${separator}`
-      csv += `"BASE PRICING"${separator}`
-      csv += `"RPM PATIENT PRICING"${separator}`
-      csv += `"PER NONRPM PATIENT PRICING"${separator}`
-      csv += `"CHURN DATE"${separator}`
-      csv += `"PAYING START DATE"${separator}`
-      csv += `"IS PAYING"${separator}`
-      csv += `"RENEWAL DATE"${separator}`
-      csv += `"PARENT CLINIC ID"${separator}`
-      csv += `"PARENT CLINIC NAME"${separator}`
-      csv += `"AS OF"`
-
-      csv += `\r\n`
-
-      response.data.forEach((item) => {
-        csv += `"${item.organization.id}"${separator}`
-        csv += `"${item.organization.name}"${separator}`
-        csv += `"${
-          item.numberOfLocations ? item.numberOfLocations : '-'
-        }"${separator}`
-        csv += `"${item.patients.lastThreeMonths.registered.count}"${separator}`
-        csv += `"${item.patients.lastThreeMonths.active.count}"${separator}`
-        csv += `"${item.patients.rpm.count}"${separator}`
-        csv += `"${item.patients.total.registered.count}"${separator}`
-        csv += `"${item.providers.registered.count}"${separator}`
-        csv += `"${item.providers.active.count}"${separator}`
-        csv += `"${
-          item.videoCalls ? item.videoCalls.twilio.count : '-'
-        }"${separator}`
-        csv += `"${item.plan && item.plan.id ? item.plan.id : '-'}"${separator}`
-        csv += `"${
-          item.plan && item.plan.name ? item.plan.name : '-'
-        }"${separator}`
-        csv += `"${
-          item.entity ? (item.entity.isBillable ? 'Yes' : 'No') : '-'
-        }"${separator}`
-        csv += `"${item.entity ? item.entity.type.id : '-'}"${separator}`
-        csv += `"${item.entity ? item.entity.type.name : '-'}"${separator}`
-        csv += `"${item.pricing.base ? item.pricing.base : '-'}"${separator}`
-        csv += `"${
-          item.pricing.rpmPatient ? item.pricing.rpmPatient : '-'
-        }"${separator}`
-        csv += `"${
-          item.pricing.nonRpmPatient ? item.pricing.nonRpmPatient : '-'
-        }"${separator}`
-        csv += `"${
-          item.churnDate ? item.churnDate.split('T')[0] : '-'
-        }"${separator}`
-        csv += `"${
-          item.payingStartDate ? item.payingStartDate : '-'
-        }"${separator}`
-        csv += `"${
+      const data = response.data.map((item) => ({
+        'ORGANIZATION ID': item.organization.id,
+        'ORGANIZATION NAME': item.organization.name,
+        'NUMBER OF LOCATIONS': item.numberOfLocations
+          ? item.numberOfLocations
+          : '-',
+        'REGISTERED PATIENTS - LAST THREE MONTHS':
+          item.patients.lastThreeMonths.registered.count,
+        'ACTIVE PATIENTS - LAST THREE MONTHS':
+          item.patients.lastThreeMonths.active.count,
+        'RPM-ENABLED PATIENTS': item.patients.rpm.count,
+        'TOTAL PATIENTS': item.patients.total.registered.count,
+        'REGISTERED COACHES': item.providers.registered.count,
+        'ACTIVE COACHES': item.providers.active.count,
+        'VIDEO CALL AMOUNT': item.videoCalls
+          ? item.videoCalls.twilio.count
+          : '-',
+        'PLAN ID': item.plan && item.plan.id ? item.plan.id : '-',
+        'PLAN NAME': item.plan && item.plan.name ? item.plan.name : '-',
+        'IS BILLABLE': item.entity
+          ? item.entity.isBillable
+            ? 'Yes'
+            : 'No'
+          : '-',
+        'ENTITY ID': item.entity ? item.entity.type.id : '-',
+        'ENTITY TYPE': item.entity ? item.entity.type.name : '-',
+        'BASE PRICING': item.pricing.base ? item.pricing.base : '-',
+        'RPM PATIENT PRICING': item.pricing.rpmPatient
+          ? item.pricing.rpmPatient
+          : '-',
+        'PER NONRPM PATIENT PRICING': item.pricing.nonRpmPatient
+          ? item.pricing.nonRpmPatient
+          : '-',
+        'CHURN DATE': item.churnDate ? item.churnDate.split('T')[0] : '-',
+        'PAYING START DATE': item.payingStartDate ? item.payingStartDate : '-',
+        'IS PAYING':
           item.isPaying !== undefined
             ? item.isPaying
               ? 'Paying'
               : 'Non-paying'
-            : '-'
-        }"${separator}`
-        csv += `"${item.renewalDate ? item.renewalDate : '-'}"${separator}`
-        csv += `"${item.parent ? item.parent.id : '-'}"${separator}`
-        csv += `"${item.parent ? item.parent.name : '-'}"${separator}`
-        csv += `"${formValue.date.endOf('day').format('YYYY-MM-DD')}"`
-        csv += `\r\n`
-      })
+            : '-',
+        'RENEWAL DATE': item.renewalDate ? item.renewalDate : '-',
+        'PARENT CLINIC ID': item.parent ? item.parent.id : '-',
+        'PARENT CLINIC NAME': item.parent ? item.parent.name : '-',
+        'AS OF': formValue.date.endOf('day').format('YYYY-MM-DD')
+      }))
+
+      const csv = Papa.unparse(data)
 
       CSV.toFile({
         content: csv,

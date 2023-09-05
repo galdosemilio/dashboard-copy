@@ -9,6 +9,7 @@ import { OrganizationAutocompleterComponent } from '@coachcare/common/components
 import { NotifierService } from '@coachcare/common/services'
 import * as moment from 'moment'
 import { CSV } from '@coachcare/common/shared'
+import Papa from 'papaparse'
 
 @Component({
   selector: 'ccr-account-csv-dialog',
@@ -79,44 +80,31 @@ export class AccountCSVDialogComponent implements OnInit {
 
   private generateCSV(accounts: any[]): string {
     let csv = ''
-    const separator = ','
 
     if (!accounts || !accounts.length) {
       return csv
     }
 
     csv += 'PROVIDER LIST\r\n'
-    csv += `"ID"${separator}`
-    csv += `"FIRST NAME"${separator}`
-    csv += `"LAST NAME"${separator}`
-    csv += `"EMAIL"${separator}`
-    csv += `"PHONE"`
 
-    if (this.includeAssociations) {
-      csv += `${separator}`
-      csv += `"ORGANIZATION"${separator}`
-      csv += `"ORGANIZATION ID"`
-    }
-
-    csv += `\r\n`
-
-    accounts.forEach((account: any) => {
-      csv += `"${account.id || ''}"${separator}`
-      csv += `"${account.firstName || ''}"${separator}`
-      csv += `"${account.lastName || ''}"${separator}`
-      csv += `"${account.email || ''}"${separator}`
-      csv += `"${account.countryCode || ''}${account.phone || ''}"`
-
-      if (account.organization) {
-        csv += `${separator}`
-        csv += `"${CSV.escapeCSVText(
-          account.organization.name || ''
-        )}"${separator}`
-        csv += `"${account.organization.id || ''}"`
+    const data = accounts.map((account) => {
+      const row = {
+        ID: account.id || '',
+        'FIRST NAME': account.firstName || '',
+        'LAST NAME': account.lastName || '',
+        EMAIL: account.email || '',
+        PHONE: `${account.countryCode || ''}${account.phone || ''}`
       }
 
-      csv += `\r\n`
+      if (this.includeAssociations && account.organization) {
+        row['ORGANIZATION'] = account.organization.name
+        row['ORGANIZATION ID'] = account.organization.id || ''
+      }
+
+      return row
     })
+
+    csv += Papa.unparse(data)
 
     return csv
   }

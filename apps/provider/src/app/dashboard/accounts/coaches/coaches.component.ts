@@ -25,9 +25,9 @@ import { Subject } from 'rxjs'
 import { delay, filter } from 'rxjs/operators'
 import { AccountCreateDialog } from '../dialogs'
 import { CoachesDatabase, CoachesDataSource } from './services'
-import { AccountAccessData } from '@coachcare/sdk'
 import { CSV } from '@coachcare/common/shared'
 import * as moment from 'moment'
+import Papa from 'papaparse'
 
 @UntilDestroy()
 @Component({
@@ -193,7 +193,6 @@ export class CoachesComponent implements AfterViewInit, OnInit, OnDestroy {
       }
 
       const res = await this.database.fetchAll(criteria).toPromise()
-      const csvSeparator = ','
 
       if (!res.data.length) {
         return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
@@ -201,39 +200,27 @@ export class CoachesComponent implements AfterViewInit, OnInit, OnDestroy {
 
       const orgName = this.context.organization.name.replace(/\s/g, '_')
       const filename = `${orgName}_Coach_List.csv`
-      let csv = ''
-      csv += 'PATIENT LIST\r\n'
-      csv +=
-        'ID' +
-        csvSeparator +
-        'First Name' +
-        csvSeparator +
-        'Last Name' +
-        csvSeparator +
-        'Email' +
-        csvSeparator +
-        'Onboarding Date' +
-        '\r\n'
+      let csv = 'COACH LIST\r\n'
 
-      res.data.forEach((entry: AccountAccessData) => {
+      const data = res.data.map((entry) => {
         const onboardingOrg = entry.organizations.find(
           (org) => org.accessType === 'association'
         )
 
-        csv +=
-          `"${entry.id}"` +
-          csvSeparator +
-          `"${entry.firstName}"` +
-          csvSeparator +
-          `"${entry.lastName}"` +
-          csvSeparator +
-          `"${entry.email}"` +
-          csvSeparator +
-          `"${
-            onboardingOrg ? moment(onboardingOrg.createdAt).toISOString() : '-'
-          }"` +
-          '\r\n'
+        const row = {
+          ID: entry.id,
+          'First Name': entry.firstName,
+          'Last Name': entry.lastName,
+          Email: entry.email,
+          'Onboarding Date': onboardingOrg
+            ? moment(onboardingOrg.createdAt).toISOString()
+            : '-'
+        }
+
+        return row
       })
+
+      csv += Papa.unparse(data)
 
       CSV.toFile({ content: csv, filename })
       return Promise.resolve()

@@ -3,6 +3,7 @@ import { ContextService, SelectedOrganization } from '@app/service'
 import { CSV } from '@coachcare/common/shared'
 import { Messaging } from '@coachcare/sdk'
 import * as moment from 'moment'
+import Papa from 'papaparse'
 
 @Component({
   selector: 'app-reports-custom-message-activity',
@@ -27,32 +28,19 @@ export class MessageActivityReportComponent implements OnInit {
       limit: 'all'
     })
 
-    const separator = ','
-    let csv = ''
+    const data = response.data.map((item) => ({
+      ID: item.id,
+      'ACCOUNT ID': item.account.id,
+      'ACCOUNT TYPE': item.account.type,
+      'CREATED AT': `${item.createdAt.local.date} ${item.createdAt.local.time}`,
+      TIMEZONE: item.createdAt.timezone,
+      'ORGANIZATION ID': item.organization.id,
+      'ORGANIZATION NAME': item.organization.name,
+      ROLE: item.role,
+      'THREAD ID': item.thread.id
+    }))
 
-    csv += `"ID"${separator}`
-    csv += `"ACCOUNT ID"${separator}`
-    csv += `"ACCOUNT TYPE"${separator}`
-    csv += `"CREATED AT"${separator}`
-    csv += `"TIMEZONE"${separator}`
-    csv += `"ORGANIZATION ID"${separator}`
-    csv += `"ORGANIZATION NAME"${separator}`
-    csv += `"ROLE"${separator}`
-    csv += `"THREAD ID"`
-    csv += '\r\n'
-
-    response.data.forEach((item) => {
-      csv += `"${item.id}"${separator}`
-      csv += `"${item.account.id}"${separator}`
-      csv += `"${item.account.type}"${separator}`
-      csv += `"${item.createdAt.local.date} ${item.createdAt.local.time}"${separator}`
-      csv += `"${item.createdAt.timezone}"${separator}`
-      csv += `"${item.organization.id}"${separator}`
-      csv += `"${item.organization.name}"${separator}`
-      csv += `"${item.role}"${separator}`
-      csv += `"${item.thread.id}"`
-      csv += '\r\n'
-    })
+    const csv = Papa.unparse(data)
 
     CSV.toFile({
       filename: `Message Activity - ${this.organization.name} (ID ${this.organization.id})`,
