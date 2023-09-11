@@ -40,22 +40,22 @@
             <p *ngIf="product.description" [class.ccr-text-left]="!showImage">{{ product.description }}</p>
           </div>
         </div>
-        <p class="price-label" fxFlex="25%">{{ product.price | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+        <p class="price-label" fxFlex="25%">{{ product.price | currency:'USD' }}</p>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
         <p class="item-label" fxFlex>{{ 'GLOBAL.SHIPPING' | translate }}</p>
-        <p class="price-label" fxFlex="25%">{{ order.shippingCost | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+        <p class="price-label" fxFlex="25%">{{ order.shippingCost | currency:'USD' }}</p>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
         <p class="item-label" fxFlex>{{ 'GLOBAL.TAX' | translate }}</p>
-        <p class="price-label" fxFlex="25%">{{ order.tax | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+        <p class="price-label" fxFlex="25%">{{ order.tax | currency:'USD' }}</p>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="start center">
         <p class="item-label" fxFlex>{{ 'GLOBAL.TOTAL' | translate }}</p>
-        <p class="price-label total" fxFlex="25%">{{ order.total | currency:'USD':'symbol':'1.0-0':'en-US' }}</p>
+        <p class="price-label total" fxFlex="25%">{{ order.total | currency:'USD' }}</p>
       </div>
 
       <hr>
