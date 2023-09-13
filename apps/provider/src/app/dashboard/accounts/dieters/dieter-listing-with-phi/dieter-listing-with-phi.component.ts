@@ -383,6 +383,16 @@ export class DieterListingWithPhiComponent implements AfterViewInit, OnInit {
                     .unit
                 }`
               : '',
+          'Current Blood Pressure Date': d.dataPoints?.[
+            DataPointTypes.BLOOD_PRESSURE_DIASTOLIC
+          ]?.recordedAt
+            ? moment
+                .utc(
+                  d.dataPoints?.[DataPointTypes.BLOOD_PRESSURE_DIASTOLIC]
+                    ?.recordedAt.utc
+                )
+                .format('YYYY-MM-DD')
+            : '',
           'Start Weight': d.weight?.start
             ? unitConversion(
                 rawPreference,
