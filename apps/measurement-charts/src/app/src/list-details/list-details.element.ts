@@ -134,13 +134,7 @@ export class ListDetailsElement extends CcrElement {
     this.loading(true)
 
     try {
-      if (
-        api.baseData.dataPointTypeId === DataPointTypes.BLOOD_PRESSURE_GENERAL
-      ) {
-        await api.measurementDataPoint.deleteGroup({ id: item.groupId })
-      } else {
-        await api.measurementDataPoint.delete({ id: item.id })
-      }
+      await api.measurementDataPoint.deleteGroup({ id: item.groupId })
 
       if (this.groupData.length === 1) {
         this.goBack()
