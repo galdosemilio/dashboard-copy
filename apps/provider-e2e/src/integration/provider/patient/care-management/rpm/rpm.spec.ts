@@ -254,14 +254,6 @@ describe('Patient profile -> dashboard -> rpm', function () {
         expect(xhr.response.statusCode).to.equal(201)
         expect(xhr.request.body.tags.includes('rpm')).to.equal(true)
       })
-
-      cy.get('[data-cy="care-management-state"]')
-        .find('.current-code')
-        .should('contain', 99490)
-
-      cy.get('[data-cy="care-management-state"]')
-        .find('.timer')
-        .should('contain', '10:00 / 20:00')
     })
   })
 

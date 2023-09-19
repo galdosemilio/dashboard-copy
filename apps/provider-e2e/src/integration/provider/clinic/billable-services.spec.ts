@@ -95,6 +95,8 @@ describe('Clinics -> Clinic -> Billable Services', function () {
 
     cy.get('button').contains('Add Coach').click()
 
+    cy.wait(1000)
+
     cy.get('mat-dialog-container')
       .find('input[data-placeholder="Search"]')
       .type('test value')

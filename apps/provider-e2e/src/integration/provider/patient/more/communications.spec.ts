@@ -111,7 +111,7 @@ describe('Patient profile -> More -> Communications', function () {
       clickStartTime()
 
       cy.get('.mat-clock-hours')
-        .contains('7')
+        .contains('8')
         .should('have.class', 'mat-clock-cell-disabled')
 
       clickOkAndCreate()

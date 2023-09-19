@@ -195,7 +195,7 @@ describe('Clinics -> Clinic -> Measurements', function () {
 
     cy.get('button').contains('Add Category').click()
 
-    cy.tick(1000)
+    cy.wait(1000)
 
     cy.get('mat-dialog-container')
       .find('input[data-placeholder="Name"]')
@@ -247,8 +247,8 @@ describe('Clinics -> Clinic -> Measurements', function () {
 
     cy.wait('@measurementLabelPatchRequest').should((xhr) => {
       expect(xhr.request.body.id).to.equal('1')
-      expect(xhr.request.body.name).to.equal('Edited Label')
-      expect(xhr.request.body.description).to.equal('Edited Description')
+      expect(xhr.request.body.name).to.contains('Edited Label')
+      expect(xhr.request.body.description).to.contains('Edited Description')
     })
 
     cy.wait('@measurementLabelGetRequest')

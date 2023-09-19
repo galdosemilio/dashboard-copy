@@ -125,9 +125,8 @@ describe('Sequence -> View -> Enrollments', function () {
   it('Properly enrolls all the patients in selected phase(s)', function () {
     cy.tick(5000)
 
-    cy.get('[aria-label="All patients in selected phase(s)"]').click()
-
     cy.wait(500)
+    cy.get('[aria-label="All patients in selected phase(s)"]').click()
 
     cy.get('ccr-organization-search').find('input').type('Coachcare')
     selectAutocompleteOption(0)

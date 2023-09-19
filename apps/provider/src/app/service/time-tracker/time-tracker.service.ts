@@ -47,9 +47,11 @@ export class TimeTrackerService implements OnDestroy {
     this.postEventQueue = this.postEventQueue.bind(this)
 
     this.currentOrganization = this.context.organization
-    this.context.automatedTimeTracking$.subscribe((value) => {
-      this.automatedTimeTracking = value
-    })
+    this.context.automatedTimeTracking$
+      .pipe(untilDestroyed(this), debounceTime(500))
+      .subscribe((value) => {
+        this.automatedTimeTracking = value
+      })
 
     // Queue post trigger listener
     this.eventQueueTrigger$
@@ -154,10 +156,10 @@ export class TimeTrackerService implements OnDestroy {
 
     if (
       route.useAccount &&
-      this.context.activeCareManagementService &&
+      this.activeCareManagementServiceTag &&
       this.automatedTimeTracking
     ) {
-      tags.push(this.context.activeCareManagementService.tag)
+      tags.push(this.activeCareManagementServiceTag)
     }
 
     if (!this.automatedTimeTracking) {

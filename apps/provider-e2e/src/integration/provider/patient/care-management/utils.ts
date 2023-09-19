@@ -49,7 +49,7 @@ export function addTime() {
 }
 
 export function selectMinutesAndSeconds(minutes, seconds) {
-  cy.get('[cy-data="open-status-button"').click()
+  cy.get('[data-cy="open-status-button"]').click()
 
   cy.tick(10000)
 

@@ -150,8 +150,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
       selectMinutesAndSeconds(1, 30)
 
-      cy.get('[cy-data="open-status-button"').click().click()
-
+      cy.get('[data-cy="open-status-button"]').click().click()
       cy.tick(10000)
 
       addTime()

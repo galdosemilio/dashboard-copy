@@ -141,7 +141,7 @@ describe('Reports -> RPM -> Export Monitoring Report', function () {
 
 function checkRPMAndRTMCsv(csv, requirements: string[]) {
   checkCsvData(csv, 0, 12, 'N/A')
-  checkCsvData(csv, 0, 13, '30 more calendar days')
+  checkCsvData(csv, 0, 13, '30 more calendar days; ')
   checkCsvData(csv, 0, 14, 'N/A')
   checkCsvData(
     csv,
