@@ -1,59 +1,31 @@
 import { standardSetup } from '../../../../support'
+import { ApiOverrideEntry } from '../../../../support/api'
 import { deleteNote } from './utils'
 
 describe('Patient profile -> notes', function () {
   it('Notes section shows in side bar with three notes in New York ET', function () {
-    cy.setOrganization('ccr')
-    cy.setTimezone('et')
-    standardSetup()
+    checkNotes('et', Cypress.env('clientId'), undefined, [
+      { date: 'Tue, Dec 31, 2019', value: 'CoachCare (ID 1)' },
+      { date: 'Tue, Dec 31, 2019', value: 'CoachCare (ID 1)' },
+      { date: 'Wed, Jan 1, 2020', value: 'CoachCare (ID 1)' }
+    ])
+  })
 
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('app-dieter-dashboard')
-    cy.tick(10000)
-
-    // Main buttons
-    cy.get('app-rightpanel-reminders').as('rightMenu')
-    cy.get('@rightMenu').find('h4').should('contain', 'Notes')
-    cy.get('@rightMenu').find('button').should('contain', 'Add New Note')
-
-    cy.get('@rightMenu').find('.note-container').as('noteEntries')
-
-    cy.get('@noteEntries').should('have.length', 3)
-
-    cy.get('@noteEntries').eq(0).should('contain', 'Tue, Dec 31, 2019')
-    cy.get('@noteEntries').eq(0).should('contain', 'CoachCare (ID 1)')
-    cy.get('@noteEntries').eq(1).should('contain', 'Tue, Dec 31, 2019')
-    cy.get('@noteEntries').eq(1).should('contain', 'CoachCare (ID 1)')
-    cy.get('@noteEntries').eq(2).should('contain', 'Wed, Jan 1, 2020')
-    cy.get('@noteEntries').eq(2).should('contain', 'CoachCare (ID 1)')
+  it('Notes section not showing in different patient', function () {
+    checkNotes('et', '1', [
+      {
+        url: '/1.0/content/form/submission?**',
+        fixture: 'api/general/emptyDataEmptyPagination'
+      }
+    ])
   })
 
   it('Notes section shows in side bar with three notes in Australia AET', function () {
-    cy.setOrganization('ccr')
-    cy.setTimezone('aet')
-    standardSetup()
-
-    cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-    cy.get('app-dieter-dashboard')
-    cy.tick(10000)
-
-    // Main buttons
-    cy.get('app-rightpanel-reminders').as('rightMenu')
-    cy.get('@rightMenu').find('h4').should('contain', 'Notes')
-    cy.get('@rightMenu').find('button').should('contain', 'Add New Note')
-
-    cy.get('@rightMenu').find('.note-container').as('noteEntries')
-
-    cy.get('@noteEntries').should('have.length', 3)
-
-    cy.get('@noteEntries').eq(0).should('contain', 'Wed, Jan 1, 2020')
-    cy.get('@noteEntries').eq(0).should('contain', 'CoachCare (ID 1)')
-    cy.get('@noteEntries').eq(1).should('contain', 'Wed, Jan 1, 2020')
-    cy.get('@noteEntries').eq(1).should('contain', 'CoachCare (ID 1)')
-    cy.get('@noteEntries').eq(2).should('contain', 'Thu, Jan 2, 2020')
-    cy.get('@noteEntries').eq(2).should('contain', 'CoachCare (ID 1)')
+    checkNotes('aet', Cypress.env('clientId'), undefined, [
+      { date: 'Wed, Jan 1, 2020', value: 'CoachCare (ID 1)' },
+      { date: 'Wed, Jan 1, 2020', value: 'CoachCare (ID 1)' },
+      { date: 'Thu, Jan 2, 2020', value: 'CoachCare (ID 1)' }
+    ])
   })
 
   it('Notes section modal submits for proper form id', function () {
@@ -112,3 +84,43 @@ describe('Patient profile -> notes', function () {
     })
   })
 })
+
+const checkNotes = (
+  tz: string,
+  clientId,
+  apiOverrides?: ApiOverrideEntry[],
+  notes?: Array<{
+    date: string
+    value: string
+  }>
+) => {
+  cy.setOrganization('ccr')
+  cy.setTimezone(tz)
+  standardSetup({
+    apiOverrides
+  })
+
+  cy.visit(`/accounts/patients/${clientId}/dashboard`)
+
+  cy.get('app-dieter-dashboard')
+  cy.tick(10000)
+
+  // Main buttons
+  cy.get('app-rightpanel-reminders').as('rightMenu')
+  cy.get('@rightMenu').find('h4').should('contain', 'Notes')
+  cy.get('@rightMenu').find('button').should('contain', 'Add New Note')
+
+  if (!notes) {
+    cy.get('@rightMenu').find('.empty-container').should('exist')
+    cy.get('@rightMenu').find('.note-container').should('not.exist')
+  } else {
+    cy.get('@rightMenu').find('.note-container').as('noteEntries')
+
+    cy.get('@noteEntries').should('have.length', notes.length)
+
+    for (let i = 0; i < notes.length; i += 1) {
+      cy.get('@noteEntries').eq(i).should('contain', notes[i].date)
+      cy.get('@noteEntries').eq(i).should('contain', notes[i].value)
+    }
+  }
+}
