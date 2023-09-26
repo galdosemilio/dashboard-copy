@@ -254,6 +254,15 @@ describe('Patient profile -> dashboard -> rpm', function () {
         expect(xhr.response.statusCode).to.equal(201)
         expect(xhr.request.body.tags.includes('rpm')).to.equal(true)
       })
+
+      // disabled auto time tracking
+      cy.get('[data-cy="care-management-state"]')
+        .find('.current-code')
+        .should('not.exist')
+
+      cy.get('[data-cy="care-management-state"]')
+        .find('.timer')
+        .should('contain', '00:00 / 00:00')
     })
   })
 
@@ -373,7 +382,8 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
         cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
-        cy.tick(60000)
+        cy.wait(1000)
+        cy.tick(1000)
 
         cy.get('.ccr-tabs').find('a').eq(1).click()
 
@@ -383,46 +393,47 @@ describe('Patient profile -> dashboard -> rpm', function () {
         })
       })
 
-      it('Consistently post events when traversing multiple routes in a short span of time', () => {
+      it('Consistently post events when traversing multiple routes in the same timestamp', () => {
         standardSetup()
 
         cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-        cy.tick(250)
-
+        cy.wait(1000)
+        cy.tick(1000)
         cy.get('.ccr-tabs').find('a').eq(1).click()
-
-        cy.tick(250)
-
         cy.get('.ccr-tabs').find('a').eq(0).click()
-
-        cy.tick(250)
-
+        cy.tick(1000)
         cy.get('.ccr-tabs').find('a').eq(1).click()
-
-        cy.tick(250)
-
         cy.get('.ccr-tabs').find('a').eq(0).click()
-
-        const startTimes = []
+        cy.tick(1000)
 
         cy.wait('@accountActivityPostRequest')
-        cy.wait('@accountActivityPostRequest').should((xhr) =>
-          startTimes.push(xhr.request.body.interaction.time.start)
-        )
-        cy.wait('@accountActivityPostRequest').should((xhr) =>
-          startTimes.push(xhr.request.body.interaction.time.start)
-        )
-        cy.wait('@accountActivityPostRequest').should((xhr) =>
-          startTimes.push(xhr.request.body.interaction.time.start)
-        )
-        cy.wait('@accountActivityPostRequest').should((xhr) =>
-          startTimes.push(xhr.request.body.interaction.time.start)
-        )
-
-        expect(
-          startTimes.filter((item, index) => startTimes.indexOf(item) !== index)
-        ).to.have.length(0)
+        cy.wait('@accountActivityPostRequest')
+        cy.wait('@accountActivityPostRequest').then((xhr) => {
+          expect(xhr.request.body.interaction.time.start).to.equal(
+            '2020-01-01T00:00:00.000Z'
+          )
+          expect(xhr.request.body.interaction.time.end).to.equal(
+            '2020-01-01T00:00:01.000Z'
+          )
+        })
+        cy.wait('@accountActivityPostRequest').then((xhr) => {
+          expect(xhr.request.body.interaction.time.instant).to.equal(
+            '2020-01-01T00:00:01.000Z'
+          )
+        })
+        cy.wait('@accountActivityPostRequest').then((xhr) => {
+          expect(xhr.request.body.interaction.time.start).to.equal(
+            '2020-01-01T00:00:01.000Z'
+          )
+          expect(xhr.request.body.interaction.time.end).to.equal(
+            '2020-01-01T00:00:02.000Z'
+          )
+        })
+        cy.wait('@accountActivityPostRequest').then((xhr) => {
+          expect(xhr.request.body.interaction.time.instant).to.equal(
+            '2020-01-01T00:00:02.000Z'
+          )
+        })
       })
     })
   })

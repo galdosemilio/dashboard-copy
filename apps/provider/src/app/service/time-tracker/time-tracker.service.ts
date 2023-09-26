@@ -3,7 +3,12 @@ import { NavigationStart, Router, RouterEvent } from '@angular/router'
 import { STORAGE_TIME_TRACKER_STASH } from '@app/config'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { BehaviorSubject, Subject, filter, merge, debounceTime } from 'rxjs'
-import { AccountActivityEvent, AccountProvider } from '@coachcare/sdk'
+import * as moment from 'moment-timezone'
+import {
+  AccountActivityEvent,
+  AccountActivityTimeRange,
+  AccountProvider
+} from '@coachcare/sdk'
 import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
@@ -35,6 +40,7 @@ export class TimeTrackerService implements OnDestroy {
   private currentOrganization: SelectedOrganization
   private trackingTimeStart: Date
   private automatedTimeTracking: boolean = true
+  private previousEvent: AccountActivityEvent
 
   constructor(
     private account: AccountProvider,
@@ -57,6 +63,7 @@ export class TimeTrackerService implements OnDestroy {
     this.eventQueueTrigger$
       .pipe(
         untilDestroyed(this),
+        debounceTime(500),
         filter(() => !this.isPostingQueue)
       )
       .subscribe(this.postEventQueue)
@@ -275,29 +282,49 @@ export class TimeTrackerService implements OnDestroy {
     return params
   }
 
+  private getInteractionRange(event: AccountActivityEvent) {
+    return event.interaction.time as AccountActivityTimeRange
+  }
+
   private async postEventQueue(): Promise<void> {
     if (this.isPostingQueue) {
       return
     }
 
     try {
-      const MAX_ATTEMPTS = 3
-
       while (this.eventQueue.length > 0) {
-        const currEvent = this.eventQueue.shift()
-        let attempts = MAX_ATTEMPTS
+        const event = this.eventQueue.shift()
+        const timeRange = this.getInteractionRange(event)
+        let start = moment(timeRange.start)
+        const end = moment(timeRange.end)
 
-        // If we go beyond 3 attempts with the same payload we drop it, sadly :(
-        // it might mean the data is corrupt
-        while (attempts > 0) {
-          try {
-            await this.account.addActivityEvent(currEvent)
-            attempts = 0 // We succeeded so we don't keep on trying
-          } catch (error) {
-            --attempts
-            this.notifier.error(error)
-          }
+        if (this.previousEvent) {
+          start = moment.unix(
+            Math.max(
+              start.unix(),
+              moment(this.getInteractionRange(this.previousEvent).end).unix()
+            )
+          )
         }
+
+        if (end.isSameOrBefore(start)) {
+          event.interaction = {
+            time: {
+              instant: start.toISOString()
+            }
+          }
+        } else {
+          event.interaction = {
+            time: {
+              start: start.toISOString(),
+              end: end.toISOString()
+            }
+          }
+
+          this.previousEvent = event
+        }
+
+        await this.account.addActivityEvent(event)
       }
     } catch (error) {
       this.notifier.error(error)

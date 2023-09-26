@@ -178,8 +178,8 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   private async handleSecondPassing(): Promise<void> {
     try {
       if (
-        this.seconds < this.requiredIterationSeconds ||
-        this.requiredIterationSeconds === 0
+        this.requiredIterationSeconds > 0 &&
+        this.seconds < this.requiredIterationSeconds
       ) {
         return
       }
@@ -205,15 +205,16 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
     account: AccountAccessData
   ): Promise<void> {
     try {
-      if (!account || !this.serviceType || !this.automatedTimeTracking) {
-        return
-      }
       this.loading = true
       this.timeTrackingComplete = false
       this.currentCodeString = ''
       this.requiredIterationSeconds = 0
       this.timerUnavailableError = undefined
       this.stopTimer()
+
+      if (!account || !this.serviceType || !this.automatedTimeTracking) {
+        return
+      }
 
       const response = await this.careManagementState.getList({
         organization: this.context.organizationId,
@@ -325,8 +326,8 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
         this.cdr.detectChanges()
 
         if (
-          this.seconds < this.requiredIterationSeconds ||
-          this.requiredIterationSeconds === 0
+          this.requiredIterationSeconds > 0 &&
+          this.seconds < this.requiredIterationSeconds
         ) {
           this.startTimer()
         } else {
