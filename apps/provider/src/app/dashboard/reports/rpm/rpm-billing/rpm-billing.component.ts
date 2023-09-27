@@ -31,7 +31,7 @@ import {
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
-import { chain, times, isEmpty, countBy } from 'lodash'
+import { chain, times, isEmpty, countBy, startCase } from 'lodash'
 import * as moment from 'moment'
 import Papa from 'papaparse'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -506,7 +506,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         'Organization ID',
         'Organization Name',
         'Status',
-        'Activation Date'
+        'Activation Date',
+        'Billing Type',
+        'Monitoring Type'
       ]
 
       headers.forEach((value, index) => {
@@ -560,7 +562,9 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           entry.state?.isActive ? 'Active' : 'Inactive',
           entry.state?.isActive
             ? moment(entry.state.startedAt).format('MM/DD/YYYY')
-            : 'No'
+            : 'No',
+          startCase(entry.state.preference.billing),
+          startCase(entry.state.preference.monitoring)
         ]
 
         this.cptCodes.forEach((code, index) => {
