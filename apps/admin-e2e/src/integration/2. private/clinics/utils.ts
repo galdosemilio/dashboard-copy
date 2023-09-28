@@ -19,6 +19,20 @@ export function verifyAutomaticTimeTracking(section, option) {
     .should('contain', option)
 }
 
+export function verifyBillingType(section, option) {
+  cy.get(`[data-cy="org-settings-section-care-${section}"]`)
+    .find('[data-cy="care-preference-billing-option"]')
+    .find('.mat-select')
+    .should('contain', option)
+}
+
+export function verifyMonitoringType(section, option) {
+  cy.get(`[data-cy="org-settings-section-care-${section}"]`)
+    .find('[data-cy="care-preference-monitoring-option"]')
+    .find('.mat-select')
+    .should('contain', option)
+}
+
 export function selectActiveOption(type, option) {
   cy.get(`[data-cy="org-settings-section-care-${type}"]`)
     .find('[data-cy="care-preference-active-option"]')

@@ -15,12 +15,26 @@
         formControlName="deviceSetupNotification"
       >{{ 'GLOBAL.DEVICE_SETUP_NOTIFICATION' | translate }}</mat-slide-toggle>
     </div>
-    <div [hidden]="!pref.preference?.isActive" data-cy="care-preference-automated-time-tracking-option">
-      <mat-form-field fxFlex="300px">
+    <div [hidden]="!pref.preference?.isActive"  fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex data-cy="care-preference-automated-time-tracking-option">
         <mat-label>{{ 'GLOBAL.AUTOMATIC_TIME_TRACKING' | translate }}</mat-label>
         <mat-select formControlName="automatedTimeTracking" >
           <mat-option [value]="true">{{ 'GLOBAL.ENABLED' | translate }}</mat-option>
           <mat-option [value]="false">{{ 'GLOBAL.DISABLED' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex data-cy="care-preference-billing-option">
+        <mat-label>{{ 'GLOBAL.BILLING_TYPE' | translate }}</mat-label>
+        <mat-select formControlName="billing" >
+          <mat-option *ngFor="let type of careManagementTypes" [value]="type.value">{{ type.viewValue | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex data-cy="care-preference-monitoring-option">
+        <mat-label>{{ 'GLOBAL.MONITORING_TYPE' | translate }}</mat-label>
+        <mat-select formControlName="monitoring" >
+          <mat-option *ngFor="let type of careManagementTypes" [value]="type.value">{{ type.viewValue | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

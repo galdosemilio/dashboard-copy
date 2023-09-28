@@ -9,6 +9,7 @@ import {
 } from '@coachcare/common/services'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { debounceTime, Subject } from 'rxjs'
+import { SelectorOption } from '@coachcare/common/shared'
 
 @UntilDestroy()
 @Component({
@@ -37,6 +38,16 @@ export class CarePreferenceComponent implements OnInit {
   private carePref$ = new Subject<CareManagementFeaturePref>()
   public inheritedOrg: Entity
   public inherited: boolean = true
+  public careManagementTypes: SelectorOption[] = [
+    {
+      value: 'self-service',
+      viewValue: _('GLOBAL.SELF_SERVICE')
+    },
+    {
+      value: 'managed',
+      viewValue: _('GLOBAL.MANAGED')
+    }
+  ]
 
   constructor(
     private carePreference: CareManagementPreference,
@@ -57,8 +68,13 @@ export class CarePreferenceComponent implements OnInit {
   }
 
   private async onSubmit() {
-    const { active, deviceSetupNotification, automatedTimeTracking } =
-      this.form.value
+    const {
+      active,
+      deviceSetupNotification,
+      automatedTimeTracking,
+      billing,
+      monitoring
+    } = this.form.value
     const deviceSetupNotificationValue =
       deviceSetupNotification === false ? 'disabled' : 'enabled'
     const automatedTimeTrackingValue =
@@ -86,14 +102,18 @@ export class CarePreferenceComponent implements OnInit {
             isActive: active,
             serviceType: this.pref.serviceType.id,
             deviceSetupNotification: deviceSetupNotificationValue,
-            automatedTimeTracking: automatedTimeTrackingValue
+            automatedTimeTracking: automatedTimeTrackingValue,
+            billing,
+            monitoring
           })
         } else {
           await this.carePreference.updateCareManagementPreference({
             id: this.pref.preference.id,
             isActive: active,
             deviceSetupNotification: deviceSetupNotificationValue,
-            automatedTimeTracking: automatedTimeTrackingValue
+            automatedTimeTracking: automatedTimeTrackingValue,
+            billing,
+            monitoring
           })
         }
       }
@@ -122,7 +142,9 @@ export class CarePreferenceComponent implements OnInit {
     this.form = this.fb.group({
       active: ['inherit'],
       deviceSetupNotification: [true],
-      automatedTimeTracking: [true]
+      automatedTimeTracking: [true],
+      billing: ['self-service'],
+      monitoring: ['self-service']
     })
   }
 
@@ -143,7 +165,9 @@ export class CarePreferenceComponent implements OnInit {
           : true,
         automatedTimeTracking: this.pref.preference?.automatedTimeTracking
           ? this.pref.preference?.automatedTimeTracking === 'enabled'
-          : true
+          : true,
+        billing: this.pref.preference?.billing || 'self-service',
+        monitoring: this.pref.preference?.monitoring || 'self-service'
       },
       { emitEvent: false }
     )

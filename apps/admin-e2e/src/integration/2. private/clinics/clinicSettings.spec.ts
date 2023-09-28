@@ -3,7 +3,9 @@ import {
   verifyActiveOption,
   verifyDeviceSetupNotification,
   verifyAutomaticTimeTracking,
-  selectActiveOption
+  selectActiveOption,
+  verifyBillingType,
+  verifyMonitoringType
 } from './utils'
 
 enum Sections {
@@ -208,11 +210,15 @@ describe('Clinic Settings', () => {
     verifyActiveOption('rpm', 'Enabled')
     verifyDeviceSetupNotification('rpm', 'be.checked')
     verifyAutomaticTimeTracking('rpm', 'Enabled')
+    verifyBillingType('rpm', 'Self Service')
+    verifyMonitoringType('rpm', 'Self Service')
 
     // CCM enabled and deviceSetupNotification disabled
     verifyActiveOption('ccm', 'Enabled')
     verifyDeviceSetupNotification('ccm', 'not.be.checked')
     verifyAutomaticTimeTracking('ccm', 'Disabled')
+    verifyBillingType('rpm', 'Self Service')
+    verifyMonitoringType('rpm', 'Self Service')
 
     // RTM disabled
     verifyActiveOption('rtm', 'Disabled')
@@ -237,6 +243,8 @@ describe('Clinic Settings', () => {
       expect(xhr.response.statusCode).to.equal(200)
       expect(xhr.request.body.isActive).to.equal(true)
       expect(xhr.request.body.deviceSetupNotification).to.equal('enabled')
+      expect(xhr.request.body.billing).to.equal('self-service')
+      expect(xhr.request.body.monitoring).to.equal('self-service')
     })
 
     // Disable care preference
@@ -246,6 +254,8 @@ describe('Clinic Settings', () => {
       expect(xhr.response.statusCode).to.equal(204)
       expect(xhr.request.body.isActive).to.equal(false)
       expect(xhr.request.body.deviceSetupNotification).to.equal('enabled')
+      expect(xhr.request.body.billing).to.equal('self-service')
+      expect(xhr.request.body.monitoring).to.equal('self-service')
     })
 
     // Inherit care preference
@@ -285,29 +295,30 @@ describe('Clinic Settings', () => {
   })
 
   it('should update automatic time tracking preference', () => {
-    cy.get(`[data-cy="org-settings-menu-care"]`).click()
+    updatingCarePreference(
+      'care-preference-automated-time-tracking-option',
+      'Disabled',
+      'automatedTimeTracking',
+      'disabled'
+    )
+  })
 
-    cy.get('[data-cy="org-settings-section-care-rpm"]')
-      .find('[data-cy="care-preference-automated-time-tracking-option"]')
-      .find('.mat-select')
-      .eq(0)
-      .trigger('click')
-      .wait(500)
+  it('should update billing type preference', () => {
+    updatingCarePreference(
+      'care-preference-billing-option',
+      'Managed',
+      'billing',
+      'managed'
+    )
+  })
 
-    cy.get('.mat-select-panel')
-      .find('mat-option')
-      .contains('Disabled')
-      .trigger('click')
-      .trigger('blur', { force: true })
-      .wait(500)
-
-    cy.tick(1000)
-
-    cy.wait('@updateOrgCarePreference').should((xhr) => {
-      expect(xhr.response.statusCode).to.equal(204)
-      expect(xhr.request.body.isActive).to.equal(true)
-      expect(xhr.request.body.automatedTimeTracking).to.equal('disabled')
-    })
+  it('should update monitoring type preference', () => {
+    updatingCarePreference(
+      'care-preference-monitoring-option',
+      'Managed',
+      'monitoring',
+      'managed'
+    )
   })
 
   it('Features section data display appropriately', () => {
@@ -463,4 +474,31 @@ function verifySectionVisiblity(section: Sections): void {
       .scrollIntoView()
       .should(section === s.section ? 'be.visible' : 'not.be.visible')
   }
+}
+
+function updatingCarePreference(
+  selector: string,
+  option: string,
+  property: string,
+  value: string
+) {
+  cy.get(`[data-cy="org-settings-menu-care"]`).click()
+  cy.get('[data-cy="org-settings-section-care-rpm"]')
+    .find(`[data-cy="${selector}"]`)
+    .find('.mat-select')
+    .eq(0)
+    .trigger('click')
+    .wait(500)
+  cy.get('.mat-select-panel')
+    .find('mat-option')
+    .contains(option)
+    .trigger('click')
+    .trigger('blur', { force: true })
+    .wait(500)
+  cy.tick(1000)
+  cy.wait('@updateOrgCarePreference').should((xhr) => {
+    expect(xhr.response.statusCode).to.equal(204)
+    expect(xhr.request.body.isActive).to.equal(true)
+    expect(xhr.request.body[property]).to.equal(value)
+  })
 }
