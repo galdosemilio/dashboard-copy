@@ -57,9 +57,9 @@ export class StorefrontCheckoutComponent implements OnInit {
   }
 
   public get totalDiscount(): string | null {
-    return this.cart?.attributes?.adjustment_total === '0.0'
+    return this.cart?.attributes?.promo_total === '0.0'
       ? null
-      : this.cart?.attributes?.display_adjustment_total
+      : this.cart?.attributes?.display_promo_total
   }
   public get totalMeals(): number {
     return this.cart?.lineItems?.reduce((acc, item) => acc + item.meals, 0)
