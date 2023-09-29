@@ -13,7 +13,7 @@ import { ContextService, SelectedOrganization } from '../context.service'
 import { NotifierService } from '../notifier.service'
 import { TIME_TRACKER_ROUTES, TimeTrackerRoute } from './consts'
 import { RouteUtils } from '@app/shared/helpers'
-import { uniq } from 'lodash'
+import { sortBy, uniq } from 'lodash'
 import { _ } from '@coachcare/backend/shared'
 
 @UntilDestroy()
@@ -184,33 +184,29 @@ export class TimeTrackerService implements OnDestroy {
     const route = this.currentRoute
     const tags = this.getTags(route)
 
-    const payload = [
-      ...this.eventQueue,
-      {
-        account: route.useAccount ? this.context.accountId : undefined,
-        interaction: {
-          time: {
-            end: new Date().toISOString(),
-            start: this.trackingTimeStart.toISOString()
-          }
-        },
-        organization: this.currentOrganization.id,
-        source: 'dashboard',
-        tags
-      }
-    ]
+    this.addEventToQueue({
+      account: route.useAccount ? this.context.accountId : undefined,
+      interaction: {
+        time: {
+          end: new Date().toISOString(),
+          start: this.trackingTimeStart.toISOString()
+        }
+      },
+      organization: this.currentOrganization.id,
+      source: 'dashboard',
+      tags
+    })
 
     window.localStorage.setItem(
       STORAGE_TIME_TRACKER_STASH,
-      JSON.stringify(payload)
+      JSON.stringify(this.eventQueue)
     )
   }
 
   private async commitTime(route: TimeTrackerRoute): Promise<void> {
     try {
       const tags = this.getTags(route)
-
-      this.eventQueue.push({
+      this.addEventToQueue({
         account: route.useAccount ? this.context.accountId : undefined,
         interaction: {
           time: {
@@ -280,6 +276,14 @@ export class TimeTrackerService implements OnDestroy {
     }
 
     return params
+  }
+
+  private addEventToQueue(event: AccountActivityEvent) {
+    this.eventQueue = sortBy(
+      [...this.eventQueue, event],
+      (entry) => moment(this.getInteractionRange(entry).start).unix(),
+      ['asc']
+    )
   }
 
   private getInteractionRange(event: AccountActivityEvent) {
