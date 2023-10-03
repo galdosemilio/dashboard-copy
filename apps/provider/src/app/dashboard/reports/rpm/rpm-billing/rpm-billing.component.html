@@ -57,7 +57,7 @@
                     <button
                     data-cy="export-monitoring-report-button"
                     [disabled]="!source.isLoaded || source.isEmpty || source.isLoading || isLoading"
-                    (click)="download('monitoring')"
+                    (click)="onOpenMonitoringReportDialog()"
                     mat-button class="ccr-align-center">
                         {{ 'REPORTS.EXPORT_MONITORING_REPORT' | translate }}
                         <mat-icon>file_download</mat-icon>

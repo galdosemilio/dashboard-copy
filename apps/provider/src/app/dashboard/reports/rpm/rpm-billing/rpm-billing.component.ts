@@ -31,7 +31,7 @@ import {
 } from '@coachcare/sdk'
 import { SelectOption, _ } from '@app/shared/utils'
 import { select, Store } from '@ngrx/store'
-import { chain, times, isEmpty, countBy, startCase } from 'lodash'
+import { chain, times, isEmpty, countBy, startCase, groupBy } from 'lodash'
 import * as moment from 'moment'
 import Papa from 'papaparse'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
@@ -63,6 +63,7 @@ import { CareManagementStateSummaryItem } from '@coachcare/sdk/dist/lib/provider
 import { CareManagementBillingMonthItem } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCareManagementBillingMonthResponse.interface'
 import { CareManagementPermissionsService } from '@app/service/care-management-permissions.service'
 import { RPMStateEntry } from '@app/shared/components/rpm/models'
+import { MonitoringReportDialog } from '../../dialogs/monitoring-report-dialog'
 
 interface StorageFilter {
   selectedClinicId?: string
@@ -131,19 +132,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   private selectedClinic$ = new Subject<OrganizationEntity | null>()
   private selectedSupervisingProvider$ =
     new Subject<SelectOption<number> | null>()
+  private monitoringReportLimit = 1000
 
   get cptCodes() {
-    return chain(this.careManagementService.billingCodes)
-      .filter((entry) => entry.serviceType.id === this.selectedServiceTypeId)
-      .flatMap((entry) => {
-        const iterations = entry.requirements?.maxIterations ?? 1
-        return new Array(iterations)
-          .fill(entry.value)
-          .map((code, index) =>
-            iterations > 1 ? `${code} (${index + 1})` : code
-          )
-      })
-      .valueOf()
+    return this.getCptCodes(this.selectedServiceTypeId)
   }
 
   constructor(
@@ -276,6 +268,20 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     })
   }
 
+  private getCptCodes(serviceTypeId: string) {
+    return chain(this.careManagementService.billingCodes)
+      .filter((entry) => entry.serviceType.id === serviceTypeId)
+      .flatMap((entry) => {
+        const iterations = entry.requirements?.maxIterations ?? 1
+        return new Array(iterations)
+          .fill(entry.value)
+          .map((code, index) =>
+            iterations > 1 ? `${code} (${index + 1})` : code
+          )
+      })
+      .valueOf()
+  }
+
   public clearSearchQuery(): void {
     this.searchForm.patchValue({
       query: ''
@@ -298,11 +304,19 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     switch (reportType) {
       case 'superbill':
         return this.downloadSuperbillReport()
-      case 'monitoring':
-        return this.downloadMonitoringReport()
       case 'billing':
         return this.downloadBillingReport()
     }
+  }
+
+  public async onOpenMonitoringReportDialog() {
+    this.dialog
+      .open(MonitoringReportDialog, {
+        disableClose: true
+      })
+      .afterClosed()
+      .pipe(filter((serviceType) => serviceType))
+      .subscribe((serviceType) => this.onDownloadMonitoringReport(serviceType))
   }
 
   public onServiceTypeChange(event: string): void {
@@ -434,109 +448,88 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
     })
   }
 
-  private async downloadMonitoringReport(): Promise<void> {
-    try {
-      this.isLoading = true
-      const criteria = this.source.args
-      const rawResponse =
-        await this.database.fetchCareManagementBillingSnapshot({
-          ...criteria,
-          limit: 'all',
-          offset: 0
-        })
+  private getMonitoringReportHeaders(
+    serviceTypes: CareManagementServiceType[],
+    entries: RPMStateSummaryEntry[]
+  ) {
+    const currentAsOf = moment(this.criteria.asOf).isSameOrAfter(
+      moment(),
+      'day'
+    )
+      ? moment()
+      : moment(this.criteria.asOf).endOf('day')
 
-      const allBillings = this.careManagementService.billingCodes
-        .filter((code) => code.serviceType.id === this.selectedServiceTypeId)
-        .map(
-          (key) =>
-            ({
-              code: key.value,
-              eligibility: {}
-            } as any)
+    const headers = ['ID', 'First Name', 'Last Name', 'Date of Birth']
+    const firstRow = [`As of: ${currentAsOf.format('MMM D, YYYY')}`, '', '', '']
+    const footerRow = [
+      `${currentAsOf.format('dddd, MMM D, YYYY HH:mm:ss A [GMT]Z')}`
+    ]
+    let secondRow = null
+
+    if (this.timezoneName) {
+      secondRow = [
+        `GENERATED IN ${this.timezoneName.toUpperCase()}`,
+        '',
+        '',
+        ''
+      ]
+    }
+
+    const dynamicHeaders = [
+      'Primary Diagnosis',
+      'Secondary Diagnosis',
+      'Supervising Provider',
+      'Organization ID',
+      'Organization Name',
+      'Status',
+      'Activation Date',
+      'Billing Type',
+      'Monitoring Type'
+    ]
+
+    for (const serviceType of serviceTypes) {
+      if (
+        this.careManagementService.serviceTypeMap[serviceType.id]?.deviceSetup
+      ) {
+        headers.push(
+          serviceTypes.length > 1
+            ? `${serviceType.name} Device Type`
+            : 'Device Type'
         )
-
-      const res: RPMStateSummaryEntry[] = rawResponse.data.map(
-        (element) =>
-          new RPMStateSummaryEntry(
-            element,
-            allBillings,
-            this.careManagementService.trackableCptCodes[
-              this.selectedServiceTypeId
-            ],
-            this.criteria.asOf
-          )
-      )
-
-      if (!res.length) {
-        return this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
-      }
-      const filename = `${this.selectedServiceType.name}_${moment(
-        criteria.asOf
-      ).format('MMM_YYYY')}.csv`
-
-      const externalIdentifierNames = this.getExternalIdentifierNames(res)
-
-      const currentAsOf = moment(this.criteria.asOf).isSameOrAfter(
-        moment(),
-        'day'
-      )
-        ? moment()
-        : moment(this.criteria.asOf).endOf('day')
-
-      const firstRow = [`As of: ${currentAsOf.format('MMM D, YYYY')}`]
-      let secondRow = null
-
-      if (this.timezoneName) {
-        secondRow = [`GENERATED IN ${this.timezoneName.toUpperCase()}`]
-      }
-
-      const footerRow = [
-        `${currentAsOf.format('dddd, MMM D, YYYY HH:mm:ss A [GMT]Z')}`
-      ]
-
-      const headers = [
-        'ID',
-        'First Name',
-        'Last Name',
-        'Date of Birth',
-        'Device Type',
-        'Primary Diagnosis',
-        'Secondary Diagnosis',
-        'Supervising Provider',
-        'Organization ID',
-        'Organization Name',
-        'Status',
-        'Activation Date',
-        'Billing Type',
-        'Monitoring Type'
-      ]
-
-      headers.forEach((value, index) => {
-        if (!firstRow[index]) {
-          firstRow.push('')
-        }
-
-        if (secondRow && !secondRow[index]) {
-          secondRow.push('')
-        }
-
-        if (!footerRow[index]) {
-          return
-        }
-      })
-
-      this.cptCodes.forEach((billingCode, index) => {
-        firstRow.push(billingCode)
-        firstRow.push(billingCode)
+        firstRow.push('')
 
         if (secondRow) {
           secondRow.push('')
+        }
+      }
+
+      for (const header of dynamicHeaders) {
+        headers.push(
+          serviceTypes.length > 1 ? `${serviceType.name} ${header}` : header
+        )
+        firstRow.push('')
+
+        if (secondRow) {
           secondRow.push('')
         }
+      }
 
+      const cptCodes = this.getCptCodes(serviceType.id)
+
+      for (const billingCode of cptCodes) {
+        firstRow.push(billingCode)
+        secondRow?.push('')
         headers.push('Latest Claim Date')
-        headers.push('Next Claim Requirements')
-      })
+
+        if (serviceTypes.length === 1) {
+          firstRow.push(billingCode)
+          secondRow?.push('')
+          headers.push('Next Claim Requirements')
+        }
+      }
+    }
+    if (serviceTypes.length === 1) {
+      const externalIdentifierNames = this.getExternalIdentifierNames(entries)
 
       this.addExternalIdentifierHeaders(
         externalIdentifierNames,
@@ -544,60 +537,189 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
         firstRow,
         secondRow
       )
+    }
 
-      const dataRows = res.map((entry) => {
-        const row = [
-          entry.account.id,
-          entry.account.firstName,
-          entry.account.lastName,
-          moment(entry.account.dateOfBirth).format('MM/DD/YYYY'),
-          entry.device.name,
-          (entry.state?.isActive && entry.state?.diagnosis?.primary) || '',
-          (entry.state?.isActive && entry.state?.diagnosis?.secondary) || '',
-          entry.state?.isActive && entry.state?.supervisingProvider
-            ? `${entry.state?.supervisingProvider.firstName} ${entry.state?.supervisingProvider.lastName}`
-            : '',
-          entry.organization.id,
-          entry.organization.name,
-          entry.state?.isActive ? 'Active' : 'Inactive',
-          entry.state?.isActive
-            ? moment(entry.state.startedAt).format('MM/DD/YYYY')
-            : 'No',
-          entry.state?.preference?.billing
-            ? startCase(entry.state?.preference?.billing)
-            : 'N/A',
-          entry.state?.preference?.monitoring
-            ? startCase(entry.state?.preference?.monitoring)
-            : 'N/A'
-        ]
+    return {
+      headers,
+      firstRow,
+      secondRow,
+      footerRow
+    }
+  }
 
-        this.cptCodes.forEach((code, index) => {
-          const billingEntry = entry.billing.find(
-            (billing) => billing.code === code
+  private async downloadMonitoringReport(
+    serviceTypeId: string | 'all',
+    page: number
+  ) {
+    const criteria = this.source.args
+    const rawResponse = await this.database.fetchCareManagementBillingSnapshot({
+      ...criteria,
+      serviceType: serviceTypeId === 'all' ? undefined : serviceTypeId,
+      limit: this.monitoringReportLimit,
+      offset: (page - 1) * this.monitoringReportLimit
+    })
+
+    const serviceTypes =
+      serviceTypeId === 'all'
+        ? this.careManagementService.serviceTypes
+        : this.careManagementService.serviceTypes.filter(
+            (entry) => entry.id === serviceTypeId
           )
-          if (billingEntry) {
-            this.getRPMBillingEntryContent(billingEntry, entry, row)
-          } else {
-            row.push('N/A')
-            row.push('N/A')
-          }
-        })
+    const availableServiceTypeIds = serviceTypes.map(
+      (serviceType) => serviceType.id
+    )
+    const res: RPMStateSummaryEntry[] = rawResponse.data
+      .filter((entry) =>
+        availableServiceTypeIds.includes(entry.state.serviceType.id)
+      )
+      .map((entry) => {
+        const allBillings = this.careManagementService.billingCodes
+          .filter((code) => code.serviceType.id === entry.state.serviceType.id)
+          .map(
+            (key) =>
+              ({
+                code: key.value,
+                eligibility: {}
+              } as any)
+          )
 
-        this.addExternalIdentifierValues(
-          externalIdentifierNames,
-          entry.externalIdentifiers,
-          row
+        return new RPMStateSummaryEntry(
+          entry,
+          allBillings,
+          this.careManagementService.trackableCptCodes[
+            entry.state.serviceType.id
+          ],
+          this.criteria.asOf
         )
-
-        return row
       })
 
-      const csv = Papa.unparse(
-        [firstRow, secondRow, headers, ...dataRows, [''], footerRow],
-        { header: false }
-      )
+    if (!res.length) {
+      this.notifier.error(_('NOTIFY.ERROR.NOTHING_TO_EXPORT'))
+      return true
+    }
 
-      CSV.toFile({ content: csv, filename })
+    const selectedServiceType =
+      this.careManagementService.serviceTypeMap[serviceTypeId]?.serviceType
+
+    const filename = `${
+      selectedServiceType ? selectedServiceType.name : 'Monitoring_Report'
+    }_${moment(criteria.asOf).format('MMM_YYYY')}_${page}`
+
+    const isMultipleServiceType = serviceTypes.length > 1
+    const externalIdentifierNames = this.getExternalIdentifierNames(res)
+    const { firstRow, secondRow, headers, footerRow } =
+      this.getMonitoringReportHeaders(serviceTypes, res)
+    const data = groupBy(res, (entry) => entry.account.id)
+
+    const dataRows = Object.entries(data).map(([id, entries]) => {
+      const firstEntry = entries[0]
+      const row = [
+        firstEntry.id,
+        firstEntry.account.firstName,
+        firstEntry.account.lastName,
+        moment(firstEntry.account.dateOfBirth).format('MM/DD/YYYY')
+      ]
+
+      for (const serviceType of serviceTypes) {
+        const entry = entries.find(
+          (item) => item.state.serviceType.id === serviceType.id
+        )
+        const cptCodes = this.getCptCodes(serviceType.id)
+
+        if (
+          this.careManagementService.serviceTypeMap[serviceType.id]?.deviceSetup
+        ) {
+          row.push(entry?.device?.name || '')
+        }
+
+        row.push(
+          (entry?.state?.isActive && entry?.state?.diagnosis?.primary) || ''
+        )
+        row.push(
+          (entry?.state?.isActive && entry?.state?.diagnosis?.secondary) || ''
+        )
+        row.push(
+          entry?.state?.isActive && entry?.state?.supervisingProvider
+            ? `${entry.state?.supervisingProvider.firstName} ${entry.state?.supervisingProvider.lastName}`
+            : ''
+        )
+        row.push(entry?.organization?.id || '')
+        row.push(entry?.organization?.name || '')
+        row.push(entry ? (entry.state?.isActive ? 'Active' : 'Inactive') : '')
+        row.push(
+          entry
+            ? entry.state?.isActive
+              ? moment(entry.state.startedAt).format('MM/DD/YYYY')
+              : 'No'
+            : ''
+        )
+        row.push(entry ? startCase(entry.state?.preference?.billing) : '')
+        row.push(entry ? startCase(entry?.state?.preference?.monitoring) : '')
+
+        for (const code of cptCodes) {
+          const billingEntry = entry?.billing.find(
+            (billing) => billing.code === code
+          )
+
+          if (billingEntry) {
+            this.getRPMBillingEntryContent(
+              billingEntry,
+              entry,
+              row,
+              isMultipleServiceType
+            )
+          } else {
+            row.push(entry ? 'N/A' : '')
+
+            if (!isMultipleServiceType) {
+              row.push(entry ? 'N/A' : '')
+            }
+          }
+        }
+
+        if (!isMultipleServiceType && entry) {
+          this.addExternalIdentifierValues(
+            externalIdentifierNames,
+            entry.externalIdentifiers,
+            row
+          )
+        }
+      }
+
+      return row
+    })
+
+    const csv = Papa.unparse(
+      [firstRow, secondRow, headers, ...dataRows, [''], footerRow],
+      { header: false }
+    )
+
+    CSV.toFile({ content: csv, filename })
+
+    return (
+      page * this.monitoringReportLimit >= rawResponse.pagination.totalCount
+    )
+  }
+
+  private async onDownloadMonitoringReport(
+    serviceTypeId: string | 'all'
+  ): Promise<void> {
+    try {
+      this.isLoading = true
+      let page = 1
+
+      while (true) {
+        const completed = await this.downloadMonitoringReport(
+          serviceTypeId,
+          page
+        )
+
+        page += 1
+
+        if (completed) {
+          break
+        }
+      }
     } catch (error) {
       this.notifier.error(error)
     } finally {
@@ -991,13 +1113,18 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   private getRPMBillingEntryContent(
     billingEntry: RPMStateSummaryBilling,
     entry: RPMStateSummaryEntry,
-    row: string[]
+    row: string[],
+    isMultipleServiceType = false
   ): string {
     row.push(
       billingEntry.eligibility.last
         ? moment(billingEntry.eligibility.last.timestamp).format('MM/DD/YYYY')
         : 'N/A'
     )
+
+    if (isMultipleServiceType) {
+      return
+    }
 
     if (
       !billingEntry.eligibility.next ||
