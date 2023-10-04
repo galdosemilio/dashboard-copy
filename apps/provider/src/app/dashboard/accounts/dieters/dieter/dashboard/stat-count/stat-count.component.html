@@ -1,0 +1,51 @@
+<div class="stats-big" fxLayout="column" fxLayoutAlign="space-between">
+  <div class="metric-heading" fxLayoutAlign="center center">
+    <span>{{ title }}</span>
+  </div>
+
+  <ng-container *ngIf="!record.recent; else stat">
+    <div class="metric-number" fxFlexAlign="center">
+      ---
+    </div>
+    <div class="metric-text">
+      {{ 'STATS.NO_RECENT_DATA' | translate }}
+    </div>
+  </ng-container>
+
+  <ng-template #stat>
+    <div fxLayoutAlign="center center" *ngIf="record.isLoading">
+      <mat-spinner [diameter]="28" [strokeWidth]="2"></mat-spinner>
+    </div>
+    <div class="metric-number">
+      {{ record.recent }} {{ record.unit }}
+    </div>
+
+    <div class="metric-text" *ngIf="!record.isLoading">
+      <div *ngIf="record.average">
+        {{ 'STATS.MONTHLY_AVERAGE' | translate }}:
+        {{ record.average }}
+        <ng-container *ngIf="record.average">
+          <span class="percent-container">{{ record.unit }}</span>
+        </ng-container>
+      </div>
+      <div *ngIf="record.max">
+        {{ 'STATS.MONTHLY_MAX' | translate }}:
+        {{ record.max }}
+        <ng-container *ngIf="record.max">
+          <span class="percent-container">{{ record.unit }}</span>
+        </ng-container>
+      </div>
+      <div *ngIf="record.min">
+        {{ 'STATS.MONTHLY_MIN' | translate }}:
+        {{ record.min }}
+        <ng-container *ngIf="record.min">
+          <span class="percent-container">{{ record.unit }}</span>
+        </ng-container>
+      </div>
+      <div *ngIf="record.count">
+        {{ 'STATS.NUMBER_OF_READINGS' | translate }}:
+        {{ record.count }}
+      </div>
+    </div>
+  </ng-template>
+</div>

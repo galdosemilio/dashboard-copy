@@ -1,46 +1,96 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
-import { MatSelect, MatSelectChange } from '@coachcare/material'
-import { DieterDashboardSummary } from '@coachcare/sdk'
-import { ContextService } from '@app/service'
-import { _ } from '@app/shared'
+import { Component, OnInit } from '@angular/core'
+import { ContextService, EventsService } from '@app/service'
+import { ReportsDatabase } from '@app/dashboard/reports/services'
+import { DataPointTypes } from '@coachcare/sdk'
+
+const serviceType = {
+  RPM: '1',
+  RTM: '3'
+}
+
+const deviceTypes = {
+  weight: DataPointTypes.WEIGHT,
+  bloodPressure: DataPointTypes.BLOOD_PRESSURE_SYSTOLIC,
+  glucometer: DataPointTypes.GLUCOSE,
+  pulseOximeter: DataPointTypes.BLOOD_OXYGEN_LEVEL
+}
 
 @Component({
   selector: 'app-default-dieter-summary-boxes',
   templateUrl: './default-summary-boxes.component.html'
 })
 export class DefaultDieterSummaryBoxesComponent implements OnInit {
-  public activityLevels = [
-    { value: -1, viewValue: _('SELECTOR.LEVEL.NONE') },
-    { value: 0, viewValue: _('SELECTOR.LEVEL.SEDENTARY') },
-    { value: 2, viewValue: _('SELECTOR.LEVEL.LOW') },
-    { value: 4, viewValue: _('SELECTOR.LEVEL.MEDIUM') },
-    { value: 7, viewValue: _('SELECTOR.LEVEL.HIGH') },
-    { value: 10, viewValue: _('SELECTOR.LEVEL.INTENSE') }
-  ]
-
+  public summaryBoxDeviceType = ''
   public zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360018829432-Viewing-the-Patient-Dashboard'
 
-  @ViewChild(MatSelect, { static: false })
-  activitySelector: MatSelect
-
   constructor(
-    public data: DieterDashboardSummary,
-    private context: ContextService
+    private context: ContextService,
+    private database: ReportsDatabase,
+    private bus: EventsService
   ) {}
 
-  public ngOnInit(): void {
-    // default level is low
-    void this.data.init(this.context.accountId)
+  public async ngOnInit(): Promise<void> {
+    await this.resolveRPMBillingStatus()
   }
 
-  public setupActivityLevel(): void {
-    if (this.data.haveBMRData) {
-      this.activitySelector.open()
+  private async resolveRPMBillingStatus() {
+    try {
+      let response = await this.fetchCareManagementBillingSnapshot(
+        serviceType.RPM
+      )
+
+      if (!response.data.length) {
+        response = await this.fetchCareManagementBillingSnapshot(
+          serviceType.RTM
+        )
+      }
+
+      if (!response.data.length) {
+        this.setSummaryBoxDeviceType('weight')
+        return
+      }
+
+      const rpmBillingReportEntry = response.data.shift()
+
+      switch (rpmBillingReportEntry?.state?.plan?.id?.toString()) {
+        case '1':
+          this.setSummaryBoxDeviceType('weight')
+          break
+        case '2':
+          this.setSummaryBoxDeviceType('bloodPressure')
+          break
+        case '3':
+          this.setSummaryBoxDeviceType('glucometer')
+          break
+        case '4':
+          this.setSummaryBoxDeviceType('pulseOximeter')
+          break
+        default:
+          this.setSummaryBoxDeviceType('weight')
+          break
+      }
+    } catch (error) {
+      this.setSummaryBoxDeviceType('weight')
     }
   }
 
-  public selectActivityLevel(event: MatSelectChange): void {
-    this.data.update(event.value === -1 ? null : event.value)
+  private setSummaryBoxDeviceType(deviceType: string) {
+    this.summaryBoxDeviceType = deviceType
+    this.bus.trigger(
+      'summary-boxes.device-type.change',
+      deviceTypes[deviceType]
+    )
+  }
+
+  private async fetchCareManagementBillingSnapshot(serviceType: string) {
+    return this.database.fetchCareManagementBillingSnapshot({
+      account: this.context.accountId,
+      organization: this.context.organizationId,
+      limit: 1,
+      offset: 0,
+      status: 'all',
+      serviceType
+    })
   }
 }

@@ -1,2 +1,6 @@
 export * from './default'
 export * from './nxtstim'
+export * from './weight'
+export * from './glucose'
+export * from './blood-pressure'
+export * from './oximeter'

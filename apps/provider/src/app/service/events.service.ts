@@ -21,6 +21,7 @@ export type CcrEventType =
   | 'user.data'
   | 'videoconferencing.ratingWindow.setState'
   | 'reports.controls'
+  | 'summary-boxes.device-type.change'
 
 export type CcrEvent = {
   name: CcrEventType

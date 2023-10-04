@@ -1,0 +1,20 @@
+<div fxLayout="row" fxLayoutGap="1%">
+  <div fxLayout="row" fxLayoutGap="1%">
+    <ccr-stat-count fxFlex="1 0 250px"
+      title="{{ 'STATS.DIASTOLIC' | translate }}"
+      [record]="diastolic"
+    ></ccr-stat-count>
+  </div>
+  <div fxLayout="row" fxLayoutGap="1%">
+    <ccr-stat-count fxFlex="1 0 250px"
+      title="{{ 'STATS.SYSTOLIC' | translate }}"
+      [record]="systolic"
+    ></ccr-stat-count>
+  </div>
+  <div fxLayout="row" fxLayoutGap="1%">
+    <ccr-stat-count fxFlex="1 0 250px"
+      title="{{ 'STATS.HEART_RATE' | translate }}"
+      [record]="heartRate"
+    ></ccr-stat-count>
+  </div>
+</div>

@@ -1,74 +1,10 @@
 <p class="ccr-hint lowercase">
   {{ 'GLOBAL.ABOUT' | translate }} {{ 'GLOBAL.PATIENT' | translate }} {{ 'GLOBAL.DASHBOARD' | translate }}
   <ccr-help-link [link]="zendeskLink"></ccr-help-link>
+  <span data-cy="summary-box-device-type" [attr.data-value]='summaryBoxDeviceType'></span>
 </p>
 
-<div fxLayout="row" fxLayoutGap="1%">
-  <ccr-stat-diff fxFlex="1 0 100px"
-    title="{{ 'STATS.WEIGHT_CHANGE' | translate }} ({{ 'composition' | unitLabel | translate }})"
-    [starting]="data.starting.weight | unitConversion: 'composition'"
-    [startingTimestamp]="data.timestamp.starting.weight"
-    [current]="data.current.weight | unitConversion: 'composition'"
-    [currentTimestamp]="data.timestamp.current.weight"
-  ></ccr-stat-diff>
-
-  <ccr-stat-diff fxFlex="1 0 100px"
-    title="{{ 'STATS.BODYFAT_CHANGE' | translate }} ({{ 'composition' | unitLabel | translate }})"
-    [starting]="data.starting.bodyFat | unitConversion: 'composition'"
-    [startingTimestamp]="data.timestamp.starting.bodyFat"
-    [current]="data.current.bodyFat | unitConversion: 'composition'"
-    [currentPercent]="data.current.bodyFatPercentage"
-    [currentTimestamp]="data.timestamp.current.bodyFat"
-    [startingPercent]="data.starting.bodyFatPercentage"
-  ></ccr-stat-diff>
-
-  <ccr-stat-diff fxFlex="1 0 100px"
-    title="{{ 'STATS.LEANMASS_CHANGE' | translate }} ({{ 'composition' | unitLabel | translate }})"
-    [starting]="data.starting.leanMass | unitConversion: 'composition'"
-    [startingTimestamp]="data.timestamp.starting.leanMass"
-    [current]="data.current.leanMass | unitConversion: 'composition'"
-    [currentPercent]="data.current.leanMassPercentage"
-    [currentTimestamp]="data.timestamp.current.leanMass"
-    [startingPercent]="data.starting.leanMassPercentage"
-  ></ccr-stat-diff>
-
-  <ccr-stat-diff fxFlex="1 0 100px"
-    title="{{ 'STATS.WATERMASS_CHANGE' | translate }} ({{ 'composition' | unitLabel | translate }})"
-    [starting]="data.starting.waterMass | unitConversion: 'composition'"
-    [startingTimestamp]="data.timestamp.starting.waterMass"
-    [current]="data.current.waterMass | unitConversion: 'composition'"
-    [currentPercent]="data.current.waterMassPercentage"
-    [currentTimestamp]="data.timestamp.current.waterMass"
-    [startingPercent]="data.starting.waterMassPercentage"
-  ></ccr-stat-diff>
-
-  <ccr-stat-diff fxFlex="1 0 100px"
-    title="{{ 'STATS.BMI_CHANGE' | translate }}"
-    [starting]="data.starting.BMI"
-    [startingTimestamp]="data.timestamp.starting.BMI"
-    [current]="data.current.BMI"
-    [currentTimestamp]="data.timestamp.current.BMI"
-  ></ccr-stat-diff>
-
-  <ccr-stat-single fxFlex="1 0 100px" (edit)="setupActivityLevel()"
-    [isLoading]="data.isBMRLoading"
-    [isEditable]="data.haveBMRData"
-    title="{{ 'MEASUREMENT.BMR' | translate }}"
-    [value]="data.BMR">
-
-    <div *ngIf="!data.haveBMRData">
-      {{ 'STATS.NO_MEASUREMENTS' | translate }}
-    </div>
-    <div *ngIf="data.haveBMRData">
-      {{ 'STATS.ACTIVITY_LEVEL' | translate }}
-      <br />
-      <mat-form-field>
-        <mat-select #activity="matSelect" [ngModel]="data.activityLevel" (selectionChange)="selectActivityLevel($event)">
-          <mat-option class="ccr-align-center" *ngFor="let activityLevel of activityLevels" [value]="activityLevel.value">
-            {{ activityLevel.viewValue | translate }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </ccr-stat-single>
-</div>
+<app-weight-dieter-summary-boxes *ngIf="summaryBoxDeviceType === 'weight'"></app-weight-dieter-summary-boxes>
+<app-glucose-dieter-summary-boxes *ngIf="summaryBoxDeviceType === 'glucometer'"></app-glucose-dieter-summary-boxes>
+<app-blood-pressure-dieter-summary-boxes *ngIf="summaryBoxDeviceType === 'bloodPressure'"></app-blood-pressure-dieter-summary-boxes>
+<app-oximeter-dieter-summary-boxes *ngIf="summaryBoxDeviceType === 'pulseOximeter'"></app-oximeter-dieter-summary-boxes>

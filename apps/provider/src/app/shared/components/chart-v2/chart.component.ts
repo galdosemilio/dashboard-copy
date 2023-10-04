@@ -10,6 +10,7 @@ import {
 import {
   ConfigService,
   ContextService,
+  EventsService,
   MeasurementChartDataSource,
   MeasurementDatabaseV2,
   MeasurementTimeframe
@@ -76,7 +77,7 @@ export class CcrMeasurementChartV2Component implements OnInit {
   }
 
   @Input()
-  timeframe: MeasurementTimeframe = 'week'
+  timeframe: MeasurementTimeframe = 'month'
 
   @Output()
   onChange = new EventEmitter<{ timeframe: string }>()
@@ -119,12 +120,17 @@ export class CcrMeasurementChartV2Component implements OnInit {
     private context: ContextService,
     private database: MeasurementDatabaseV2,
     private store: Store<AppState>,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private bus: EventsService
   ) {
     this.resolveTypes = this.resolveTypes.bind(this)
   }
 
   public ngOnInit(): void {
+    this.bus.register('summary-boxes.device-type.change', (deviceType) => {
+      this.source.type = deviceType
+      this.refresh()
+    })
     this.dates = this.dates ?? {
       current: moment().startOf('day').toISOString(),
       endDate: moment().endOf('week').toISOString(),

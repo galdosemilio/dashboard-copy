@@ -1,0 +1,319 @@
+{
+  "data": [
+    {
+      "type": {
+        "id": "5",
+        "name": "Blood pressure - diastolic",
+        "multiplier": 1,
+        "unit": {
+          "symbol": "mmHg",
+          "display": "mmHg"
+        }
+      },
+      "count": 1,
+      "average": "80",
+      "minimum": 80,
+      "maximum": 80,
+      "first": {
+        "id": "4303811",
+        "type": {
+          "id": "5",
+          "name": "Blood pressure - diastolic",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "mmHg",
+            "display": "mmHg"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-10-05T01:04:40.140918+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-10-04T20:04:40.140918"
+        },
+        "value": 80,
+        "group": {
+          "id": "105580",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:36.939+00:00",
+            "local": "2023-10-04T20:04:36.939"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:40.140918+00:00",
+            "local": "2023-10-04T20:04:40.140918"
+          },
+          "account": {
+            "id": "9505"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "last": {
+        "id": "4303811",
+        "type": {
+          "id": "5",
+          "name": "Blood pressure - diastolic",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "mmHg",
+            "display": "mmHg"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-10-05T01:04:40.140918+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-10-04T20:04:40.140918"
+        },
+        "value": 80,
+        "group": {
+          "id": "105580",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:36.939+00:00",
+            "local": "2023-10-04T20:04:36.939"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:40.140918+00:00",
+            "local": "2023-10-04T20:04:40.140918"
+          },
+          "account": {
+            "id": "9505"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "change": {
+        "value": 0,
+        "percentage": 0
+      }
+    },
+    {
+      "type": {
+        "id": "6",
+        "name": "Blood pressure - systolic",
+        "multiplier": 1,
+        "unit": {
+          "symbol": "mmHg",
+          "display": "mmHg"
+        }
+      },
+      "count": 1,
+      "average": "120",
+      "minimum": 120,
+      "maximum": 120,
+      "first": {
+        "id": "4303810",
+        "type": {
+          "id": "6",
+          "name": "Blood pressure - systolic",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "mmHg",
+            "display": "mmHg"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-10-05T01:04:40.140918+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-10-04T20:04:40.140918"
+        },
+        "value": 120,
+        "group": {
+          "id": "105580",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:36.939+00:00",
+            "local": "2023-10-04T20:04:36.939"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:40.140918+00:00",
+            "local": "2023-10-04T20:04:40.140918"
+          },
+          "account": {
+            "id": "9505"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "last": {
+        "id": "4303810",
+        "type": {
+          "id": "6",
+          "name": "Blood pressure - systolic",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "mmHg",
+            "display": "mmHg"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-10-05T01:04:40.140918+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-10-04T20:04:40.140918"
+        },
+        "value": 120,
+        "group": {
+          "id": "105580",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:36.939+00:00",
+            "local": "2023-10-04T20:04:36.939"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:40.140918+00:00",
+            "local": "2023-10-04T20:04:40.140918"
+          },
+          "account": {
+            "id": "9505"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "change": {
+        "value": 0,
+        "percentage": 0
+      }
+    },
+    {
+      "type": {
+        "id": "7",
+        "name": "Heart rate",
+        "multiplier": 1,
+        "unit": {
+          "symbol": "bpm",
+          "display": "bpm"
+        }
+      },
+      "count": 1,
+      "average": "100",
+      "minimum": 100,
+      "maximum": 100,
+      "first": {
+        "id": "4303812",
+        "type": {
+          "id": "7",
+          "name": "Heart rate",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "bpm",
+            "display": "bpm"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-10-05T01:04:40.140918+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-10-04T20:04:40.140918"
+        },
+        "value": 100,
+        "group": {
+          "id": "105580",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:36.939+00:00",
+            "local": "2023-10-04T20:04:36.939"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:40.140918+00:00",
+            "local": "2023-10-04T20:04:40.140918"
+          },
+          "account": {
+            "id": "9505"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "last": {
+        "id": "4303812",
+        "type": {
+          "id": "7",
+          "name": "Heart rate",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "bpm",
+            "display": "bpm"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-10-05T01:04:40.140918+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-10-04T20:04:40.140918"
+        },
+        "value": 100,
+        "group": {
+          "id": "105580",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:36.939+00:00",
+            "local": "2023-10-04T20:04:36.939"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-10-05T01:04:40.140918+00:00",
+            "local": "2023-10-04T20:04:40.140918"
+          },
+          "account": {
+            "id": "9505"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "change": {
+        "value": 0,
+        "percentage": 0
+      }
+    }
+  ]
+}
