@@ -45,7 +45,6 @@ import {
 import { criteriaSelector, ReportsState } from '../../store'
 import { RPMStateSummaryBilling, RPMStateSummaryEntry } from '../models'
 import {
-  STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
   STORAGE_PAGE_SIZE_RPM_BILLING,
   STORAGE_PRM_BILLING_FILTER,
   STORAGE_RPM_BILLING_COLUMN_INDEX,
@@ -123,7 +122,7 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   private storageFilter: StorageFilter
   public supervisingProviders: SelectOption<number>[] = []
   public selectedSupervisingProvider: SelectOption<number>
-  public selectedServiceTypeId: string = this.getServiceTypeFromStorage()
+  public selectedServiceTypeId: string
   public selectedServiceType: CareManagementServiceType
 
   private timezones: Array<TimezoneResponse> = this.timezone.fetch()
@@ -773,26 +772,6 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
 
   public openPatientInNewTab(patientId: string): void {
     window.open(`./accounts/patients/${patientId}`, '_blank')
-  }
-
-  private getServiceTypeFromStorage(): string {
-    try {
-      const serviceType = window.localStorage.getItem(
-        STORAGE_CARE_MANAGEMENT_SERVICE_TYPE
-      )
-      if (!serviceType) {
-        throw new Error('No service type in storage')
-      }
-
-      this.selectedServiceTypeId = serviceType
-      this.selectedServiceType =
-        this.context.user.careManagementServiceTypes.find(
-          (entry) => entry.id === serviceType
-        )
-      return serviceType
-    } catch (error) {
-      console.error(error)
-    }
   }
 
   private async resolvePackages(clinic: OrganizationEntity) {

@@ -22,7 +22,7 @@ export class ReportsServiceTypeSelectorComponent {
   private refresh$ = new Subject<void>()
   public serviceTypes: CareManagementServiceType[] = []
   public isLoading = false
-  public selectedServiceType: string = this.getServiceTypeFromStorage()
+  public selectedServiceType: string
 
   @Output() public serviceTypeChange = new EventEmitter<string>()
 
@@ -57,9 +57,13 @@ export class ReportsServiceTypeSelectorComponent {
       this.serviceTypes = this.context.user.careManagementServiceTypes
       const selectedServiceTypeFromStorage = this.getServiceTypeFromStorage()
 
-      if (selectedServiceTypeFromStorage) {
-        this.selectedServiceType = selectedServiceTypeFromStorage
-        this.serviceTypeChange.emit(selectedServiceTypeFromStorage)
+      const selectedServiceType = this.serviceTypes.find(
+        (serviceType) => serviceType.id === selectedServiceTypeFromStorage
+      )
+
+      if (selectedServiceType) {
+        this.selectedServiceType = selectedServiceType.id
+        this.serviceTypeChange.emit(selectedServiceType.id)
         return
       }
 
