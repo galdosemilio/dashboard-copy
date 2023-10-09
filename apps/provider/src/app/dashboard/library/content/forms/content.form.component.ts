@@ -178,6 +178,8 @@ export class ContentFormComponent implements BindForm, OnInit {
   }
 
   openPackageDialog(): void {
+    const availability = this.form.value.availability
+
     this.dialog
       .open(PackageSelectDialog, {
         autoFocus: false,
@@ -202,7 +204,7 @@ export class ContentFormComponent implements BindForm, OnInit {
         } else {
           const formPackages: Package[] = this.form.value.packages
           if (!formPackages || !formPackages.length) {
-            this.form.patchValue({ availability: '' })
+            this.form.patchValue({ availability })
           }
         }
 
@@ -243,7 +245,6 @@ export class ContentFormComponent implements BindForm, OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((values: any) => {
         const patchValue: any = {}
-        let isChangedAvailability = false
 
         if (values.availability !== this.current.availability) {
           switch (values.availability) {
@@ -258,10 +259,6 @@ export class ContentFormComponent implements BindForm, OnInit {
             case 2:
               patchValue.isPublic = false
               break
-          }
-
-          if (this.current.availability) {
-            isChangedAvailability = true
           }
 
           this.current.availability = values.availability
@@ -285,10 +282,6 @@ export class ContentFormComponent implements BindForm, OnInit {
 
         if (Object.keys(patchValue).length) {
           this.form.patchValue(patchValue)
-        }
-
-        if (isChangedAvailability && this.current.availability === 2) {
-          this.openPackageDialog()
         }
       })
   }

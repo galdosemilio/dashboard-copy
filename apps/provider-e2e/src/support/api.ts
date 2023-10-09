@@ -578,6 +578,10 @@ const interceptCoreApiCalls = (
     body: { id: '1' }
   }).as('formSubmit')
 
+  cy.intercept('GET', '/1.0/content/*/package', {
+    fixture: fetchOverride('/1.0/content/*/package', 'api/general/emptyData')
+  })
+
   cy.intercept('POST', '/2.0/organization', {
     statusCode: 201,
     body: { id: '1' }
@@ -656,7 +660,12 @@ const interceptCoreApiCalls = (
   cy.intercept('PATCH', '/1.0/content/*', {
     statusCode: 204,
     body: {}
-  })
+  }).as('updateContentRequest')
+
+  cy.intercept('PUT', '/1.0/content/*/package/*', {
+    statusCode: 204,
+    body: {}
+  }).as('updateContentPackageRequest')
 
   cy.intercept('GET', '/1.0/content/vault?**', {
     fixture: 'api/filevault/file-vault-contents'

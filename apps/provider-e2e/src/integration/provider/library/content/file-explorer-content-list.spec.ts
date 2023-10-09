@@ -327,4 +327,90 @@ describe('Dashboard -> Digital Library', function () {
 
     cy.url().should('contain', '/library/forms/10161')
   })
+
+  describe('Edit Content', () => {
+    it('Should update to private', () =>
+      editContentTest({
+        index: 0,
+        selector: 'Private',
+        isPublic: false
+      }))
+
+    it('Should update to public', () =>
+      editContentTest({
+        index: 4,
+        selector: 'Public',
+        isPublic: true
+      }))
+
+    it('Should update to by phase', () =>
+      editContentTest({
+        index: 0,
+        selector: 'By Phase',
+        isPublic: false
+      }))
+  })
 })
+
+function editContentTest({
+  index,
+  selector,
+  isPublic
+}: {
+  index: number
+  selector: 'Public' | 'Private' | 'By Phase'
+  isPublic: boolean
+}) {
+  cy.setTimezone('et')
+  standardSetup()
+
+  cy.visit(`/library/content`)
+
+  cy.get('.ccr-edit-table').find('mat-row').as('contentRows')
+  cy.get('@contentRows')
+    .eq(index)
+    .find('mat-icon[data-mat-icon-name="fa-edit"]')
+    .click()
+  cy.tick(1000)
+
+  cy.get('mat-dialog-container')
+    .get('mat-radio-group')
+    .find('mat-radio-button')
+    .contains(selector)
+    .click()
+
+  if (selector === 'By Phase') {
+    cy.get('mat-dialog-container')
+      .find('app-content-package-table')
+      .find('mat-table')
+      .find('mat-row')
+      .eq(0)
+      .find('mat-cell')
+      .eq(0)
+      .click()
+
+    cy.get('app-content-package-select-dialog')
+      .find('button')
+      .contains('Save')
+      .click()
+    cy.tick(1000)
+  }
+
+  cy.get('mat-dialog-container')
+    .get('mat-dialog-actions')
+    .find('button')
+    .contains('Save')
+    .click()
+
+  cy.tick(1000)
+
+  cy.wait('@updateContentRequest').should((xhr) => {
+    expect(xhr.request.body.isPublic).to.equal(isPublic)
+  })
+
+  if (selector === 'By Phase') {
+    cy.wait('@updateContentPackageRequest').should((xhr) => {
+      expect(xhr.response.statusCode).to.equal(204)
+    })
+  }
+}
