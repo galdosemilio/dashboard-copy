@@ -4,8 +4,7 @@ import { _ } from '@app/shared'
 
 @Component({
   selector: 'app-patient-stats',
-  templateUrl: './patient-stats.component.html',
-  styleUrls: ['./patient-stats.component.scss']
+  templateUrl: './patient-stats.component.html'
 })
 export class PatientStatsComponent implements AfterViewInit {
   demographicType

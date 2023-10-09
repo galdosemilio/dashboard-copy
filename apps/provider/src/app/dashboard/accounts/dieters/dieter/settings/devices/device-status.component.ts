@@ -7,8 +7,7 @@ import { ContextService, NotifierService } from '@app/service'
 
 @Component({
   selector: 'app-device-status',
-  templateUrl: './device-status.component.html',
-  styleUrls: ['./device-status.component.scss']
+  templateUrl: './device-status.component.html'
 })
 export class DeviceStatusComponent implements OnInit {
   source: DevicesDataSource

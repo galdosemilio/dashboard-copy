@@ -27,8 +27,7 @@ import { CSV } from '@coachcare/common/shared'
 @UntilDestroy()
 @Component({
   selector: 'app-statistics-sleep-table',
-  templateUrl: './sleep.component.html',
-  styleUrls: ['./sleep.component.scss']
+  templateUrl: './sleep.component.html'
 })
 export class SleepTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(CcrPaginatorComponent, { static: true })

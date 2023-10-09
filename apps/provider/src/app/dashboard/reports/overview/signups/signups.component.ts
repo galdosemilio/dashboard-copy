@@ -22,8 +22,7 @@ import { CSV } from '@coachcare/common/shared'
 @UntilDestroy()
 @Component({
   selector: 'app-reports-signups',
-  templateUrl: './signups.component.html',
-  styleUrls: ['./signups.component.scss']
+  templateUrl: './signups.component.html'
 })
 export class SignupsComponent implements OnInit, AfterViewInit, OnDestroy {
   source: SignupsReportsDataSource

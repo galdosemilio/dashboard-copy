@@ -37,8 +37,7 @@ export interface AccountFormProps {
 @UntilDestroy()
 @Component({
   selector: 'account-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  templateUrl: './form.component.html'
 })
 export class FormComponent implements OnInit, OnDestroy {
   _data = new BehaviorSubject<CurrentAccount>(null)

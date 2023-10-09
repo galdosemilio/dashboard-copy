@@ -24,8 +24,7 @@ import { _, TranslationsObject } from '@app/shared'
 @UntilDestroy()
 @Component({
   selector: 'app-statistics-patient-stats-age',
-  templateUrl: './age.component.html',
-  styleUrls: ['./age.component.scss']
+  templateUrl: './age.component.html'
 })
 export class AgeComponent implements OnInit, AfterViewInit, OnDestroy {
   // FIXME receive observable of the connect

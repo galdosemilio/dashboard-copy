@@ -16,7 +16,6 @@ import { ChartData } from '@app/shared'
 @Component({
   selector: 'app-statistics-age-chart',
   templateUrl: './age-chart.component.html',
-  styleUrls: ['./age-chart.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class AgeChartComponent implements OnDestroy, OnInit {

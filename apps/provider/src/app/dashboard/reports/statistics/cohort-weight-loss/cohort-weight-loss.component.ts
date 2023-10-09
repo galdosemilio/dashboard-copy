@@ -33,8 +33,7 @@ import { debounceTime } from 'rxjs/operators'
 @UntilDestroy()
 @Component({
   selector: 'app-cohort-weight-loss',
-  templateUrl: './cohort-weight-loss.component.html',
-  styleUrls: ['./cohort-weight-loss.component.scss']
+  templateUrl: './cohort-weight-loss.component.html'
 })
 export class CohortWeightLossComponent
   implements OnInit, AfterViewInit, OnDestroy

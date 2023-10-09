@@ -3,8 +3,7 @@ import { ExerciseDataSource } from '@app/dashboard/accounts/dieters/services'
 
 @Component({
   selector: 'app-dieter-journal-exercise-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  templateUrl: './table.component.html'
 })
 export class ExerciseTableComponent implements OnInit {
   @Input() columns = ['date', 'activity_type', 'intensity', 'duration', 'notes']

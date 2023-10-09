@@ -13,7 +13,6 @@ export interface FormCloneDialogData {
 @Component({
   selector: 'app-library-form-clone-dialog',
   templateUrl: './form-clone.dialog.html',
-  styleUrls: ['./form-clone.dialog.scss'],
   host: { class: 'ccr-dialog' }
 })
 export class FormCloneDialog implements OnInit {

@@ -20,7 +20,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 @Component({
   selector: 'app-reports-alerts',
   templateUrl: './alerts.component.html',
-  styleUrls: ['./alerts.component.scss'],
   providers: [AlertsDataSource]
 })
 export class AlertsComponent implements OnInit, OnDestroy {

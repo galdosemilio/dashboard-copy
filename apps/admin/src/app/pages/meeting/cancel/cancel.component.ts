@@ -13,7 +13,6 @@ export enum MeetingCancelStatus {
 @Component({
   selector: 'ccr-page-meeting-cancel',
   templateUrl: './cancel.component.html',
-  styleUrls: ['./cancel.component.scss'],
   host: {
     class: 'ccr-page-card'
   }

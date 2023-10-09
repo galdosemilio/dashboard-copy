@@ -19,8 +19,7 @@ import { AddMeetingRequest, MeetingAttendee } from '@coachcare/sdk'
 
 @Component({
   selector: 'app-set-unavailability',
-  templateUrl: './set-unavailability.component.html',
-  styleUrls: ['./set-unavailability.component.scss']
+  templateUrl: './set-unavailability.component.html'
 })
 export class SetAvailabilityComponent implements OnInit {
   form: FormGroup

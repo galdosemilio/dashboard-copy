@@ -25,7 +25,6 @@ import { ChartData } from '@app/shared'
 @Component({
   selector: 'app-statistics-sleep-chart',
   templateUrl: './sleep.component.html',
-  styleUrls: ['./sleep.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class SleepChartComponent implements OnInit, AfterViewInit, OnDestroy {

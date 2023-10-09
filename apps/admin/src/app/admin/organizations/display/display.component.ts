@@ -7,8 +7,7 @@ import { OrganizationParams } from '@coachcare/common/services'
 
 @Component({
   selector: 'ccr-organizations-display',
-  templateUrl: './display.component.html',
-  styleUrls: ['./display.component.scss']
+  templateUrl: './display.component.html'
 })
 export class OrganizationsDisplayComponent implements OnInit {
   id: string | undefined

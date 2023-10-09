@@ -13,8 +13,7 @@ import { CcrPaginatorComponent } from '@coachcare/common/components'
 
 @Component({
   selector: 'app-account-phase-list',
-  templateUrl: './account-phase-list.component.html',
-  styleUrls: ['./account-phase-list.component.scss']
+  templateUrl: './account-phase-list.component.html'
 })
 export class AccountPhaseListComponent
   implements OnInit, AfterViewInit, OnDestroy

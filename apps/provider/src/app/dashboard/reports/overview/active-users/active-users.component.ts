@@ -20,7 +20,6 @@ import { TimelineUnit } from '@coachcare/sdk'
 @Component({
   selector: 'app-reports-active-users',
   templateUrl: './active-users.component.html',
-  styleUrls: ['./active-users.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class ActiveUsersComponent implements OnInit, OnDestroy {

@@ -35,8 +35,7 @@ interface Goals {
 @UntilDestroy()
 @Component({
   selector: 'app-dieter-goals',
-  templateUrl: './goals.component.html',
-  styleUrls: ['./goals.component.scss']
+  templateUrl: './goals.component.html'
 })
 export class DieterGoalsComponent implements BindForm, OnInit {
   public form: FormGroup

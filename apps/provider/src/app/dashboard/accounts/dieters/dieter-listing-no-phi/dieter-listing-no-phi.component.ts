@@ -30,7 +30,6 @@ import { CSV } from '@coachcare/common/shared'
 @Component({
   selector: 'dieter-listing-no-phi',
   templateUrl: './dieter-listing-no-phi.component.html',
-  styleUrls: ['./dieter-listing-no-phi.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class DieterListingNoPhiComponent

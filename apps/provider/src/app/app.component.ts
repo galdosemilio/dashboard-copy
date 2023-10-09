@@ -27,8 +27,7 @@ import { RecoverCall } from './layout/store/call'
 @UntilDestroy()
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnDestroy, OnInit {
   @HostListener('window:beforeunload', ['$event'])

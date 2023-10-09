@@ -4,8 +4,7 @@ import { EventsService } from '@app/service'
 
 @Component({
   selector: 'app-support',
-  templateUrl: './support.component.html',
-  styleUrls: ['./support.component.scss']
+  templateUrl: './support.component.html'
 })
 export class SupportComponent implements OnInit {
   constructor(private bus: EventsService) {}

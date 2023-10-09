@@ -13,7 +13,6 @@ import { ChartData } from '@app/shared'
 @Component({
   selector: 'app-reports-signups-chart',
   templateUrl: './signups-chart.component.html',
-  styleUrls: ['./signups-chart.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class SignupsChartComponent implements OnInit, OnDestroy {

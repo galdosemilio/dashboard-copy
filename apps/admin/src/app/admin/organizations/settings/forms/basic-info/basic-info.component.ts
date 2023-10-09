@@ -9,8 +9,7 @@ import { NotifierService } from '@coachcare/common/services'
 
 @Component({
   selector: 'ccr-organizations-basic-info',
-  templateUrl: './basic-info.component.html',
-  styleUrls: ['./basic-info.component.scss']
+  templateUrl: './basic-info.component.html'
 })
 export class BasicInfoComponent implements OnInit {
   @Input() orgId: string

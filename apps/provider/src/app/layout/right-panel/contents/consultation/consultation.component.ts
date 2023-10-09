@@ -6,8 +6,7 @@ import { ConsultationFormArgs } from './consultationFormArgs.interface'
 
 @Component({
   selector: 'app-consultation',
-  templateUrl: './consultation.component.html',
-  styleUrls: ['./consultation.component.scss']
+  templateUrl: './consultation.component.html'
 })
 export class ConsultationComponent implements OnInit, OnDestroy {
   formType = 'addConsultation'

@@ -19,7 +19,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 @Component({
   selector: 'sequencing-sms-form',
   templateUrl: './sms-form.component.html',
-  styleUrls: ['./sms-form.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -29,7 +28,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
   ]
 })
 export class SMSFormComponent
-  implements ControlValueAccessor, OnDestroy, OnInit {
+  implements ControlValueAccessor, OnDestroy, OnInit
+{
   @Input() markAsTouched
 
   @Input('isDisabled') set disabled(disabled: boolean) {

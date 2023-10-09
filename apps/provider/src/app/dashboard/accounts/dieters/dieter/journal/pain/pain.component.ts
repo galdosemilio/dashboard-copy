@@ -11,8 +11,7 @@ import { BehaviorSubject } from 'rxjs'
 
 @Component({
   selector: 'app-dieter-journal-pain',
-  templateUrl: 'pain.component.html',
-  styleUrls: ['pain.component.scss']
+  templateUrl: 'pain.component.html'
 })
 export class PainComponent implements OnInit {
   @Input()

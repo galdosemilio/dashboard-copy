@@ -33,7 +33,6 @@ import Papa from 'papaparse'
 @Component({
   selector: 'app-coaches',
   templateUrl: './coaches.component.html',
-  styleUrls: ['./coaches.component.scss'],
   providers: [CoachesDatabase],
   encapsulation: ViewEncapsulation.None
 })

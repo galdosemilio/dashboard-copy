@@ -3,8 +3,7 @@ import { Router } from '@angular/router'
 
 @Component({
   selector: 'ccr-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   constructor(private router: Router) {}

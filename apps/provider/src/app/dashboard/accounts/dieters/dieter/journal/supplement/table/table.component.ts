@@ -13,7 +13,6 @@ import { SupplementDataSource } from '@app/dashboard/accounts/dieters/services'
 @Component({
   selector: 'app-dieter-journal-supplements-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SupplementsTableComponent implements OnInit, OnDestroy {

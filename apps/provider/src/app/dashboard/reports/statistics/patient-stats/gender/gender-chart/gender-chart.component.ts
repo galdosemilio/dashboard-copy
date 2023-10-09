@@ -16,7 +16,6 @@ import { ChartData } from '@app/shared'
 @Component({
   selector: 'app-statistics-gender-chart',
   templateUrl: './gender-chart.component.html',
-  styleUrls: ['./gender-chart.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class GenderChartComponent implements OnInit, OnDestroy {

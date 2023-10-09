@@ -22,8 +22,7 @@ type QuickSelectOption = 'past' | 'upcoming' | 'all'
 @UntilDestroy()
 @Component({
   selector: 'app-dieter-meetings',
-  templateUrl: './meetings.component.html',
-  styleUrls: ['./meetings.component.scss']
+  templateUrl: './meetings.component.html'
 })
 export class DieterMeetingsComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })

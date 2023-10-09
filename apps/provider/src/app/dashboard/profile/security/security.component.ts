@@ -10,8 +10,7 @@ import { filter } from 'rxjs/operators'
 @UntilDestroy()
 @Component({
   selector: 'app-profile-security',
-  templateUrl: './security.component.html',
-  styleUrls: ['./security.component.scss']
+  templateUrl: './security.component.html'
 })
 export class SecurityComponent implements OnDestroy {
   public isLoading: boolean

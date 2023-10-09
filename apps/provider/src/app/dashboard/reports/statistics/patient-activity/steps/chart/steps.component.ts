@@ -22,7 +22,6 @@ import { CSV } from '@coachcare/common/shared'
 @Component({
   selector: 'app-statistics-steps-chart',
   templateUrl: './steps.component.html',
-  styleUrls: ['./steps.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class StepsChartComponent implements OnInit, OnDestroy {

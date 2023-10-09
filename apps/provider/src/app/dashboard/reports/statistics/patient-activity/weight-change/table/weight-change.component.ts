@@ -28,8 +28,7 @@ import { CSV } from '@coachcare/common/shared'
 @UntilDestroy()
 @Component({
   selector: 'app-statistics-weight-change-table',
-  templateUrl: './weight-change.component.html',
-  styleUrls: ['./weight-change.component.scss']
+  templateUrl: './weight-change.component.html'
 })
 export class WeightChangeTableComponent
   implements OnInit, AfterViewInit, OnDestroy

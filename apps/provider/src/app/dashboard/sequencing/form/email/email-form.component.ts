@@ -23,7 +23,6 @@ import { Subject } from 'rxjs'
 @Component({
   selector: 'sequencing-email-form',
   templateUrl: './email-form.component.html',
-  styleUrls: ['./email-form.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -34,7 +33,8 @@ import { Subject } from 'rxjs'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmailFormComponent
-  implements ControlValueAccessor, OnDestroy, OnInit {
+  implements ControlValueAccessor, OnDestroy, OnInit
+{
   @ViewChild(CdkTextareaAutosize, { static: true })
   textarea: CdkTextareaAutosize
   @Input() markAsTouched: Subject<void>

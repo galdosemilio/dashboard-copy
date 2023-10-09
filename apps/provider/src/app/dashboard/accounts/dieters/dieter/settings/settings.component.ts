@@ -8,8 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 @UntilDestroy()
 @Component({
   selector: 'app-dieter-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  templateUrl: './settings.component.html'
 })
 export class DieterSettingsComponent implements OnInit, OnDestroy {
   account: string

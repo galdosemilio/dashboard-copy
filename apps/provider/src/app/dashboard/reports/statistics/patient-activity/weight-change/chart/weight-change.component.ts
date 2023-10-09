@@ -25,11 +25,11 @@ import { ChartData } from '@app/shared'
 @Component({
   selector: 'app-statistics-weight-change-chart',
   templateUrl: './weight-change.component.html',
-  styleUrls: ['./weight-change.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class WeightChangeChartComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   source: WeightChangeDataSource | null
   chart: ChartData
   chartWidth: any

@@ -4,8 +4,7 @@ import { EventsService } from '@app/service'
 
 @Component({
   selector: 'app-reports-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss']
+  templateUrl: './overview.component.html'
 })
 export class OverviewComponent implements OnInit {
   zendeskLink =

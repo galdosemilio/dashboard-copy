@@ -13,7 +13,6 @@ import { Translations } from './contents'
 @Component({
   selector: 'ccr-page-register-apple',
   templateUrl: './apple.component.html',
-  styleUrls: ['./apple.component.scss'],
   host: {
     class: 'ccr-page-content'
   }

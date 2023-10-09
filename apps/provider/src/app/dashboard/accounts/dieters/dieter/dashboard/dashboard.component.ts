@@ -14,8 +14,7 @@ import {
 @UntilDestroy()
 @Component({
   selector: 'app-dieter-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.component.html'
 })
 export class DieterDashboardComponent implements OnInit, OnDestroy {
   public typeGroups?: TypeGroupEntry[]

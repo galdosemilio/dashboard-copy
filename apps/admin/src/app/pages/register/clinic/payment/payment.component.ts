@@ -20,11 +20,11 @@ import { get } from 'lodash'
 
 @Component({
   selector: 'ccr-page-register-clinic-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  templateUrl: './payment.component.html'
 })
 export class RegisterClinicPaymentPageComponent
-  implements OnInit, AfterViewInit {
+  implements OnInit, AfterViewInit
+{
   @Input() formGroup: FormGroup
   @Input() isLoading: boolean
   @Input() required = true

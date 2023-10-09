@@ -21,7 +21,6 @@ import { Subject } from 'rxjs'
 @Component({
   selector: 'sequencing-notification-form',
   templateUrl: './notification-form.component.html',
-  styleUrls: ['./notification-form.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

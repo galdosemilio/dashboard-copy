@@ -23,8 +23,7 @@ import { NotifierService } from '@app/service'
 @UntilDestroy()
 @Component({
   selector: 'app-statistics-patient-stats-gender',
-  templateUrl: './gender.component.html',
-  styleUrls: ['./gender.component.scss']
+  templateUrl: './gender.component.html'
 })
 export class GenderComponent implements OnInit, AfterViewInit, OnDestroy {
   source: GenderDataSource | null

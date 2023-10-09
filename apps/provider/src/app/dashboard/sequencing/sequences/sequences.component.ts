@@ -15,8 +15,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 @UntilDestroy()
 @Component({
   selector: 'app-sequencing-sequences',
-  templateUrl: './sequences.component.html',
-  styleUrls: ['./sequences.component.scss']
+  templateUrl: './sequences.component.html'
 })
 export class SequencesComponent implements OnDestroy, OnInit {
   @ViewChild(CcrPaginatorComponent, { static: true })

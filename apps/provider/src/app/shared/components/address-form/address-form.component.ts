@@ -33,7 +33,6 @@ import { LabelOption } from '../addresses/addresses.component'
 @Component({
   selector: 'ccr-address-form',
   templateUrl: './address-form.component.html',
-  styleUrls: ['./address-form.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

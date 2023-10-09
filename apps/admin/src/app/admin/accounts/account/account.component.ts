@@ -4,8 +4,7 @@ import { AccountSingle, AccountTypeId } from '@coachcare/sdk'
 
 @Component({
   selector: 'ccr-accounts-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  templateUrl: './account.component.html'
 })
 export class AccountComponent implements OnInit {
   accountType: string

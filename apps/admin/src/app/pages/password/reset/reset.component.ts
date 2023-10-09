@@ -9,7 +9,6 @@ import { ContextService } from '@coachcare/common/services'
 @Component({
   selector: 'ccr-page-password-reset',
   templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.scss'],
   host: {
     class: 'ccr-page-card'
   }

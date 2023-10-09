@@ -6,8 +6,7 @@ import { ContentUploadService } from './content/services'
 
 @Component({
   selector: 'app-library',
-  templateUrl: './library.component.html',
-  styleUrls: ['./library.component.scss']
+  templateUrl: './library.component.html'
 })
 export class LibraryComponent implements OnInit {
   @HostListener('window:beforeunload', ['$event'])

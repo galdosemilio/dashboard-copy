@@ -17,7 +17,6 @@ import { _ } from '@coachcare/backend/shared'
 @Component({
   selector: 'ccr-affiliated-accounts-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AffiliatedAccountsTableComponent implements OnInit, OnDestroy {

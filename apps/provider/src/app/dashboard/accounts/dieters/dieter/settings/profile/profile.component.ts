@@ -30,7 +30,6 @@ import { filter } from 'rxjs/operators'
 @Component({
   selector: 'app-dieter-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [
     {

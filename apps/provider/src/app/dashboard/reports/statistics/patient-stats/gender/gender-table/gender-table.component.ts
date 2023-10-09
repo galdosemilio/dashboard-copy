@@ -4,8 +4,7 @@ import { GenderDataSource } from '@app/dashboard/reports/services'
 
 @Component({
   selector: 'app-statistics-gender-table',
-  templateUrl: './gender-table.component.html',
-  styleUrls: ['./gender-table.component.scss']
+  templateUrl: './gender-table.component.html'
 })
 export class GenderTableComponent implements OnInit {
   columns = ['gender', 'count', 'percentage']

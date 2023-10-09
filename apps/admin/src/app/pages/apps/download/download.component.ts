@@ -5,7 +5,6 @@ const PAGE_CONF_TIMEOUT = 300
 @Component({
   selector: 'ccr-page-download',
   templateUrl: './download.component.html',
-  styleUrls: ['./download.component.scss'],
   host: {
     class: 'ccr-page-cover'
   }

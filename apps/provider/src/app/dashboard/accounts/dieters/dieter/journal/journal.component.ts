@@ -21,7 +21,6 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 @Component({
   selector: 'app-dieter-journal',
   templateUrl: './journal.component.html',
-  styleUrls: ['./journal.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class DieterJournalComponent implements OnInit {

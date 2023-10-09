@@ -14,8 +14,7 @@ import { AlertDataThresholdDialog } from '../dialogs'
 
 @Component({
   selector: 'app-alerts-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  templateUrl: './settings.component.html'
 })
 export class AlertsSettingsComponent implements OnDestroy, OnInit {
   public clinic: Partial<OrganizationWithAddress> = {}

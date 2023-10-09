@@ -8,8 +8,7 @@ import { resolveConfig } from '@app/config/section'
 @UntilDestroy()
 @Component({
   selector: 'app-reports-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+  templateUrl: './statistics.component.html'
 })
 export class StatisticsComponent implements OnInit {
   showReportControls = true

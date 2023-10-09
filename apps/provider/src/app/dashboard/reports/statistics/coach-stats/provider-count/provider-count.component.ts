@@ -20,7 +20,6 @@ import { TimelineUnit } from '@coachcare/sdk'
 @Component({
   selector: 'app-statistics-provider-count',
   templateUrl: './provider-count.component.html',
-  styleUrls: ['./provider-count.component.scss'],
   host: { class: 'ccr-chart' }
 })
 export class ProviderCountComponent implements OnInit, OnDestroy {

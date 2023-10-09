@@ -13,7 +13,6 @@ import { Translations } from './contents'
 @Component({
   selector: 'ccr-page-register-implementation',
   templateUrl: './implementation.component.html',
-  styleUrls: ['./implementation.component.scss'],
   host: {
     class: 'ccr-page-content'
   }

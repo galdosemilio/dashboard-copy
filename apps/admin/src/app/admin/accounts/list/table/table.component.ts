@@ -18,7 +18,6 @@ import { NotifierService } from '@coachcare/common/services'
 @Component({
   selector: 'ccr-accounts-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountsTableComponent implements OnInit, OnDestroy {

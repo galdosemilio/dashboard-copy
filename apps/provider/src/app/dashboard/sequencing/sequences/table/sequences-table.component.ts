@@ -14,8 +14,7 @@ import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-sequencing-sequences-table',
-  templateUrl: './sequences-table.component.html',
-  styleUrls: ['./sequences-table.component.scss']
+  templateUrl: './sequences-table.component.html'
 })
 export class SequencesTableComponent {
   @Input()
