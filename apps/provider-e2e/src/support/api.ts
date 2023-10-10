@@ -974,6 +974,13 @@ const interceptCoreApiCalls = (
       'api/general/emptyDataEmptyPagination'
     )
   }).as('downloadCareManagementReports')
+
+  cy.intercept('GET', '/1.0/task**', {
+    fixture: 'api/care-management/getTasks'
+  }).as('task')
+  cy.intercept('GET', '/1.0/task/status**', {
+    fixture: 'api/care-management/getTaskStatuses'
+  }).as('taskStatus')
 }
 
 const seti18n = (): void => {

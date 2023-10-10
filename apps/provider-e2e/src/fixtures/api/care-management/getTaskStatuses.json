@@ -1,0 +1,47 @@
+{
+  "data": [
+    {
+      "id": "4",
+      "name": "Canceled",
+      "isActive": true,
+      "isCompletionState": true
+    },
+    {
+      "id": "7",
+      "name": "Expired",
+      "isActive": true,
+      "isCompletionState": false
+    },
+    {
+      "id": "5",
+      "name": "Failed",
+      "isActive": true,
+      "isCompletionState": true
+    },
+    {
+      "id": "3",
+      "name": "Pending cancelation",
+      "isActive": true,
+      "isCompletionState": false
+    },
+    {
+      "id": "1",
+      "name": "Queued",
+      "isActive": true,
+      "isCompletionState": false
+    },
+    {
+      "id": "2",
+      "name": "Running",
+      "isActive": true,
+      "isCompletionState": false
+    },
+    {
+      "id": "6",
+      "name": "Succeeded",
+      "isActive": true,
+      "isCompletionState": true
+    }
+  ],
+  "pagination": {}
+}

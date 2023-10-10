@@ -92,7 +92,7 @@ class="ccr-table ccr-expand-table ccr-table-stats">
                         {{ 'GLOBAL.DOWNLOAD' | translate }} {{ 'GLOBAL.FILE' | translate }} ({{ r + 1 }}/{{ row.progress.artifact.count }})<br>
                     </a>
                 </span>
-                <span fxLayout="row" fxLayoutAlign="start center" *ngIf="row.status.id !== Status.Succeeded">
+                <span fxLayout="row" fxLayoutAlign="start center">
                     {{ row.status.name }}
                     <mat-icon *ngIf="row.status.id === Status.Failed && row.status.message" class="status-failed-icon" [matTooltip]="row.status.message">error</mat-icon>
                 </span>
