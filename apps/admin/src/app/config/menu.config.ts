@@ -165,6 +165,12 @@ const admin: Array<MenuItem> = [
         icon: 'bar_chart'
       }
     ]
+  },
+  {
+    route: 'cellular-device-history',
+    navName: _('SIDENAV.DEVICE_HISTORY'),
+    navRoute: '/admin/cellular-device-history',
+    icon: 'devices'
   }
 ]
 

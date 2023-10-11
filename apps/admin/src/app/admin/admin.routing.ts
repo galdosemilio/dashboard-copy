@@ -42,6 +42,13 @@ export const routes: Routes = [
         path: 'reports',
         loadChildren: () =>
           import('./reports/reports.module').then((m) => m.ReportsModule)
+      },
+      {
+        path: 'cellular-device-history',
+        loadChildren: () =>
+          import(
+            './cellular-device-history/cellular-device-history.module'
+          ).then((m) => m.CellularDeviceHistoryModule)
       }
     ]
   },

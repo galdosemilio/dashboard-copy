@@ -1,0 +1,92 @@
+<div class="ccr-heading">
+  <div class="ccr-title" fxLayout="row" fxLayout.xs="row wrap" fxLayoutAlign=" center">
+    <h2 fxFlex="0 0 auto">{{ 'SIDENAV.CELLULAR_DEVICE_HISTORY' | translate }}</h2>
+  </div>
+</div>
+<div class="ccr-filters" fxLayout="row" fxLayoutAlign=" center">
+  <div [formGroup]="form">
+    <mat-form-field>
+      <input matInput
+      formControlName="imei"
+      required
+      type="number"
+      [placeholder]="'GLOBAL.IMEI' | translate">
+    </mat-form-field>
+  </div>
+
+  <ccr-paginator fxFlex #paginator [source]="source"></ccr-paginator>
+</div>
+
+<div class="ccr-table" [class.ccr-loading]="source.isLoading" [class.ccr-empty]="source.isEmpty" [class.ccr-errors]="source.hasErrors()">
+  <mat-table [dataSource]="data" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.ID' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.account.id }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.FIRST_NAME' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.account.firstName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.LAST_NAME' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.account.lastName }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deviceId">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.DEVICE_ID' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.device?.type?.id }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deviceName">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.DEVICE_NAME' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.device?.type?.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="associatedAt">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.ASSIGNED_AT' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.associatedAt | amDateFormat:'MMM D, YYYY hh:mm a' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="removedAt">
+      <mat-header-cell *matHeaderCellDef fxFlex.xs="100%">{{ 'GLOBAL.REMOVED_AT' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let row"
+        fxLayoutAlign=" center" fxFlex.xs="100%"
+      >
+        {{ row.removedAt | amDateFormat:'MMM D, YYYY hh:mm a' }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+    <mat-row fxLayout="row wrap"
+    *matRowDef="let row; columns: columns; let even = even; let odd = odd"
+    [ngClass]="{ 'row-even': even, 'row-odd': odd }"
+    ></mat-row>
+  </mat-table>
+
+  <ccr-table-overlay [source]="source" [emptyMsg]="'NOTIFY.ERROR.EMPTY_DEVICE_HISTORY_LISTING' | translate"></ccr-table-overlay>
+</div>
