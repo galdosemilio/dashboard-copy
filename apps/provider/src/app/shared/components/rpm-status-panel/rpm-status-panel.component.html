@@ -100,7 +100,7 @@
             data-cy="program_setting_button"
             mat-button>{{ 'GLOBAL.PROGRAM_SETTINGS' | translate }}</button>
             <button
-            *ngIf="getStatus() === 'active' && !automaticCareManagementTimeTracking"
+            *ngIf="getStatus() === 'active' && !automatedTimeTracking"
             class="ccr-button"
             color="primary"
             (click)="toggleManualTime()"

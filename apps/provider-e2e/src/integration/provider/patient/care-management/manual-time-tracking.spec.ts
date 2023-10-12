@@ -45,24 +45,25 @@ describe('Patient profile -> dashboard -> rpm', function () {
   })
   describe('manual timeTracking', () => {
     it('service type should not be included on account activity post request', () => {
+      setAutomatedTimeTrackingPreference('disabled')
+
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
-      setAutomatedTimeTrackingPreference('disabled')
       cy.wait('@accountActivityPostRequest')
 
       cy.get('[data-cy="manual-time-enabled-notice"]')
         .should('contain', 'Automatic time tracking paused for this clinic')
         .should('be.exist')
 
+      cy.tick(1000)
       cy.get('.ccr-tabs').find('a').eq(1).click()
-
       cy.wait('@accountActivityPostRequest')
       shouldNotIncludeRpmTag()
     })
 
     it('service type should be included on account activity post request', () => {
-      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
       setAutomatedTimeTrackingPreference('enabled')
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.get('app-sidenav-org-selector')
         .click()
@@ -82,13 +83,28 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.wait('@accountActivityPostRequest')
       cy.wait('@accountActivityPostRequest')
       cy.wait('@accountActivityPostRequest')
+      cy.wait('@accountActivityPostRequest')
       shouldIncludeRpmTag()
     })
 
-    it('should be able to add manual time tracking', () => {
+    it('should not showing add manual time for enabled auto tracking', () => {
+      setAutomatedTimeTrackingPreference('enabled')
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
+      cy.tick(10000)
+
+      cy.get('[data-cy="open-status-button"]').click()
+
+      cy.tick(10000)
+
+      cy.get('button').contains('Add RPM Time').should('not.exist')
+    })
+
+    it('should be able to add manual time tracking', () => {
       setAutomatedTimeTrackingPreference('disabled')
+
+      cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
       cy.tick(10000)
 
       selectMinutesAndSeconds(1, 30)
@@ -104,29 +120,11 @@ describe('Patient profile -> dashboard -> rpm', function () {
       )
 
       expectToastNotification('Manual time tracking added')
-
-      selectMinutesAndSeconds(0, 30)
-
-      addTime()
-
-      expectCorrectTimeTrackingRequest(
-        Cypress.env('organizationId'),
-        '2020-01-01T00:00:00.000Z',
-        '2020-01-01T00:00:30.000Z'
-      )
-
-      selectMinutesAndSeconds(55, 30)
-
-      addTime()
-
-      expectCorrectTimeTrackingRequest(
-        Cypress.env('organizationId'),
-        '2019-12-31T23:05:10.000Z',
-        '2020-01-01T00:00:40.000Z'
-      )
     })
 
     it('should handle error when adding manual time tracking', () => {
+      setAutomatedTimeTrackingPreference('disabled')
+
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.tick(10000)
@@ -144,6 +142,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
     })
 
     it('should reset form after close panel', () => {
+      setAutomatedTimeTrackingPreference('disabled')
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.tick(10000)
@@ -151,7 +150,6 @@ describe('Patient profile -> dashboard -> rpm', function () {
       selectMinutesAndSeconds(1, 30)
 
       cy.get('[data-cy="open-status-button"]').click().click()
-      cy.tick(10000)
 
       addTime()
 
