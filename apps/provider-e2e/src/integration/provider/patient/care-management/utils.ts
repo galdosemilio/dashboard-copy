@@ -17,7 +17,7 @@ export function setAutomatedTimeTrackingPreference(
 export function expectCorrectTimeTrackingRequest(organizationId, start, end) {
   cy.wait('@accountActivityPostRequest').should((xhr) => {
     expect(xhr.response.statusCode).to.equal(201)
-    expect(xhr.request.body.tags.includes('rpm')).to.not.equal(true)
+    expect(xhr.request.body.tags.includes('rpm')).to.equal(true)
     expect(xhr.request.body.organization).to.equal(organizationId)
     expect(xhr.request.body.interaction.time.start).to.equal(start)
     expect(xhr.request.body.interaction.time.end).to.equal(end)
@@ -36,7 +36,7 @@ export function shouldNotIncludeRpmTag() {
   cy.wait('@accountActivityPostRequest').should((xhr) => {
     expect(xhr.response.statusCode).to.equal(201)
     expect(xhr.request.body.tags.includes('rpm')).to.not.equal(true)
-    expect(xhr.request.body.tags.includes('manual-entry')).to.equal(true)
+    expect(xhr.request.body.tags.includes('manual-entry')).to.not.equal(true)
   })
 }
 

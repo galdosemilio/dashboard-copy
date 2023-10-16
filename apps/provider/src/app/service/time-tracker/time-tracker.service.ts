@@ -128,6 +128,13 @@ export class TimeTrackerService implements OnDestroy {
 
     try {
       const tags = this.getTags(this.currentRoute)
+
+      if (this.activeCareManagementServiceTag) {
+        tags.push(this.activeCareManagementServiceTag)
+      }
+
+      tags.push('manual-entry')
+
       await this.account.addActivityEvent({
         account: this.currentRoute.useAccount
           ? this.context.accountId
@@ -167,10 +174,6 @@ export class TimeTrackerService implements OnDestroy {
       this.automatedTimeTracking
     ) {
       tags.push(this.activeCareManagementServiceTag)
-    }
-
-    if (!this.automatedTimeTracking) {
-      tags.push('manual-entry')
     }
 
     return uniq(tags)
