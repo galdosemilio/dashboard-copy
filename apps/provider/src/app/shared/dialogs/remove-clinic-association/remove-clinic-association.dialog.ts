@@ -1,21 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { ContextService, NotifierService } from '@app/service'
-import {
-  RPMStateEntry,
-  RPMStateEntryPendingStatus
-} from '@app/shared/components/rpm/models'
-import { _ } from '@app/shared/utils'
+import { RPMStateEntry } from '@app/shared/components/rpm/models'
 import { MAT_DIALOG_DATA } from '@coachcare/material'
 import {
   AccountProvider,
   AccountRef,
-  AccSingleResponse,
   CareManagementState
 } from '@coachcare/sdk'
 
 export interface RemoveClinicAssociationDialogProps {
   organizationId: string
 }
+
+const MAX_CONCURRENT_EPISODES_OF_CARE = 3
 
 @Component({
   selector: 'app-remove-clinic-association-dialog',
@@ -25,9 +22,7 @@ export interface RemoveClinicAssociationDialogProps {
 })
 export class RemoveClinicAssociationDialog implements OnInit {
   public client: AccountRef
-  public entryIsActive: boolean
-  public entryPending: RPMStateEntryPendingStatus
-  public rpmEntry: RPMStateEntry | null = null
+  public entries: RPMStateEntry[] = []
 
   constructor(
     private account: AccountProvider,
@@ -39,59 +34,23 @@ export class RemoveClinicAssociationDialog implements OnInit {
 
   public ngOnInit(): void {
     this.client = this.context.account
-    void this.resolveRPMEntry()
+    void this.resolveEntries()
   }
 
-  private async resolveRPMEntry(): Promise<void> {
+  private async resolveEntries(): Promise<void> {
     try {
       const response = await this.careManagementState.getList({
         account: this.context.accountId,
         organization: this.data.organizationId,
-        limit: 1,
+        limit: MAX_CONCURRENT_EPISODES_OF_CARE,
         offset: 0
       })
 
-      const rpmEntry = response.data.length
-        ? new RPMStateEntry({ rpmState: response.data.pop() })
-        : null
-
-      this.rpmEntry = rpmEntry
-
-      if (this.rpmEntry && this.rpmEntry.rpmState.createdBy) {
-        this.rpmEntry.rpmState.createdBy = await this.resolveCreatedByAccount(
-          this.rpmEntry.rpmState.createdBy.id
-        )
-      }
-
-      this.entryIsActive = this.rpmEntry ? this.rpmEntry.isActive : false
-      this.entryPending = this.rpmEntry ? this.rpmEntry.pending : null
+      this.entries = response.data.map(
+        (item) => new RPMStateEntry({ rpmState: item })
+      )
     } catch (error) {
       this.notifier.error(error)
-    }
-  }
-
-  private async resolveCreatedByAccount(
-    id: string
-  ): Promise<AccSingleResponse> {
-    try {
-      return await this.account.getSingle(id)
-    } catch (error) {
-      return {
-        id: '',
-        accountType: undefined,
-        firstName: _('BOARD.INACCESSIBLE_PROVIDER'),
-        lastName: '',
-        email: '',
-        preferredLocales: [],
-        preference: {},
-        createdAt: '',
-        isActive: true,
-        measurementPreference: 'metric',
-        timezone: '',
-        phone: '',
-        countryCode: '',
-        phoneType: 'ios'
-      }
     }
   }
 }

@@ -6,26 +6,27 @@
 <mat-dialog-content>
   <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
     <p [innerHTML]="'ASSOCIATIONS.REMOVE_ASSOCIATION_HELP' | translate"></p>
+    <p [innerHTML]="'RPM.PATIENT_HAS_CARE_MANAGEMENT_SESSIONS' | translate" *ngIf="entries.length"></p>
+    <div *ngFor="let entry of entries">
+      <div *ngIf="entry.isActive">
+        <div>
+          <p class="notice entry" *ngIf="entry.pending">
+              {{ entry.pending === 'same-day' ? ('RPM.RPM_WILL_BE_ENABLED_AT_6_AM' | translate: { serviceType: entry.serviceType.name } ) : ('RPM.RPM_WILL_BE_ENABLED_TOMORROW' | translate: { serviceType: entry.serviceType.name }) }}
+          </p>
+          <p class="notice entry" *ngIf="!entry.pending">
+              {{ 'RPM.RPM_ENABLED' | translate:{
+                  serviceType: entry.serviceType.name,
+                  patient: client.firstName + ' ' + client.lastName,
+                  date: entry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
+                  clinic: entry.organization }
+              }}
+          </p>
+        </div>
 
-    <div *ngIf="entryIsActive">
-      <p [innerHTML]="'RPM.PATIENT_HAS_RPM_SESSION' | translate"></p>
+        <div class="separator"></div>
 
-      <div>
-        <p class="notice entry" *ngIf="entryPending">
-            {{ entryPending === 'same-day' ? ('RPM.RPM_WILL_BE_ENABLED_AT_6_AM' | translate) : ('RPM.RPM_WILL_BE_ENABLED_TOMORROW' | translate) }}
-        </p>
-        <p class="notice entry" *ngIf="!entryPending">
-            {{ 'RPM.RPM_ENABLED' | translate:{
-                patient: client.firstName + ' ' + client.lastName,
-                date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
-                clinic: rpmEntry.organization }
-            }}
-        </p>
-      </div>
-
-      <div class="separator"></div>
-
-      <app-rpm-status-info [rpmEntry]="rpmEntry"></app-rpm-status-info>
+        <app-rpm-status-info [rpmEntry]="entry"></app-rpm-status-info>
+        </div>
     </div>
 
     <p class="ccr-text-bold" [innerHTML]="'BOARD.SURE_WANT_TO_CONTINUE' | translate"></p>
