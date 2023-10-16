@@ -26,6 +26,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import { FormsDatasource } from '../models'
+import { isEmpty } from 'lodash'
 
 @UntilDestroy()
 @Component({
@@ -201,7 +202,13 @@ export class LibraryFormComponent implements BindForm, OnDestroy, OnInit {
               const questionValue: any = formValue[section][question]
                 ? formValue[section][question].value
                 : undefined
-              if (questionValue) {
+
+              const isValid =
+                typeof questionValue === 'object'
+                  ? !isEmpty(questionValue)
+                  : !!questionValue
+
+              if (isValid) {
                 answers.push({
                   question: question,
                   response: {
