@@ -413,7 +413,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
 
         cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
         cy.wait(1000)
-        cy.tick(1000)
+        cy.tick(500)
         cy.get('.ccr-tabs').find('a').eq(1).click()
         cy.get('.ccr-tabs').find('a').eq(0).click()
         cy.tick(1000)
@@ -428,25 +428,25 @@ describe('Patient profile -> dashboard -> rpm', function () {
             '2020-01-01T00:00:00.000Z'
           )
           expect(xhr.request.body.interaction.time.end).to.equal(
-            '2020-01-01T00:00:01.000Z'
+            '2020-01-01T00:00:00.500Z'
           )
         })
         cy.wait('@accountActivityPostRequest').then((xhr) => {
           expect(xhr.request.body.interaction.time.instant).to.equal(
-            '2020-01-01T00:00:01.000Z'
+            '2020-01-01T00:00:00.500Z'
           )
         })
         cy.wait('@accountActivityPostRequest').then((xhr) => {
           expect(xhr.request.body.interaction.time.start).to.equal(
-            '2020-01-01T00:00:01.000Z'
+            '2020-01-01T00:00:00.500Z'
           )
           expect(xhr.request.body.interaction.time.end).to.equal(
-            '2020-01-01T00:00:02.000Z'
+            '2020-01-01T00:00:01.500Z'
           )
         })
         cy.wait('@accountActivityPostRequest').then((xhr) => {
           expect(xhr.request.body.interaction.time.instant).to.equal(
-            '2020-01-01T00:00:02.000Z'
+            '2020-01-01T00:00:01.500Z'
           )
         })
       })

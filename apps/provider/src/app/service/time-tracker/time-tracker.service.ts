@@ -42,6 +42,14 @@ export class TimeTrackerService implements OnDestroy {
   private automatedTimeTracking: boolean = true
   private previousEvent: AccountActivityEvent
 
+  get previousEventEnd() {
+    if (!this.previousEvent) {
+      return null
+    }
+
+    return moment(this.getInteractionRange(this.previousEvent).end)
+  }
+
   constructor(
     private account: AccountProvider,
     private context: ContextService,
@@ -305,13 +313,8 @@ export class TimeTrackerService implements OnDestroy {
         let start = moment(timeRange.start)
         const end = moment(timeRange.end)
 
-        if (this.previousEvent) {
-          start = moment.unix(
-            Math.max(
-              start.unix(),
-              moment(this.getInteractionRange(this.previousEvent).end).unix()
-            )
-          )
+        if (this.previousEventEnd?.isAfter(start)) {
+          start = this.previousEventEnd
         }
 
         if (end.isSameOrBefore(start)) {
