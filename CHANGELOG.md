@@ -1,3 +1,42 @@
+# [1.126.0](https://github.com/coachcare/dashboard/compare/v1.125.2...v1.126.0) (2023-10-17)
+
+
+### Bug Fixes
+
+* add current blood pressure date to patient csv [FRON-3310] ([8dd8cad](https://github.com/coachcare/dashboard/commit/8dd8cade2be8cde858e6934ae39c3f93bfb0902d))
+* add manual time button visibility issue [FRON-3336] ([2306b3c](https://github.com/coachcare/dashboard/commit/2306b3cafeae8e00bd7a99560a178eee52aaf11f))
+* added time-tracker event queue to prevent multiple event with same start date [FRON-3206] ([7b9cecd](https://github.com/coachcare/dashboard/commit/7b9cecda0d3732a439e7e23ec4cf23a72c4e4dd8))
+* adjust time range selector next/back by currently-selected offset [FRON-3227] ([0b76df7](https://github.com/coachcare/dashboard/commit/0b76df72b4972a2cbf532b574310fd3837d18542))
+* allow patients communication records to be manually added at any time in the past ([0694abf](https://github.com/coachcare/dashboard/commit/0694abff61eaf1175e05ea8dc5ca5b613d16b496))
+* care management tracker [FRON-3327] ([7618bdf](https://github.com/coachcare/dashboard/commit/7618bdf9538e8c29f9803b623c9a2056a9df9734))
+* correct the logic for care management report nav tab [FRON-3293] ([9cbd67e](https://github.com/coachcare/dashboard/commit/9cbd67e86e26db01237cecf19371d6710b43e52d))
+* cypress tests [FRON-3322] ([aebcdf2](https://github.com/coachcare/dashboard/commit/aebcdf24914adbc57a78593ffb95e9e3268992b8))
+* discount display on storefront ([38f7f95](https://github.com/coachcare/dashboard/commit/38f7f958a583b0ba002a2789958bbc78da2bfe83))
+* failing care-management related tests ([a8dfa0b](https://github.com/coachcare/dashboard/commit/a8dfa0b7261696cc66a84273b9894ee6d55ca169))
+* fix care episodes sessions [FRON-3228] ([d2a986c](https://github.com/coachcare/dashboard/commit/d2a986c9297bc81a28b8125c35582e3604fedbd6))
+* fix resolve rpm billing status [FRON-3303] ([bd2b703](https://github.com/coachcare/dashboard/commit/bd2b70366055da58f2256441f915e7a98056c418))
+* manual time tracking issue [FRON-3337] ([94b0042](https://github.com/coachcare/dashboard/commit/94b00422a34a78459ce26db6cc6cc5d420bd7209))
+* mobile styles for storefront ([5a355f2](https://github.com/coachcare/dashboard/commit/5a355f208654a376d1f6621f4d7a57999e5210ad))
+* prevent patients communication records from being manual added in the future ([a144e6d](https://github.com/coachcare/dashboard/commit/a144e6dd43f321325c1adb812da505f7131dbe24))
+* price format on orders details storefront, fix style issues and button text [FRON-3317] ([0bc5535](https://github.com/coachcare/dashboard/commit/0bc5535bc3f82d815c337633d40a63622b803bc5))
+* provider and admin test suite ([333cde6](https://github.com/coachcare/dashboard/commit/333cde6c0a758bf0e5b7064c1cddedf7c1612f5b))
+* sort event queue [FRON-3327] ([a4f3cd8](https://github.com/coachcare/dashboard/commit/a4f3cd8e13f56e1dba043da23afcd310a84388aa))
+* updating digital library visibility type [FRON-3333] ([179a69e](https://github.com/coachcare/dashboard/commit/179a69e60611bed3c88a94887afd126b30982cc8))
+
+
+### Features
+
+* add billing and monitoring type to org care pref settings [FRON-3315] ([55ffa78](https://github.com/coachcare/dashboard/commit/55ffa780d1d5454654b809cc0e251e0bd97dbc23))
+* add billing and monitoring types to monitoring csv [FRON-3316] ([7697462](https://github.com/coachcare/dashboard/commit/76974620d17a81c8ae0a25b496746972fb0323d5))
+* add link to AHA heart rate chart to patient listing ([a0d617f](https://github.com/coachcare/dashboard/commit/a0d617f52217fad604092695208e174f5ba3d558))
+* add manual tracking time for care management ([8cd8864](https://github.com/coachcare/dashboard/commit/8cd88641046bf0b3f5cf290841d8f547428f3608))
+* add service type to individual report generation [FRON-3179] ([a2700f3](https://github.com/coachcare/dashboard/commit/a2700f345b60a764ce4bd38f0e160bf0c89e44f1))
+* add tests for inactive time tracking modal ([41b51b1](https://github.com/coachcare/dashboard/commit/41b51b143082a4309e5bce9c1435c0f374dee1d9))
+* added current bmi columns for bons secour mercy [FRON-3183] ([2030b34](https://github.com/coachcare/dashboard/commit/2030b34bc4e909a445da7897145593f10cb59503))
+* automatically choose most appropriate summary boxes [FRON-3276] ([621d08c](https://github.com/coachcare/dashboard/commit/621d08c2bb0f352e6406b3cb85bc4f8dbbab0e50))
+* display page title on storefront from respective Spree store ([b0c3ae1](https://github.com/coachcare/dashboard/commit/b0c3ae19ccb77774f04372b1170e87a90e20f95e))
+* use papaparse for csv serializer [FRON-3307] ([9bfca18](https://github.com/coachcare/dashboard/commit/9bfca1872f4d45a7fa6353fe0c9e17d4958562dd))
+
 ## [1.125.2](https://github.com/coachcare/dashboard/compare/v1.125.1...v1.125.2) (2023-08-16)
 
 
