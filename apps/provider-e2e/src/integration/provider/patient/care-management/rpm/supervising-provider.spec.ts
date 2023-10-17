@@ -30,6 +30,13 @@ describe('Patient profile -> rpm -> Change Supervising Provider state', function
     confirmSupervisingProviderName('Eric Di Bari')
   })
 
+  it('Correct organization id is passed when supervising provider is shown', function () {
+    openDialogToChangeProvider()
+    cy.wait('@careManagementStateAudit').should((xhr) => {
+      expect(xhr.request.query.organization).to.equal('7384')
+    })
+  })
+
   it('Proper message is shown when no supervising providers are available to change to', function () {
     confirmMessageNoSupervisingProvidersAvailable(openDialogToChangeProvider)
   })

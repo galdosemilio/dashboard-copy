@@ -171,7 +171,10 @@ export class RPMComponent implements OnInit {
   private async refresh() {
     try {
       this.isLoading = true
-      await this.careManagementPermissions.init(this.context.accountId)
+      await this.careManagementPermissions.init(
+        this.context.accountId,
+        this.context.organization.id
+      )
       this.rpmEntries = this.careManagementPermissions.careEntries
 
       this.activeCareEntries = this.careManagementPermissions.activeCareEntries

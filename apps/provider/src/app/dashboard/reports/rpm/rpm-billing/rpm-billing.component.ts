@@ -1192,7 +1192,10 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   public async onChangeSupervisingProvider(summary: RPMStateSummaryEntry) {
-    await this.careManagementPermissions.init(summary.account.id)
+    await this.careManagementPermissions.init(
+      summary.account.id,
+      this.selectedClinic?.id
+    )
     const careEntries = this.careManagementPermissions.careEntries
 
     const activeCareEntries = this.careManagementPermissions.activeCareEntries

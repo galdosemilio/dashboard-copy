@@ -27,7 +27,7 @@ export class CareManagementPermissionsService {
     private account: AccountProvider
   ) {}
 
-  public async init(accountId: string) {
+  public async init(accountId: string, organizationId: string | null = null) {
     const accessibleOrgs = (
       await this.organization.getAccessibleList({
         account: accountId,
@@ -49,7 +49,7 @@ export class CareManagementPermissionsService {
 
     const response = await this.careManagementState.getAuditList({
       account: this.context.accountId,
-      organization: highestOrgId,
+      organization: organizationId || highestOrgId,
       limit: 50,
       offset: 0
     })

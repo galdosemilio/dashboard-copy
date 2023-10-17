@@ -38,6 +38,17 @@ describe('Reports -> RPM -> RPM Billing -> Change Supervising Provider', functio
     openDialogToChangeProvider()
     confirmPayloadOnSupervisingProviderUpdate()
   })
+
+  it('Correct organization id is passed when supervising provider edit icon is clicked', function () {
+    setSelectedClinicToStorage('7384')
+    cy.tick(100)
+
+    openDialogToChangeProvider()
+
+    cy.wait('@careManagementStateAudit').should((xhr) => {
+      expect(xhr.request.query.organization).to.equal('7384')
+    })
+  })
 })
 
 function openDialogToChangeProvider(): void {

@@ -11,6 +11,10 @@ function fetchOverride(url: string, fixture: string): string | undefined {
     : fixture
 }
 
+const emptyDataEmptyPagination = {
+  fixture: 'api/general/emptyDataEmptyPagination'
+}
+
 function setupAccountEndpointData(data) {
   data.preference.defaultOrganization = Cypress.env('organizationId')
   data.timezone = Cypress.env('timezone')
@@ -205,9 +209,7 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/2.0/message/unread', {
     fixture: fetchOverride('/2.0/message/unread', 'api/message/getUnreadNone')
   })
-  cy.intercept('GET', '/3.0/conference/video/call**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept('GET', '/3.0/conference/video/call**', emptyDataEmptyPagination)
   cy.intercept('GET', '/2.0/message/thread?**', {
     fixture: 'api/message/getThreads'
   })
@@ -313,9 +315,7 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/1.0/content?**', {
     fixture: 'api/library/file-explorer-contents'
   })
-  cy.intercept('GET', '1.0/content/form/addendum?**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept('GET', '1.0/content/form/addendum?**', emptyDataEmptyPagination)
   cy.intercept(
     'GET',
     `/1.0/content/form/submission/${Cypress.env('formSubmissionId')}`,
@@ -327,9 +327,7 @@ const interceptCoreApiCalls = (
       'api/form/full-form'
     )
   })
-  cy.intercept('GET', '/1.0/content/form?**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept('GET', '/1.0/content/form?**', emptyDataEmptyPagination)
   cy.intercept('GET', '/2.0/package?**', {
     fixture: 'api/package/getPackages1'
   })
@@ -412,15 +410,15 @@ const interceptCoreApiCalls = (
     statusCode: 204,
     body: {}
   }).as('measurementDataPointTypeAssocDeleteRequest')
-  cy.intercept('GET', '1.0/measurement/data-point/group?**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept(
+    'GET',
+    '1.0/measurement/data-point/group?**',
+    emptyDataEmptyPagination
+  )
   cy.intercept('GET', '/2.0/available/calendar?**', {
     fixture: 'api/meeting/getAvailability'
   })
-  cy.intercept('GET', '/2.0/available?provider**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept('GET', '/2.0/available?provider**', emptyDataEmptyPagination)
   cy.intercept('GET', '/1.0/meeting/attendance/status/**', {
     fixture: 'api/meeting/getAttendanceStatuses'
   })
@@ -474,9 +472,15 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/1.0/consultation?**', {
     fixture: 'api/general/emptyArray'
   })
-  cy.intercept('GET', '/1.0/notification?**', {
+  const alertNotifications = {
     fixture: 'api/alert/notifications'
-  })
+  }
+  cy.intercept('GET', '/1.0/notification?**', alertNotifications)
+  cy.intercept(
+    'GET',
+    '/1.0/warehouse/alert/notification?**',
+    alertNotifications
+  )
   cy.intercept('GET', '/1.0/warehouse/care-management/billing/snapshot**', {
     fixture: fetchOverride(
       '/1.0/warehouse/care-management/billing/snapshot**',
@@ -510,24 +514,34 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/2.0/warehouse/provider/count**', {
     fixture: 'api/warehouse/providerCount'
   })
-  cy.intercept('GET', '/2.0/warehouse/weight/change**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
-  cy.intercept('GET', '/2.0/warehouse/organization/sign-ups/timeline**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
-  cy.intercept('GET', '/2.0/warehouse/enrollment/simple**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
-  cy.intercept('GET', '/2.0/warehouse/enrollment/patient-count**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept(
+    'GET',
+    '/2.0/warehouse/weight/change**',
+    emptyDataEmptyPagination
+  )
+  cy.intercept(
+    'GET',
+    '/2.0/warehouse/organization/sign-ups/timeline**',
+    emptyDataEmptyPagination
+  )
+  cy.intercept(
+    'GET',
+    '/2.0/warehouse/enrollment/simple**',
+    emptyDataEmptyPagination
+  )
+  cy.intercept(
+    'GET',
+    '/2.0/warehouse/enrollment/patient-count**',
+    emptyDataEmptyPagination
+  )
   cy.intercept('GET', '/1.0/warehouse/patient-listing**', {
     fixture: 'api/warehouse/getPatientListing'
   }).as('patientListingGetRequest')
-  cy.intercept('GET', '/2.0/warehouse/organization/activity**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept(
+    'GET',
+    '/2.0/warehouse/organization/activity**',
+    emptyDataEmptyPagination
+  )
   cy.intercept('GET', '/2.0/warehouse/alert/type**', {
     fixture: 'api/alert/getTypes'
   })
@@ -731,9 +745,11 @@ const interceptCoreApiCalls = (
     body: { id: '1' }
   }).as('manualInteractionPostRequest')
 
-  cy.intercept('GET', '/1.0/communication/interaction/self**', {
-    fixture: 'api/general/emptyDataEmptyPagination'
-  })
+  cy.intercept(
+    'GET',
+    '/1.0/communication/interaction/self**',
+    emptyDataEmptyPagination
+  )
 
   cy.intercept('GET', '1.0/communication/interaction/billable-service**', {
     fixture: 'api/interactions/getBillableServices'
