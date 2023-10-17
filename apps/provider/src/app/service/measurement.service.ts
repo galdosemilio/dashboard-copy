@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import moment from 'moment-timezone'
 import {
   GetMeasurementDataPointSummaryResponse,
   MeasurementDataPointProvider
@@ -15,9 +16,20 @@ export class MeasurementService {
     account: string
     type: string[]
   }): Promise<GetMeasurementDataPointSummaryResponse> {
+    const end = moment().endOf('day')
+    const start = end
+      .clone()
+      .subtract(1, 'month')
+      .add('1', 'day')
+      .startOf('day')
+
     return this.measurement.getSummary({
       account,
-      type
+      type,
+      recordedAt: {
+        start: start.toISOString(),
+        end: end.toISOString()
+      }
     })
   }
 }

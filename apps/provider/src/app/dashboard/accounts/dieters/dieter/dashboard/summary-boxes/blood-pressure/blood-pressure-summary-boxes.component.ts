@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+
 import { ContextService } from '@app/service'
 import { MeasurementService } from '@app/service/measurement.service'
 import { DataPointTypes } from '@coachcare/sdk'
