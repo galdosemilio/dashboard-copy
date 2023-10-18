@@ -1,3 +1,13 @@
+## [1.126.1](https://github.com/coachcare/dashboard/compare/v1.126.0...v1.126.1) (2023-10-18)
+
+
+### Bug Fixes
+
+* remove empty SCSS files [FRON-3162] ([223b35f](https://github.com/coachcare/dashboard/commit/223b35f0479e6a102969534a49a517114b9cfd90))
+* resolve care management selector [FRON-3328] ([3995c09](https://github.com/coachcare/dashboard/commit/3995c09c0db48c8b85b20291d87733cd33c4e4c8))
+* select appropriate organization to use when displaying the care-management modal for patient [FRON-3341] ([353a6ea](https://github.com/coachcare/dashboard/commit/353a6eaa140557ee655ff6b91886ed85cc1c9407))
+* status missing on patient bulk report ([257fa4f](https://github.com/coachcare/dashboard/commit/257fa4fafe683a95412035fe49357250c74947e9))
+
 # [1.126.0](https://github.com/coachcare/dashboard/compare/v1.125.2...v1.126.0) (2023-10-17)
 
 
