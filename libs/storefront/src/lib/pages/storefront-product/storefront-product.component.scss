@@ -248,6 +248,8 @@
           border: 0px;
           border-bottom: 2px solid var(--contrast-darken);
           flex-direction: row;
+          text-align: left;
+          line-height: 1.5;
 
           .product-img {
             flex: none;
