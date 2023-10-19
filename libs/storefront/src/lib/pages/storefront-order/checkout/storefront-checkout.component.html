@@ -123,7 +123,7 @@
         <h2>{{ cart.attributes.display_total }}</h2>
       </div>
     </div>
-    <storefront-discount-form (busy)="isLoading = $event"></storefront-discount-form>
+    <storefront-discount-form *ngIf="couponCodesEnabled" (busy)="isLoading = $event"></storefront-discount-form>
     <storefront-notice *ngIf="shippingDescription" [message]="shippingDescription"></storefront-notice>
     <button
       mat-button

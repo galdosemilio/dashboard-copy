@@ -73,6 +73,7 @@ export interface CurrentSpreeStore extends SpreeStore {
   title?: string
   description?: string
   hero_image?: string
+  coupon_codes_enabled?: boolean
   public_metadata?: {
     company_url?: string
     company_url_label?: string
@@ -151,6 +152,7 @@ interface SpreeStore {
   supported_locales?: string
   twitter?: string
   url?: string
+  coupon_codes_enabled?: boolean
   public_metadata?: {
     company_url?: string
     company_url_label?: string

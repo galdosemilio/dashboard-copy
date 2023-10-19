@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import {
+  CurrentSpreeStore,
   StorefrontCart,
   StorefrontService
 } from '@coachcare/storefront/services'
@@ -51,6 +52,11 @@ export class StorefrontCheckoutComponent implements OnInit {
   public shippingRates: ShippingRate[] = []
   public creditCardList: NamedEntity[] = []
   public errors: { [key: string]: { [key: string]: string[] } } = {}
+  public currentStore: CurrentSpreeStore
+
+  public get couponCodesEnabled(): boolean {
+    return this.currentStore?.coupon_codes_enabled
+  }
 
   public get shippingDescription(): string {
     return this.cart?.shipment?.attributes?.public_metadata?.description || ''
@@ -121,6 +127,15 @@ export class StorefrontCheckoutComponent implements OnInit {
         filter((res) => !!res)
       )
       .subscribe((res) => (this.cart = res))
+
+    this.storefront.store$
+      .pipe(
+        untilDestroyed(this),
+        filter((store) => !!store)
+      )
+      .subscribe((store) => {
+        this.currentStore = store
+      })
   }
 
   private async processCheckout() {
