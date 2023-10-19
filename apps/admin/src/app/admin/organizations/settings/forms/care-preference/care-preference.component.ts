@@ -174,8 +174,14 @@ export class CarePreferenceComponent implements OnInit {
 
     if (this.inheritedOrg) {
       this.form.controls.deviceSetupNotification.disable({ emitEvent: false })
+      this.form.controls.automatedTimeTracking.disable({ emitEvent: false })
+      this.form.controls.billing.disable({ emitEvent: false })
+      this.form.controls.monitoring.disable({ emitEvent: false })
     } else {
       this.form.controls.deviceSetupNotification.enable({ emitEvent: false })
+      this.form.controls.automatedTimeTracking.enable({ emitEvent: false })
+      this.form.controls.billing.enable({ emitEvent: false })
+      this.form.controls.monitoring.enable({ emitEvent: false })
     }
   }
 }

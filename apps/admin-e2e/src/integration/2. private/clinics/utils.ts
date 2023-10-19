@@ -19,18 +19,26 @@ export function verifyAutomaticTimeTracking(section, option) {
     .should('contain', option)
 }
 
-export function verifyBillingType(section, option) {
+export function verifyBillingType(
+  section: string,
+  should: string,
+  option?: string
+) {
   cy.get(`[data-cy="org-settings-section-care-${section}"]`)
     .find('[data-cy="care-preference-billing-option"]')
     .find('.mat-select')
-    .should('contain', option)
+    .should(should, option)
 }
 
-export function verifyMonitoringType(section, option) {
+export function verifyMonitoringType(
+  section: string,
+  should: string,
+  option?: string
+) {
   cy.get(`[data-cy="org-settings-section-care-${section}"]`)
     .find('[data-cy="care-preference-monitoring-option"]')
     .find('.mat-select')
-    .should('contain', option)
+    .should(should, option)
 }
 
 export function selectActiveOption(type, option) {

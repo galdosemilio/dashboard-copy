@@ -210,27 +210,35 @@ describe('Clinic Settings', () => {
     verifyActiveOption('rpm', 'Enabled')
     verifyDeviceSetupNotification('rpm', 'be.checked')
     verifyAutomaticTimeTracking('rpm', 'Enabled')
-    verifyBillingType('rpm', 'Self Service')
-    verifyMonitoringType('rpm', 'Self Service')
+    verifyBillingType('rpm', 'contain', 'Self Service')
+    verifyMonitoringType('rpm', 'contain', 'Self Service')
 
     // CCM enabled and deviceSetupNotification disabled
     verifyActiveOption('ccm', 'Enabled')
     verifyDeviceSetupNotification('ccm', 'not.be.checked')
     verifyAutomaticTimeTracking('ccm', 'Disabled')
-    verifyBillingType('rpm', 'Self Service')
-    verifyMonitoringType('rpm', 'Self Service')
+    verifyBillingType('ccm', 'contain', 'Self Service')
+    verifyMonitoringType('ccm', 'contain', 'Self Service')
 
     // RTM disabled
     verifyActiveOption('rtm', 'Disabled')
     verifyDeviceSetupNotification('rtm', 'not.be.visible')
+    verifyBillingType('rtm', 'not.be.visible')
+    verifyMonitoringType('rtm', 'not.be.visible')
 
     // PCM inherit from parent org
     verifyActiveOption('pcm', 'Inherit')
     verifyDeviceSetupNotification('pcm', 'be.disabled')
+    verifyBillingType('pcm', 'contain', 'Self Service')
+    verifyMonitoringType('pcm', 'contain', 'Self Service')
+    verifyBillingType('pcm', 'have.attr', 'aria-disabled')
+    verifyMonitoringType('pcm', 'have.attr', 'aria-disabled')
 
     // BHI no preference (Inherit)
     verifyActiveOption('bhi', 'Inherit')
     verifyDeviceSetupNotification('bhi', 'not.be.visible')
+    verifyBillingType('bhi', 'not.be.visible')
+    verifyMonitoringType('bhi', 'not.be.visible')
   })
 
   it('Care Management update preferences', () => {
