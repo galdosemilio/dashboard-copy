@@ -12,6 +12,7 @@ import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { SelectOption } from '@app/shared/utils'
 import { STORAGE_ACTIVE_CARE_MANAGEMENT_SERVICE_TYPE } from '@app/config'
+import { BILLABLE_SERVICES } from '@app/dashboard/reports/communications/models'
 
 interface RPMSession {
   end?: string
@@ -81,7 +82,7 @@ export class RPMPatientReportDialog implements OnDestroy, OnInit {
         organization: this.context.organization.id,
         start: dateRange.start,
         end: dateRange.end,
-        serviceType: formValue.serviceType || undefined
+        serviceType: formValue.serviceType || BILLABLE_SERVICES.rpm.id
       }
 
       let data

@@ -74,7 +74,7 @@ function checkServiceSelection(
     if (serviceType) {
       expect(xhr.request.query.serviceType).to.equal(serviceType.id)
     } else {
-      expect(xhr.request.query.serviceType).to.be.undefined
+      expect(xhr.request.query.serviceType).to.equal('1')
     }
   })
 }
