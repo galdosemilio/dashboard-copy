@@ -1,3 +1,21 @@
+# [1.127.0](https://github.com/coachcare/dashboard/compare/v1.126.1...v1.127.0) (2023-10-20)
+
+
+### Bug Fixes
+
+* disable care management sub settings in inherited [FRON-3338] ([75996ea](https://github.com/coachcare/dashboard/commit/75996ea2d33e3dd8e5311dcc23443140315689c0))
+* empty string is being sent for form submission [FRON-3335] ([a8fbfd7](https://github.com/coachcare/dashboard/commit/a8fbfd74c738729f7d818d592694514bfb0fb5bf))
+* generating patient report with no active care entry [FRON-3342] ([ad2f9af](https://github.com/coachcare/dashboard/commit/ad2f9af70a2143e22d4c775dfec9442fe5da0409))
+* invalidate index.html on publish FRON-3348 ([2ccbd55](https://github.com/coachcare/dashboard/commit/2ccbd5540fc1a2d5cea0f7a3d49a1138037e5602))
+* provide notice for all to-be-cancelled episodes of care on clinic association removal [FRON-3305] ([1e2e51f](https://github.com/coachcare/dashboard/commit/1e2e51fc0d608f6862d51ae26e466123b2da42cd))
+* storefront products layout on mobile ([e5d3049](https://github.com/coachcare/dashboard/commit/e5d3049e5f46c426c076ce823f11e68c045184cd))
+
+
+### Features
+
+* add device history table [FRON-3319] ([4bb51d8](https://github.com/coachcare/dashboard/commit/4bb51d86bd73c6bdfc23da7f0deac0a52580bf7f))
+* display discount form on storefront depending on spree store setting ([d0145ad](https://github.com/coachcare/dashboard/commit/d0145ad835155ef9f6188b3fdfe0c706ac6d4efa))
+
 ## [1.126.1](https://github.com/coachcare/dashboard/compare/v1.126.0...v1.126.1) (2023-10-18)
 
 
