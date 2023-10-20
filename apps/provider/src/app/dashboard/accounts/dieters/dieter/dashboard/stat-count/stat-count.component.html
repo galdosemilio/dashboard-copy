@@ -25,21 +25,14 @@
         {{ 'STATS.MONTHLY_AVERAGE' | translate }}:
         {{ record.average }}
         <ng-container *ngIf="record.average">
-          <span class="percent-container">{{ record.unit }}</span>
+          <span> {{ record.unit }}</span>
         </ng-container>
       </div>
-      <div *ngIf="record.max">
-        {{ 'STATS.MONTHLY_MAX' | translate }}:
-        {{ record.max }}
-        <ng-container *ngIf="record.max">
-          <span class="percent-container">{{ record.unit }}</span>
-        </ng-container>
-      </div>
-      <div *ngIf="record.min">
-        {{ 'STATS.MONTHLY_MIN' | translate }}:
-        {{ record.min }}
-        <ng-container *ngIf="record.min">
-          <span class="percent-container">{{ record.unit }}</span>
+      <div *ngIf="record.max && record.min">
+        {{ 'STATS.MONTHLY_MIN_MAX' | translate }}:
+        <strong>{{record.min}}/{{ record.max }}</strong>
+        <ng-container>
+          <span> {{ record.unit }}</span>
         </ng-container>
       </div>
       <div *ngIf="record.count">
