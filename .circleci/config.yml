@@ -149,6 +149,9 @@ jobs:
       - run: aws s3 sync ./<< parameters.env>>/provider s3://$DEPLOYMENT_BUCKET/provider --acl public-read --delete
       - run: aws s3 cp ./<< parameters.env>>/measurement-charts s3://$DEPLOYMENT_BUCKET/measurement-charts --acl public-read --recursive
       - run: aws s3 sync ./<< parameters.env>>/measurement-charts s3://$DEPLOYMENT_BUCKET/measurement-charts --acl public-read --delete
+      - run:
+          name: Clear Cache
+          command: aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID  --paths "/index.html"
 
   format_check:
     <<: *default
