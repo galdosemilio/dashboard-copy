@@ -273,11 +273,11 @@ describe('Patient profile -> dashboard -> rpm', function () {
       // disabled auto time tracking
       cy.get('[data-cy="care-management-state"]')
         .find('.current-code')
-        .should('not.exist')
+        .should('contain', '99490')
 
       cy.get('[data-cy="care-management-state"]')
         .find('.timer')
-        .should('contain', '00:00 / 00:00')
+        .should('contain', '10:00 / 20:00')
     })
   })
 

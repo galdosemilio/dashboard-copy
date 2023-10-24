@@ -212,7 +212,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
       this.timerUnavailableError = undefined
       this.stopTimer()
 
-      if (!account || !this.serviceType || !this.automatedTimeTracking) {
+      if (!account || !this.serviceType) {
         return
       }
 
@@ -375,6 +375,10 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
   }
 
   private startTimer(): void {
+    if (!this.automatedTimeTracking) {
+      return
+    }
+
     if (this.timerInterval) {
       this.stopTimer()
     }
@@ -406,6 +410,7 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
   public onCloseStatusPanel(): void {
     this.showStatusPanel = false
+    void this.resolveAccountCareSessionStatus(this.account)
   }
 
   public onOpenSettings(): void {
