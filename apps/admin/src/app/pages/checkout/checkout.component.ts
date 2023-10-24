@@ -11,9 +11,6 @@ import { ActivatedRoute } from '@angular/router'
 import { AddressLabelType, EcommerceProduct } from '@coachcare/common/model'
 import {
   ContextService,
-  CookieService,
-  ECOMMERCE_ACCESS_TOKEN,
-  ECOMMERCE_REFRESH_TOKEN,
   EventsService,
   LanguageService,
   NotifierService
@@ -36,7 +33,6 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Client, makeClient } from '@spree/storefront-api-v2-sdk'
 import { OrderAttr } from '@spree/storefront-api-v2-sdk/types/interfaces/Order'
-import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
 import { environment } from 'apps/admin/src/environments/environment'
 import { get } from 'lodash'
 import * as moment from 'moment'
@@ -54,6 +50,7 @@ import {
   CheckoutShippingInfo,
   CheckoutShippingInfoComponent
 } from './shipping-info'
+import { EcommerceService } from '@board/services/account/ecommerce.service'
 
 export interface CheckoutData {
   accountInfo?: CheckoutAccountInfo
@@ -126,7 +123,7 @@ export class CheckoutComponent implements OnInit {
   public showSpinner = false
   public storeUrl: string
   public spree: Client
-  public spreeToken: IOAuthToken
+  public spreeToken: string
   public useShippingAddress: boolean = true
   public actionButtonType: ActionButtonType = 'dashboard'
   private automaticShopifyRedirect = false
@@ -137,7 +134,6 @@ export class CheckoutComponent implements OnInit {
     private bus: EventsService,
     private cdr: ChangeDetectorRef,
     private context: ContextService,
-    private cookie: CookieService,
     private fb: FormBuilder,
     private lang: LanguageService,
     private log: Logging,
@@ -145,7 +141,8 @@ export class CheckoutComponent implements OnInit {
     private org: AppStoreFacade,
     private route: ActivatedRoute,
     private session: Session,
-    private spreeProvider: SpreeProvider
+    private spreeProvider: SpreeProvider,
+    private ecommerceAccount: EcommerceService
   ) {}
 
   public ngOnInit(): void {
@@ -216,10 +213,7 @@ export class CheckoutComponent implements OnInit {
         await this.accountComponent.submit()
 
         if (this.hasStoreUrl) {
-          await this.loadSpreeInfo(
-            this.checkoutData.accountInfo.email,
-            this.checkoutData.accountInfo.password
-          )
+          await this.loadSpreeInfo(this.accountComponent.account.id)
         }
 
         await this.resolveAccountAddresses()
@@ -334,14 +328,14 @@ export class CheckoutComponent implements OnInit {
 
       this.bus.trigger('checkout.loading.show', true)
       await this.spree.cart.emptyCart({
-        bearerToken: this.spreeToken.access_token
+        bearerToken: this.spreeToken
       })
 
       const selectedProducts = this.checkoutForm.value.products
 
       for (const product of selectedProducts) {
         const spreeItemAddResult = await this.spree.cart.addItem(
-          { bearerToken: this.spreeToken.access_token },
+          { bearerToken: this.spreeToken },
           {
             variant_id: product,
             quantity: 1
@@ -467,30 +461,8 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  private async loadSpreeInfo(email: string, password: string): Promise<void> {
-    const spreeToken = await this.spree.authentication.getToken({
-      username: email,
-      password: password
-    })
-
-    if (spreeToken.isFail()) {
-      throw new Error(
-        `Spree token fetch error. Reason: ${spreeToken.fail().message}`
-      )
-    }
-
-    this.spreeToken = spreeToken.success()
-
-    this.spreeProvider.setBaseApiOptions(
-      {
-        baseUrl: this.storeUrl,
-        headers: { Authorization: `Bearer ${this.spreeToken.access_token}` }
-      },
-      true
-    )
-
-    this.cookie.set(ECOMMERCE_ACCESS_TOKEN, this.spreeToken.access_token)
-    this.cookie.set(ECOMMERCE_REFRESH_TOKEN, this.spreeToken.refresh_token)
+  private async loadSpreeInfo(accountId: string): Promise<void> {
+    this.spreeToken = await this.ecommerceAccount.loadSpreeInfo(accountId)
   }
 
   private loadBillingAddressIntoForm(address: AccountAddress): void {
@@ -526,7 +498,7 @@ export class CheckoutComponent implements OnInit {
       this.bus.trigger('checkout.loading.show', true)
 
       const paymentMethodsResponse = await this.spree.checkout.paymentMethods({
-        bearerToken: this.spreeToken.access_token
+        bearerToken: this.spreeToken
       })
 
       if (paymentMethodsResponse.isFail()) {
@@ -544,7 +516,7 @@ export class CheckoutComponent implements OnInit {
       }
 
       const addPaymentRes = await this.spree.checkout.addPayment(
-        { bearerToken: this.spreeToken.access_token },
+        { bearerToken: this.spreeToken },
         {
           payment_method_id: paymentMethodsResponse.success().data[0].id,
           source_attributes: {
@@ -578,7 +550,7 @@ export class CheckoutComponent implements OnInit {
       }
 
       const completeCheckoutRes = await this.spree.checkout.complete({
-        bearerToken: this.spreeToken.access_token
+        bearerToken: this.spreeToken
       })
 
       if (completeCheckoutRes.isFail()) {
@@ -651,7 +623,7 @@ export class CheckoutComponent implements OnInit {
       }
 
       const orderRes = await this.spree.checkout.orderUpdate(
-        { bearerToken: this.spreeToken.access_token },
+        { bearerToken: this.spreeToken },
         {}
       )
 
@@ -667,7 +639,7 @@ export class CheckoutComponent implements OnInit {
 
       const productsRes = await this.spree.products.list(
         {
-          bearerToken: this.spreeToken.access_token
+          bearerToken: this.spreeToken
         },
         { include: 'images' }
       )
@@ -690,8 +662,6 @@ export class CheckoutComponent implements OnInit {
 
   private async resolveOnboardingProgress(): Promise<void> {
     try {
-      const loginInfo = this.loginInfo.value
-
       this.bus.trigger('checkout.loading.show', true)
 
       const session = await this.session.check()
@@ -711,7 +681,7 @@ export class CheckoutComponent implements OnInit {
       this.account = account
 
       if (this.hasStoreUrl) {
-        await this.loadSpreeInfo(loginInfo.email, loginInfo.password)
+        await this.loadSpreeInfo(account.id)
       }
 
       this.accountCreated = true
@@ -840,6 +810,7 @@ export class CheckoutComponent implements OnInit {
       })
 
       this.storeUrl = pref.storeUrl ?? ''
+      this.ecommerceAccount.setupUrl(pref.storeUrl)
       this.hasStoreUrl = !!pref.storeUrl
       this.additionalConsentButtons =
         (pref.mala.custom as MALACustomData)?.links?.additionalConsent?.map(

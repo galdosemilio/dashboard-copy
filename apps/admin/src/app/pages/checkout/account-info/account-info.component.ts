@@ -21,15 +21,12 @@ import {
   ContextService,
   CookieService,
   COOKIE_ROLE,
-  ECOMMERCE_ACCESS_TOKEN,
-  ECOMMERCE_REFRESH_TOKEN,
   EventsService,
   LanguageService,
   NotifierService
 } from '@coachcare/common/services'
 import { SelectorOption, _ } from '@coachcare/common/shared'
 import {
-  AccountIdentifier,
   AccountProvider,
   AccSingleResponse,
   AddLogRequest,
@@ -37,7 +34,6 @@ import {
   DeviceTypeIds,
   Logging,
   Register,
-  SpreeProvider,
   User
 } from '@coachcare/sdk'
 import { TranslateService } from '@ngx-translate/core'
@@ -50,10 +46,8 @@ import { DeviceDetectorService } from 'ngx-device-detector'
 import * as owasp from 'owasp-password-strength-test'
 import { filter } from 'rxjs/operators'
 import { Client } from '@spree/storefront-api-v2-sdk'
-import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token'
 import { merge } from 'rxjs'
-
-const SPREE_EXTERNAL_ID_NAME = 'Spree ID'
+import { EcommerceService } from '@board/services/account/ecommerce.service'
 
 export interface AdditionalConsentButtonEntry {
   text: string
@@ -103,7 +97,7 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
 
   @Input() hasStoreUrl: boolean
   @Input() spree: Client
-  @Input() spreeToken: IOAuthToken
+  @Input() spreeToken: string
   @Input() storeUrl: string
 
   public account: AccSingleResponse
@@ -125,7 +119,7 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
   private propagateTouched: () => void
 
   constructor(
-    private accountIdentifier: AccountIdentifier,
+    private ecommerceAccount: EcommerceService,
     private accountProvider: AccountProvider,
     private bus: EventsService,
     private cookie: CookieService,
@@ -136,7 +130,6 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
     private log: Logging,
     private notifier: NotifierService,
     private register: Register,
-    private spreeProvider: SpreeProvider,
     private translate: TranslateService,
     private user: User
   ) {
@@ -301,33 +294,13 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
         return
       }
 
-      const spreeAccountResult = await this.spree.account.create({
-        user: {
-          email: accountData.email,
-          password: accountData.password,
-          password_confirmation: accountData.password
-        }
-      })
-
-      if (spreeAccountResult.isFail()) {
-        throw new Error(
-          `Spree account creation error. Reason: ${
-            spreeAccountResult.fail().message
-          }`
-        )
-      }
-
-      await this.accountIdentifier.add({
-        account: this.account.id,
-        organization: environment.defaultOrgId,
-        name: SPREE_EXTERNAL_ID_NAME,
-        value: spreeAccountResult.success().data.id
-      })
-
-      await this.loadSpreeInfo(accountData.email, accountData.password)
+      await this.ecommerceAccount.createExternalIdentifier(this.account.id)
+      this.spreeToken = await this.ecommerceAccount.loadSpreeInfo(
+        this.account.id
+      )
 
       const spreeCartResult = await this.spree.cart.create({
-        bearerToken: this.spreeToken.access_token
+        bearerToken: this.spreeToken
       })
 
       if (spreeCartResult.isFail()) {
@@ -337,7 +310,7 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
       }
 
       const setEmailRes = await this.spree.checkout.orderUpdate(
-        { bearerToken: this.spreeToken.access_token },
+        { bearerToken: this.spreeToken },
         { order: { email: accountData.email } }
       )
 
@@ -367,32 +340,6 @@ export class CheckoutAccountComponent implements ControlValueAccessor, OnInit {
     } finally {
       this.bus.trigger('checkout.loading.show', false)
     }
-  }
-
-  private async loadSpreeInfo(email: string, password: string): Promise<void> {
-    const spreeToken = await this.spree.authentication.getToken({
-      username: email,
-      password: password
-    })
-
-    if (spreeToken.isFail()) {
-      throw new Error(
-        `Spree token fetch error. Reason: ${spreeToken.fail().message}`
-      )
-    }
-
-    this.spreeToken = spreeToken.success()
-
-    this.spreeProvider.setBaseApiOptions(
-      {
-        baseUrl: this.storeUrl,
-        headers: { Authorization: `Bearer ${this.spreeToken.access_token}` }
-      },
-      true
-    )
-
-    this.cookie.set(ECOMMERCE_ACCESS_TOKEN, this.spreeToken.access_token)
-    this.cookie.set(ECOMMERCE_REFRESH_TOKEN, this.spreeToken.refresh_token)
   }
 
   private generateHeights(): void {

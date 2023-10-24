@@ -2,6 +2,7 @@ import { AppDownloadGuard } from '@board/pages/services/app-download.guard'
 import { PasswordUpdateGuard } from '@board/pages/services/password-update.guard'
 import { RouteWildcardGuard } from '@board/pages/services/route-wildcard.guard'
 import { SessionGuard } from '@board/pages/services/session.guard'
+import { EcommerceService } from '@board/services'
 
 export {
   AppDownloadGuard,
@@ -10,7 +11,7 @@ export {
   SessionGuard
 }
 
-export const PagesProviders = []
+export const PagesProviders = [EcommerceService]
 
 export const PagesRoutings = [
   AppDownloadGuard,
