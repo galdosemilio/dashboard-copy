@@ -497,7 +497,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
           passedRPMSession,
           {
             serviceType: 'RPM',
-            startDate: '06/03/2023',
+            startDate: '06/02/2023',
             endDate: '06/03/2023',
             disabledBy: 'Zhang Xin'
           }
@@ -527,8 +527,8 @@ describe('Patient profile -> dashboard -> rpm', function () {
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.get('.ccr-dashboard')
-      cy.get('[cy-data="open-status-button"]').click()
-      cy.get('[cy-data="program_setting_button"]').click()
+      cy.get('[data-cy="open-status-button"]').click()
+      cy.get('[data-cy="program_setting_button"]').click()
 
       cy.get('table').find('tbody tr').as('passedSessions')
       cy.get('@passedSessions').eq(0).find('td').eq(4).find('mat-icon').click()
@@ -707,8 +707,8 @@ function checkActivePassedSessions({
   cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
   cy.get('.ccr-dashboard')
-  cy.get('[cy-data="open-status-button"]').click()
-  cy.get('[cy-data="program_setting_button"]').click()
+  cy.get('[data-cy="open-status-button"]').click()
+  cy.get('[data-cy="program_setting_button"]').click()
 
   if (activeSessionsDate) {
     activeSessionsDate.forEach((date, index) => {

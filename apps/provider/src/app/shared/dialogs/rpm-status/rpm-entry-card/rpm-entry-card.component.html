@@ -6,7 +6,7 @@
     <p class="notice entry" *ngIf="!entryPending">
         {{ 'CARE_SERVICES.SERVICE_ENABLED' | translate:{
             patient: client.firstName + ' ' + client.lastName,
-            date: rpmEntry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
+            date: rpmEntry.rpmState.startedAt | amDateFormat:'ddd, MMM D YYYY',
             clinic: rpmEntry.organization, service: serviceName }
         }}
     </p>

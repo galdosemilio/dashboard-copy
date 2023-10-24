@@ -17,7 +17,7 @@
               {{ 'RPM.RPM_ENABLED' | translate:{
                   serviceType: entry.serviceType.name,
                   patient: client.firstName + ' ' + client.lastName,
-                  date: entry.rpmState.createdAt | amDateFormat:'ddd, MMM D YYYY',
+                  date: entry.rpmState.startedAt | amDateFormat:'ddd, MMM D YYYY',
                   clinic: entry.organization }
               }}
           </p>

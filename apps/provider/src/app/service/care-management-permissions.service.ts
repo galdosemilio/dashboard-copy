@@ -58,7 +58,6 @@ export class CareManagementPermissionsService {
       .filter((entry) =>
         accessibleCareServiceIds.includes(entry.serviceType.id)
       )
-      .reverse()
       .valueOf()
 
     this.careEntries = allEntries
