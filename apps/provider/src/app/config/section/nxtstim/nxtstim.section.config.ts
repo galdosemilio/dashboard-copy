@@ -2,6 +2,7 @@ import { MeasurementTabs, SidenavOptions } from '../consts'
 import { SectionConfigDetails } from '../models/section.details'
 import { _ } from '@app/shared/utils'
 import { NxtstimDieterSummaryBoxesComponent } from '@app/dashboard/accounts/dieters/dieter/dashboard'
+import { RPM_DEVICES } from '@app/dashboard/reports/rpm/models'
 
 export const NXTSTIMSectionConfig: SectionConfigDetails = {
   JOURNAL: {
@@ -20,6 +21,7 @@ export const NXTSTIMSectionConfig: SectionConfigDetails = {
   },
   RPM: {
     AVAILABLE_DEVICES: [
+      ...RPM_DEVICES,
       {
         id: '5',
         name: 'NXTSTIM EcoAI',
