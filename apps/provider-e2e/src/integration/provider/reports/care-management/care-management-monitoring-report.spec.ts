@@ -24,7 +24,6 @@ describe('Reports -> RPM -> Export Monitoring Report', function () {
       `${Cypress.config('downloadsFolder')}/RPM_Dec_2019_csv.csv`
     ).then((res) => {
       const csv = csvJSON(res)
-
       checkRPMAndRTMCsv(csv, ['99457', '99458'])
     })
   })
@@ -140,115 +139,115 @@ describe('Reports -> RPM -> Export Monitoring Report', function () {
 })
 
 function checkRPMAndRTMCsv(csv, requirements: string[]) {
-  checkCsvData(csv, 0, 12, 'N/A')
-  checkCsvData(csv, 0, 13, '30 more calendar days; ')
   checkCsvData(csv, 0, 14, 'N/A')
-  checkCsvData(
-    csv,
-    0,
-    15,
-    '30 more calendar days; 15 more device transmissions needed'
-  )
+  checkCsvData(csv, 0, 15, '30 more calendar days; ')
   checkCsvData(csv, 0, 16, 'N/A')
   checkCsvData(
     csv,
     0,
     17,
-    '30 more calendar days; 20 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
+    '30 more calendar days; 15 more device transmissions needed'
   )
   checkCsvData(csv, 0, 18, 'N/A')
   checkCsvData(
     csv,
     0,
     19,
-    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
+    '30 more calendar days; 20 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
   )
   checkCsvData(csv, 0, 20, 'N/A')
   checkCsvData(
     csv,
     0,
     21,
+    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
+  )
+  checkCsvData(csv, 0, 22, 'N/A')
+  checkCsvData(
+    csv,
+    0,
+    23,
     `${requirements[1]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
   )
 
-  checkCsvData(csv, 1, 12, '01/31/2020')
-  checkCsvData(csv, 1, 13, 'N/A')
-  checkCsvData(csv, 1, 14, 'N/A')
-  checkCsvData(
-    csv,
-    1,
-    15,
-    '20 more calendar days; 15 more device transmissions needed'
-  )
+  checkCsvData(csv, 1, 14, '01/31/2020')
+  checkCsvData(csv, 1, 15, 'N/A')
   checkCsvData(csv, 1, 16, 'N/A')
   checkCsvData(
     csv,
     1,
     17,
-    '30 more calendar days; 20 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
+    '20 more calendar days; 15 more device transmissions needed'
   )
   checkCsvData(csv, 1, 18, 'N/A')
   checkCsvData(
     csv,
     1,
     19,
-    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
+    '30 more calendar days; 20 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
   )
   checkCsvData(csv, 1, 20, 'N/A')
   checkCsvData(
     csv,
     1,
     21,
+    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
+  )
+  checkCsvData(csv, 1, 22, 'N/A')
+  checkCsvData(
+    csv,
+    1,
+    23,
     `${requirements[1]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
   )
 
-  checkCsvData(csv, 2, 12, '01/31/2020')
-  checkCsvData(csv, 2, 13, 'N/A')
   checkCsvData(csv, 2, 14, '01/31/2020')
   checkCsvData(csv, 2, 15, 'N/A')
-  checkCsvData(csv, 2, 16, 'N/A')
-  checkCsvData(
-    csv,
-    2,
-    17,
-    '20 more calendar days; 10 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
-  )
+  checkCsvData(csv, 2, 16, '01/31/2020')
+  checkCsvData(csv, 2, 17, 'N/A')
   checkCsvData(csv, 2, 18, 'N/A')
   checkCsvData(
     csv,
     2,
     19,
-    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
+    '20 more calendar days; 10 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
   )
   checkCsvData(csv, 2, 20, 'N/A')
   checkCsvData(
     csv,
     2,
     21,
+    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
+  )
+  checkCsvData(csv, 2, 22, 'N/A')
+  checkCsvData(
+    csv,
+    2,
+    23,
     `${requirements[1]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
   )
 
-  checkCsvData(csv, 3, 12, '01/31/2020')
-  checkCsvData(csv, 3, 13, 'N/A')
   checkCsvData(csv, 3, 14, '01/31/2020')
   checkCsvData(csv, 3, 15, 'N/A')
   checkCsvData(csv, 3, 16, '01/31/2020')
   checkCsvData(csv, 3, 17, 'N/A')
   checkCsvData(csv, 3, 18, '01/31/2020')
   checkCsvData(csv, 3, 19, 'N/A')
-  checkCsvData(csv, 3, 20, 'N/A')
-  checkCsvData(csv, 3, 21, '20 minutes more of monitoring needed')
+  checkCsvData(csv, 3, 20, '01/31/2020')
+  checkCsvData(csv, 3, 21, 'N/A')
+  checkCsvData(csv, 3, 22, 'N/A')
+  checkCsvData(csv, 3, 23, '20 minutes more of monitoring needed')
 
-  checkCsvData(csv, 4, 12, '01/31/2020')
-  checkCsvData(csv, 4, 13, 'N/A')
   checkCsvData(csv, 4, 14, '01/31/2020')
   checkCsvData(csv, 4, 15, 'N/A')
   checkCsvData(csv, 4, 16, '01/31/2020')
   checkCsvData(csv, 4, 17, 'N/A')
   checkCsvData(csv, 4, 18, '01/31/2020')
   checkCsvData(csv, 4, 19, 'N/A')
-  checkCsvData(csv, 4, 20, 'N/A')
-  checkCsvData(csv, 4, 21, '')
+  checkCsvData(csv, 4, 20, '01/31/2020')
+  checkCsvData(csv, 4, 21, 'N/A')
+  checkCsvData(csv, 4, 22, 'N/A')
+  checkCsvData(csv, 4, 23, '')
 }
 
 function checkCsvData(csv, index: number, column: number, value: string) {
