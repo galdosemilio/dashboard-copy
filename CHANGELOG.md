@@ -1,3 +1,23 @@
+# [1.128.0](https://github.com/coachcare/dashboard/compare/v1.127.0...v1.128.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* adjusted base interface for rpmstate entries on dashbaord [FRON-3126] ([c8b95aa](https://github.com/coachcare/dashboard/commit/c8b95aae976abd9ed3dee87ab51f5f221a464d95))
+* external identifier registration workflow issue [FRON-3353] ([d25bdff](https://github.com/coachcare/dashboard/commit/d25bdff0385e15ad236b8bcf8e7712a9736271c0))
+* fix edit supervising provider on rpm billings [FRON-3197] ([bb70ccd](https://github.com/coachcare/dashboard/commit/bb70ccd1d0cc64917854b586e933c02a0a843f32))
+* move systolic bp box before diastolic [FRON-3344] ([a7bbe6f](https://github.com/coachcare/dashboard/commit/a7bbe6fa244c22bbddb10a71c6dd6f7acf146612))
+* retain milliseconds for time tracking start [FRON-3339] ([7ace627](https://github.com/coachcare/dashboard/commit/7ace627b2ba1016266b8788ef0dc9c1b9bb8b1e1))
+* show startedAt for episode of care information [FRON-3347] ([1766992](https://github.com/coachcare/dashboard/commit/17669924ebba33a9bec041340c9730b0580fe070))
+* summary box multiplier and date range issue [FRON-3340] ([b024512](https://github.com/coachcare/dashboard/commit/b0245120625030328b86a4183cb857a5544c7c3e))
+* summary boxes styling ([b79dade](https://github.com/coachcare/dashboard/commit/b79dade0fc6718d99795e07a31522d01f67131f0))
+
+
+### Features
+
+* add button to switch org context in foreign patient [FRON-3115] ([61b26b7](https://github.com/coachcare/dashboard/commit/61b26b78a062c4a600184812c3ea109898f47e4d))
+* allow all rpm devices in nxtstim clinic [FRON-3355] ([3861331](https://github.com/coachcare/dashboard/commit/3861331fdf67501a01b6d2e7391fe3dee000b93c))
+
 # [1.127.0](https://github.com/coachcare/dashboard/compare/v1.126.1...v1.127.0) (2023-10-20)
 
 
