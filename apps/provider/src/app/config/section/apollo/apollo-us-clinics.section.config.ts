@@ -6,9 +6,3 @@ export const ApolloUSClinicsProdSectionConfig: SectionConfigDetails = {
     SHOWN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
   }
 }
-
-export const ApolloUSClinicsTestSectionConfig: SectionConfigDetails = {
-  SIDENAV: {
-    SHOWN_OPTIONS: [SidenavOptions.REPORT_CUSTOM]
-  }
-}

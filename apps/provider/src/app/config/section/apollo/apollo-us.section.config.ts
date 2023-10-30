@@ -29,30 +29,3 @@ export const ApolloUSProdSectionConfig: SectionConfigDetails = {
     SHOW_ACC_IDN_INPUT_CREATE: true
   }
 }
-
-export const ApolloUSTestSectionConfig: SectionConfigDetails = {
-  PATIENT_FORM: {
-    PACKAGE_ENROLL: null,
-    PACKAGE_ENROLL_GRID: {
-      component: PackageSelectorComponent,
-      props: PackageSelectorProps,
-      values: {
-        forcePackageSelection: false,
-        forcePackageChoiceId: '681',
-        packages: [
-          {
-            name: _('SECTION.APOLLO_US.PACKAGE_SELECT.COACH_PLUS_SERVICE'),
-            value: '681',
-            image: '../../../assets/package-b.png',
-            contents: [
-              _('SECTION.APOLLO_US.PACKAGE_SELECT.MOBILE_APP'),
-              _('SECTION.APOLLO_US.PACKAGE_SELECT.BODY_COMPOSITION_SCALE'),
-              _('SECTION.APOLLO_US.PACKAGE_SELECT.APOLLO_COACHING_SERVICES')
-            ]
-          }
-        ]
-      }
-    },
-    SHOW_ACC_IDN_INPUT_CREATE: true
-  }
-}

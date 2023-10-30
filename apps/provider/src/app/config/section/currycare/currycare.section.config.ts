@@ -6,9 +6,3 @@ export const CurryCareProdSectionConfig: SectionConfigDetails = {
     HIDDEN_OPTIONS: [SidenavOptions.SCHEDULE_PARENT]
   }
 }
-
-export const CurryCareTestSectionConfig: SectionConfigDetails = {
-  SIDENAV: {
-    HIDDEN_OPTIONS: [SidenavOptions.SCHEDULE_PARENT]
-  }
-}
