@@ -158,12 +158,20 @@ export function assertSequenceBulkOrganizationEnrollmentRequest(args: {
   sequence: string
   executeAt: string
   transition: string
+  packages?: string[]
+  serviceTypes?: string[]
 }): void {
   cy.wait('@sequenceBulkOrganizationEnrollmentPostRequest').should((xhr) => {
     expect(xhr.request.body.organization).to.equal(args.organization)
     expect(xhr.request.body.sequence).to.equal(args.sequence)
     expect(xhr.request.body.executeAt.local).to.equal(args.executeAt)
     expect(xhr.request.body.transition).to.equal(args.transition)
+    expect(xhr.request.body.packages?.toString()).to.equal(
+      args.packages?.toString()
+    )
+    expect(xhr.request.body.serviceTypes?.toString()).to.equal(
+      args.serviceTypes?.toString()
+    )
   })
 }
 

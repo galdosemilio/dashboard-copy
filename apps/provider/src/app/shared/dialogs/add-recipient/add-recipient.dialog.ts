@@ -16,6 +16,8 @@ import { Transition } from '@app/dashboard/sequencing/models/sequence-transition
 import { ContextService, NotifierService } from '@app/service'
 import {
   AccountAccessData,
+  CareManagementPreference,
+  CareManagementServiceType,
   OrganizationEntity,
   OrganizationProvider,
   PackageAssociation,
@@ -71,6 +73,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
   public isFirstStepImmediateProcess = false
   public packagesControl = new FormControl([])
   public packages: PackageAssociation[] = []
+  public serviceTypesControl = new FormControl([])
+  public serviceTypes: CareManagementServiceType[] = []
   public minDateForEnrollment = moment().subtract(8, 'days')
 
   private _sequence: Sequence
@@ -87,7 +91,8 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     private notify: NotifierService,
     private organization: OrganizationProvider,
     private seq: SelveraSequenceService,
-    private packageOrganization: PackageOrganization
+    private packageOrganization: PackageOrganization,
+    private carePreference: CareManagementPreference
   ) {}
 
   public ngOnDestroy(): void {}
@@ -118,12 +123,14 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     this.recipients = [...(this.recipients || []), recipient]
   }
 
-  public async onOrgSelect($event: OrganizationEntity): Promise<void> {
+  public onOrgSelect($event: OrganizationEntity): void {
     if (typeof $event === 'object' && $event.id) {
       this.packagesControl.setValue([])
+      this.serviceTypesControl.setValue([])
       this.selectedOrg = $event
-      await this.fetchOrgChildren(this.selectedOrg.id)
-      await this.fetchOrgPackages(this.selectedOrg.id)
+      void this.fetchOrgChildren(this.selectedOrg.id)
+      void this.fetchOrgPackages(this.selectedOrg.id)
+      void this.resolveServiceTypes(this.selectedOrg.id)
     }
   }
 
@@ -226,6 +233,13 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
 
     this.packagesControl.setValue(packages)
   }
+  public onServiceTypeRemoved(serviceType): void {
+    const serviceTypes = this.serviceTypesControl.value.filter(
+      (p) => p.id !== serviceType.id
+    )
+
+    this.serviceTypesControl.setValue(serviceTypes)
+  }
 
   private bulkDataRequest({ org, transition }): {
     organization: string
@@ -236,8 +250,10 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
     }
     transition: string
     packages?: string[]
+    serviceTypes?: string[]
   } {
     const { value: packages } = this.packagesControl
+    const { value: serviceTypes } = this.serviceTypesControl
     return {
       organization: org.id,
       targetOrganization:
@@ -248,7 +264,9 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
       },
       transition: transition.id,
       packages:
-        packages.length > 0 ? packages.map((p) => p.package.id) : undefined
+        packages.length > 0 ? packages.map((p) => p.package.id) : undefined,
+      serviceTypes:
+        serviceTypes.length > 0 ? serviceTypes.map((p) => p.id) : undefined
     }
   }
 
@@ -316,6 +334,31 @@ export class AddRecipientDialog implements OnDestroy, OnInit {
         limit: 'all'
       })
       this.packages = response.data
+    } catch (error) {
+      this.notify.error(error)
+    }
+  }
+
+  private async resolveServiceTypes(orgId: string): Promise<void> {
+    try {
+      this.serviceTypes = []
+
+      const res = await this.carePreference.getAllCareManagementPreferences({
+        organization: orgId
+      })
+
+      const orgServiceTypes = res.data
+        .filter((entry) => entry.isActive)
+        .map((entry) => entry.serviceType)
+
+      this.serviceTypes = [
+        ...this.context.user.careManagementServiceTypes.filter(
+          (userServiceType) =>
+            orgServiceTypes.find(
+              (orgServiceType) => orgServiceType.id === userServiceType.id
+            )
+        )
+      ]
     } catch (error) {
       this.notify.error(error)
     }

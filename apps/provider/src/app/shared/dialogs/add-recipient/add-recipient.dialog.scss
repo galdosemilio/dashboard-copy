@@ -27,4 +27,16 @@ sequencing-add-recipient-dialog {
     background-color: var(--primary-lighten);
     opacity: 1;
   }
+
+  .mat-standard-chip {
+    border-radius: 0;
+    border: 1px solid #9e9e9e !important;
+    background: transparent !important;
+    color: #484848 !important;
+    min-height: 26px;
+
+    .mat-chip-remove {
+      color: #484848 !important;
+    }
+  }
 }

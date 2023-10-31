@@ -67,7 +67,7 @@
             <small data-cy="sequence-org-child" *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
         </mat-tab>
 
-        <mat-tab *ngIf="allowBulkEnrollment" [aria-label]="'SEQUENCING.ALL_PATIENTS_PHASES' | translate" [label]="'SEQUENCING.ALL_PATIENTS_PHASES' | translate">
+        <mat-tab *ngIf="allowBulkEnrollment" [aria-label]="'SEQUENCING.ALL_PATIENTS_SELECTED_CLINICS' | translate" [label]="'SEQUENCING.ALL_PATIENTS_SELECTED_CLINICS' | translate">
             <ccr-organization-search
             data-cy="sequence-enroll-search-orgs"
             [showEmptyOption]="false"
@@ -78,7 +78,7 @@
             <small data-cy="sequence-org-child" *ngIf="orgChildren?.length" [innerHTML]="'SEQUENCING.ORG_AND_CHILDREN' | translate:{ org: selectedOrg?.name, childAmount: orgChildren.length }"></small>
 
             <mat-form-field *ngIf="selectedOrg && packages">
-                <mat-label>{{ 'GLOBAL.PACKAGES' | translate }}</mat-label>
+                <mat-label>{{ 'BOARD.FILTER_BY_PACKAGE' | translate }}</mat-label>
                 <mat-select data-cy="sequence-package-select" [formControl]="packagesControl" multiple>
 
                   <mat-select-trigger>
@@ -94,7 +94,26 @@
                   <mat-option *ngFor="let package of packages" [value]="package">{{package.package.title}}</mat-option>
 
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="selectedOrg && serviceTypes.length">
+                <mat-label>{{ 'BOARD.FILTER_CARE_MANAGEMENT_SERVICE_TYPE' | translate }}</mat-label>
+                <mat-select data-cy="sequence-service-types-select" [formControl]="serviceTypesControl" multiple>
+
+                  <mat-select-trigger>
+                    <mat-chip-list>
+                      <mat-chip *ngFor="let serviceType of serviceTypesControl.value"
+                        [removable]="true" (removed)="onServiceTypeRemoved(serviceType)">
+                        {{ serviceType.name }}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </mat-select-trigger>
+
+                  <mat-option *ngFor="let serviceType of serviceTypes" [value]="serviceType">{{serviceType.name}}</mat-option>
+
+                </mat-select>
+            </mat-form-field>
         </mat-tab>
     </mat-tab-group>
 
