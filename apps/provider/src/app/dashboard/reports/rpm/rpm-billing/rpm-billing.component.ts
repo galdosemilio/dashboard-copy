@@ -563,8 +563,12 @@ export class RPMBillingComponent implements AfterViewInit, OnDestroy, OnInit {
           entry.state?.isActive
             ? moment(entry.state.startedAt).format('MM/DD/YYYY')
             : 'No',
-          startCase(entry.state.preference.billing),
-          startCase(entry.state.preference.monitoring)
+          entry.state?.preference?.billing
+            ? startCase(entry.state?.preference?.billing)
+            : 'N/A',
+          entry.state?.preference?.monitoring
+            ? startCase(entry.state?.preference?.monitoring)
+            : 'N/A'
         ]
 
         this.cptCodes.forEach((code, index) => {
