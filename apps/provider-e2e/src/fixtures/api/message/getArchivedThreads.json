@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "threadId": "1",
+      "subject": "CoachCare Message 1",
+      "account": [],
+      "organization": {
+        "name": "CoachCare",
+        "id": "1",
+        "hierarchyPath": ["1"]
+      },
+      "lastMessage": {
+        "id": "6112",
+        "date": "2020-01-01T03:00:00.000+00:00",
+        "content": "this is a test",
+        "accountId": "6"
+      },
+      "viewed": true
+    }
+  ],
+  "pagination": {}
+}

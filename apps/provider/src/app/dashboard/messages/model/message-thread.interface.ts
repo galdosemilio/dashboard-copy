@@ -5,6 +5,7 @@ export interface MessageThread {
   threadId?: string
   allRecipients: Array<MessageRecipient>
   recipients: Array<MessageRecipient>
+  hasParticipants: boolean
   lastMessageId?: string
   lastMessageDate?: string
   lastMessageSent?: string

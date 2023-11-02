@@ -211,7 +211,7 @@ const interceptCoreApiCalls = (
   })
   cy.intercept('GET', '/3.0/conference/video/call**', emptyDataEmptyPagination)
   cy.intercept('GET', '/2.0/message/thread?**', {
-    fixture: 'api/message/getThreads'
+    fixture: fetchOverride('/2.0/message/thread?**', 'api/message/getThreads')
   })
   cy.intercept('GET', '/2.0/message/thread/**', {
     fixture: 'api/message/getThread'

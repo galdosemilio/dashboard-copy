@@ -197,7 +197,8 @@ export class MessagesComponent implements OnInit {
     // update the ccr-messages component
     this.newThread = {
       allRecipients: accounts,
-      recipients: accounts
+      recipients: accounts,
+      hasParticipants: accounts?.length > 0
     }
   }
 
@@ -308,13 +309,15 @@ export class MessagesComponent implements OnInit {
       )
       .value()
 
+    const recipients = accounts.filter((a) => a.id !== this.current.id)
     return {
       threadId: t.threadId,
       allRecipients: accounts,
-      recipients: accounts.filter((a) => a.id !== this.current.id),
+      recipients,
       lastMessageId: t.lastMessage.id,
       lastMessageDate: t.lastMessage.date,
       lastMessageSent: t.lastMessage.content,
+      hasParticipants: recipients?.length > 0,
       organization: t.organization,
       unread: !t.viewed
     }

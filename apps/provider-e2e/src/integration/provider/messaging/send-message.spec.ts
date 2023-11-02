@@ -77,4 +77,32 @@ describe('Messages -> send message', function () {
       expect(xhr.request.body.data.message).to.contain('test')
     })
   })
+
+  it('disabled send message for archived thread', function () {
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/2.0/message/thread?**',
+          fixture: '/api/message/getArchivedThreads'
+        }
+      ]
+    })
+
+    cy.visit(`/messages`)
+
+    cy.get('messages-thread-list')
+      .find('mat-nav-list')
+      .find('mat-list-item')
+      .eq(0)
+      .find('h3')
+      .should('contain', 'ARCHIVED')
+
+    cy.get('app-messages').find('textarea').should('not.exist')
+    cy.get('app-messages')
+      .find('.disabled-input')
+      .should(
+        'contain',
+        'All other participants have been removed from this message thread'
+      )
+  })
 })

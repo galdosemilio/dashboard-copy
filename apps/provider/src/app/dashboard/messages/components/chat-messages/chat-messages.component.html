@@ -71,10 +71,10 @@
     </ng-container>
   </div>
 </div>
-<div class="message-footer-resize">
+<div class="message-footer-resize" *ngIf="thread?.hasParticipants">
   <mat-icon (mousedown)="onResizeStart($event)" class="clickable" fxHide.lt-md>expand</mat-icon>
 </div>
-<div class="messages-footer" #messageFooter>
+<div class="messages-footer" #messageFooter *ngIf="thread?.hasParticipants">
   <textarea
   rows="2"
   [(ngModel)]="newMessage"
@@ -94,6 +94,10 @@
       [showIntro]="false"
     ></ccr-popup-description>
   </div>
+</div>
+
+<div class="disabled-input" *ngIf="!thread?.hasParticipants">
+  {{ 'BOARD.ALL_OTHER_PARTICIPANTS_REMOVED' | translate }}
 </div>
 
 <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="loading || disabled">
