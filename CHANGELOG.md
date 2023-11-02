@@ -1,3 +1,10 @@
+## [1.128.1](https://github.com/coachcare/dashboard/compare/v1.128.0...v1.128.1) (2023-11-02)
+
+
+### Bug Fixes
+
+* monitoring report for billing and monitoring prefs [FRON-3361] ([f029f2c](https://github.com/coachcare/dashboard/commit/f029f2cdb8c08bad68f308ee5496f46f0fc83141))
+
 # [1.128.0](https://github.com/coachcare/dashboard/compare/v1.127.0...v1.128.0) (2023-10-27)
 
 
