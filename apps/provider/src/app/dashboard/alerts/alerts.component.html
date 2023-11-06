@@ -27,7 +27,7 @@
   </mat-form-field>
 
   <mat-form-field fxFlex fxFlex.gt-md="300px" floatLabel="never" class="ccr-filter">
-    <mat-select [disableOptionCentering]="true" [(ngModel)]="rpmStatus" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_BY_RPM_STATUS' | translate">
+    <mat-select data-cy="rpmStatus" [disableOptionCentering]="true" [(ngModel)]="rpmStatus" (selectionChange)="refresh()" [placeholder]="'REPORTS.FILTER_BY_RPM_STATUS' | translate">
       <mat-option *ngFor="let rpmStatusItem of rpmStatusList" [value]="rpmStatusItem.value">
         {{ rpmStatusItem.viewValue | translate | uppercase }}
       </mat-option>

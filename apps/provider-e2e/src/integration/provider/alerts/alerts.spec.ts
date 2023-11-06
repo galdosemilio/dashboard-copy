@@ -275,4 +275,152 @@ describe('Dashboard -> Alerts', function () {
       .should('contain', 'Heart rate')
       .should('contain', 'No data in the previous 3 days')
   })
+
+  describe('Alerts Filters', function () {
+    beforeEach(function () {
+      cy.setOrganization('ccr')
+      standardSetup({
+        startDate: new Date().getTime()
+      })
+    })
+
+    it('Properly load filters from local storage', function () {
+      window.localStorage.setItem(
+        `ccrAlertsFilters_${Cypress.env('organizationId')}`,
+        JSON.stringify({
+          value: {
+            rpmStatus: 'active'
+          },
+          expiry: new Date().getTime() + 1000 * 60 * 60 * 24 * 30
+        })
+      )
+      cy.visit(`/alerts/notifications`)
+
+      cy.get('mat-table').find('mat-row').as('notifRows').tick(10000)
+
+      cy.get('[data-cy="rpmStatus"]')
+        .find('.mat-select-value-text')
+        .should('contain', 'PATIENTS CURRENTLY ENROLLED IN RPM')
+    })
+
+    it('Properly respects expired filters', function () {
+      window.localStorage.setItem(
+        `ccrAlertsFilters_${Cypress.env('organizationId')}`,
+        JSON.stringify({
+          value: {
+            rpmStatus: 'active'
+          },
+          expiry: new Date().getTime() - 1000 * 60 * 60 * 24 * 30
+        })
+      )
+      cy.visit(`/alerts/notifications`)
+
+      cy.get('mat-table').find('mat-row').as('notifRows').tick(10000)
+
+      cy.get('[data-cy="rpmStatus"]')
+        .find('.mat-select-value-text')
+        .should('not.exist')
+    })
+
+    it('Properly saves filters to local storage', function () {
+      cy.visit(`/alerts/notifications`)
+
+      cy.get('mat-table').find('mat-row').as('notifRows').tick(10000)
+
+      cy.get('[data-cy="rpmStatus"]').click().wait(500)
+      cy.get('.mat-option').eq(1).click()
+
+      cy.get('[data-cy="rpmStatus"]')
+        .find('.mat-select-value-text')
+        .should('contain', 'PATIENTS CURRENTLY ENROLLED IN RPM')
+
+      cy.getAllLocalStorage().then((ls) => {
+        expect(ls['http://localhost:4200']).to.have.property(
+          `ccrAlertsFilters_${Cypress.env('organizationId')}`
+        )
+        const filter =
+          ls['http://localhost:4200'][
+            `ccrAlertsFilters_${Cypress.env('organizationId')}`
+          ]
+        expect(JSON.parse(filter as string)['value']).to.deep.equal({
+          package: null,
+          rpmStatus: 'active'
+        })
+      })
+    })
+
+    it('Property saves pagination to local storage', function () {
+      cy.visit(`/alerts/notifications`)
+
+      cy.get('mat-table').find('mat-row').as('notifRows').tick(10000)
+
+      cy.get('button[aria-label="Next page"]').click()
+
+      cy.getAllLocalStorage().then((ls) => {
+        expect(ls['http://localhost:4200']).to.have.property(
+          `ccrAlertsFilters_${Cypress.env('organizationId')}`
+        )
+        const filter =
+          ls['http://localhost:4200'][
+            `ccrAlertsFilters_${Cypress.env('organizationId')}`
+          ]
+        expect(JSON.parse(filter as string)['value']).to.deep.equal({
+          package: null,
+          offset: 1
+        })
+      })
+    })
+
+    it('Properly resets pagination in local storage when no data its loaded', function () {
+      window.localStorage.setItem(
+        `ccrAlertsFilters_${Cypress.env('organizationId')}`,
+        JSON.stringify({
+          value: {
+            package: null,
+            offset: 1
+          },
+          expiry: new Date().getTime() + 1000 * 60 * 60 * 24 * 30
+        })
+      )
+      cy.intercept('GET', '/1.0/warehouse/alert/notification?**', {
+        body: { data: [], pagination: {} }
+      }).as('getNotificationsRequest')
+      cy.visit(`/alerts/notifications`)
+      cy.wait('@getNotificationsRequest')
+
+      cy.getAllLocalStorage().then((ls) => {
+        const filter =
+          ls['http://localhost:4200'][
+            `ccrAlertsFilters_${Cypress.env('organizationId')}`
+          ]
+        expect(JSON.parse(filter as string)['value']).to.deep.equal({
+          package: null
+        })
+      })
+    })
+
+    it('Properly clears filters from local storage when incorrect package its loaded', function () {
+      window.localStorage.setItem(
+        `ccrAlertsFilters_${Cypress.env('organizationId')}`,
+        JSON.stringify({
+          value: {
+            package: 4
+          },
+          expiry: new Date().getTime() + 1000 * 60 * 60 * 24 * 30
+        })
+      )
+      cy.visit(`/alerts/notifications`)
+      cy.get('mat-table').find('mat-row').as('notifRows').tick(10000)
+
+      cy.getAllLocalStorage().then((ls) => {
+        const filter =
+          ls['http://localhost:4200'][
+            `ccrAlertsFilters_${Cypress.env('organizationId')}`
+          ]
+        expect(JSON.parse(filter as string)['value']).to.not.deep.equal({
+          package: 4
+        })
+      })
+    })
+  })
 })

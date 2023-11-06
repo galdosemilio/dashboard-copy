@@ -16,6 +16,7 @@ export const STORAGE_ECOMMERCE_ITEM_AMOUNT = 'ecommerceItemAmount'
 export const ECOMMERCE_ACCESS_TOKEN = 'ecommerceAccessToken'
 export const ECOMMERCE_REFRESH_TOKEN = 'ecommerceRefreshToken'
 export const ECOMMERCE_CART_ID = 'ecommerceGuestCartId'
+export const ALERTS_FILTERS = 'ccrAlertsFilters'
 
 /**
  * Cookie Service

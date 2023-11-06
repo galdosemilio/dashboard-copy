@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import { findIndex } from 'lodash'
 import { Subject } from 'rxjs'
+import * as moment from 'moment-timezone'
 
 import {
   ContextService,
@@ -15,6 +16,8 @@ import { AlertsDatabase, AlertsDataSource } from './services'
 import { debounceTime } from 'rxjs/operators'
 import { NotificationRequest, PackageOrganization } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
+import { LocalStorageService } from '@app/service/local-storage'
+import { ALERTS_FILTERS } from '@coachcare/common/services'
 
 @UntilDestroy()
 @Component({
@@ -62,7 +65,8 @@ export class AlertsComponent implements OnInit, OnDestroy {
     private bus: EventsService,
     private notifier: NotifierService,
     private database: AlertsDatabase,
-    private packageOrganization: PackageOrganization
+    private packageOrganization: PackageOrganization,
+    private localStorage: LocalStorageService
   ) {}
 
   // refresh chart trigger
@@ -108,18 +112,28 @@ export class AlertsComponent implements OnInit, OnDestroy {
       organization: this.context.organizationId,
       account: this.context.user.id
     }))
-    this.source.addOptional(this.paginator.page, () => ({
-      limit: this.paginator.pageSize || 12,
-      offset: this.paginator.pageIndex * (this.paginator.pageSize || 12)
-    }))
+    this.source.addOptional(
+      this.paginator.page,
+      this.calculatePagination.bind(this)
+    )
 
     this.context.organization$
       .pipe(untilDestroyed(this))
       .subscribe((org) => this.resolvePackages(org))
+
+    this.source
+      .connect()
+      .pipe(untilDestroyed(this))
+      .subscribe((data) => {
+        if (data.length === 0 && this.paginator.pageIndex > 0) {
+          this.paginator.pageIndex = 0
+          this.refresh()
+        }
+      })
   }
 
   private async resolvePackages(org: SelectedOrganization) {
-    this.package = null
+    this.getFiltersFromLocalStorage(org)
     this.refresh()
     this.packages = [{ viewValue: _('REPORTS.CLEAR_FILTER'), value: undefined }]
 
@@ -137,6 +151,13 @@ export class AlertsComponent implements OnInit, OnDestroy {
           value: Number(entry.package.id)
         }))
       ]
+      if (
+        this.package &&
+        !this.packages.some((p) => p.value === this.package)
+      ) {
+        this.package = null
+        this.refresh()
+      }
     } catch (err) {
       this.notifier.error(err)
     }
@@ -147,7 +168,68 @@ export class AlertsComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
+    this.saveFiltersToLocalStorage()
     this.paginator.pageIndex = 0
     this.refresh$.next(true)
+  }
+
+  private calculatePagination() {
+    const filters = this.localStorage.get(
+      `${ALERTS_FILTERS}_${this.context.organizationId}`
+    )
+
+    if (this.paginator.pageIndex > 0) {
+      this.saveFiltersToLocalStorage()
+    }
+
+    if (filters?.offset != 0 && this.paginator.pageIndex == 0) {
+      this.paginator.pageIndex = filters?.offset ?? 0
+    }
+
+    return {
+      limit: this.paginator.pageSize || 12,
+      offset: this.paginator.pageIndex * (this.paginator.pageSize || 12)
+    }
+  }
+
+  private saveFiltersToLocalStorage() {
+    const filters: {
+      package: number
+      rpmStatus: 'active' | 'inactive'
+      alert: string
+      offset?: number
+    } = {
+      package: this.package,
+      rpmStatus: this.rpmStatus,
+      alert: this.alert
+    }
+
+    if (this.paginator.pageIndex !== 0) {
+      filters.offset = this.paginator.pageIndex
+    }
+
+    this.localStorage.setWithExpiry(
+      `${ALERTS_FILTERS}_${this.context.organizationId}`,
+      filters,
+      moment.duration(1, 'month')
+    )
+  }
+
+  private getFiltersFromLocalStorage(org?: SelectedOrganization) {
+    const filters = this.localStorage.get(
+      `${ALERTS_FILTERS}_${org?.id ?? this.context.organizationId}`
+    )
+
+    if (filters) {
+      this.alert = filters.alert
+      this.rpmStatus = filters.rpmStatus
+      this.package = filters.package
+      this.paginator.pageIndex = filters.offset ?? 0
+    } else {
+      this.alert = undefined
+      this.package = null
+      this.rpmStatus = undefined
+      this.paginator.pageIndex = 0
+    }
   }
 }
