@@ -16,11 +16,19 @@ export interface CareServiceType {
   deviceSetup?: boolean
 }
 
+enum ServiceTypeId {
+  RPM = '1',
+  CCM = '2',
+  RTM = '3',
+  PCM = '4',
+  BHI = '5'
+}
+
 const serviceTypeConflictsMap: Record<string, string[]> = {
-  '1': ['3'],
-  '2': ['4'],
-  '3': ['1'],
-  '4': ['2']
+  [ServiceTypeId.RPM]: [ServiceTypeId.RTM],
+  [ServiceTypeId.CCM]: [ServiceTypeId.PCM],
+  [ServiceTypeId.RTM]: [ServiceTypeId.RPM],
+  [ServiceTypeId.PCM]: [ServiceTypeId.CCM]
 }
 
 @Injectable({
@@ -108,6 +116,16 @@ export class CareManagementService {
       this.notify.error(err)
 
       return []
+    }
+  }
+
+  isAllowedTomorrow(serviceType: string) {
+    switch (serviceType) {
+      case ServiceTypeId.RPM:
+      case ServiceTypeId.RTM:
+        return true
+      default:
+        return false
     }
   }
 }

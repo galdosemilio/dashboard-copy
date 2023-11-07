@@ -582,6 +582,7 @@
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Du har ikke adgang til at redigere {{service}} status for denne patient, da du ikke har administrative privilegier for deres klinik ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "Episoden af ​​Care {{service}}.",
     "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "{{service}}-episoden af pleje vil blive aktiveret med det samme",
+    "SERVICE_WILL_BE_ENABLED_TODAY": "Plejeafsnittet {{service}} bliver aktiveret i dag",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "Episoden af ​​Care {{service}}.",
     "SUPERVISOR": "Tilsynsførende"
   },
@@ -1613,7 +1614,8 @@
     "CLINIC": "Klinik",
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minutter mere af overvågningen er nødvendig",
     "CURRENT_SUPERVISING_PROVIDER": "Nuværende tilsynsførende udbyder",
-    "DEFAULT_START_DATE_DESCRIPTION": "Standard startdato valgt, i morgen kl. 6 lokal tid",
+    "DEFAULT_START_DATE_TODAY_DESCRIPTION": "Standard startdato valgt, i dag ved midnat lokal tid",
+    "DEFAULT_START_DATE_TOMORROW_DESCRIPTION": "Standard startdato valgt, i morgen kl. 6 lokal tid",
     "DEPENDENCY_ICON_DESCRIPTION": "Kravene til kode {{code}} skal være opfyldt, før denne kode er berettiget til fakturering",
     "DEVICE_TYPE": "Enhedstype",
     "EDIT_DIAGNOSIS": "Rediger Diagnose",

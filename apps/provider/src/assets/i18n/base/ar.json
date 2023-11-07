@@ -582,6 +582,7 @@
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "ليس لديك حق الوصول إلى تحرير حالة {{service}} لهذا المريض لأنك لا تملك امتيازات إدارية لعيادتهم ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "سيتم تمكين حلقة {{service}} من الرعاية في الساعة 6 صباحًا",
     "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "سيتم تفعيل حلقة الرعاية {{service}} على الفور",
+    "SERVICE_WILL_BE_ENABLED_TODAY": "سيتم تفعيل حلقة الرعاية {{service}} اليوم",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "سيتم تمكين حلقة {{service}}",
     "SUPERVISOR": "مشرف"
   },
@@ -1613,7 +1614,8 @@
     "CLINIC": "عيادة",
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} دقيقة من المراقبة المطلوبة",
     "CURRENT_SUPERVISING_PROVIDER": "مقدم الإشراف الحالي",
-    "DEFAULT_START_DATE_DESCRIPTION": "تم تحديد تاريخ البدء الافتراضي غدًا في الساعة 6 صباحًا بالتوقيت المحلي",
+    "DEFAULT_START_DATE_TODAY_DESCRIPTION": "تم تحديد تاريخ البدء الافتراضي، اليوم عند منتصف الليل بالتوقيت المحلي",
+    "DEFAULT_START_DATE_TOMORROW_DESCRIPTION": "تم تحديد تاريخ البدء الافتراضي غدًا في الساعة 6 صباحًا بالتوقيت المحلي",
     "DEPENDENCY_ICON_DESCRIPTION": "متطلبات {{code}} غير مستوفاة",
     "DEVICE_TYPE": "نوع الجهاز",
     "EDIT_DIAGNOSIS": "تحرير التشخيص",

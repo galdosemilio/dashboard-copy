@@ -582,6 +582,7 @@
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Vous n'avez pas accès à la modification du statut {{service}} pour ce patient car vous n'avez pas de privilèges administratifs pour leur clinique ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "L'épisode {{service}} sera activé à 6h du matin",
     "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "L'épisode de soins {{service}} sera activé immédiatement",
+    "SERVICE_WILL_BE_ENABLED_TODAY": "L'épisode de soins {{service}} sera activé aujourd'hui",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "L'épisode {{service}} de Care sera activé demain",
     "SUPERVISOR": "Superviseur"
   },
@@ -1613,7 +1614,8 @@
     "CLINIC": "Clinique",
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minutes de surveillance supplémentaires nécessaires",
     "CURRENT_SUPERVISING_PROVIDER": "Fournisseur superviseur actuel",
-    "DEFAULT_START_DATE_DESCRIPTION": "Date de début par défaut sélectionnée, demain à 6h00 heure locale",
+    "DEFAULT_START_DATE_TODAY_DESCRIPTION": "Date de début par défaut sélectionnée, aujourd'hui à minuit, heure locale",
+    "DEFAULT_START_DATE_TOMORROW_DESCRIPTION": "Date de début par défaut sélectionnée, demain à 6h00 heure locale",
     "DEPENDENCY_ICON_DESCRIPTION": "{{code}} exigences non satisfaites",
     "DEVICE_TYPE": "Type d'appareil",
     "EDIT_DIAGNOSIS": "Modifier le diagnostic",

@@ -582,6 +582,7 @@
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Sie haben keinen Zugriff, um den Status {{service}} für diesen Patienten zu bearbeiten, da Sie keine administrativen Berechtigungen für ihre Klinik haben ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "Die {{service}} -Pode von Care wird um 6 Uhr morgens aktiviert",
     "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "Die Pflegeepisode {{service}} wird sofort aktiviert",
+    "SERVICE_WILL_BE_ENABLED_TODAY": "Die Pflegeepisode {{service}} wird heute aktiviert",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "Die {{service}} -Spolsters von Care wird morgen aktiviert",
     "SUPERVISOR": "Aufsicht"
   },
@@ -1613,7 +1614,8 @@
     "CLINIC": "Klinik",
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minuten mehr Überwachung erforderlich",
     "CURRENT_SUPERVISING_PROVIDER": "Aktueller überwachender Anbieter",
-    "DEFAULT_START_DATE_DESCRIPTION": "Standardstartdatum ausgewählt, morgen um 6 Uhr Ortszeit",
+    "DEFAULT_START_DATE_TODAY_DESCRIPTION": "Standardstartdatum ausgewählt, heute um Mitternacht Ortszeit",
+    "DEFAULT_START_DATE_TOMORROW_DESCRIPTION": "Standardstartdatum ausgewählt, morgen um 6 Uhr Ortszeit",
     "DEPENDENCY_ICON_DESCRIPTION": "{{code}} -krav er ikke opfyldt",
     "DEVICE_TYPE": "Gerätetyp",
     "EDIT_DIAGNOSIS": "Bearbeiten Diagnose",

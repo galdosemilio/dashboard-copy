@@ -537,9 +537,50 @@ describe('Patient profile -> dashboard -> rpm', function () {
       )
     })
 
+    describe('visibility', () => {
+      it('should not show start date in non top level user', () => {
+        checkActivationDialogVisibility({
+          apiOverrides: [],
+          isTopLevelUser: false,
+          isAllowTomorrow: false,
+          index: 0
+        })
+      })
+
+      describe('top level user', () => {
+        const data = [
+          { name: 'RPM', isAllowTomorrow: true },
+          { name: 'CCM', isAllowTomorrow: false },
+          { name: 'RTM', isAllowTomorrow: true },
+          { name: 'PCM', isAllowTomorrow: false },
+          { name: 'BHI', isAllowTomorrow: false }
+        ]
+
+        for (let i = 0; i < data.length; i += 1) {
+          it(data[i].name, () => {
+            checkActivationDialogVisibility({
+              apiOverrides: [
+                {
+                  url: '/2.0/access/organization?**',
+                  fixture: 'api/organization/getAll-topLevel'
+                }
+              ],
+              isTopLevelUser: true,
+              isAllowTomorrow: data[i].isAllowTomorrow,
+              index: i
+            })
+          })
+        }
+      })
+    })
+
     it('should enable new episode', () => {
       standardSetup({
         apiOverrides: [
+          {
+            url: '/2.0/access/organization?**',
+            fixture: 'api/organization/getAll-topLevel'
+          },
           {
             url: '/1.0/care-management/state/audit**',
             fixture: 'api/general/emptyDataEmptyPagination'
@@ -644,6 +685,54 @@ describe('Patient profile -> dashboard -> rpm', function () {
     }
   })
 })
+
+function checkActivationDialogVisibility({
+  apiOverrides,
+  isTopLevelUser,
+  isAllowTomorrow,
+  index
+}: {
+  apiOverrides: ApiOverrideEntry[]
+  isTopLevelUser: boolean
+  isAllowTomorrow: boolean
+  index: number
+}) {
+  standardSetup({
+    apiOverrides: [
+      ...apiOverrides,
+      {
+        url: '/1.0/care-management/state/audit**',
+        fixture: 'api/general/emptyDataEmptyPagination'
+      }
+    ]
+  })
+
+  cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
+
+  cy.get('.ccr-dashboard')
+  cy.get('[data-cy="open-status-button"]').click()
+  cy.get('[data-cy="program_setting_button"]').click()
+
+  cy.get('mat-dialog-container')
+    .find('app-dialog-care-mgmt-card')
+    .eq(index)
+    .find('.add-button')
+    .should('exist')
+    .click()
+
+  if (!isTopLevelUser) {
+    cy.get('mat-dialog-container').find('ccr-date-input').should('not.exist')
+  } else {
+    const hint = isAllowTomorrow
+      ? 'Default start date selected, tomorrow at 6am local time'
+      : 'Default start date selected, today at midnight local time'
+    cy.get('mat-dialog-container').find('ccr-date-input').should('exist')
+    cy.get('mat-dialog-container')
+      .find('ccr-date-input')
+      .find('mat-hint')
+      .should('contain', hint)
+  }
+}
 
 function checkVisibility(visible: boolean, apiOverrides?: ApiOverrideEntry[]) {
   standardSetup({ apiOverrides })

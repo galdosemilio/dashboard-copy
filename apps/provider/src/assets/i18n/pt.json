@@ -582,6 +582,7 @@
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "Não tem acesso para editar o estado do {{service}} para este paciente pois não tem privilégios administrativos para sua clínica ({{ org }})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "O episódio de {{service}} do cuidado será ativado às 6h",
     "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "O episódio de atendimento {{service}} será ativado imediatamente",
+    "SERVICE_WILL_BE_ENABLED_TODAY": "O episódio de atendimento {{service}} será ativado hoje",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "O episódio de {{service}} do cuidado será ativado amanhã",
     "SUPERVISOR": "Supervisor"
   },
@@ -1613,7 +1614,8 @@
     "CLINIC": "Clínica",
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} minutos a mais de monitoramento necessário",
     "CURRENT_SUPERVISING_PROVIDER": "Provedor de supervisão atual",
-    "DEFAULT_START_DATE_DESCRIPTION": "Data de início padrão selecionada, amanhã às 6h, horário local",
+    "DEFAULT_START_DATE_TODAY_DESCRIPTION": "Data de início padrão selecionada, hoje à meia-noite, horário local",
+    "DEFAULT_START_DATE_TOMORROW_DESCRIPTION": "Data de início padrão selecionada, amanhã às 6h, horário local",
     "DEPENDENCY_ICON_DESCRIPTION": "Requisitos do {{code}} não atendidos",
     "DEVICE_TYPE": "Tipo de Dispositivo",
     "EDIT_DIAGNOSIS": "Editar Diagnóstico",

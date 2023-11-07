@@ -230,7 +230,11 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
       const rpmEntry = new RPMStateEntry({ rpmState: response.data.shift() })
 
-      if (rpmEntry.isActive && !rpmEntry.pending) {
+      if (
+        this.automatedTimeTracking &&
+        rpmEntry.isActive &&
+        !rpmEntry.pending
+      ) {
         await this.resolveRPMBillingStatus(account)
       } else {
         this.stopTimer()

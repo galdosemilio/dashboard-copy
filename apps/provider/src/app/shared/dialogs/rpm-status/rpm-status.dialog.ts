@@ -123,8 +123,45 @@ export class RPMStatusDialog implements OnInit {
     )
   }
 
+  get isDefaultStartTomorrow() {
+    return this.careManagementService.isAllowedTomorrow(
+      this.newEntryType?.serviceType?.id
+    )
+  }
+
+  get newEntryStatus() {
+    const now = moment()
+    const enableForm = this.form.value.enableForm
+
+    if (!enableForm) {
+      return ''
+    }
+
+    const defaultStartDate = moment().add(
+      this.isDefaultStartTomorrow ? 1 : 0,
+      'day'
+    )
+    const startDate = enableForm.setup?.startDate
+      ? moment(enableForm.setup?.startDate)
+      : defaultStartDate
+
+    if (startDate.isBefore(now, 'day')) {
+      return 'before'
+    }
+
+    if (startDate.isAfter(now, 'day')) {
+      return 'tomorrow'
+    }
+
+    if (this.shouldStartImmediately) {
+      return 'immediate'
+    }
+
+    return 'today'
+  }
+
   get shouldStartImmediately() {
-    return this.newEntryType.serviceType.id === '5' // hard coded for BHI, we need to get it from server
+    return this.newEntryType?.serviceType.id === '5' // hard coded for BHI, we need to get it from server
   }
 
   private _currentStatus: DialogStatus = 'initial'

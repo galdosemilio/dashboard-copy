@@ -582,6 +582,7 @@
     "SERVICE_NOT_ALLOWED_FOR_CLINIC": "אין לך גישה לערוך את הסטטוס {{service}} עבור מטופל זה מכיוון שאין לך הרשאות ניהול עבור המרפאה שלהם ({{org}})",
     "SERVICE_WILL_BE_ENABLED_AT_6_AM": "פרק הטיפול {{service}} יופעל בשעה 06:00",
     "SERVICE_WILL_BE_ENABLED_IMMEDIATELY": "פרק הטיפול של {{service}} יופעל באופן מיידי",
+    "SERVICE_WILL_BE_ENABLED_TODAY": "פרק הטיפול של {{service}} יופעל היום",
     "SERVICE_WILL_BE_ENABLED_TOMORROW": "פרק הטיפול {{service}} יופעל מחר",
     "SUPERVISOR": "מְפַקֵחַ"
   },
@@ -1613,7 +1614,8 @@
     "CLINIC": "מרפאה",
     "CLOCK_ICON_DESCRIPTION": "{{ amount }} דקות נוספות של ניטור נדרשות",
     "CURRENT_SUPERVISING_PROVIDER": "ספק פיקוח נוכחי",
-    "DEFAULT_START_DATE_DESCRIPTION": "תאריך התחלה ברירת מחדל נבחר, מחר בשעה 06:00 שעון מקומי",
+    "DEFAULT_START_DATE_TODAY_DESCRIPTION": "נבחר תאריך התחלה המוגדר כברירת מחדל, היום בחצות שעון מקומי",
+    "DEFAULT_START_DATE_TOMORROW_DESCRIPTION": "תאריך התחלה ברירת מחדל נבחר, מחר בשעה 06:00 שעון מקומי",
     "DEPENDENCY_ICON_DESCRIPTION": "דרישות {{code}} אינן עומדות",
     "DEVICE_TYPE": "סוג מכשיר",
     "EDIT_DIAGNOSIS": "אבחון ערוך",

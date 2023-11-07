@@ -37,8 +37,9 @@
           <ccr-date-input
             [hidden]="!supervisingProviderOptions?.length"
             [placeholder]="'BOARD.START_DATE' | translate"
+            [max]="maxStartDate"
             [required]="false"
-            [hint]="form?.get('setup')?.value?.startDate ? '' : 'RPM.DEFAULT_START_DATE_DESCRIPTION' | translate"
+            [hint]="form?.get('setup')?.value?.startDate ? '' : isAllowedTomorrow ? ('RPM.DEFAULT_START_DATE_TOMORROW_DESCRIPTION' | translate) : ('RPM.DEFAULT_START_DATE_TODAY_DESCRIPTION' | translate)"
             formControlName="startDate">
           </ccr-date-input>
         </div>
