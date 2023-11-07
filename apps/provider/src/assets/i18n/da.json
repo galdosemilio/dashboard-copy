@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "Aktivitetssporer",
     "BP_CUFF": "BEAT blodtryksmanchet",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} dage mere skal gå",
-    "CANT_EDIT_ENTRY": "Denne RPM session er allerede blevet redigeret en gang efter 24 timer. Det kan ikke ændres igen.",
     "CHANGE_SUPERVISING_PROVIDER": "Skift tilsynsførende udbyder",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} kræves flere live interaktioner (opkald / besøg)",
     "CLINIC": "Klinik",

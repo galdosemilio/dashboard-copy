@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "Activity Tracker",
     "BP_CUFF": "BEAT Blood Pressure Cuff",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} days more need to elapse",
-    "CANT_EDIT_ENTRY": "This RPM session has already been edited once after 24 hours. It cannot be modified again.",
     "CHANGE_SUPERVISING_PROVIDER": "Change Supervising Provider",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} more live interactions (call/visit) needed",
     "CLINIC": "Clinic",

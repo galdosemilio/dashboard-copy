@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "تعقب النشاط",
     "BP_CUFF": "ضغط الدم صفعة BEAT",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} أيام أكثر تحتاج إلى انقضاء",
-    "CANT_EDIT_ENTRY": "وقد تم بالفعل تحرير هذه الدورة RPM مرة واحدة بعد 24 ساعة. لا يمكن تعديله مرة أخرى.",
     "CHANGE_SUPERVISING_PROVIDER": "مزود الإشراف على التغيير",
     "CHAT_ICON_DESCRIPTION": "مطلوب {{ amount }} المزيد من التفاعلات الحية (اتصال / زيارة)",
     "CLINIC": "عيادة",

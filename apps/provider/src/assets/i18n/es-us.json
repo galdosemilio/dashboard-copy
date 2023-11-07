@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "Rastreador de actividad",
     "BP_CUFF": "BEAT Brazalete de Presión Sanguínea",
     "CALENDAR_ICON_DESCRIPTION": "Tienen que transcurrir {{ amount }} días más",
-    "CANT_EDIT_ENTRY": "Esta sesión RPM ya se ha editado una vez después de 24 horas. No se puede modificar de nuevo.",
     "CHANGE_SUPERVISING_PROVIDER": "Cambiar proveedor supervisor",
     "CHAT_ICON_DESCRIPTION": "Se necesitan {{ amount }} interacciones en vivo (llamada/visita) más",
     "CLINIC": "Clínica",

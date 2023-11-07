@@ -249,7 +249,7 @@
             <button
             *ngIf="entryIsActive"
             (click)="status = 'edit_entry'"
-            [disabled]="entryAge === 'after24Edited' || !accessibleOrganizations.length"
+            [disabled]="!accessibleOrganizations.length"
             class="ccr-button"
             color="primary"
             mat-button>{{ 'RPM.EDIT_DIAGNOSIS' | translate }}</button>

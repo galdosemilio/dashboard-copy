@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "Aktivitätstracker",
     "BP_CUFF": "BEAT Blutdruckmanschette",
     "CALENDAR_ICON_DESCRIPTION": "Es müssen noch {{ amount }} Tage vergehen",
-    "CANT_EDIT_ENTRY": "Diese RPM-Sitzung wird bereits nach 24 Stunden bearbeitet einmal worden. Es kann nicht wieder geändert werden.",
     "CHANGE_SUPERVISING_PROVIDER": "Betreuenden Anbieter wechseln",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} weitere Live-Interaktionen (Anruf / Besuch) erforderlich",
     "CLINIC": "Klinik",

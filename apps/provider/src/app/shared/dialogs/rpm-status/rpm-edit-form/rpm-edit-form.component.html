@@ -34,10 +34,6 @@
       <textarea [readonly]="mode === 'readonly'" formControlName="note" matInput></textarea>
     </mat-form-field>
 
-    <small *ngIf="entryAge === 'after24Edited'" class="highlighted">
-      {{ 'RPM.CANT_EDIT_ENTRY' | translate }}
-    </small>
-
     <small
     *ngIf="entryAge === 'after24' && mode === 'edit'"
     class="highlighted">

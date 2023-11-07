@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "Suivi d'activité",
     "BP_CUFF": "Boutons de manchette de tension artérielle BATTRE",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} jours de plus doivent s'écouler",
-    "CANT_EDIT_ENTRY": "Cette session RPM a déjà été modifié une fois après 24 heures. Il ne peut pas être modifiée à nouveau.",
     "CHANGE_SUPERVISING_PROVIDER": "Changer de fournisseur superviseur",
     "CHAT_ICON_DESCRIPTION": "{{ amount }} plus d'interactions en direct (appel / visite) nécessaires",
     "CLINIC": "Clinique",

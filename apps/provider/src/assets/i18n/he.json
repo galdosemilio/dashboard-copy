@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "מעקב אחר פעילות",
     "BP_CUFF": "לחץ דם BEAT קאף",
     "CALENDAR_ICON_DESCRIPTION": "עוד {{ amount }} יום צריך לחלוף",
-    "CANT_EDIT_ENTRY": "מושב סל\"ד זה כבר עבר עריכה פעם אחרי 24 שעות. זה לא יכול להיות שונה שוב.",
     "CHANGE_SUPERVISING_PROVIDER": "שנה ספק מפקח",
     "CHAT_ICON_DESCRIPTION": "דרושים {{ amount }} אינטראקציות חיות נוספות (שיחה / ביקור)",
     "CLINIC": "מרפאה",

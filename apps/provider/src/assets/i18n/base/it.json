@@ -1608,7 +1608,6 @@
     "ACTIVITY_TRACKER": "Rilevatore di attività",
     "BP_CUFF": "Pressione sanguigna polsino Beat",
     "CALENDAR_ICON_DESCRIPTION": "{{ amount }} giorni in più devono trascorrere",
-    "CANT_EDIT_ENTRY": "Questa sessione RPM è già stato modificato una volta dopo 24 ore. Esso non può essere modificato di nuovo.",
     "CHANGE_SUPERVISING_PROVIDER": "Cambia fornitore di supervisione",
     "CHAT_ICON_DESCRIPTION": "Sono necessarie altre {{ amount }} interazioni live (chiamata / visita)",
     "CLINIC": "Clinica",
