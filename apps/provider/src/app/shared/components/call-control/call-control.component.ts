@@ -64,6 +64,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
   public billableServices: BillableService[] = []
   public callState: CallState
   public toolTipMessage: string
+  public isLoading: boolean
 
   constructor(
     private account: AccountProvider,
@@ -81,6 +82,10 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
       .pipe(select(callSelector), untilDestroyed(this))
       .subscribe((callState) => {
         this.callState = callState
+
+        if (this.callState.isCallStarted && this.isLoading) {
+          this.isLoading = false
+        }
 
         if (this.callState.subaccountId === '' && this.callState.isSupported) {
           this.translator
@@ -122,6 +127,8 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
         this.matMenuTrigger.closeMenu()
       }
 
+      this.isLoading = true
+
       const patientAvailability = await this.checkPatientAvailability()
 
       switch (patientAvailability.status) {
@@ -130,6 +137,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
           break
         case AccountAvailabilityStatus.UNAVAILABLE:
           this.showUnavailableDialog()
+          this.isLoading = false
           await this.logging.log({
             logLevel: 'warn',
             data: {
@@ -143,6 +151,7 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
           break
         case AccountAvailabilityStatus.UNCERTAIN:
           this.showUncertainDialog(billableService)
+          this.isLoading = false
           await this.logging.log({
             logLevel: 'info',
             data: {
@@ -157,10 +166,12 @@ export class CcrCallControlComponent implements OnDestroy, OnInit {
           break
         case AccountAvailabilityStatus.EXPIRED:
           void this.showExpiredDialog()
+          this.isLoading = false
           break
       }
     } catch (error) {
       this.notifier.error(error)
+      this.isLoading = false
     }
   }
 

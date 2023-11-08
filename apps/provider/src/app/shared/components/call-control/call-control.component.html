@@ -9,7 +9,7 @@ matTooltipPosition="above">
   <button
   *ngIf="mode === 0"
   [class.active]="true"
-  [disabled]="disabled || callState?.isCallStarted || !callState?.hasAudioDeviceAccess || targets?.length > 1"
+  [disabled]="disabled || isLoading || callState?.isCallStarted || !callState?.hasAudioDeviceAccess || targets?.length > 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
   (click)="$event.stopPropagation() ; !defaultBillableService && billableServices.length ? undefined : onClick(defaultBillableService)"
   class="ccr-icon-button"
@@ -20,7 +20,7 @@ matTooltipPosition="above">
     <span fxHide.xs>{{ label | translate }}</span>
   </button>
   <div
-  *ngIf="mode === 1 && !callState.isCallStarted && callState?.hasAudioDeviceAccess && targets?.length === 1"
+  *ngIf="mode === 1 && !isLoading && !callState.isCallStarted && callState?.hasAudioDeviceAccess && targets?.length === 1"
   [matMenuTriggerFor]="billableServices.length ? menu : emptyMenu"
   (click)="$event.stopPropagation(); !defaultBillableService && billableServices.length ? undefined : onClick(defaultBillableService)"
   class="clickable">
