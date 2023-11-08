@@ -1,12 +1,11 @@
-<div fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+<div gdColumns="repeat(4, 1fr)" gdGap="20px">
   <div
   *ngFor="let option of options; let i = index;"
   [class.active]="activeOption === i"
   (click)="selectOption(i)"
   class="image-option"
   fxLayout="column"
-  fxLayoutAlign="center center"
-  fxLayoutGap="5px">
+  fxLayoutAlign="center center">
     <img *ngIf="option.imageSrc" [class]="option.imageClass" [src]="option.imageSrc" [alt]="option.viewValue | translate">
     <p *ngIf="!option.imageSrc" class="empty-image">
       <mat-icon>close</mat-icon>

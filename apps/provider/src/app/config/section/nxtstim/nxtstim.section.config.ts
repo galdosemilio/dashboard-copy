@@ -21,14 +21,14 @@ export const NXTSTIMSectionConfig: SectionConfigDetails = {
   },
   RPM: {
     AVAILABLE_DEVICES: [
-      ...RPM_DEVICES,
       {
         id: '5',
         name: 'NXTSTIM EcoAI',
         displayName: _('RPM.NXTSTIM_ECOAI'),
         imageSrc: 'assets/img/ecoai.png',
-        sortOrder: 5
-      }
+        sortOrder: 1
+      },
+      ...RPM_DEVICES
     ]
   }
 }
