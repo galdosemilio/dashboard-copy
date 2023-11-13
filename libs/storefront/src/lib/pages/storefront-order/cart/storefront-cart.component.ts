@@ -23,9 +23,9 @@ export class StorefrontCartComponent implements OnInit {
   }
 
   public get totalDiscount(): string | null {
-    return this.cart?.attributes?.adjustment_total === '0.0'
+    return this.cart?.attributes?.promo_total === '0.0'
       ? null
-      : this.cart?.attributes?.display_adjustment_total
+      : this.cart?.attributes?.display_promo_total
   }
 
   constructor(
