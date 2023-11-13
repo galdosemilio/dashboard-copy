@@ -45,6 +45,11 @@
               </div>
             </div>
           </th>
+          <ng-container *ngIf="isPainIntensity">
+            <th scope="col">{{ 'MEASUREMENT.PAIN_AREA' | translate }}</th>
+            <th scope="col">{{ 'MEASUREMENT.PAIN_TYPE' | translate }}</th>
+            <th scope="col">{{ 'MEASUREMENT.PAIN_DURATION' | translate }}</th>
+          </ng-container>
           <th class="actions-cell sticky-column sticky-right" scope="col">
             <div fxLayout="row" fxLayoutAlign="center center">
               {{ 'BOARD.ACTIONS' | translate }}
@@ -181,6 +186,13 @@
         </span>
       </ng-container>
 
+      <ng-container *ngSwitchCase="'67'">
+        <span class="pain-intensity" *ngIf="getGroupValue(row, column.id) !== null; else emptyCell">
+          {{ getGroupValue(row, column.id) | unitConvertToReadable:getGroupType(row, column.id) }}<span class="small">&nbsp;{{ getGroupUnit(row, column.id) }}</span>
+          <ccr-pain-thumbnail *ngIf="getLabelId(row, '1')" [areaType]="getLabelId(row, '1')" (click)="onShowPainImage(row)"></ccr-pain-thumbnail>
+        </span>
+      </ng-container>
+
       <ng-container *ngSwitchCase="'distance'">
         <ng-container *ngTemplateOutlet="distanceEntry; context: {row: row, column: column}"></ng-container>
       </ng-container>
@@ -192,6 +204,24 @@
       </ng-container>
     </div>
   </td>
+
+  <ng-container *ngIf="isPainIntensity">
+    <td>
+      <span *ngIf="getLabelName(row, '1'); else emptyCell">
+        {{ getLabelName(row, '1') }}
+      </span>
+    </td>
+    <td>
+      <span *ngIf="getLabelName(row, '2'); else emptyCell">
+        {{ getLabelName(row, '2') }}
+      </span>
+    </td>
+    <td>
+      <span *ngIf="getLabelName(row, '3'); else emptyCell">
+        {{ getLabelName(row, '3') }}
+      </span>
+    </td>
+  </ng-container>
 
   <td class="actions-cell sticky-column sticky-right">
     <div fxLayout="row" fxLayoutAlign="center center">

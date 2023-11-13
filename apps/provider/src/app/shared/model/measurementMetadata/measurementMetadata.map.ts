@@ -8,6 +8,12 @@ export interface MeasurementMetadataProp {
   options: SelectOption<string | NamedEntity>[]
 }
 
+export interface MeasurementPainLabelProp {
+  id: string
+  name: string
+  options: SelectOption<string>[]
+}
+
 export interface MeasurementMetadataEntry {
   dataPointTypes: DataPointTypes[]
   properties: MeasurementMetadataProp[]

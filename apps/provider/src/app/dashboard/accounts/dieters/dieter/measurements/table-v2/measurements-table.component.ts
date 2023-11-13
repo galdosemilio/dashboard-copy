@@ -21,7 +21,8 @@ import {
   CcrTableSortDirective,
   DateNavigatorOutput,
   ExtendedMeasurementLabelEntry,
-  PromptDialog
+  PromptDialog,
+  PainLocationDialog
 } from '@app/shared'
 import { _ } from '@app/shared/utils'
 import {
@@ -94,6 +95,7 @@ export class MeasurementsTableV2Component implements OnInit {
   public rows: MeasurementDataPointGroupTableEntry[] = []
   public shouldShowMetadata = false
   public source: MeasurementDataSourceV2
+  public isPainIntensity = false
   public visceralFatRatingTooltip = {
     title: {
       text: _('MEASUREMENT.VISCERAL_FAT_TANITA.TOOLTIP.TITLE')
@@ -290,6 +292,25 @@ export class MeasurementsTableV2Component implements OnInit {
     return weight !== null
       ? weight * (percentage / (percentageEntry.type.multiplier * 100))
       : null
+  }
+
+  public getLabelName(group: MeasurementDataPointGroup, typeId: string) {
+    return group.labels?.find((label) => label.type.id === typeId)?.name
+  }
+
+  public getLabelId(group: MeasurementDataPointGroup, typeId: string) {
+    return group.labels?.find((label) => label.type.id === typeId)?.id
+  }
+
+  public onShowPainImage(group: MeasurementDataPointGroup) {
+    this.dialog.open(PainLocationDialog, {
+      panelClass: 'ccr-full-dialog',
+      width: '50vw',
+      data: {
+        areaType: this.getLabelId(group, '1'),
+        coordinates: group.metadata?.pain?.coordinates
+      }
+    })
   }
 
   public onDeleteGroup(group: MeasurementDataPointGroup): void {
@@ -496,6 +517,8 @@ export class MeasurementsTableV2Component implements OnInit {
   ): Promise<void> {
     try {
       this.columns = associations.map((assoc) => assoc.type)
+      this.isPainIntensity =
+        this.columns[0]?.id === DataPointTypes.PAIN_INTENSITY
 
       const stepIndex = this.columns.findIndex(
         (col) => col.id === DataPointTypes.STEPS

@@ -1,0 +1,33 @@
+@import 'variables';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    cursor: pointer;
+
+    path {
+      fill: #fff;
+
+      &.selected {
+        fill: var(--primary);
+      }
+    }
+
+    circle {
+      &.large {
+        fill: var(--primary-lighten);
+      }
+
+      &.medium {
+        fill: var(--accent);
+      }
+
+      &.small {
+        fill: var(--primary);
+      }
+    }
+  }
+}

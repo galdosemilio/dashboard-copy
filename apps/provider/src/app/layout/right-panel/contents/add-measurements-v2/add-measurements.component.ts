@@ -25,6 +25,8 @@ import {
   convertToReadableFormat,
   convertUnitToPreferenceFormat,
   CreateMeasurementDataPointGroup,
+  DataPointTypes,
+  MeasurementDataPointGroupLabelProvider,
   MeasurementDataPointProvider,
   MeasurementDataPointType,
   MeasurementDataPointTypeAssociation,
@@ -40,7 +42,8 @@ import { debounceTime } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
 import {
   MeasurementMetadataProp,
-  MEASUREMENT_METADATA_MAP
+  MEASUREMENT_METADATA_MAP,
+  MeasurementPainLabelProp
 } from '@app/shared/model/measurementMetadata'
 import { chain, intersection, set } from 'lodash'
 import { Store } from '@ngrx/store'
@@ -70,10 +73,15 @@ interface DataPointTypeAssociationWithIndex {
   encapsulation: ViewEncapsulation.None
 })
 export class AddMeasurementsV2Component implements OnInit {
+  public isPainIntensity = false
+  public isLoading = false
   public dataTypeInputProps = DATA_TYPE_INPUT_PROPS
   public hiddenMeasurementTabs: string[] = []
   public labels: ExtendedMeasurementLabelEntry[] = []
   public labelsForm: FormGroup
+  public painLabels: MeasurementPainLabelProp[] = []
+  public painManagementId = 1
+  public painLabelsForm: FormArray
   public magnitudes: CcrMagnitudeEntry[] = [
     {
       id: '1',
@@ -103,6 +111,7 @@ export class AddMeasurementsV2Component implements OnInit {
     private bus: EventsService,
     private context: ContextService,
     private dataPoint: MeasurementDataPointProvider,
+    private dataPointGroupLabel: MeasurementDataPointGroupLabelProvider,
     private dialog: MatDialog,
     private fb: FormBuilder,
     private notifier: NotifierService,
@@ -362,14 +371,34 @@ export class AddMeasurementsV2Component implements OnInit {
     )
   }
 
+  private async createPainLabelsForm() {
+    await this.resolvePainLabels()
+
+    this.painLabelsForm = this.fb.array(
+      this.painLabels.map(() => new FormControl(''))
+    )
+
+    this.painLabelsForm.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((values) => {
+        const isRequired = values.filter((value) => value).length > 0
+
+        this.painLabelsForm.controls.forEach((ctrl) => {
+          ctrl.setValidators(isRequired ? [Validators.required] : [])
+          ctrl.updateValueAndValidity({ emitEvent: false })
+        })
+      })
+  }
+
   private createPayload(
     types: DataPointTypeAssociationWithIndex[],
     formValue,
-    metadataFormValue
+    metadataFormValue,
+    painLabelsFormValue
   ): CreateMeasurementDataPointGroup {
     const date: moment.Moment = moment(this.labelsForm.value.date.toISOString())
 
-    const payload = {
+    const payload: CreateMeasurementDataPointGroup = {
       account: this.context.accountId,
       dataPoints: types
         .map((typeAssocEntry) =>
@@ -389,6 +418,10 @@ export class AddMeasurementsV2Component implements OnInit {
       metadataFormValue.forEach((value, idx) =>
         set(payload, this.metadataEntries[idx].payloadRoute, value)
       )
+    }
+
+    if (painLabelsFormValue) {
+      payload.labels = painLabelsFormValue
     }
 
     return payload
@@ -442,9 +475,11 @@ export class AddMeasurementsV2Component implements OnInit {
 
   private async processWithNewFramework(): Promise<void> {
     try {
+      this.isLoading = true
       const formValue = this.measurementForm.value
       const metadataFormValue = this.metadataForm.value
       const convertedFormValue = this.convertFormValue(formValue)
+      const painLabelsFormValue = this.painLabelsForm?.value
 
       const { dateTypesAssoc, instantTypesAssoc } = this.typesAssoc.reduce(
         (typesAcc, assoc, index) =>
@@ -469,12 +504,14 @@ export class AddMeasurementsV2Component implements OnInit {
       const instantPayload = this.createPayload(
         instantTypesAssoc,
         convertedFormValue,
-        metadataFormValue
+        metadataFormValue,
+        painLabelsFormValue
       )
       const datePayload = this.createPayload(
         dateTypesAssoc,
         convertedFormValue,
-        metadataFormValue
+        metadataFormValue,
+        painLabelsFormValue
       )
 
       if (instantPayload.dataPoints.length) {
@@ -490,6 +527,52 @@ export class AddMeasurementsV2Component implements OnInit {
       this.resetForm()
     } catch (error) {
       this.notifier.error(error)
+    } finally {
+      this.isLoading = false
+    }
+  }
+
+  private async resolvePainLabels() {
+    if (this.painLabels.length) {
+      return
+    }
+
+    try {
+      this.isLoading = true
+
+      const result: MeasurementPainLabelProp[] = []
+
+      const labelTypesResponse =
+        await this.dataPointGroupLabel.getAllLabelTypes({
+          category: this.painManagementId,
+          limit: 'all',
+          status: 'active'
+        })
+
+      const labelTypes = labelTypesResponse.data
+
+      for (const labelType of labelTypes) {
+        const res = await this.dataPointGroupLabel.getAllLabels({
+          type: labelType.id,
+          category: this.painManagementId.toString(),
+          limit: 'all'
+        })
+
+        result.push({
+          id: labelType.id,
+          name: labelType.name,
+          options: res.data.map((entry) => ({
+            value: entry.id,
+            viewValue: entry.name
+          }))
+        })
+      }
+
+      this.painLabels = result
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isLoading = false
     }
   }
 
@@ -511,8 +594,15 @@ export class AddMeasurementsV2Component implements OnInit {
         .flatMap((mapEntry) => [...mapEntry.properties])
         .value()
 
+      this.isPainIntensity = assocTypeIds.includes(
+        DataPointTypes.PAIN_INTENSITY
+      )
       this.createMeasurementForm(assocTypes)
       this.createMetadataForm(this.metadataEntries)
+
+      if (this.isPainIntensity) {
+        void this.createPainLabelsForm()
+      }
     } catch (error) {
       this.notifier.error(error)
     }

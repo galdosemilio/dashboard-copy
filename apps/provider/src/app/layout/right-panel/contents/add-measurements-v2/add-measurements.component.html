@@ -115,9 +115,29 @@
       </div>
     </div>
 
+    <div
+      *ngIf="painLabelsForm"
+      [formGroup]="painLabelsForm"
+      fxLayout="column"
+      fxLayoutAlign="start stretch"
+      fxLayoutGap="10px"
+    >
+    <div *ngFor="let painLabel of painLabels; let i = index;" fxFlex>
+      <mat-form-field fxFlex>
+        <mat-select [formControlName]="i" [placeholder]="painLabel.name">
+          <mat-option *ngFor="let option of painLabel.options" [value]="option.value">{{ option.viewValue | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </div>
+
+    <div fxLayoutAlign="center center" class="ccr-overlay" *ngIf="isLoading">
+      <mat-spinner></mat-spinner>
+    </div>
+
     <div class="action-buttons">
       <button
-      [disabled]="measurementForm?.invalid || !typesAssoc?.length"
+      [disabled]="isLoading || measurementForm?.invalid || !typesAssoc?.length || (painLabelsForm && painLabelsForm.invalid)"
       (click)="onSubmit()"
       mat-button
       class="ccr-icon-button"

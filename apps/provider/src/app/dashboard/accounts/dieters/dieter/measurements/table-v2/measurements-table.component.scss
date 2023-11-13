@@ -93,6 +93,12 @@
         background: mat-color($ccr-background, odd);
       }
     }
+
+    .pain-intensity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
 }
 

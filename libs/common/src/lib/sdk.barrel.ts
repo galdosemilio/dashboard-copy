@@ -82,7 +82,8 @@ import {
   MeasurementDataPointTypeProvider,
   MeasurementBodytraceSyncProvider,
   SpreeProvider,
-  EcommerceProvider
+  EcommerceProvider,
+  MeasurementDataPointGroupLabelProvider
 } from '@coachcare/sdk'
 
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
@@ -321,6 +322,11 @@ export const SdkApiProviders = [
   {
     provide: MeasurementLabelProvider,
     useClass: MeasurementLabelProvider,
+    deps: [ApiService]
+  },
+  {
+    provide: MeasurementDataPointGroupLabelProvider,
+    useClass: MeasurementDataPointGroupLabelProvider,
     deps: [ApiService]
   },
   {

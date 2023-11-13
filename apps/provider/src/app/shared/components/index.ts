@@ -78,6 +78,7 @@ import { TranslatedTextInputComponent } from './translated-text-input'
 import { CcrDietersTableComponent } from './dieters-table'
 import { ExpandableTextComponent } from './expandable-text'
 import { SequencePreviewComponent } from './sequence-preview'
+import { PainThumbnailComponent } from './pain-thumbnail'
 
 export {
   AccountPhaseListComponent,
@@ -144,7 +145,8 @@ export {
   MeetingsDataSource,
   MeetingsDatabase,
   ExpandableTextComponent,
-  SequencePreviewComponent
+  SequencePreviewComponent,
+  PainThumbnailComponent
 }
 
 export const CmpComponents = [
@@ -210,5 +212,6 @@ export const CmpComponents = [
   ViewMeetingDialog,
   ViewAllMeetingsDialog,
   ExpandableTextComponent,
-  SequencePreviewComponent
+  SequencePreviewComponent,
+  PainThumbnailComponent
 ]
