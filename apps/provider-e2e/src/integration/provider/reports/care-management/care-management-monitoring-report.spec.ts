@@ -53,58 +53,58 @@ describe('Reports -> RPM -> Export Monitoring Report', function () {
     ).then((res) => {
       const csv = csvJSON(res)
 
-      checkCsvData(csv, 0, 12, 'N/A')
-      checkCsvData(
-        csv,
-        0,
-        13,
-        '30 more calendar days; 20 minutes more of monitoring needed'
-      )
       checkCsvData(csv, 0, 14, 'N/A')
       checkCsvData(
         csv,
         0,
         15,
-        '99490 requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed'
+        '30 more calendar days; 20 minutes more of monitoring needed'
       )
       checkCsvData(csv, 0, 16, 'N/A')
       checkCsvData(
         csv,
         0,
         17,
+        '99490 requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed'
+      )
+      checkCsvData(csv, 0, 18, 'N/A')
+      checkCsvData(
+        csv,
+        0,
+        19,
         '99439 requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed'
       )
 
-      checkCsvData(csv, 1, 12, '01/31/2020')
-      checkCsvData(csv, 1, 13, 'N/A')
-      checkCsvData(csv, 1, 14, 'N/A')
-      checkCsvData(
-        csv,
-        1,
-        15,
-        '30 more calendar days; 15 minutes more of monitoring needed'
-      )
+      checkCsvData(csv, 1, 14, '01/31/2020')
+      checkCsvData(csv, 1, 15, 'N/A')
       checkCsvData(csv, 1, 16, 'N/A')
       checkCsvData(
         csv,
         1,
         17,
+        '30 more calendar days; 15 minutes more of monitoring needed'
+      )
+      checkCsvData(csv, 1, 18, 'N/A')
+      checkCsvData(
+        csv,
+        1,
+        19,
         '99439 requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed'
       )
 
-      checkCsvData(csv, 2, 12, '01/31/2020')
-      checkCsvData(csv, 2, 13, 'N/A')
       checkCsvData(csv, 2, 14, '01/31/2020')
       checkCsvData(csv, 2, 15, 'N/A')
-      checkCsvData(csv, 2, 16, 'N/A')
-      checkCsvData(csv, 2, 17, '10 minutes more of monitoring needed')
+      checkCsvData(csv, 2, 16, '01/31/2020')
+      checkCsvData(csv, 2, 17, 'N/A')
+      checkCsvData(csv, 2, 18, 'N/A')
+      checkCsvData(csv, 2, 19, '10 minutes more of monitoring needed')
 
-      checkCsvData(csv, 3, 12, '02/01/2020')
-      checkCsvData(csv, 3, 13, '01/31/2020')
       checkCsvData(csv, 3, 14, 'N/A')
       checkCsvData(csv, 3, 15, '01/31/2020')
       checkCsvData(csv, 3, 16, 'N/A')
       checkCsvData(csv, 3, 17, '01/31/2020')
+      checkCsvData(csv, 3, 18, 'N/A')
+      checkCsvData(csv, 3, 19, '01/31/2020')
     })
   })
 

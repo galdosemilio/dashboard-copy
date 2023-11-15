@@ -396,8 +396,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
         standardSetup()
 
         cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-
-        cy.wait(1000)
+        cy.wait(3000)
         cy.tick(1000)
 
         cy.get('.ccr-tabs').find('a').eq(1).click()
@@ -412,7 +411,7 @@ describe('Patient profile -> dashboard -> rpm', function () {
         standardSetup()
 
         cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
-        cy.wait(1000)
+        cy.wait(3000)
         cy.tick(500)
         cy.get('.ccr-tabs').find('a').eq(1).click()
         cy.get('.ccr-tabs').find('a').eq(0).click()
