@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { ContextService, NotifierService } from '@coachcare/common/services'
+import { NotifierService } from '@coachcare/common/services'
 import { CellularDeviceDatabase } from '../../../services'
 import { CellularDeviceType } from '@coachcare/sdk'
+import { resolveConfig } from '@app/config/section'
+import { ContextService } from '@app/service'
 
 @Component({
   selector: 'app-cellular-device-form',
@@ -23,8 +25,18 @@ export class CellularDeviceFormComponent implements OnInit {
     this.createForm()
     const res = await this.getAllTypes()
 
-    this.devices = res.data
-    this.form.get('type').setValue(this.devices[0].id)
+    const filterRegex: RegExp = resolveConfig(
+      'PATIENT_DASHBOARD.INCLUDE_CELLULAR_DEVICE_NAMES_REGEX',
+      this.context.organization
+    )
+
+    this.devices = filterRegex
+      ? res.data.filter((entry) => entry.name.match(filterRegex))
+      : res.data
+
+    if (this.devices.length > 0) {
+      this.form.get('type').setValue(this.devices[0].id)
+    }
   }
 
   public async onSubmit(): Promise<void> {

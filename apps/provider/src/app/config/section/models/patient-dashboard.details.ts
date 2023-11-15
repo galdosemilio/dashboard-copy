@@ -7,4 +7,5 @@ export interface PatientDashboardConfigDetails {
   ALLOWED_CHART_DATA_POINT_TYPES?: DataPointTypes[] | null
   SUMMARY_BOXES?: SectionConfigObject
   SHOW_EXERCISE_MODERATE_TOTAL?: boolean
+  INCLUDE_CELLULAR_DEVICE_NAMES_REGEX?: RegExp
 }

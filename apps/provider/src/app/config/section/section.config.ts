@@ -63,6 +63,7 @@ import {
 import { SharpProdSectionConfig, SharpTestSectionConfig } from './sharp'
 import { OptionsMedicalWeightLossSectionConfig } from './options-medical-weight-loss'
 import { BonsSecourMercySectionConfig } from './bons-secour'
+import { ChapSectionConfig } from './chap'
 
 export interface SectionConfigObject {
   component: any
@@ -146,6 +147,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['7227']: WakeForestSectionConfig,
     ['7277']: SharpProdSectionConfig,
     ['7327']: OptionsMedicalWeightLossSectionConfig,
-    ['7233']: BonsSecourMercySectionConfig
+    ['7233']: BonsSecourMercySectionConfig,
+    ['7337']: ChapSectionConfig
   }
 }
