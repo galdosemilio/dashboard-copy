@@ -1603,7 +1603,6 @@
     "SET_AS_UNAVAILABLE": "Set As Unavailable"
   },
   "RPM": {
-    "24H_AGE_NOTICE": "This RPM session has been active for at least 24 hours and can only be modified one time.",
     "ABOUT_RPM": "This toggles remote patient monitoring (RPM) services that are now reimbursable by Medicare and many commercial payors. You may activate RPM for this patient here, or contact <a href=\"mailto:sales@coachcare.com\">sales@coachcare.com</a> for more information. Please note there is an additional charge for these services.",
     "ACTIVATION_DATE": "Activation Date",
     "ACTIVITY_TRACKER": "Activity Tracker",

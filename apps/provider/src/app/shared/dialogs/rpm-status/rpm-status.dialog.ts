@@ -25,12 +25,8 @@ import {
   RPMReason
 } from '@coachcare/sdk'
 import { _ } from '@app/shared/utils'
-import * as moment from 'moment'
 import { Subject } from 'rxjs'
-import {
-  RPMEditFormComponentEditMode,
-  RPMEntryAgeStatus
-} from './rpm-edit-form'
+import { RPMEditFormComponentEditMode } from './rpm-edit-form'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { CareServiceEnableFormStepperInfo } from './rpm-enable-form'
 import { chain, isEqual } from 'lodash'
@@ -38,6 +34,7 @@ import { chain, isEqual } from 'lodash'
 type DialogStatus =
   | 'initial'
   | 'view_session'
+  | 'edit_entry'
   | 'new_entry'
   | 'about'
   | 'edit_supervising_provider'
@@ -68,7 +65,6 @@ export class RPMStatusDialog implements OnInit {
   public editFormEditMode: RPMEditFormComponentEditMode
   public enableFormStepIndex: number
   public enableFormValidity: boolean
-  public entryAge: RPMEntryAgeStatus
   public entryPending: RPMStateEntryPendingStatus
   public form: FormGroup
   public inaccessibleOrganizations: OrganizationAccess[] = []
@@ -314,7 +310,6 @@ export class RPMStatusDialog implements OnInit {
     try {
       this.rpmEntry = entry
       this.status = 'view_session'
-      await this.calculateEntryAge()
 
       if (this.entryIsActive) {
         this.refreshDiagnosisForm()
@@ -331,6 +326,15 @@ export class RPMStatusDialog implements OnInit {
     }
   }
 
+  public onEditDiagnosis() {
+    if (!this.entryIsActive) {
+      return
+    }
+
+    this.status = 'edit_entry'
+    this.refreshDiagnosisForm()
+  }
+
   public async updateRPMEntry(): Promise<void> {
     try {
       const formValue = this.form.get('editEntry').value
@@ -342,9 +346,6 @@ export class RPMStatusDialog implements OnInit {
         other: formValue.otherDiagnosis || undefined,
         note: formValue.note || undefined
       })
-
-      this.entryAge =
-        this.entryAge === 'after24' ? 'after24Edited' : this.entryAge
 
       this.rpmEntry.rpmState.diagnosis.primary = formValue.primaryDiagnosis
       this.rpmEntry.rpmState.diagnosis.secondary = formValue.secondaryDiagnosis
@@ -386,33 +387,6 @@ export class RPMStatusDialog implements OnInit {
         this.dialogRef.close(this.rpmEntry)
       } else {
         this.status = 'initial'
-      }
-    } catch (error) {
-      this.notify.error(error)
-    }
-  }
-
-  private async calculateEntryAge(): Promise<void> {
-    try {
-      if (!this.rpmEntry) {
-        this.entryAge = 'before24'
-        return
-      }
-
-      const mostRecentEntryAge = Math.abs(
-        moment(this.rpmEntry.rpmState.createdAt).diff(moment(), 'hours')
-      )
-      const diagnosisAuditEntries =
-        await this.careManagementState.getDiagnosisAuditList({
-          id: this.rpmEntry.rpmState.id
-        })
-
-      this.entryAge = 'before24'
-
-      if (mostRecentEntryAge >= 24) {
-        this.entryAge = diagnosisAuditEntries.data.length
-          ? 'after24Edited'
-          : 'after24'
       }
     } catch (error) {
       this.notify.error(error)

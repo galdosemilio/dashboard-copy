@@ -82,7 +82,6 @@
 
         <app-dialog-rpm-edit-form
             *ngIf="entryIsActive"
-            [entryAge]="entryAge"
             [rpmEntry]="rpmEntry"
             formControlName="editEntry">
         </app-dialog-rpm-edit-form>
@@ -90,7 +89,6 @@
 
     <div *ngSwitchCase="'edit_entry'" [formGroup]="form">
         <app-dialog-rpm-edit-form
-            [entryAge]="entryAge"
             [mode]="'edit'"
             [rpmEntry]="rpmEntry"
             [showModeToggle]="false"
@@ -248,7 +246,7 @@
 
             <button
             *ngIf="entryIsActive"
-            (click)="status = 'edit_entry'"
+            (click)="onEditDiagnosis()"
             [disabled]="!accessibleOrganizations.length"
             class="ccr-button"
             color="primary"

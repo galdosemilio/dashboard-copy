@@ -1603,7 +1603,6 @@
     "SET_AS_UNAVAILABLE": "Imposta Come Irreperibile"
   },
   "RPM": {
-    "24H_AGE_NOTICE": "Questa sessione RPM è già stato modificato una volta dopo 24 ore. Esso non può essere modificato di nuovo.",
     "ABOUT_RPM": "Questo alterna i servizi di monitoraggio in remoto del paziente (MRP), ora rimborsabile da Medicare e altri servizi a pagamento. Puoi attivare MRP per questo paziente qui",
     "ACTIVATION_DATE": "Data di attivazione",
     "ACTIVITY_TRACKER": "Rilevatore di attività",

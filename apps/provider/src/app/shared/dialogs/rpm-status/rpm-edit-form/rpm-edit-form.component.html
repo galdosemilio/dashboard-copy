@@ -28,16 +28,10 @@
     </mat-form-field>
 
     <mat-form-field
-    [hidden]="(mode === 'readonly' && !form.get('note').value) || entryAge === 'before24'"
+    [hidden]="(mode === 'readonly' && !form.get('note').value)"
     class="example-full-width">
       <mat-label>{{ 'RPM.EXPLANATION' | translate }}</mat-label>
       <textarea [readonly]="mode === 'readonly'" formControlName="note" matInput></textarea>
     </mat-form-field>
-
-    <small
-    *ngIf="entryAge === 'after24' && mode === 'edit'"
-    class="highlighted">
-      {{ 'RPM.24H_AGE_NOTICE' | translate }}
-    </small>
   </div>
 </div>

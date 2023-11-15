@@ -1603,7 +1603,6 @@
     "SET_AS_UNAVAILABLE": "Angiv som Utilgængelig"
   },
   "RPM": {
-    "24H_AGE_NOTICE": "Denne RPM session er allerede blevet redigeret en gang efter 24 timer. Det kan ikke ændres igen.",
     "ABOUT_RPM": "Dette skifter ydelse til ekstern patientovervågning (RPM), som nu refunderes af Medicare og mange kommercielle betalere. Du kan aktivere RPM for denne patient her",
     "ACTIVATION_DATE": "Aktivering Dato",
     "ACTIVITY_TRACKER": "Aktivitetssporer",

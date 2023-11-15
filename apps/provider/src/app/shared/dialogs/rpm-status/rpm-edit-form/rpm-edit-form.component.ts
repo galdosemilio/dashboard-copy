@@ -11,7 +11,6 @@ import { FormUtils, sleep } from '@app/shared/utils'
 import { CareManagementServiceTypeId } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 
-export type RPMEntryAgeStatus = 'before24' | 'after24' | 'after24Edited'
 export type RPMEditFormComponentEditMode = 'edit' | 'readonly'
 
 @UntilDestroy()
@@ -27,25 +26,6 @@ export type RPMEditFormComponentEditMode = 'edit' | 'readonly'
   ]
 })
 export class RPMEditFormComponent implements ControlValueAccessor, OnInit {
-  @Input()
-  set entryAge(entryAge: RPMEntryAgeStatus) {
-    this._entryAge = entryAge
-
-    if (this.form) {
-      this.form
-        .get('note')
-        .setValidators(
-          this._entryAge === 'after24' && this.mode !== 'readonly'
-            ? [Validators.required]
-            : []
-        )
-    }
-  }
-
-  get entryAge(): RPMEntryAgeStatus {
-    return this._entryAge
-  }
-
   @Input() mode: RPMEditFormComponentEditMode = 'readonly'
   @Input() rpmEntry: RPMStateEntry
   @Input() showModeToggle = true
@@ -56,13 +36,10 @@ export class RPMEditFormComponent implements ControlValueAccessor, OnInit {
 
   public form: FormGroup
 
-  private _entryAge: RPMEntryAgeStatus
-
   constructor(private fb: FormBuilder, private formUtils: FormUtils) {}
 
   public ngOnInit(): void {
     this.createForm()
-    this.mode = this.entryAge === 'after24Edited' ? 'readonly' : this.mode
   }
 
   public registerOnChange(fn: any): void {
@@ -87,12 +64,7 @@ export class RPMEditFormComponent implements ControlValueAccessor, OnInit {
         this.isRequiredSecondaryDiagnosis ? Validators.required : []
       ],
       otherDiagnosis: [''],
-      note: [
-        '',
-        this.entryAge === 'after24' && this.mode !== 'readonly'
-          ? [Validators.required]
-          : []
-      ]
+      note: ['', [Validators.required]]
     })
 
     this.form.valueChanges

@@ -1603,7 +1603,6 @@
     "SET_AS_UNAVAILABLE": "Als nicht verfügbar einstellen"
   },
   "RPM": {
-    "24H_AGE_NOTICE": "Diese RPM-Sitzung wird bereits nach 24 Stunden bearbeitet einmal worden. Es kann nicht wieder geändert werden.",
     "ABOUT_RPM": "Dies schaltet die RPM-Dienste (Remote Patient Monitoring) ein und aus, die inzwischen von Medicare und vielen kommerziellen Kostenträgern erstattet werden. Sie können das RPM für diesen Patienten hier aktivieren oder sich an <a href='mailto:sales@coachcare.com'>sales@coachcare.com</a> wenden für weitere Informationen. Bitte beachten Sie, dass für diese Dienste ein Zuschlag erhoben wird.",
     "ACTIVATION_DATE": "Aktivierungs-Datum",
     "ACTIVITY_TRACKER": "Aktivitätstracker",

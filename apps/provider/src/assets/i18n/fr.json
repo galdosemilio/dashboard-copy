@@ -1603,7 +1603,6 @@
     "SET_AS_UNAVAILABLE": "Marquer comme indisponible"
   },
   "RPM": {
-    "24H_AGE_NOTICE": "Cette session RPM a déjà été modifié une fois après 24 heures. Il ne peut pas être modifiée à nouveau.",
     "ABOUT_RPM": "Taux de graisse viscérale)",
     "ACTIVATION_DATE": "Date d'activation",
     "ACTIVITY_TRACKER": "Suivi d'activité",
