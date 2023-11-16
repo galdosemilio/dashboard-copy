@@ -1,3 +1,21 @@
+# [1.129.0](https://github.com/coachcare/dashboard/compare/v1.128.1...v1.129.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* allow unlimited diagnosis audit updates on episode of care [FRON-3363] ([4c42997](https://github.com/coachcare/dashboard/commit/4c42997a9a177642767be3b070d50c2ef9fc48bf))
+* clock for manual time tracking [FRON-3343] ([0c5dde5](https://github.com/coachcare/dashboard/commit/0c5dde537192000c257bd2de0b8ff29642f17dcb))
+* nxtstim rpm device order and styling [FRON-3355] ([30a0b98](https://github.com/coachcare/dashboard/commit/30a0b98aa6c58f43ce18896d1491a1722c12fe9e))
+* total discount amount and display tax amount on storefront cart page [EC-159] ([8f7524e](https://github.com/coachcare/dashboard/commit/8f7524ed60a459977d6b66ed1e64e72aa50c8a16))
+
+
+### Features
+
+* add section config for filter celluar devices [FRON-3372] ([2878f2b](https://github.com/coachcare/dashboard/commit/2878f2b26ec4fc0e17f8f9e6a8225bcd5742c811))
+* allow unlimited diagnosis audit updates on episode of care [FRON-3363] ([880aa36](https://github.com/coachcare/dashboard/commit/880aa369a670a3e0ee515d90dbb74ce34f8e15c2))
+* disable message for one participant thread [FRON-3308] ([055483a](https://github.com/coachcare/dashboard/commit/055483ad0d306a7862aaa1391592e68f85820c92))
+* expose service type in sequence enroll [FRON-3298] ([4d8d06d](https://github.com/coachcare/dashboard/commit/4d8d06da9bcd9d160e53f83d0157cda8f97c1288))
+
 ## [1.128.1](https://github.com/coachcare/dashboard/compare/v1.128.0...v1.128.1) (2023-11-02)
 
 
