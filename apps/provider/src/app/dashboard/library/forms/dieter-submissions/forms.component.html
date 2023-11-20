@@ -17,7 +17,7 @@
             [title]="'LIBRARY.FORMS.SEARCH_BY_NAME' | translate"
             [description]="'LIBRARY.FORMS.SEARCH_BY_NAME_DESCRIPTION' | translate"
             ></ccr-popup-description>
-            <form-search *ngIf="isProvider" (change)="formFilter = $event" fxFlex></form-search>
+            <form-search *ngIf="isProvider" [formId]="formId" (change)="formFilter = $event" fxFlex></form-search>
             <button
                 [disabled]="hasReachedSubmissionLimit"
                 (click)="assignForm()"

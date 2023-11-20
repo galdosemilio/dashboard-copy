@@ -63,6 +63,9 @@ Cypress.Commands.add('setOrganization', (org: ValidOrganization) => {
     case 'chap':
       translatedOrg = 7625
       break
+    case 'conci':
+      translatedOrg = 3440
+      break
     default:
       translatedOrg = 1
   }

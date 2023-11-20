@@ -327,7 +327,7 @@ const interceptCoreApiCalls = (
       'api/form/full-form'
     )
   })
-  cy.intercept('GET', '/1.0/content/form?**', emptyDataEmptyPagination)
+
   cy.intercept('GET', '/2.0/package?**', {
     fixture: 'api/package/getPackages1'
   })
@@ -680,6 +680,13 @@ const interceptCoreApiCalls = (
     statusCode: 204,
     body: {}
   }).as('updateContentPackageRequest')
+
+  cy.intercept('GET', '/1.0/content/form?organization=**', {
+    fixture: fetchOverride(
+      '/1.0/content/form?organization=**',
+      'api/form/getFormListing'
+    )
+  })
 
   cy.intercept('GET', '/1.0/content/vault?**', {
     fixture: 'api/filevault/file-vault-contents'

@@ -11,5 +11,6 @@ type ValidOrganization =
   | 'idealyou'
   | 'sharp'
   | 'chap'
+  | 'conci'
 
 export { ValidOrganization }

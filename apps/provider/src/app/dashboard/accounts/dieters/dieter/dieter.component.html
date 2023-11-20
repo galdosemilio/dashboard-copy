@@ -1,22 +1,35 @@
 <div class="mb-10" fxFlex="nogrow" fxLayout="column" fxLayoutAlign="start" fxLayoutGap="15px">
-  <div class="ccr-title" fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
-    <h2>
-      {{ 'GLOBAL.PATIENTS' | translate }}
-    </h2>
-    <a mat-button color="primary" class="ccr-button" routerLink="/accounts/patients">
-      {{ 'BOARD.BACK_LIST' | translate }}
-    </a>
-    <a *ngIf="showPatientPDFButton" color="primary" class="ccr-button" mat-button (click)="onShowProgressPDFModal()">
-      {{ 'BOARD.PROGRESS_REPORT' | translate }}
-    </a>
-    <a
-    *ngIf="showDoctorPDFButton"
-    color="primary"
-    class="ccr-button"
-    mat-button
-    (click)="onShowDoctorPDFModal()">
-      {{ 'BOARD.GENERATE_DOCTOR_PDF' | translate }}
-    </a>
+  <div class="ccr-title" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center start" fxLayoutAlign="start end" fxLayoutGap="10px">
+    <div fxFlex fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
+      <h2>
+        {{ 'GLOBAL.PATIENTS' | translate }}
+      </h2>
+      <a mat-button color="primary" class="ccr-button" routerLink="/accounts/patients">
+        {{ 'BOARD.BACK_LIST' | translate }}
+      </a>
+      <a *ngIf="showPatientPDFButton" color="primary" class="ccr-button" mat-button (click)="onShowProgressPDFModal()">
+        {{ 'BOARD.PROGRESS_REPORT' | translate }}
+      </a>
+      <a
+      *ngIf="showDoctorPDFButton"
+      color="primary"
+      class="ccr-button"
+      mat-button
+      (click)="onShowDoctorPDFModal()">
+        {{ 'BOARD.GENERATE_DOCTOR_PDF' | translate }}
+      </a>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="10px">
+      <a
+        *ngFor="let link of patientLinks"
+        color="primary"
+        class="ccr-button"
+        mat-button
+        [routerLink]="[link.link, link.params ?? {}]"
+      >
+        {{ link.title | translate }}
+      </a>
+    </div>
   </div>
 
   <div

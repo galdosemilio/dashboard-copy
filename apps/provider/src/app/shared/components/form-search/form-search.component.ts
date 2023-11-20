@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { MatAutocompleteSelectedEvent } from '@coachcare/material'
 import { ContextService } from '@app/service/context.service'
@@ -15,6 +15,8 @@ import { Form } from '@app/shared/model'
   templateUrl: './form-search.component.html'
 })
 export class FormSearchComponent implements OnDestroy, OnInit {
+  @Input() formId: string
+
   @Output()
   change: Subject<string | void> = new Subject<string | void>()
 
@@ -87,6 +89,21 @@ export class FormSearchComponent implements OnDestroy, OnInit {
     if (response.pagination.next) {
       this.showSearchBar = true
     }
+
     this.forms = response.data.map((single: FormSingle) => new Form(single))
+
+    const selectedEntry = this.forms.find((form) => form.id === this.formId)
+
+    if (!selectedEntry) {
+      return
+    }
+
+    if (this.showSearchBar) {
+      this.form.patchValue({ query: this.formId }, { emitEvent: false })
+      this.formSelected = true
+      this.form.controls.query.disable()
+    } else {
+      this.form.patchValue({ value: this.formId }, { emitEvent: false })
+    }
   }
 }

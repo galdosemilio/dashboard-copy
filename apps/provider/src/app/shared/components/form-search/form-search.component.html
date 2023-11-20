@@ -1,6 +1,7 @@
-<div *ngIf="!showSearchBar" fxFlex>
+<div *ngIf="!showSearchBar" fxFlex [formGroup]="form">
     <mat-form-field class="ccr-filter" floatLabel="never" fxFlex="grow">
         <mat-select
+        [formControl]="form.controls.value"
         [placeholder]="'LIBRARY.FORMS.FILTER_BY_FORM' | translate"
         [disableOptionCentering]="true" (selectionChange)="onFormSelect($event)">
             <mat-option [value]="''">{{ 'LIBRARY.FORMS.ALL' | translate }}</mat-option>

@@ -19,6 +19,7 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { CCRConfig } from '@app/config'
 import { Store } from '@ngrx/store'
 import { FetchSubaccount } from '@app/layout/store/call'
+import { PatientProfileLink } from '@app/config/section/models'
 
 @UntilDestroy()
 @Component({
@@ -42,6 +43,7 @@ export class DieterComponent implements OnDestroy, OnInit {
   public callUserZendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/articles/360019778772-Video-Conferencing-with-a-Patient'
   public isSwitchingOrg = false
+  public patientLinks: PatientProfileLink[] = []
 
   constructor(
     private account: AccountProvider,
@@ -83,6 +85,18 @@ export class DieterComponent implements OnDestroy, OnInit {
           'JOURNAL.SHOW_DOCTOR_PDF_BUTTON',
           organization
         )
+
+        this.showPatientPDFButton = resolveConfig(
+          'JOURNAL.SHOW_PATIENT_PDF_BUTTON',
+          organization
+        )
+
+        this.patientLinks =
+          resolveConfig(
+            'PATIENT_DASHBOARD.PATIENT_PROFILE_LINKS',
+            organization
+          ) ?? []
+
         this.showMessaging = get(
           organization,
           'preferences.messaging.isActive',
@@ -99,11 +113,6 @@ export class DieterComponent implements OnDestroy, OnInit {
         ) {
           this.context.activeCareManagementService = undefined
         }
-
-        this.showPatientPDFButton = resolveConfig(
-          'JOURNAL.SHOW_PATIENT_PDF_BUTTON',
-          organization
-        )
 
         void this.resolvePatientForeigness()
       })

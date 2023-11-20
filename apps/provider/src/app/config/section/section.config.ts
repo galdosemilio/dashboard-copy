@@ -44,6 +44,7 @@ import { SharpProdSectionConfig, SharpTestSectionConfig } from './sharp'
 import { OptionsMedicalWeightLossSectionConfig } from './options-medical-weight-loss'
 import { BonsSecourMercySectionConfig } from './bons-secour'
 import { ChapSectionConfig } from './chap'
+import { ConciSectionConfig } from './conci'
 
 export interface SectionConfigObject {
   component: any
@@ -70,6 +71,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['3235']: IdealYouTestSectionConfig,
     ['3328']: SharpTestSectionConfig,
     ['3381']: LeanMDSectionConfig,
+    ['3440']: ConciSectionConfig,
     ['31']: CoachCareClinicTestSectionConfig,
     ['7016']: RobardSectionConfig,
     ['7242']: InhealthSectionConfig,
@@ -102,6 +104,7 @@ export const SECTION_CONFIG: SectionConfig = {
     ['6869']: HomeAndThrivingSectionConfig,
     ['6475']: HernriedSectionConfig,
     ['7032']: GardenStatePainSectionConfig,
+    ['7054']: ConciSectionConfig,
     ['7074']: NXTSTIMSectionConfig,
     ['7080']: AlaskaPremierSectionConfig,
     ['7227']: WakeForestSectionConfig,

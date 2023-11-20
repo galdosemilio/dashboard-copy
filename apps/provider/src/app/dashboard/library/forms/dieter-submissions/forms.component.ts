@@ -114,7 +114,11 @@ export class DieterSubmissionsComponent implements OnInit {
     this.createDatasource()
 
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((paramMap) => {
-      this.formId = paramMap.get('id')
+      this.formId = this.isProvider
+        ? paramMap.get('formId')
+        : paramMap.get('id')
+
+      this.formFilter = this.formId
 
       if (this.isProvider) {
         return
@@ -124,8 +128,6 @@ export class DieterSubmissionsComponent implements OnInit {
         .connect()
         .pipe(take(1))
         .subscribe(() => void this.resolveSubmissionLimit(this.formId))
-
-      this.formFilter = this.formId
     })
 
     this.formDisplay.saved$

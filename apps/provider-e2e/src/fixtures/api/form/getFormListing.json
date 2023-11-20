@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": "1915",
+      "name": "1 - Diagnosis",
+      "organization": {
+        "id": "3440",
+        "name": "Conci"
+      },
+      "allowAddendum": true,
+      "isActive": true,
+      "removableSubmissions": false
+    }
+  ],
+  "pagination": {}
+}
