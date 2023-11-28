@@ -1,6 +1,6 @@
 
 <div fxLayout="column">
-  <div class="storefront-banner" [style.background-image]="heroImageUrl">
+  <div class="storefront-banner" [style]="customStyle" [style.background-image]="heroImageUrl">
     <div class="storefront-banner-overlay"></div>
     <h2 *ngIf="currentStore?.title; else defaultTitle">{{ currentStore.title }}</h2>
     <ng-template #defaultTitle>{{ 'GLOBAL.BANNER_TITLE' | translate }}</ng-template>

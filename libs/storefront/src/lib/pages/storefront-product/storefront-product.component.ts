@@ -40,6 +40,10 @@ export class StorefrontProductComponent implements OnInit {
   public currentStore: CurrentSpreeStore
   public defaultHeroImage: string
 
+  public get customStyle(): string {
+    return this.currentStore.hero_styles
+  }
+
   public get heroImageUrl(): string {
     if (this.currentStore.hero_image) {
       return `url('${this.currentStore.hero_image}')`
@@ -91,11 +95,14 @@ export class StorefrontProductComponent implements OnInit {
         this.currentStore = {
           title: s.name,
           description: s.description,
-          hero_image: this.defaultHeroImage
+          hero_image: this.defaultHeroImage,
+          hero_styles: s.hero_styles
         }
       })
 
     this.selectedCategory$.pipe(untilDestroyed(this)).subscribe((c) => {
+      if (this.currentStore.hero_styles) return
+
       this.currentStore.hero_image = c?.images?.[0] ?? this.defaultHeroImage
     })
   }
