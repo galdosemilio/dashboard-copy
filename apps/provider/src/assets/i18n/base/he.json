@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "הסרת מרפאה",
     "CLINIC_REMOVE_AUTOENROLLMENT": "הסר הרשמה אוטומטית",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "האם אתה בטוח שברצונך להסיר את כניסתם הרשמה אוטומטית עבור רצף {{name}}?",
+    "CLINIC_REMOVE_DEVICE": "הסר מרפאה",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "האם ברצונך להסיר את מזהה המכשיר {{ id }} מהמטופל הזה?",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "סר ספקי פיקוח בירושה",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "האם אתה רוצה לבטל את הגדרת ספקי פיקוח בירושת הרישום? זה יאפשר לך ליצור מנהג רישום עבור מרפאת זו. Unsetting העוברות בירושה הרישום לא יהיה להסיר או לשנות את ספקי פיקוח הרישום עבור {{name}} (מזהה {{id}}) במרפאה.",
     "CLINIC_REMOVE_INHERITED_TIN": "הסר TIN בירושה",

@@ -4,7 +4,8 @@ import { CellularDeviceDatabase } from '../../../services'
 import { ContextService } from '@app/service'
 import { AccountCellularDevice } from '@coachcare/sdk'
 import { MatDialog } from '@coachcare/material'
-import { BodytraceSyncDialog } from '@app/shared'
+import { BodytraceSyncDialog, PromptDialog, _ } from '@app/shared'
+import { filter } from 'rxjs'
 
 @Component({
   selector: 'app-cellular-device-table',
@@ -40,13 +41,34 @@ export class CellularDeviceTableComponent implements OnInit {
       id: row.id
     }
 
-    await this.database.remove(req)
-    this.source.refresh()
+    this.dialog
+      .open(PromptDialog, {
+        data: {
+          title: _('BOARD.CLINIC_REMOVE_DEVICE'),
+          content: _('BOARD.CLINIC_REMOVE_DEVICE_DESCRIPTION'),
+          contentParams: {
+            id: row.device.identifier
+          }
+        }
+      })
+      .afterClosed()
+      .pipe(filter((confirm) => confirm))
+      .subscribe(() => {
+        void this.removeDevice(req)
+      })
   }
 
   public showDialog(row: AccountCellularDevice): void {
     this.dialog.open(BodytraceSyncDialog, {
       data: { id: row.id }
     })
+  }
+
+  private async removeDevice(req: {
+    account: string
+    id: string
+  }): Promise<void> {
+    await this.database.remove(req)
+    this.source.refresh()
   }
 }

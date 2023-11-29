@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "Elimina Clinica",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Rimuovere registrazione automatica",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Sei sicuro di voler rimuovere la voce la registrazione automatica per la successione {{name}}?",
+    "CLINIC_REMOVE_DEVICE": "Rimuovi Clinica",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "Vuoi rimuovere l'ID dispositivo {{ id }} da questo paziente?",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "Rimuovere Provider Supervisione ereditati",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "Vuoi disinserire i fornitori Supervisione ereditati listing? Questo vi permetterà di creare una scheda per questa clinica personalizzata. Disinserimento del ereditato messa in vendita di non rimuovere o modificare i fornitori di Supervisione elenco per la clinica {{name}} (ID {{id}}).",
     "CLINIC_REMOVE_INHERITED_TIN": "Rimuovere TIN Inherited",

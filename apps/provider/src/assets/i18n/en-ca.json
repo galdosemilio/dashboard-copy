@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "Remove Clinic",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Remove Autoenrollment",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Are you sure you want to remove the autoenrollment entry for the sequence {{ name }}?",
+    "CLINIC_REMOVE_DEVICE": "Remove Device",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "Do you want to remove device ID {{ id }} from this patient?",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "Remove Inherited Supervising Providers",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "Do you want to unset the inherited Supervising Providers listing? This will allow you to create a custom listing for this clinic. Unsetting the inherited listing will not remove or modify the Supervising Providers listing for the {{name}} (ID {{id}}) clinic.",
     "CLINIC_REMOVE_INHERITED_TIN": "Remove Inherited TIN",

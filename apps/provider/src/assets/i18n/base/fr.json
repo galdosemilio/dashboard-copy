@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "Effacer la clinique",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Retirer Autoenrollment",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Etes-vous sûr de vouloir supprimer l'entrée d'auto-inscription pour la séquence {{name}}?",
+    "CLINIC_REMOVE_DEVICE": "Supprimer la clinique",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "Souhaitez-vous supprimer l'ID d'appareil {{ id }} de ce patient?",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "Retirer les fournisseurs Héritée Supervision",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "Voulez-vous les fournisseurs désinitialiser liste hérités Supervision? Cela vous permettra de créer une coutume pour cette liste clinique. Décharger l'a hérité la liste ne sera pas supprimer ou modifier les fournisseurs pour la liste Supervision {{name}} (ID {{id}}) clinique.",
     "CLINIC_REMOVE_INHERITED_TIN": "Retirer Hérité TIN",

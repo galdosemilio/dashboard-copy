@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "Fjern Klinik",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Fjern Autoenrollment",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Er du sikker på du ønsker at fjerne autoenrollment post for sekvensen {{name}}?",
+    "CLINIC_REMOVE_DEVICE": "Fjern klinikken",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "Vil du fjerne enheds-id {{ id }} fra denne patient?",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "Fjern Arvelige fører tilsyn Providers",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "Vil du frakoble nedarvede fører tilsyn Providers notering? Dette vil tillade dig at oprette en brugerdefineret liste for denne klinik. Frakobling af arvede notering vil ikke fjerne eller ændre det overvågende Providers notering til {{name}} (ID {{id}}) klinik.",
     "CLINIC_REMOVE_INHERITED_TIN": "Fjern arvet TIN",

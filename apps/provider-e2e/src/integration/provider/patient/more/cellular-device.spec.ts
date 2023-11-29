@@ -97,6 +97,12 @@ describe('Dashboard -> Patients -> Patient -> More -> Devices', function () {
 
     cy.get('#delete-btn').click()
 
+    cy.tick(1000)
+
+    cy.get('mat-dialog-container').as('confirmDialog')
+    cy.get('@confirmDialog').contains('Remove Device').should('exist')
+    cy.get('@confirmDialog').find('button').contains('Yes').click()
+
     cy.wait('@removeAddedDevice').then((interception) => {
       expect(interception.response.statusCode).to.equal(200)
     })

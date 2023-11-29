@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "Borrar Clínica",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Eliminar Autoenrolamiento",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "¿Está seguro de querer eliminar el autoenrolamiento para la secuencia {{ name }}?",
+    "CLINIC_REMOVE_DEVICE": "Quitar clínica",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "¿Quiere eliminar el ID del dispositivo {{ id }} de este paciente?",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "Eliminar Asesores Supervisores Heredados",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "¿Desea desactivar la lista de Asesores Supervisores heredada? Esto le permitirá crear una lista personalizada para esta clínica. Desactivar la lista heredada no removerá o modificará la lista de Asesores Supervisores de la clínica {{ name }} (ID {{ id }}).",
     "CLINIC_REMOVE_INHERITED_TIN": "Eliminar el TIN heredado",

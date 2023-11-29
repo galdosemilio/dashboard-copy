@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "Klinik löschen",
     "CLINIC_REMOVE_AUTOENROLLMENT": "Entfernen Sie die automatische Registrierung",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "Sind Sie sicher, dass Sie die automatische Registrierung Eintrag für die Sequenz zu entfernende {{name}}?",
+    "CLINIC_REMOVE_DEVICE": "Klinik entfernen",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "Möchten Sie die Geräte-ID {{ id }} von diesem Patienten entfernen?",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "Entfernen Inherited Supervising Provider",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "Wollen Sie die Auflistung der geerbten Supervising Provider unscharf zu schalten? Dies ermöglicht Ihnen, eine benutzerdefinierte zu schaffen für diese Klinik auflistet. Auflistung für die {{name}} (ID {{id}}) Klinik Entschärfen der geerbte Auflistung wird die Supervising Provider nicht entfernen oder ändern.",
     "CLINIC_REMOVE_INHERITED_TIN": "Entfernen Sie geerbt TIN",

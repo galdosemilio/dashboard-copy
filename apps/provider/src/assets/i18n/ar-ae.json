@@ -161,6 +161,8 @@
     "CLINIC_REMOVE": "إزالة العيادة",
     "CLINIC_REMOVE_AUTOENROLLMENT": "إزالة الانتساب التلقائي",
     "CLINIC_REMOVE_AUTOENROLLMENT_DESC": "هل أنت متأكد أنك تريد إزالة إدخال الانتساب التلقائي للتسلسل {{name}}؟",
+    "CLINIC_REMOVE_DEVICE": "إزالة العيادة",
+    "CLINIC_REMOVE_DEVICE_DESCRIPTION": "هل تريد إزالة معرف الجهاز {{ id }} من هذا المريض؟",
     "CLINIC_REMOVE_INHERITED_SUP_PROVIDERS": "إزالة مقدمي الإشراف ورثت",
     "CLINIC_REMOVE_INHERITED_SUP_PROV_DESC": "هل تريد إلغاء تعيين مقدمي الإشراف ورثت سرد؟ وهذا سوف يسمح لك لخلق العرف سرد هذه العيادة. Unsetting الموروث سرد لن إزالة أو تعديل مقدمي الإشراف سرد من أجل العيادة {{name}} (ID {{id}}).",
     "CLINIC_REMOVE_INHERITED_TIN": "إزالة القصدير ورثت",
