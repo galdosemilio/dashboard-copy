@@ -1,0 +1,23 @@
+<footer>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <ul>
+        <li *ngIf="terms">
+          <a routerLink="./terms">
+            {{ 'GLOBAL.TOS' | translate }}
+          </a>
+        </li>
+        <li *ngIf="refundPolicy">
+          <a routerLink="./refund-policy">
+            {{ 'GLOBAL.REFUND_POLICY' | translate }}
+          </a>
+        </li>
+      </ul>
+
+      <span>
+        &#9400;&nbsp;{{ currentYear }}
+        <span>{{ storeName }}</span>
+      </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</footer>

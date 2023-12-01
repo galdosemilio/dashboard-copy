@@ -6,7 +6,8 @@ import {
   StorefrontLoadingComponent,
   StorefrontNoticeComponent,
   StorefrontDiscountFormComponent,
-  StorefrontSubscribeButtonComponent
+  StorefrontSubscribeButtonComponent,
+  StorefrontFooterComponent
 } from './components'
 import {
   StorefrontAddressDialog,
@@ -21,7 +22,9 @@ import {
   StorefrontCheckoutComponent,
   StorefrontOrderCompleteComponent,
   StorefrontOrderComponent,
-  StorefrontProductComponent
+  StorefrontProductComponent,
+  StorefrontTermsComponent,
+  StorefrontRefundPolicyComponent
 } from './pages'
 import { StorefrontPaymentManagementPageComponent } from './pages/payment-management'
 import {
@@ -51,7 +54,10 @@ export const StorefrontComponents = [
   StorefrontLoadingComponent,
   StorefrontNoticeComponent,
   StorefrontDiscountFormComponent,
-  StorefrontSubscribeButtonComponent
+  StorefrontSubscribeButtonComponent,
+  StorefrontTermsComponent,
+  StorefrontRefundPolicyComponent,
+  StorefrontFooterComponent
 ]
 
 export const StorefrontProviders = [

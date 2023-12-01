@@ -5,7 +5,7 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "Postnummer er påkrævet",
     "ADDRESS_STATE_REQUIRED": "Stat/provins er påkrævet",
     "PAYMENT_METHOD_NOT_FOUND": "Betalingsmetode ikke fundet, kontakt venligst admin.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "Butik ikke tilgængelig"
   },
   "GLOBAL": {
     "ACCOUNT": "Konto",
@@ -42,7 +42,6 @@
     "EMPTY_CART": "din vogn er tom",
     "EXPIRES": "Udløber: {{date}}",
     "GO_TO_CART": "Gå til indkøbsvogn",
-    "GO_TO_MY_ORDERS": "Gå til Mine ordrer",
     "ID": "ID",
     "INVALID_BILLING_ADDRESS": "Faktureringsadressen er ugyldig",
     "INVALID_POBOX_ADDRESS": "Forsendelsesadresse gade er ugyldig, indeholder postboks",
@@ -63,6 +62,7 @@
     "POSTAL_CODE": "Postnummer",
     "PRICE": "Pris",
     "PRIMARY": "Primær",
+    "REFUND_POLICY": "Tilbagebetalings politik",
     "REMOVE": "Fjerne",
     "SEARCH_ITEMS": "Begynd at skrive for at søge efter produkter",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "Indstil betalingsmetode som standard",
@@ -81,6 +81,7 @@
     "SUMMARY": "Resumé",
     "TAX": "Skat",
     "THANK_YOU_FOR_ORDER": "Tak for din ordre!",
+    "TOS": "Vilkår og betingelser",
     "TOTAL": "i alt",
     "TOTAL_MEALS": "Samlet antal måltider: {{ total }}",
     "TOTAL_PRODUCTS": "Samlet antal produkter: {{ total }}",

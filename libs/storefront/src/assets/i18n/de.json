@@ -5,7 +5,7 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "Postleitzahl ist erforderlich",
     "ADDRESS_STATE_REQUIRED": "Bundesland/Provinz ist erforderlich",
     "PAYMENT_METHOD_NOT_FOUND": "Zahlungsmethode nicht gefunden, bitte kontaktieren Sie den Administrator.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "Shop nicht verfügbar"
   },
   "GLOBAL": {
     "ACCOUNT": "Konto",
@@ -42,7 +42,6 @@
     "EMPTY_CART": "Ihr Warenkorb ist leer",
     "EXPIRES": "Läuft ab: {{date}}",
     "GO_TO_CART": "Zum Einkaufskorb gehen",
-    "GO_TO_MY_ORDERS": "Gehen Sie zu Meine Bestellungen",
     "ID": "ID",
     "INVALID_BILLING_ADDRESS": "Rechnungsadresse ist ungültig",
     "INVALID_POBOX_ADDRESS": "Straße der Lieferadresse ist ungültig, enthält Postfach",
@@ -63,6 +62,7 @@
     "POSTAL_CODE": "Postleitzahl",
     "PRICE": "Preis",
     "PRIMARY": "Primär",
+    "REFUND_POLICY": "Rückgaberecht",
     "REMOVE": "Entfernen",
     "SEARCH_ITEMS": "Beginnen Sie mit der Eingabe, um nach Produkten zu suchen",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "Geben Sie die Zahlungsmethode als Standard fest",
@@ -81,6 +81,7 @@
     "SUMMARY": "Zusammenfassung",
     "TAX": "Steuer",
     "THANK_YOU_FOR_ORDER": "Vielen Dank für Ihren Auftrag!",
+    "TOS": "Geschäftsbedingungen",
     "TOTAL": "Gesamt",
     "TOTAL_MEALS": "Gesamtzahl der Mahlzeiten: {{ total }}",
     "TOTAL_PRODUCTS": "Gesamtzahl der Produkte: {{ total }}",

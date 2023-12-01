@@ -6,7 +6,9 @@ import {
   StorefrontOrderComponent,
   StorefrontProductComponent,
   StorefrontOrderCompleteComponent,
-  StorefrontOrderHistoryPageComponent
+  StorefrontOrderHistoryPageComponent,
+  StorefrontTermsComponent,
+  StorefrontRefundPolicyComponent
 } from './pages'
 import { StorefrontPaymentManagementPageComponent } from './pages/payment-management'
 import { Storefront } from './storefront'
@@ -25,6 +27,14 @@ const routes: Routes = [
       {
         path: 'payment-management',
         component: StorefrontPaymentManagementPageComponent
+      },
+      {
+        path: 'terms',
+        component: StorefrontTermsComponent
+      },
+      {
+        path: 'refund-policy',
+        component: StorefrontRefundPolicyComponent
       },
       {
         path: 'product',

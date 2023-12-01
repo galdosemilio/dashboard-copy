@@ -155,6 +155,8 @@ interface SpreeStore {
   twitter?: string
   url?: string
   coupon_codes_enabled?: boolean
+  terms_and_conditions?: string
+  return_policy?: string
   public_metadata?: {
     company_url?: string
     company_url_label?: string

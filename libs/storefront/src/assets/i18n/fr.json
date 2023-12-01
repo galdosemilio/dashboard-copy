@@ -5,7 +5,7 @@
     "ADDRESS_POSTAL_CODE_REQUIRED": "Le code postal est requis",
     "ADDRESS_STATE_REQUIRED": "État/Province est requis",
     "PAYMENT_METHOD_NOT_FOUND": "Mode de paiement introuvable, veuillez contacter l'administrateur.",
-    "STORE_NOT_AVAILABLE": ""
+    "STORE_NOT_AVAILABLE": "Magasin non disponible"
   },
   "GLOBAL": {
     "ACCOUNT": "Compte",
@@ -42,7 +42,6 @@
     "EMPTY_CART": "Votre panier est vide",
     "EXPIRES": "Expire: {{date}}",
     "GO_TO_CART": "Aller au panier",
-    "GO_TO_MY_ORDERS": "Ir a Mis pedidos",
     "ID": "ID",
     "INVALID_BILLING_ADDRESS": "L'adresse de facturation n'est pas valide",
     "INVALID_POBOX_ADDRESS": "L'adresse de livraison n'est pas valide, contient une boîte postale",
@@ -63,6 +62,7 @@
     "POSTAL_CODE": "Code postal",
     "PRICE": "Prix",
     "PRIMARY": "Primaire",
+    "REFUND_POLICY": "Politique de remboursement",
     "REMOVE": "Retirer",
     "SEARCH_ITEMS": "Commencez à taper pour rechercher des produits",
     "SET_PAYMENT_METHOD_AS_DEFAULT": "Définir la méthode de paiement par défaut",
@@ -81,6 +81,7 @@
     "SUMMARY": "Sommaire",
     "TAX": "Impôt",
     "THANK_YOU_FOR_ORDER": "¡Gracias por su orden!",
+    "TOS": "Termes et conditions",
     "TOTAL": "Total",
     "TOTAL_MEALS": "Nombre total de repas: {{ total }}",
     "TOTAL_PRODUCTS": "Nombre total de produits: {{ total }}",
