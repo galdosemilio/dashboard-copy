@@ -18,6 +18,8 @@ const checkBillingCodes = (serviceTypeId: string) => {
   for (let i = 0; i < codes.length; i += 1) {
     cy.get('@codeCells').eq(i).should('contain', codes[i])
   }
+
+  cy.get('@codeCells').contains('-DMO').should('not.exist')
 }
 
 describe('Reports -> RPM -> Care Management Billing Table', function () {

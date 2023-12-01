@@ -111,7 +111,9 @@ export class CareManagementService {
     try {
       const res = await this.reports.fetchCareManagementBillingCodes(args)
 
-      return res.data
+      return res.data.filter(
+        (entry) => entry.coverage !== 'measurement-data-transmissions'
+      )
     } catch (err) {
       this.notify.error(err)
 

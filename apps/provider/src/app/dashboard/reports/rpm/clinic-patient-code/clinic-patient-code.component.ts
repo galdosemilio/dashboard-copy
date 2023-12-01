@@ -166,12 +166,10 @@ export class ClinicPatientCodeComponent implements OnInit {
     const asOf = (this.form.value.asOf ?? moment()).endOf('day')
     const now = moment()
 
-    const billingCodesResponse =
-      await this.database.fetchCareManagementBillingCodes({
-        asOf: asOf.isBefore(now) ? asOf.toISOString() : undefined
-      })
+    this.billingCodes = await this.database.fetchCareManagementBillingCodes({
+      asOf: asOf.isBefore(now) ? asOf.toISOString() : undefined
+    })
 
-    this.billingCodes = billingCodesResponse.data
     this.refresh$.next()
   }
 

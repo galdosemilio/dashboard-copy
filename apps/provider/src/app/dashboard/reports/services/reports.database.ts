@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import {
+  BillingCode,
   FetchCareManagementBillingCodesRequest,
-  FetchCareManagementBillingCodesResponse,
   FetchCareManagementBillingMonthRequest,
   FetchCareManagementBillingMonthResponse,
   FetchCareManagementBillingSnapshotRequest,
@@ -138,9 +138,13 @@ export class ReportsDatabase extends CcrDatabase {
     return this.reports.fetchCareManagementBillingMonth(args)
   }
 
-  public fetchCareManagementBillingCodes(
+  public async fetchCareManagementBillingCodes(
     args: FetchCareManagementBillingCodesRequest
-  ): Promise<FetchCareManagementBillingCodesResponse> {
-    return this.reports.fetchCareManagementBillingCodes(args)
+  ): Promise<BillingCode[]> {
+    const res = await this.reports.fetchCareManagementBillingCodes(args)
+
+    return res.data.filter(
+      (entry) => entry.coverage !== 'measurement-data-transmissions'
+    )
   }
 }

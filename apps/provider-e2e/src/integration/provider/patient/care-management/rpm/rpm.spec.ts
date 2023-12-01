@@ -681,6 +681,8 @@ describe('Patient profile -> dashboard -> rpm', function () {
             .find('.code')
             .should('contain', entry.billingCodes[i])
         }
+
+        cy.get('@billingCodeRow').contains('-DMO').should('not.exist')
       })
     }
   })
