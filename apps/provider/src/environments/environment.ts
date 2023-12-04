@@ -11,11 +11,11 @@ export const environment: Environment = {
   url: 'http://localhost:4201',
   awsAssetsUrl: 'https://s3.amazonaws.com/dev.assets.cc',
   coachcareOrgId: '30',
-  daysheetsFormId: '15121',
-  remindersFormId: '15081',
-  physicianFormId: '15096',
+  daysheetsFormId: '5',
+  remindersFormId: '4',
+  physicianFormId: '6',
   wellCoreOrgId: '7535',
-  wellcoreMedicalFormId: '15189',
+  wellcoreMedicalFormId: '7',
   wellcoreMeetingId: 22,
   wellcoreEligibleToSelfSchedulePhaseId: '817'
 }

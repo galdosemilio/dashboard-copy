@@ -574,7 +574,7 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/1.0/content/form/submission/3', {
     fixture: 'api/form/getForm3'
   })
-  cy.intercept('GET', '/1.0/content/form/15081?**', {
+  cy.intercept('GET', '/1.0/content/form/4?**', {
     fixture: 'api/form/getStructure'
   })
   cy.intercept('GET', '/2.0/account/*/external-identifier?account=**', {

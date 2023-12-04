@@ -61,7 +61,7 @@ describe('Patient profile -> notes', function () {
       expect(xhr.request.body.answers[0].response.value).to.equal(
         'this is a test'
       )
-      expect(xhr.request.body.form).to.equal('15081')
+      expect(xhr.request.body.form).to.equal('4')
       expect(xhr.request.body.submittedBy).to.equal(1)
       expect(xhr.request.body.organization).to.equal('1')
     })
