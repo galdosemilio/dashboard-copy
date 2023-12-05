@@ -38,6 +38,7 @@ export class AddNoteDialog implements OnDestroy, OnInit {
   form: FormGroup
   formsSource: FormsDatasource
   remoteForm: Form
+  isLoading = false
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: AddNoteDialogData,
@@ -99,6 +100,7 @@ export class AddNoteDialog implements OnDestroy, OnInit {
 
   async onSubmit() {
     try {
+      this.isLoading = true
       const formData = this.form.value
       const submission = await this.formsSource.createFormSubmission({
         form: this.data.formId,
@@ -118,6 +120,8 @@ export class AddNoteDialog implements OnDestroy, OnInit {
       this.notifier.success(_('NOTIFY.SUCCESS.NOTE_ADDED'))
     } catch (error) {
       this.notifier.error(_('NOTIFY.ERROR.NOTE_ADDED'))
+    } finally {
+      this.isLoading = false
     }
   }
 

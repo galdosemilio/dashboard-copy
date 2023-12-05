@@ -23,7 +23,7 @@
 
 <mat-dialog-actions>
   <button
-  [disabled]="!remoteForm || form.invalid"
+  [disabled]="!remoteForm || form.invalid || isLoading"
   (click)="onSubmit()"
   class="ccr-icon-button"
   color="primary"
