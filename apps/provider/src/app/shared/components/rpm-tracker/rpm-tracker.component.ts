@@ -230,22 +230,14 @@ export class RPMTrackerComponent implements OnDestroy, OnInit {
 
       const rpmEntry = new RPMStateEntry({ rpmState: response.data.shift() })
 
-      if (
-        this.automatedTimeTracking &&
-        rpmEntry.isActive &&
-        !rpmEntry.pending
-      ) {
+      if (rpmEntry.isActive && !rpmEntry.pending) {
         await this.resolveRPMBillingStatus(account)
-      } else {
-        this.stopTimer()
-
-        if (!rpmEntry.pending) {
-          return
-        }
-
-        this.timerUnavailableError =
-          rpmEntry.pending === 'future' ? 'active-tomorrow' : 'active-6am'
+      } else if (!rpmEntry.pending) {
+        return
       }
+
+      this.timerUnavailableError =
+        rpmEntry.pending === 'future' ? 'active-tomorrow' : 'active-6am'
     } catch (error) {
       this.notifier.error(error)
       this.timerUnavailableError = 'no-tracking'
