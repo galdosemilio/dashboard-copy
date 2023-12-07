@@ -1,3 +1,26 @@
+# [1.130.0](https://github.com/coachcare/dashboard/compare/v1.129.0...v1.130.0) (2023-12-07)
+
+
+### Bug Fixes
+
+* add back in default forms on test environment [FRON-3375] ([863656d](https://github.com/coachcare/dashboard/commit/863656daa0bf713f0d5cfebd1679f1cd8ce5d03c))
+* exclude dmo otp codes [FRON-3382] ([06998d1](https://github.com/coachcare/dashboard/commit/06998d196e361cc274423f806544a7df2e739230))
+* import moment [FRON-3379] ([364fe34](https://github.com/coachcare/dashboard/commit/364fe3480d4fc04f25a66c1cd0aead9732c2cf3d))
+* prevent duplicate call requests [FRON-2190] ([640c7e8](https://github.com/coachcare/dashboard/commit/640c7e8dc92de2e37795e2b7e827a8966871b62e))
+* remove unused dashboard section config [FRON-3352] ([b897237](https://github.com/coachcare/dashboard/commit/b89723747cf5119cf5b7c509b1af886d2df45ac2))
+* sending twice add new note request [FRON-3384] ([e77af8c](https://github.com/coachcare/dashboard/commit/e77af8c75404da11d6e2d869c2415b2fab51faa1))
+* show correct current code and tracked time for manual episode of care [FRON-3387] ([97d26bb](https://github.com/coachcare/dashboard/commit/97d26bb2961c916a40b44a332df08e0ac8efaf8d))
+* update new stripe keys account ([744fd3f](https://github.com/coachcare/dashboard/commit/744fd3f4d0b7e62b2a587266c5cf980a27ebe105))
+
+
+### Features
+
+* add custom links to patient profile for conci [FRON-3369] ([5bee9b3](https://github.com/coachcare/dashboard/commit/5bee9b3bfc81a10dac39a2d5a7055e5f35678ab0))
+* add custom styles for storefront hero [EC-169] ([3eee32c](https://github.com/coachcare/dashboard/commit/3eee32c6cf36daa9f229a250f52ea4714f31d4f2))
+* display terms and refund policy links on storefront [EC-172] ([6a71216](https://github.com/coachcare/dashboard/commit/6a7121679bc783fc75f8f302126e9aae7727db93))
+* retain alert page filters selections between page views [FRON-3362] ([c03241e](https://github.com/coachcare/dashboard/commit/c03241eb4580998f37075a2336d846ec7d86cd76))
+* start ccm, pcm and bhi start today [FRON-3356] ([767bcf0](https://github.com/coachcare/dashboard/commit/767bcf071f44b82729bbade8d3f54d14a7262d31))
+
 # [1.129.0](https://github.com/coachcare/dashboard/compare/v1.128.1...v1.129.0) (2023-11-16)
 
 
