@@ -46,4 +46,15 @@ describe('Dashboard -> Coach Own Profile', function () {
       expect(xhr.request.body.timezone).to.equal('et')
     })
   })
+
+  it('Should not have delete account button for coach', function () {
+    standardSetup()
+
+    cy.visit(`/profile`)
+
+    cy.get('app-profile')
+      .find('button')
+      .contains('Delete Account')
+      .should('not.exist')
+  })
 })

@@ -2,7 +2,11 @@ export * from './profile.component'
 export * from './form/form.component'
 export * from './layouts'
 
-import { VerifyDeleteMFADialog, VerifyMFADialog } from './dialogs'
+import {
+  DeleteAccountDialog,
+  VerifyDeleteMFADialog,
+  VerifyMFADialog
+} from './dialogs'
 import { FormComponent as ProfileFormComponent } from './form/form.component'
 import { DefaultProfileComponent, WellcoreLayoutComponents } from './layouts'
 import { MFAVerificatorComponent } from './mfa-verificator'
@@ -18,6 +22,7 @@ export const ProfileComponents = [
   ProfileFormComponent,
   SecurityComponent,
   VerifyDeleteMFADialog,
+  DeleteAccountDialog,
   VerifyMFADialog,
   ...WellcoreLayoutComponents
 ]

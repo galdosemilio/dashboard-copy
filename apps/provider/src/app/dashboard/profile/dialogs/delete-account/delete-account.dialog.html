@@ -1,0 +1,41 @@
+
+<div matDialogTitle>
+    <div>
+      <mat-icon>error</mat-icon>
+      <span>{{'GLOBAL.DELETE_ACCOUNT_ CONFIRMATION' | translate}}</span>
+    </div>
+    <button matDialogClose><mat-icon>cancel</mat-icon></button>
+  </div>
+
+  <div class="mat-dialog-separator"></div>
+  <mat-dialog-content>
+    <div [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="30px">
+      <div class="delete-account-warning" [innerHTML]="'GLOBAL.DELETE_ACCOUNT_ CONFIRMATION_DESCRIPTION' | translate">
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+        <div>{{ 'GLOBAL.DELETE_ACCOUNT_VERIFY_EMAIL' | translate:{ email: email } }}</div>
+        <mat-form-field >
+          <input matInput
+          formControlName="email"
+          required
+        >
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button
+    [disabled]="form.invalid"
+    (click)="onDelete()"
+    class="ccr-icon-button"
+    color="primary"
+    mat-button>
+      <mat-icon>delete</mat-icon> {{'GLOBAL.DELETE_ACCOUNT' | translate}}
+    </button>
+
+    <button mat-button class="ccr-icon-button" matDialogClose>
+      <mat-icon>close</mat-icon> {{'GLOBAL.CANCEL' | translate}}
+    </button>
+  </mat-dialog-actions>

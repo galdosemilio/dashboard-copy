@@ -43,6 +43,7 @@ export class FormComponent implements OnInit, OnDestroy {
   _data = new BehaviorSubject<CurrentAccount>(null)
   form: FormGroup
   public isProvider = false
+  public isPatient = false
   lang: String
   colSpan = 2
   rowSpan = false
@@ -59,6 +60,9 @@ export class FormComponent implements OnInit, OnDestroy {
   @Output()
   onProfileSaved: EventEmitter<AccUpdateRequest> = new EventEmitter<AccUpdateRequest>()
 
+  @Output()
+  onDelete?: EventEmitter<void> = new EventEmitter<void>()
+
   timezones: Array<TimezoneResponse> = this.timezone.fetch()
   units = MEASUREMENT_UNITS
 
@@ -73,6 +77,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isProvider = this.context.isProvider
+    this.isPatient = this.context.isPatient
 
     // setup the FormGroup
     this.createForm()
@@ -138,5 +143,9 @@ export class FormComponent implements OnInit, OnDestroy {
     } else {
       this.formUtils.markAsTouched(this.form)
     }
+  }
+
+  onDeleteAccount() {
+    this.onDelete.next()
   }
 }

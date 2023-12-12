@@ -10,10 +10,14 @@ import { _ } from '@app/shared'
 import {
   AccountProvider,
   AccSingleResponse,
-  AccUpdateRequest
+  AccUpdateRequest,
+  Session
 } from '@coachcare/sdk'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { AccountFormProps } from '../../form/form.component'
+import { DeleteAccountDialog } from '../../dialogs'
+import { MatDialog } from '@angular/material/dialog'
+import { filter } from 'rxjs'
 
 type ProviderProfileSection =
   | 'addresses'
@@ -33,15 +37,17 @@ export class DefaultProfileComponent implements OnInit {
   profile: AccSingleResponse
   isProvider: boolean
   isPatient: boolean
-  isSaving = false
+  isLoading = false
   section: ProviderProfileSection = 'security'
   zendeskLink =
     'https://coachcare.zendesk.com/hc/en-us/sections/360003260532-Profile'
 
   constructor(
     private account: AccountProvider,
+    private session: Session,
     private bus: EventsService,
     private context: ContextService,
+    private dialog: MatDialog,
     private notifier: NotifierService,
     private route: ActivatedRoute
   ) {}
@@ -68,7 +74,7 @@ export class DefaultProfileComponent implements OnInit {
   }
 
   saveProfile(formData: AccountFormProps): void {
-    this.isSaving = true
+    this.isLoading = true
 
     const updateRequest: AccUpdateRequest = {
       ...formData,
@@ -88,11 +94,39 @@ export class DefaultProfileComponent implements OnInit {
       .then(() => {
         this.notifier.success(_('NOTIFY.SUCCESS.PROFILE_UPDATED'))
         void this.context.updateUser()
-        this.isSaving = false
+        this.isLoading = false
       })
       .catch((err) => {
         this.notifier.error(err)
-        this.isSaving = false
+        this.isLoading = false
       })
+  }
+
+  public onOpenDeleteAccountDialog(): void {
+    this.dialog
+      .open(DeleteAccountDialog, {
+        data: {},
+        disableClose: true,
+        width: '80vw',
+        panelClass: 'ccr-full-dialog'
+      })
+      .afterClosed()
+      .pipe(
+        untilDestroyed(this),
+        filter((isDelete) => isDelete)
+      )
+      .subscribe(() => this.onDeleteAccount())
+  }
+
+  private async onDeleteAccount() {
+    try {
+      this.isLoading = true
+      await this.account.deactivate(this.context.user.id)
+      window.location.reload()
+    } catch (error) {
+      this.notifier.error(error)
+    } finally {
+      this.isLoading = false
+    }
   }
 }

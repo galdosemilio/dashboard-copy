@@ -1004,6 +1004,14 @@ const interceptCoreApiCalls = (
   cy.intercept('GET', '/1.0/task/status**', {
     fixture: 'api/care-management/getTaskStatuses'
   }).as('taskStatus')
+
+  cy.intercept('PATCH', '/2.0/account/1/activity*', {
+    statusCode: 200
+  }).as('deactivateAccount')
+
+  cy.intercept('POST', '/2.0/logout*', {
+    statusCode: 200
+  }).as('logoutAccount')
 }
 
 const seti18n = (): void => {

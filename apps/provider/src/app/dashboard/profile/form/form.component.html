@@ -73,7 +73,7 @@
     </mat-grid-list>
   </form>
 
-  <div class="mt-40" fxLayoutAlign="center">
+  <div class="mt-40" fxLayoutAlign="center" fxLayoutGap="20px">
     <button
       [disabled]="form.invalid"
       class="ccr-icon-button"
@@ -81,6 +81,14 @@
       mat-button
       (click)="onSubmit()">
       <mat-icon>check</mat-icon> {{'GLOBAL.SAVE' | translate}}
+    </button>
+    <button
+      *ngIf="isPatient"
+      class="ccr-icon-button"
+      color="primary"
+      mat-button
+      (click)="onDeleteAccount()">
+      <mat-icon>delete</mat-icon> {{'GLOBAL.DELETE_ACCOUNT' | translate}}
     </button>
   </div>
 

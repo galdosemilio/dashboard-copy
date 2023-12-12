@@ -1,0 +1,6 @@
+@import 'variables';
+
+.delete-account-warning {
+  background-color: var(--warn, mat-color($ccr-warn));
+  padding: 20px;
+}
