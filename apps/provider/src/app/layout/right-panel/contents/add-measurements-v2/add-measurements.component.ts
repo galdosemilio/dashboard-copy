@@ -337,7 +337,7 @@ export class AddMeasurementsV2Component implements OnInit {
           Validators.max(
             Math.round(
               convertToReadableFormat(
-                type.bound.upper,
+                type.bound.upper - 1,
                 type,
                 this.context.user.measurementPreference
               )

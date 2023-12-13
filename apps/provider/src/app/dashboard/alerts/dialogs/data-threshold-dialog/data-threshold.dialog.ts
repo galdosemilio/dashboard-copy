@@ -471,7 +471,7 @@ export class AlertDataThresholdDialog {
       return { min: true }
     }
 
-    if (realValue > this.selectedDataType.bound.upper) {
+    if (realValue >= this.selectedDataType.bound.upper) {
       return { max: true }
     }
 
