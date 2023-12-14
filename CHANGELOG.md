@@ -1,3 +1,17 @@
+# [1.131.0](https://github.com/coachcare/dashboard/compare/v1.130.0...v1.131.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* fix data point type input max validation [FRON-3082] ([5d0b41f](https://github.com/coachcare/dashboard/commit/5d0b41f3eaf7dacd0915bd476e9a6f499088fce1))
+
+
+### Features
+
+* add prompt to confirm device removal from patient account ([851427a](https://github.com/coachcare/dashboard/commit/851427aed28dec1a14506a1f3cbb6f4a909aab0d))
+* enhance pain table view and input for metadata and labels [FRON-3082] ([8d46be1](https://github.com/coachcare/dashboard/commit/8d46be1658f5b472f74ee571372b7e5082a395a8))
+* expose ability to delete patient account on dashboard [FRON-3385] ([3e61491](https://github.com/coachcare/dashboard/commit/3e61491bc0123b476c3394d57b0f5b0e04d6fed1))
+
 # [1.130.0](https://github.com/coachcare/dashboard/compare/v1.129.0...v1.130.0) (2023-12-07)
 
 
