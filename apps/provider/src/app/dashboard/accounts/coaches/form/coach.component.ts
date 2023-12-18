@@ -18,7 +18,12 @@ import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { ContextService, NotifierService } from '@app/service'
 import { BindForm, BINDFORM_TOKEN } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
-import { AccountProvider, Timezone, TimezoneResponse } from '@coachcare/sdk'
+import {
+  AccountProvider,
+  SecurityProvider,
+  Timezone,
+  TimezoneResponse
+} from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { clone } from 'lodash'
@@ -54,11 +59,13 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
   form: FormGroup
   isLoading = false
   isOwnProfile = true
+  isEmailRestricted = false
   lang: string
   colSpan = 2
 
   timezones: Array<TimezoneResponse> = this.timezone.fetch()
   source: ClinicPickerDataSource | null
+  static isEmailRestricted = false
 
   constructor(
     private builder: FormBuilder,
@@ -68,10 +75,11 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
     private timezone: Timezone,
     private context: ContextService,
     private notifier: NotifierService,
-    private database: ClinicsDatabase
+    private database: ClinicsDatabase,
+    private securityProvider: SecurityProvider
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.isOwnProfile = this.coachId === +this.context.user.id
 
     // setup the clinics table source
@@ -91,7 +99,7 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
 
     if (this.coachId) {
       this.isLoading = true
-      this.loadCoachData()
+      await this.loadCoachData()
     }
   }
 
@@ -129,27 +137,38 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
     // this.picker.markAsSubmitted();
   }
 
-  private loadCoachData(): void {
-    this.account
-      .getSingle(this.coachId)
-      .then((account) => {
-        // update the form
-        this.form.patchValue({
-          ...account,
-          ...(account.profile ? account.profile : {}),
-          birthday: account.profile?.birthday
-            ? moment(account.profile.birthday)
-            : null,
-          password: undefined,
-          phone: {
-            phone: account.phone,
-            countryCode: account.countryCode
-          }
-        })
+  private async loadCoachData(): Promise<void> {
+    try {
+      const account = await this.account.getSingle(this.coachId)
 
-        this.isLoading = false
+      // update the form
+      this.form.patchValue({
+        ...account,
+        ...(account.profile ? account.profile : {}),
+        birthday: account.profile?.birthday
+          ? moment(account.profile.birthday)
+          : null,
+        password: undefined,
+        phone: {
+          phone: account.phone,
+          countryCode: account.countryCode
+        }
       })
-      .catch((err) => this.notifier.error(err))
+
+      const { data } = await this.securityProvider.ipRestriction()
+      if (
+        data.some((regex) => {
+          const re = new RegExp(regex.email)
+          return re.test(account.email)
+        })
+      ) {
+        this.isEmailRestricted = true
+        CoachFormComponent.isEmailRestricted = true
+      }
+      this.isLoading = false
+    } catch (error) {
+      this.notifier.error(error)
+    }
   }
 
   static preSave(coachData): { data: any; clinics: Array<ClinicsPickerValue> } {
@@ -171,6 +190,10 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
     delete data.gender
     delete data.height
     delete data.birthday
+
+    if (CoachFormComponent.isEmailRestricted) {
+      delete data.email
+    }
 
     // collect the clinics data
     const clinics = data.clinics

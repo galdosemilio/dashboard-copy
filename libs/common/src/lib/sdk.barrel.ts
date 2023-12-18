@@ -83,7 +83,8 @@ import {
   MeasurementBodytraceSyncProvider,
   SpreeProvider,
   EcommerceProvider,
-  MeasurementDataPointGroupLabelProvider
+  MeasurementDataPointGroupLabelProvider,
+  SecurityProvider
 } from '@coachcare/sdk'
 
 import { ApiHeaders } from '@coachcare/sdk/dist/lib/services/api-headers'
@@ -391,5 +392,6 @@ export const SdkApiProviders = [
   { provide: Task, useClass: Task, deps: [ApiService] },
   { provide: Timezone, useClass: Timezone, deps: [ApiService] },
   { provide: User, useClass: User, deps: [ApiService] },
-  { provide: Zendesk, useClass: Zendesk, deps: [ApiService] }
+  { provide: Zendesk, useClass: Zendesk, deps: [ApiService] },
+  { provide: SecurityProvider, useClass: SecurityProvider, deps: [ApiService] }
 ]

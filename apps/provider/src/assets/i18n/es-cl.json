@@ -250,6 +250,7 @@
       "3_DAYS": "3 días"
     },
     "EMAIL": "Correo",
+    "EMAIL_DOMAIN_HAS_IP_RESTRICTION": "El dominio de correo electrónico tiene una restricción de dirección IP. Comuníquese con el soporte para cambiar la dirección de correo electrónico.",
     "END_DATE": "Fecha Final",
     "END_TIME": "Hora Final",
     "ENROLLMENT_END": "Fin",

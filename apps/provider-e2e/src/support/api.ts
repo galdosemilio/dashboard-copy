@@ -1012,6 +1012,10 @@ const interceptCoreApiCalls = (
   cy.intercept('POST', '/2.0/logout*', {
     statusCode: 200
   }).as('logoutAccount')
+
+  cy.intercept('GET', '/1.0/security/ip-restriction', {
+    fixture: 'api/security/getIPRestriction'
+  }).as('getIPRestriction')
 }
 
 const seti18n = (): void => {

@@ -57,4 +57,35 @@ describe('Dashboard -> Coach Own Profile', function () {
       .contains('Delete Account')
       .should('not.exist')
   })
+
+  it('Should not allow to change ip restricted email', function () {
+    standardSetup()
+    cy.intercept('GET', '/1.0/security/ip-restriction', {
+      fixture: 'api/security/getIPWithRestriction'
+    }).as('getIPRestriction')
+
+    cy.visit(`/profile`)
+
+    cy.get('div.ccr-tabs').find('a').as('coachMenuLinks')
+
+    cy.get('@coachMenuLinks').contains('Profile').click({ force: true })
+
+    cy.tick(1000)
+
+    cy.get('app-profile')
+      .find('input[formcontrolname="email"]')
+      .should('have.attr', 'readonly', 'readonly')
+
+    cy.get('mat-hint').should(
+      'contain',
+      'Email domain has an IP address restriction. Please contact support to change the email address.'
+    )
+
+    cy.get('app-profile').find('button').contains('Save').click({ force: true })
+
+    cy.wait('@accountPatchRequest')
+    cy.wait('@accountPatchRequest').should((xhr) => {
+      expect(xhr.request.body).to.not.include({ email: 'eric@websprout.org' })
+    })
+  })
 })

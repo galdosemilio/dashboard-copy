@@ -11,12 +11,17 @@ import { responsiveSelector, UIResponsiveState } from '@app/layout/store'
 import { ContextService, CurrentAccount } from '@app/service'
 import { FormUtils, MEASUREMENT_UNITS } from '@app/shared'
 import { ccrPhoneValidator } from '@app/shared/components/phone-input'
-import { AccUpdateRequest, Gender, TimezoneResponse } from '@coachcare/sdk'
+import {
+  AccUpdateRequest,
+  Gender,
+  TimezoneResponse,
+  Timezone,
+  SecurityProvider
+} from '@coachcare/sdk'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
-import { BehaviorSubject } from 'rxjs'
-import { Timezone } from '@coachcare/sdk'
+import { BehaviorSubject, combineLatestWith } from 'rxjs'
 import { UserMeasurementPreferenceType } from '@coachcare/sdk/dist/lib/providers/user/requests/userMeasurementPreference.type'
 import * as moment from 'moment'
 
@@ -37,13 +42,21 @@ export interface AccountFormProps {
 @UntilDestroy()
 @Component({
   selector: 'account-form',
-  templateUrl: './form.component.html'
+  templateUrl: './form.component.html',
+  styles: [
+    `
+      .mat-form-field-appearance-legacy .mat-hint {
+        color: var(--primary);
+      }
+    `
+  ]
 })
 export class FormComponent implements OnInit, OnDestroy {
   _data = new BehaviorSubject<CurrentAccount>(null)
   form: FormGroup
   public isProvider = false
   public isPatient = false
+  public isEmailRestricted = false
   lang: String
   colSpan = 2
   rowSpan = false
@@ -72,7 +85,8 @@ export class FormComponent implements OnInit, OnDestroy {
     private responsive: Store<UIResponsiveState>,
     private translator: TranslateService,
     private timezone: Timezone,
-    private formUtils: FormUtils
+    private formUtils: FormUtils,
+    private securityProvider: SecurityProvider
   ) {}
 
   ngOnInit() {
@@ -82,11 +96,23 @@ export class FormComponent implements OnInit, OnDestroy {
     // setup the FormGroup
     this.createForm()
 
-    this._data.subscribe((x) => {
-      if (this.profile) {
-        this.populateFields()
-      }
-    })
+    this._data
+      .pipe(combineLatestWith(this.securityProvider.ipRestriction()))
+      .subscribe(([x, res]) => {
+        if (
+          this.isProvider &&
+          res.data.some((regex) => {
+            const re = new RegExp(regex.email)
+            return re.test(x.email)
+          })
+        ) {
+          this.isEmailRestricted = true
+        }
+
+        if (this.profile) {
+          this.populateFields()
+        }
+      })
 
     // get the current lang
     this.lang = this.translator.currentLang.split('-')[0]
@@ -138,7 +164,11 @@ export class FormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.form.valid) {
-      const data: AccUpdateRequest = this.form.value
+      let data: AccUpdateRequest = this.form.value
+      if (this.isEmailRestricted) {
+        const { email, ...newData } = data
+        data = newData
+      }
       this.onProfileSaved.next(data)
     } else {
       this.formUtils.markAsTouched(this.form)

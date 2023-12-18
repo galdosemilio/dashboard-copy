@@ -250,6 +250,7 @@
       "3_DAYS": "3 Days"
     },
     "EMAIL": "Email",
+    "EMAIL_DOMAIN_HAS_IP_RESTRICTION": "Email domain has an IP address restriction. Please contact support to change the email address.",
     "END_DATE": "End Date",
     "END_TIME": "End Time",
     "ENROLLMENT_END": "Enrollment End",

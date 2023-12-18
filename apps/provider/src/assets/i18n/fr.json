@@ -250,6 +250,7 @@
       "3_DAYS": "3 jours"
     },
     "EMAIL": "Mail",
+    "EMAIL_DOMAIN_HAS_IP_RESTRICTION": "Le domaine de messagerie a une restriction d'adresse IP. Veuillez contacter le support pour modifier l'adresse e-mail.",
     "END_DATE": "Date de fin",
     "END_TIME": "Heure de fin",
     "ENROLLMENT_END": "Fin d'inscription",

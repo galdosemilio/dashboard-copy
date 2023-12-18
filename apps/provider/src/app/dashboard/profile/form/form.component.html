@@ -1,6 +1,6 @@
 <ng-container>
   <form class="mt-20" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-    <mat-grid-list class="ccr-grid" [cols]="colSpan" rowHeight="70px">
+    <mat-grid-list class="ccr-grid" [cols]="colSpan" [rowHeight]="isEmailRestricted ? '90px' : '70px'">
       <mat-grid-tile>
         <mat-form-field>
           <input matInput required formControlName="firstName"
@@ -35,9 +35,10 @@
 
       <mat-grid-tile>
         <mat-form-field>
-          <input matInput required email type="email" formControlName="email"
+          <input matInput [readonly]="isEmailRestricted" required email type="email" formControlName="email"
             [placeholder]="'BOARD.EMAIL' | translate">
           <mat-icon matSuffix>mode_edit</mat-icon>
+          <mat-hint *ngIf="isEmailRestricted" color="primary">{{ 'BOARD.EMAIL_DOMAIN_HAS_IP_RESTRICTION' | translate }}</mat-hint>
         </mat-form-field>
       </mat-grid-tile>
 

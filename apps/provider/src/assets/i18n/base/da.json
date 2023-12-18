@@ -250,6 +250,7 @@
       "3_DAYS": "Tre dage"
     },
     "EMAIL": "E-mail",
+    "EMAIL_DOMAIN_HAS_IP_RESTRICTION": "E-mail-domænet har en IP-adressebegrænsning. Kontakt venligst support for at ændre e-mailadressen.",
     "END_DATE": "Slutdato",
     "END_TIME": "Sluttid",
     "ENROLLMENT_END": "Tilmelding End",

@@ -250,6 +250,7 @@
       "3_DAYS": "3 Tage"
     },
     "EMAIL": "Email",
+    "EMAIL_DOMAIN_HAS_IP_RESTRICTION": "Für die E-Mail-Domäne gilt eine IP-Adressbeschränkung. Bitte wenden Sie sich an den Support, um die E-Mail-Adresse zu ändern.",
     "END_DATE": "Ende",
     "END_TIME": "Endzeit",
     "ENROLLMENT_END": "Anmeldeende",
