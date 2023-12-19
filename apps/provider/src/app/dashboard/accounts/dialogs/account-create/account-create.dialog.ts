@@ -105,6 +105,11 @@ export class AccountCreateDialog implements BindForm, OnInit {
           ))
           data.accountType = '3' // AccountTypeIds.Client
           data.association = { organization: this.context.organizationId }
+          if (data.sendActivationEmail) {
+            // Here we are using the sendActivationEmail field to disable send the activation email, it's setup on DieterFormComponent.preSave static method
+            data.association.notification = data.sendActivationEmail
+            delete data.sendActivationEmail
+          }
           break
         case 'coach':
           ;({ data, clinics } = CoachFormComponent.preSave(
@@ -119,6 +124,11 @@ export class AccountCreateDialog implements BindForm, OnInit {
               admin: firstClinic.admin,
               allowClientPhi: firstClinic.allowClientPhi
             }
+          }
+          if (data.sendActivationEmail) {
+            // Here we are using the sendActivationEmail field to disable send the activation email, it's setup on CoachFormComponent.preSave static method
+            data.association.notification = data.sendActivationEmail
+            delete data.sendActivationEmail
           }
           break
       }

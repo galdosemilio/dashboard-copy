@@ -159,7 +159,8 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
       // weightInitial: '',
       weightGoal: '',
       preferredLocales: ['', Validators.required],
-      clientStartedAt: null
+      clientStartedAt: null,
+      sendActivationEmail: true
     })
 
     this.form.valueChanges.pipe(untilDestroyed(this)).subscribe((controls) => {
@@ -318,6 +319,12 @@ export class DieterFormComponent implements BindForm, OnInit, OnDestroy {
 
     if (data.addresses?.length) {
       data.addresses = data.addresses.filter((address) => address)
+    }
+
+    if (data.sendActivationEmail) {
+      delete data.sendActivationEmail
+    } else {
+      data.sendActivationEmail = 'disabled'
     }
 
     delete data.clientStartedAt

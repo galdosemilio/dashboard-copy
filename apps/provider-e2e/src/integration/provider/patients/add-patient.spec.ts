@@ -66,6 +66,10 @@ describe('Patients -> Add Patient -> Select packages', function () {
       .find('input[data-placeholder="Weight Goal (Optional)"]')
       .type('200')
 
+    cy.get('mat-dialog-container')
+      .find('mat-checkbox[formControlName="sendActivationEmail"]')
+      .click()
+
     cy.get('button').contains('Add New Address').click()
 
     cy.tick(1000)
@@ -113,6 +117,7 @@ describe('Patients -> Add Patient -> Select packages', function () {
     cy.wait('@accountPostRequest').should((xhr) => {
       expect(xhr.request.body.accountType).to.equal('3')
       expect(xhr.request.body.association.organization).to.equal('1')
+      expect(xhr.request.body.association.notification).to.equal('disabled')
       expect(xhr.request.body.client.birthday).to.equal('2000-01-01')
       expect(xhr.request.body.client.gender).to.equal('male')
       expect(xhr.request.body.client.height).to.equal(183)

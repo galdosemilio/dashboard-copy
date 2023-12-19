@@ -126,6 +126,12 @@
       </mat-checkbox>
     </div>
 
+    <div class="section-grid notice-container">
+      <mat-checkbox formControlName="sendActivationEmail">
+        {{ 'BOARD.SEND_ACTIVATION_EMAIL' | translate }}
+      </mat-checkbox>
+    </div>
+
     <div
     [hidden]="!form.controls.hasMinimumAgeConsent.touched || !form.controls.hasMinimumAgeConsent.hasError('noUnderageConsent')"
     class="section-grid notice-error-container">

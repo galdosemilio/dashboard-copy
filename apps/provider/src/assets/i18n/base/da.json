@@ -427,6 +427,7 @@
     "SELECT_PATIENT_COACH": "Vælg Patient eller Coach",
     "SELECT_PHYSICIAN": "Vælg læge",
     "SELECT_SCHEDULE": "Vælg Skema",
+    "SEND_ACTIVATION_EMAIL": "Send kontoaktiverings-e-mail",
     "SEND_PASSWORD_RESET": "Send link til nulstilling af adgangskode",
     "SEND_PASSWORD_RESET_CONTENT": "Ønsker du at sende en email til nulstilling af en adgangskode til <strong><a href=mailto:{{ email }} target=_blank>{{ email }}</a></strong>?",
     "SERVICE_TYPE": "Servicetype",

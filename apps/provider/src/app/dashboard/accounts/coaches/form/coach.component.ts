@@ -123,7 +123,8 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
       measurementPreference: this.context.user.measurementPreference,
       preferredLocales: [],
       phone: [null, [ccrPhoneValidator]],
-      clinics: []
+      clinics: [],
+      sendActivationEmail: true
     })
   }
 
@@ -193,6 +194,12 @@ export class CoachFormComponent implements BindForm, OnInit, OnDestroy {
 
     if (CoachFormComponent.isEmailRestricted) {
       delete data.email
+    }
+
+    if (data.sendActivationEmail) {
+      delete data.sendActivationEmail
+    } else {
+      data.sendActivationEmail = 'disabled'
     }
 
     // collect the clinics data

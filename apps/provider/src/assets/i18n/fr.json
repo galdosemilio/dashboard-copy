@@ -427,6 +427,7 @@
     "SELECT_PATIENT_COACH": "Sélectionner un patient ou entraîneur",
     "SELECT_PHYSICIAN": "Sélectionnez un médecin",
     "SELECT_SCHEDULE": "Sélectionner un planning",
+    "SEND_ACTIVATION_EMAIL": "Envoyer un e-mail d'activation de compte",
     "SEND_PASSWORD_RESET": "Envoyer le lien de réinitialisation du mot de passe",
     "SEND_PASSWORD_RESET_CONTENT": "Do you want to send a password reset email to <strong><a href=\"mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>?",
     "SERVICE_TYPE": "Type de service",

@@ -427,6 +427,7 @@
     "SELECT_PATIENT_COACH": "חולה בחר או מאמן",
     "SELECT_PHYSICIAN": "בחר רופא",
     "SELECT_SCHEDULE": "בחירת לוח זמנים",
+    "SEND_ACTIVATION_EMAIL": "שלח דוא\"ל להפעלת חשבון",
     "SEND_PASSWORD_RESET": "שלח קישור לאיפוס סיסמה",
     "SEND_PASSWORD_RESET_CONTENT": "האם ברצונך לשלוח הודעת אימייל לאיפוס סיסמה אל <strong><a href=mailto:{{ email }}\" target=\"_blank\">{{ email }}</a></strong>?\"",
     "SERVICE_TYPE": "סוג שירות",
