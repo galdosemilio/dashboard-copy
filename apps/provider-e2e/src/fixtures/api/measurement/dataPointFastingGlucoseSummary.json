@@ -1,0 +1,109 @@
+{
+  "data": [
+    {
+      "type": {
+        "id": "26",
+        "name": "Fasting Glucose",
+        "multiplier": 1,
+        "unit": {
+          "symbol": "mg/dL",
+          "display": "mg/dL"
+        }
+      },
+      "count": 1,
+      "average": 79,
+      "minimum": 79,
+      "maximum": 79,
+      "first": {
+        "id": "4303981",
+        "type": {
+          "id": "26",
+          "name": "Fasting Glucose",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "mg/dL",
+            "display": "mg/dL"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-12-21T23:30:31.391368+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-12-21T17:30:31.391368"
+        },
+        "value": 79,
+        "group": {
+          "id": "105714",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-12-21T23:30:30.958+00:00",
+            "local": "2023-12-21T17:30:30.958"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-12-21T23:30:31.391368+00:00",
+            "local": "2023-12-21T17:30:31.391368"
+          },
+          "account": {
+            "id": "7402"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "last": {
+        "id": "4303981",
+        "type": {
+          "id": "26",
+          "name": "Fasting Glucose",
+          "multiplier": 1,
+          "span": {
+            "id": "1",
+            "name": "Instant"
+          },
+          "unit": {
+            "symbol": "mg/dL",
+            "display": "mg/dL"
+          }
+        },
+        "createdAt": {
+          "utc": "2023-12-21T23:30:31.391368+00:00",
+          "timezone": "America/Chicago",
+          "local": "2023-12-21T17:30:31.391368"
+        },
+        "value": 79,
+        "group": {
+          "id": "105714",
+          "recordedAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-12-21T23:30:30.958+00:00",
+            "local": "2023-12-21T17:30:30.958"
+          },
+          "source": {
+            "id": "3",
+            "name": "Manual"
+          },
+          "createdAt": {
+            "timezone": "America/Chicago",
+            "utc": "2023-12-21T23:30:31.391368+00:00",
+            "local": "2023-12-21T17:30:31.391368"
+          },
+          "account": {
+            "id": "7402"
+          },
+          "timezone": "America/Chicago"
+        }
+      },
+      "change": {
+        "value": 0,
+        "percentage": 0
+      }
+    }
+  ]
+}

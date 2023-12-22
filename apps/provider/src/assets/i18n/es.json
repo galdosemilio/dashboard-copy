@@ -1939,6 +1939,7 @@
     "CURRENT": "Actual",
     "CURRENT_PERFUSION": "Perfusión actual",
     "DIASTOLIC": "Diastólica",
+    "FASTING_GLUCOSE": "Glucosa en ayuno",
     "GLUCOSE": "Glucosa",
     "HEART_RATE": "Ritmo cardiaco",
     "LEANMASS_CHANGE": "Cambio de Masa Magra",

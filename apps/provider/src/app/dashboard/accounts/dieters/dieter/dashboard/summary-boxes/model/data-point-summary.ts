@@ -1,3 +1,6 @@
+import { Moment } from '@coachcare/datepicker'
+import * as moment from 'moment'
+
 export class DataPointSummary {
   public count: number | null = null
   public average: number | string | null = null
@@ -6,6 +9,7 @@ export class DataPointSummary {
   public recent: number | string | null = null
   public unit: string | null = null
   public isLoading = true
+  public recentDate: Moment | null = null
 
   update(response, id): this {
     const record = response.data.find(
@@ -16,6 +20,7 @@ export class DataPointSummary {
       record?.last?.value,
       record?.type?.multiplier
     )
+    this.recentDate = moment(record?.last?.createdAt?.local)
     this.average = this.applyMultiplier(
       record?.average,
       record?.type?.multiplier

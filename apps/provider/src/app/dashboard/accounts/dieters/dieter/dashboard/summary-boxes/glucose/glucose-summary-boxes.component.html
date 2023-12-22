@@ -1,6 +1,14 @@
 <div fxLayout="row" fxFlex fxLayoutGap="1%">
-  <ccr-stat-count fxFlex
-    title="{{ 'STATS.GLUCOSE' | translate }}"
-    [record]="glucose"
-  ></ccr-stat-count>
+  <div fxLayout="row" fxFlex fxLayoutGap="1%">
+    <ccr-stat-count fxFlex
+      title="{{ 'STATS.GLUCOSE' | translate }}"
+      [record]="glucose"
+    ></ccr-stat-count>
+  </div>
+  <div fxLayout="row" fxFlex fxLayoutGap="1%">
+    <ccr-stat-count fxFlex
+      title="{{ 'STATS.FASTING_GLUCOSE' | translate }}"
+      [record]="fastingGlucose"
+    ></ccr-stat-count>
+  </div>
 </div>

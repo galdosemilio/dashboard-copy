@@ -84,21 +84,30 @@ describe('Patient profile -> dashboard -> summary boxes', function () {
       )
     })
 
-    it('Summary boxes show glucometer data for RTM episode of care', function () {
+    it.only('Summary boxes show glucometer data for RTM episode of care', function () {
+      cy.intercept('GET', '1.0/measurement/data-point/summary?**', {
+        fixture: 'api/measurement/dataPointFastingGlucoseSummary'
+      }).as('fastingGlucoseSummary')
       interceptBillingSnapshot('1', 3)
       cy.visit(`/accounts/patients/${Cypress.env('clientId')}/dashboard`)
 
       cy.wait('@careManagementBillingSnapshotRPM')
+      cy.wait('@fastingGlucoseSummary')
 
       cy.get('[data-cy="summary-box-device-type"]')
         .should('exist')
         .and('have.attr', 'data-value', 'glucometer')
 
       cy.get('ccr-stat-count').as('summaryBoxes')
-      cy.get('@summaryBoxes').should('have.length', 1)
+      cy.get('@summaryBoxes').should('have.length', 2)
       summaryBoxesContains(cy.get('@summaryBoxes'), 0, 'Glucose').contains(
         'No Recent Data'
       )
+      summaryBoxesContains(
+        cy.get('@summaryBoxes'),
+        1,
+        'Fasting Glucose'
+      ).contains('79.0 mg/dL')
     })
 
     it('Summary boxes show pulseOximeter data for RTM episode of care', function () {

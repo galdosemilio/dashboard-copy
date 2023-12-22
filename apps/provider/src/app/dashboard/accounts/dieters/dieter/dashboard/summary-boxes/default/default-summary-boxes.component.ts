@@ -12,7 +12,8 @@ const deviceTypes = {
   weight: DataPointTypes.WEIGHT,
   bloodPressure: DataPointTypes.BLOOD_PRESSURE_SYSTOLIC,
   glucometer: DataPointTypes.GLUCOSE,
-  pulseOximeter: DataPointTypes.BLOOD_OXYGEN_LEVEL
+  pulseOximeter: DataPointTypes.BLOOD_OXYGEN_LEVEL,
+  fastingGlucose: DataPointTypes.FASTING_GLUCOSE
 }
 
 @Component({

@@ -1939,6 +1939,7 @@
     "CURRENT": "נוכחי",
     "CURRENT_PERFUSION": "זלוף נוכחי",
     "DIASTOLIC": "דיאסטולי",
+    "FASTING_GLUCOSE": "גלוקוז בצום",
     "GLUCOSE": "גלוקוז",
     "HEART_RATE": "קצב לב",
     "LEANMASS_CHANGE": "שינוי מסת גוף רזה",
