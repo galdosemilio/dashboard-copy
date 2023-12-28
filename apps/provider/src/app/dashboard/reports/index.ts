@@ -14,6 +14,7 @@ import { ReportsComponent } from './reports.component'
 import { RPMComponents } from './rpm'
 import { StatisticsComponents } from './statistics'
 import { SelectorsComponents } from './service-type-selector'
+import { DeviceComponents } from './device'
 
 import { ReportsDatabase, StatisticsDatabase, TaskDatabase } from './services'
 import { ReportsDialogComponents } from './dialogs'
@@ -27,6 +28,7 @@ export const ReportsComponents = [
   ...StatisticsComponents,
   ...OverviewComponents,
   ...SelectorsComponents,
+  ...DeviceComponents,
   ReportsComponent
 ]
 

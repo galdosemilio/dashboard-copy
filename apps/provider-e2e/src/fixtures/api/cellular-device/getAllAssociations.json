@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "account": {
+        "email": "client@ipclinic.com",
+        "firstName": "John",
+        "id": "3",
+        "lastName": "Doe"
+      },
+      "device": {
+        "associatedAt": "2023-10-10T10:00:00.000Z",
+        "identifier": "122112",
+        "type": {
+          "id": "11",
+          "name": "Transtek scale",
+          "provider": {
+            "id": "2",
+            "name": "Transtek"
+          }
+        }
+      },
+      "organization": {
+        "hierarchyPath": ["1"],
+        "id": "1",
+        "name": "test1"
+      }
+    },
+    {
+      "account": {
+        "email": "clienttwo@coachcare.com",
+        "firstName": "George",
+        "id": "1",
+        "lastName": "Smith"
+      },
+      "device": {
+        "associatedAt": "2023-10-04T09:00:00.000Z",
+        "identifier": "12345",
+        "type": {
+          "id": "1",
+          "name": "BodyTrace scale T123",
+          "provider": {
+            "id": "1",
+            "name": "BodyTrace"
+          }
+        }
+      },
+      "organization": {
+        "hierarchyPath": ["1"],
+        "id": "1",
+        "name": "test1"
+      }
+    }
+  ],
+  "pagination": {}
+}

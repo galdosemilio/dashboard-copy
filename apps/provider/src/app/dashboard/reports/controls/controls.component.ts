@@ -93,6 +93,9 @@ export class ReportsControlsComponent implements OnInit, OnDestroy {
           case '/reports/rpm/billing':
             this._timeframe = 'day'
             break
+          case '/reports/device':
+            this._timeframe = 'day'
+            break
           default:
             this._timeframe = 'week'
             if (this.range) {

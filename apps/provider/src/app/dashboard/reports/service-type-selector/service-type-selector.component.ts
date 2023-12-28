@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  Input,
   Output
 } from '@angular/core'
 import { MatSelectChange } from '@angular/material/select'
@@ -24,6 +25,8 @@ export class ReportsServiceTypeSelectorComponent {
   public isLoading = false
   public selectedServiceType: string
 
+  @Input() public allowAll = false
+
   @Output() public serviceTypeChange = new EventEmitter<string>()
 
   constructor(
@@ -45,6 +48,11 @@ export class ReportsServiceTypeSelectorComponent {
   }
 
   public onServiceTypeChange(serviceType: MatSelectChange) {
+    if (serviceType.value === 'all') {
+      this.serviceTypeChange.emit(null)
+      return
+    }
+
     this.saveToStorage(serviceType.value)
     this.serviceTypeChange.emit(serviceType.value)
   }
@@ -55,6 +63,16 @@ export class ReportsServiceTypeSelectorComponent {
 
     try {
       this.serviceTypes = this.context.user.careManagementServiceTypes
+      if (this.allowAll) {
+        this.serviceTypes = [
+          {
+            id: 'all',
+            name: 'All',
+            tag: 'all'
+          },
+          ...this.serviceTypes
+        ]
+      }
       const selectedServiceTypeFromStorage = this.getServiceTypeFromStorage()
 
       const selectedServiceType = this.serviceTypes.find(
@@ -68,14 +86,20 @@ export class ReportsServiceTypeSelectorComponent {
       }
 
       this.selectedServiceType = this.serviceTypes[0]?.id
-      this.saveToStorage(this.serviceTypes[0]?.id)
-      this.serviceTypeChange.emit(this.serviceTypes[0]?.id)
+      if (this.serviceTypes[0]?.id !== 'all') {
+        this.saveToStorage(this.serviceTypes[0]?.id)
+        this.serviceTypeChange.emit(this.serviceTypes[0]?.id)
+      }
     } catch (error) {
       this.notifier.error(error)
     } finally {
       this.isLoading = false
       this.changeDetectorRef.detectChanges()
     }
+  }
+
+  private removeServiceTypeFromStorage() {
+    window.localStorage.removeItem(STORAGE_CARE_MANAGEMENT_SERVICE_TYPE)
   }
 
   private getServiceTypeFromStorage(): string | null {
@@ -91,6 +115,10 @@ export class ReportsServiceTypeSelectorComponent {
   }
 
   private saveToStorage(serviceType: string) {
+    if (serviceType === 'all') {
+      return
+    }
+
     window.localStorage.setItem(
       STORAGE_CARE_MANAGEMENT_SERVICE_TYPE,
       serviceType

@@ -24,6 +24,8 @@ import { RPMBillingComponent } from './rpm/rpm-billing'
 import { PatientBulkReportsComponent } from './rpm/patient-bulk-reports'
 import { SharpReportComponent } from './statistics/sharp-report'
 import { ClinicPatientCodeComponent } from './rpm/clinic-patient-code'
+import { DeviceComponent } from './device/device'
+import { DeviceReportComponent } from './device/device.component'
 
 const routes: Routes = [
   {
@@ -93,6 +95,11 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'message-activity' },
       { path: 'message-activity', component: MessageActivityReportComponent }
     ]
+  },
+  {
+    path: 'device',
+    component: DeviceReportComponent,
+    children: [{ path: '', component: DeviceComponent }]
   }
 ]
 

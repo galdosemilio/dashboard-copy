@@ -25,6 +25,8 @@ import {
   SignupsTimelineRequest,
   SignupsTimelineSegment
 } from '@coachcare/sdk'
+import { FetchCellularDeviceAssociationRequest } from '@coachcare/sdk/dist/lib/providers/reports/requests/fetchCellularDeviceAssociation.request'
+import { FetchCellularDeviceAssociationResponse } from '@coachcare/sdk/dist/lib/providers/reports/responses/fetchCellularDeviceAssociation.response'
 
 @Injectable()
 export class ReportsDatabase extends CcrDatabase {
@@ -146,5 +148,11 @@ export class ReportsDatabase extends CcrDatabase {
     return res.data.filter(
       (entry) => entry.coverage !== 'measurement-data-transmissions'
     )
+  }
+
+  public fetchCellularDeviceAssociation(
+    args: FetchCellularDeviceAssociationRequest
+  ): Promise<FetchCellularDeviceAssociationResponse> {
+    return this.reports.fetchCellularDeviceAssociation(args)
   }
 }

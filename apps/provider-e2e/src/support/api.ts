@@ -979,6 +979,10 @@ const interceptCoreApiCalls = (
     )
   })
 
+  cy.intercept('GET', '/1.0/warehouse/cellular-device/association?**', {
+    fixture: 'api/cellular-device/getAllAssociations'
+  }).as('getDeviceAssociation')
+
   cy.intercept('GET', '/1.0/cellular-device/type', {
     fixture: 'api/cellular-device/getAllTypes'
   }).as('getTypes')
