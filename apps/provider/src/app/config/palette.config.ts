@@ -3,7 +3,7 @@
  */
 
 import { drop, flatten, invokeMap, zip } from 'lodash'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 import { CCRColors, CCRColorsPalette, CCRPalette } from './config.interface'
 
 export const Palette: CCRPalette = {

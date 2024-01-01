@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common'
 import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core'
 import { select, Store } from '@ngrx/store'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { filter } from 'rxjs/operators'
 

@@ -17,7 +17,7 @@ import { CCRPalette } from '@app/config'
 import { paletteSelector } from '@app/store/config'
 import { ContextService } from '@app/service/context.service'
 import { chain, flatMap, slice, sortBy } from 'lodash'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 import { TranslateService } from '@ngx-translate/core'
 import { generateChartTooltip } from './helpers'
 import {

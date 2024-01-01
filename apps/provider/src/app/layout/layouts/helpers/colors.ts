@@ -1,6 +1,6 @@
 import { Renderer2 } from '@angular/core'
 import { CCRPalette } from '@app/config'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 
 export function applyPalette(
   palette: CCRPalette,

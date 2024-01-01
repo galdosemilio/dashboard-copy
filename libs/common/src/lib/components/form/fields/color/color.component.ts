@@ -17,7 +17,7 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 
 @Component({
   selector: 'ccr-form-field-color',

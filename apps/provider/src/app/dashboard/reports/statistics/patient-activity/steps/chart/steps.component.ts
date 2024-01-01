@@ -5,7 +5,7 @@ import { isEmpty, merge } from 'lodash'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { Subject } from 'rxjs'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 import Papa from 'papaparse'
 
 import {

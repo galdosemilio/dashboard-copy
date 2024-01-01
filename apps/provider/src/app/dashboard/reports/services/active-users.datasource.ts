@@ -2,7 +2,7 @@ import { TranslateService } from '@ngx-translate/core'
 import * as moment from 'moment-timezone'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { from, Observable, of } from 'rxjs'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 
 import { ConfigService, NotifierService } from '@app/service'
 import { ChartData, ChartDataSource } from '@app/shared/model'

@@ -4,7 +4,7 @@ import { LanguageService } from '@coachcare/common/services'
 import { select, Store } from '@ngrx/store'
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core'
 import { Subscription } from 'rxjs'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 
 import { AppPalette, updateFavIcon } from '@coachcare/common/shared'
 import { OrgPrefSelectors, OrgPrefState } from '@coachcare/common/store'
