@@ -1,5 +1,4 @@
-import { Moment } from '@coachcare/datepicker'
-import * as moment from 'moment'
+import moment, { Moment } from 'moment-timezone'
 
 export class DataPointSummary {
   public count: number | null = null

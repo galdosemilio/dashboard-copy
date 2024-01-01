@@ -1,4 +1,4 @@
-import * as moment from 'moment-timezone'
+import * as moment from 'moment'
 import { LocalStorageService } from './local-storage.service'
 
 let localStorageService
@@ -18,6 +18,7 @@ describe('LocalStorageService', () => {
   })
 
   it('Should return null if the value is expired', async () => {
+    jest.useFakeTimers()
     localStorageService.setWithExpiry('test', 'test', moment.duration(1, 'ms'))
     jest.advanceTimersByTime(1000)
     expect(localStorageService.get('test')).toEqual(null)

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, fromEvent, merge, Observable, Subject } from 'rxjs'
 import { auditTime, debounceTime, filter } from 'rxjs/operators'
-import * as moment from 'moment-timezone'
+import moment, { Duration } from 'moment'
 interface GestureServiceInitProps {
-  userIdleTimeout: moment.Duration
+  userIdleTimeout: Duration
 }
 
 @Injectable()
@@ -12,7 +12,7 @@ export class GestureService {
     false
   )
 
-  private userIdleTimeout: moment.Duration
+  private userIdleTimeout: Duration
   private isPaused = false
   private simpleEvent$: Observable<Event> = new Observable<Event>()
   private userIdleBumper$: Subject<void> = new Subject<void>()

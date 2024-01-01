@@ -8,7 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { ReportsDatabase } from '../../services'
 import { _ } from '@app/shared/utils'
 import { environment } from 'apps/provider/src/environments/environment'
-import * as moment from 'moment'
+import moment from 'moment-timezone'
 import { flatten, orderBy, uniq, uniqBy } from 'lodash'
 import Papa from 'papaparse'
 import {
@@ -100,13 +100,13 @@ export class ClinicPatientCodeComponent implements OnInit {
   private rows: FetchCareManagementBillingSnapshotResponse['data'] = []
   private refresh$: Subject<void> = new Subject()
   private startOfThisMonth = moment()
-    .startOf('month')
     .tz(this.context.user.timezone)
+    .startOf('month')
     .toISOString()
   private startOfNextMonth = moment()
+    .tz(this.context.user.timezone)
     .add(1, 'month')
     .startOf('month')
-    .tz(this.context.user.timezone)
     .toISOString()
 
   public ngOnInit(): void {
@@ -130,19 +130,20 @@ export class ClinicPatientCodeComponent implements OnInit {
         }
       }
     )
+
     this.form.controls.asOf.valueChanges
       .pipe(debounceTime(500), untilDestroyed(this))
       .subscribe(() => {
         this.startOfNextMonth = this.form.value.asOf
+          .tz(this.context.user.timezone)
           .clone()
           .add(1, 'month')
           .startOf('month')
-          .tz(this.context.user.timezone)
           .toISOString()
         this.startOfThisMonth = this.form.value.asOf
+          .tz(this.context.user.timezone)
           .clone()
           .startOf('month')
-          .tz(this.context.user.timezone)
           .toISOString()
 
         void this.refreshDataWithBillingCodesChange()

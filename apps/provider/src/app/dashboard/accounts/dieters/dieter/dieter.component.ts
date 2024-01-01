@@ -14,7 +14,7 @@ import {
 import { get, intersectionBy } from 'lodash'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy'
 import { DoctorPDFDialog, ProgressReportPDFDialog } from '../../dialogs'
-import * as moment from 'moment'
+import moment from 'moment-timezone'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { CCRConfig } from '@app/config'
 import { Store } from '@ngrx/store'
