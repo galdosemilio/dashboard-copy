@@ -238,7 +238,11 @@ export class FormPDFService {
     organization: SelectedOrganization,
     logo?: string
   ): pdfMake.Header {
-    const orgName = `${organization.name} (ID ${organization.id})`
+    let orgName =
+      organization.name.length > 60
+        ? `${organization.name.substring(0, 60)}...`
+        : organization.name
+    orgName += ` (ID ${organization.id})`
     const partientName = `${submission.account.firstName} ${submission.account.lastName}`
     const submittedBy = `${submission.submittedBy.firstName} ${submission.submittedBy.lastName}`
     const submittedAtDate = this.datePipe.transform(
