@@ -27,6 +27,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { OrderUpdate } from '@spree/storefront-api-v2-sdk/types/interfaces/endpoints/CheckoutClass'
 import { StripeService } from 'ngx-stripe'
 import { IAddress } from '@spree/storefront-api-v2-sdk/types/interfaces/attributes/Address'
+import { ConfirmPaymentError } from './confirm-payment-error'
 
 type SpreeAddress = IAddress & { validate_address: boolean }
 export type ShippingRate = NamedEntity & {
@@ -53,6 +54,7 @@ export class StorefrontCheckoutComponent implements OnInit {
   public creditCardList: NamedEntity[] = []
   public errors: { [key: string]: { [key: string]: string[] } } = {}
   public currentStore: CurrentSpreeStore
+  public paymentIntentAuthFailure: boolean = false
 
   public get couponCodesEnabled(): boolean {
     return this.currentStore?.coupon_codes_enabled
@@ -118,7 +120,7 @@ export class StorefrontCheckoutComponent implements OnInit {
             queryParamsHandling: 'merge'
           })
         }
-        void this.processCheckout()
+        void this.initCheckout()
       })
 
     this.storefront.cart$
@@ -138,7 +140,7 @@ export class StorefrontCheckoutComponent implements OnInit {
       })
   }
 
-  private async processCheckout() {
+  private async initCheckout() {
     this.user = this.storefront.storefrontUserService.user
     this.isLoading = true
 
@@ -242,45 +244,6 @@ export class StorefrontCheckoutComponent implements OnInit {
     }
   }
 
-  public async addPaymentMethod(token: Token) {
-    this.isLoading = true
-
-    try {
-      await this.storefront.checkout({
-        order: {
-          payments_attributes: [
-            {
-              payment_method_id: this.paymentMethodId,
-              source_attributes: {
-                gateway_payment_profile_id: token.id,
-                cc_type: token.type,
-                last_digits: token.card.last4,
-                month: token.card.exp_month.toString(),
-                year: token.card.exp_year.toString(),
-                name: token.card.name
-              }
-            }
-          ]
-        }
-      })
-
-      const confirmData = await this.spree.getPaymentConfirmationIntentData()
-      const confirmCardPaymentResponse = await this.stripeService
-        .confirmCardPayment(confirmData.client_secret)
-        .toPromise()
-
-      await this.spree.verifyPaymentConfirmationIntentResponse({
-        response: confirmCardPaymentResponse
-      })
-
-      await this.resolvePaymentMethod()
-    } catch (err) {
-      this.notifier.error(err)
-    } finally {
-      this.isLoading = false
-    }
-  }
-
   public openChangeShippingAddress() {
     this.dialog
       .open(StorefrontAddressDialog, {
@@ -346,19 +309,51 @@ export class StorefrontCheckoutComponent implements OnInit {
     this.isLoading = true
 
     try {
-      await this.storefront.addPayment({
-        payment_method_id: this.paymentMethodId,
-        source_id: this.creditCardId
-      })
+      await this.confirmPaymentMethod()
       await this.storefront.checkoutComplete()
       await this.router.navigate(['../complete'], {
         relativeTo: this.route,
         queryParamsHandling: 'merge'
       })
     } catch (err) {
-      this.notifier.error(err)
+      this.notifier.error(err?.response?.data?.error ?? err)
+      if (err?.paymentIntentAuthFailure) {
+        await this.initCheckout()
+      }
     } finally {
       this.isLoading = false
+      this.paymentIntentAuthFailure = false
+    }
+  }
+
+  private async confirmPaymentMethod() {
+    let confirmCardPaymentResponse
+    try {
+      await this.storefront.addPayment({
+        payment_method_id: this.paymentMethodId,
+        source_id: this.creditCardId
+      })
+
+      const confirmData = await this.spree.getPaymentConfirmationIntentData()
+      confirmCardPaymentResponse = await this.stripeService
+        .confirmCardPayment(confirmData.client_secret)
+        .toPromise()
+
+      await this.spree.verifyPaymentConfirmationIntentResponse({
+        response: confirmCardPaymentResponse
+      })
+    } catch (err) {
+      if (
+        confirmCardPaymentResponse?.error?.code ===
+        'payment_intent_authentication_failure'
+      ) {
+        throw new ConfirmPaymentError({
+          message: confirmCardPaymentResponse?.error?.message,
+          paymentIntentAuthFailure: true
+        })
+      }
+
+      throw err
     }
   }
 
