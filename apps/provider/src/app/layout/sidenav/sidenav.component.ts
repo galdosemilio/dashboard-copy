@@ -269,6 +269,12 @@ export class SidenavComponent implements OnInit {
                 navName: _('SIDENAV.CUSTOM_REPORT'),
                 navRoute: 'reports/custom',
                 icon: 'content_paste'
+              },
+              {
+                code: SidenavOptions.REPORT_DEVICE,
+                navName: _('SIDENAV.DEVICE_REPORT'),
+                navRoute: 'reports/device',
+                icon: 'devices'
               }
             ]
           },

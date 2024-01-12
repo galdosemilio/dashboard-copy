@@ -20,7 +20,7 @@ function setup(clinic: ValidOrganization, clinicStore: boolean) {
   })
 }
 
-describe('Lefthand menu store links', function () {
+describe('Lefthand menu store links', { retries: 0 }, function () {
   describe('CoachCare Store', function () {
     it('CoachCare store link resolves to store.coachcare.com', function () {
       setup('ccr', true)
@@ -32,8 +32,8 @@ describe('Lefthand menu store links', function () {
         .not('.hidden')
         .as('menuLinks')
 
-      cy.get('@menuLinks').eq(20).should('contain', 'Store')
-      cy.get('@menuLinks').eq(20).click()
+      cy.get('@menuLinks').eq(21).should('contain', 'Store')
+      cy.get('@menuLinks').eq(21).click()
       cy.get('@open').should(
         'have.been.calledWith',
         'https://store.coachcare.com/'
@@ -63,8 +63,8 @@ describe('Lefthand menu store links', function () {
         .not('.hidden')
         .as('menuLinks')
 
-      cy.get('@menuLinks').eq(21).should('contain', 'Store')
-      cy.get('@menuLinks').eq(21).click()
+      cy.get('@menuLinks').eq(22).should('contain', 'Store')
+      cy.get('@menuLinks').eq(22).click()
       cy.get('@open').should(
         'have.been.calledWith',
         `http://localhost:4200/storefront?baseOrg=1`
@@ -81,10 +81,10 @@ describe('Lefthand menu store links', function () {
         .not('.hidden')
         .as('menuLinks')
 
-      cy.get('@menuLinks').eq(19).should('contain', 'Sequences')
-      cy.get('@menuLinks').eq(20).should('contain', 'Store')
-      cy.get('@menuLinks').eq(21).should('contain', 'Resources')
-      cy.get('@menuLinks').eq(20).click()
+      cy.get('@menuLinks').eq(20).should('contain', 'Sequences')
+      cy.get('@menuLinks').eq(21).should('contain', 'Store')
+      cy.get('@menuLinks').eq(22).should('contain', 'Resources')
+      cy.get('@menuLinks').eq(21).click()
       cy.get('@open').should(
         'have.been.calledWith',
         'https://store.coachcare.com/'

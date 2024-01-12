@@ -19,14 +19,14 @@ describe('Lefthand menu (resources link)', function () {
     cy.get('app-menu').find('app-sidenav-item').not('.hidden').as('menuLinks')
 
     cy.get('@menuLinks')
-      .eq(22)
+      .eq(23)
       .should('contain', 'Resources')
       .find('mat-list-item')
       .first()
       .click()
 
     cy.get('@menuLinks')
-      .eq(23)
+      .eq(24)
       .should('contain', 'Updates')
       .find('mat-list-item')
       .first()
@@ -37,7 +37,7 @@ describe('Lefthand menu (resources link)', function () {
     })
 
     cy.get('@menuLinks')
-      .eq(24)
+      .eq(25)
       .should('contain', 'Contact Support')
       .find('mat-list-item')
       .first()
@@ -49,7 +49,7 @@ describe('Lefthand menu (resources link)', function () {
     )
 
     cy.get('@menuLinks')
-      .eq(25)
+      .eq(26)
       .should('contain', 'FAQ & Support Guides')
       .find('mat-list-item')
       .first()

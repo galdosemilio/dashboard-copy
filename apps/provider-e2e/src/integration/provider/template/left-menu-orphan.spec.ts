@@ -9,7 +9,7 @@ describe('Lefthand menu (orphaned provider)', function () {
     cy.get('app-menu')
       .find('app-sidenav-item')
       .not('.hidden')
-      .should('have.length', 26)
+      .should('have.length', 27)
 
     cy.get('[data-cy="empty-menu"]').should('not.exist')
 

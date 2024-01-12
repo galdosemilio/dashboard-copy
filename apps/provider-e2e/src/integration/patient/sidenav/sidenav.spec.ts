@@ -35,8 +35,6 @@ describe('Patient Sidenav', function () {
     cy.get('app-menu').find('app-sidenav-item').not('.hidden').as('menuLinks')
     cy.get('@menuLinks').should('have.length', 8)
 
-    expectedLinks.splice(5, 1, 'Manage My Subscription')
-
     expectedLinks.forEach((link, index) => {
       getMenuLinkToContain(index, link)
     })
