@@ -13,8 +13,6 @@ import { CcrDatabase } from '@app/shared/model'
 import {
   EnrollmentSimpleReportRequest,
   EnrollmentSimpleReportResponse,
-  EnrollmentTimelineRequest,
-  EnrollmentTimelineSegment,
   FetchRPMBillingSummaryRequest,
   FetchRPMMonthlyBillingSummaryRequest,
   FetchRPMMonthlyBillingSummaryResponse,
@@ -46,20 +44,6 @@ export class ReportsDatabase extends CcrDatabase {
 
   //   return this.reports.fetchEnrollmentReport(request);
   // }
-
-  fetchEnrollmentTimelineReport(
-    args: EnrollmentTimelineRequest
-  ): Promise<Array<EnrollmentTimelineSegment>> {
-    const request: EnrollmentTimelineRequest = {
-      organization: args.organization,
-      startDate: args.startDate,
-      endDate: args.endDate,
-      detailed: args.detailed ? args.detailed : true,
-      unit: args.unit ? args.unit : undefined
-    }
-
-    return this.reports.fetchEnrollmentTimeline(request)
-  }
 
   fetchSignupsTimelineReport(
     args: SignupsTimelineRequest
