@@ -1,5 +1,11 @@
 import { standardSetup } from '../../../../support'
 import { getCareManagementBillingRows } from '../../../../support/care-management'
+import {
+  allServicesData,
+  ccmData,
+  rpmData,
+  rtmData
+} from './monitoring-reports-data'
 
 describe('Reports -> RPM -> Export Monitoring Report', function () {
   beforeEach(() => {
@@ -20,12 +26,19 @@ describe('Reports -> RPM -> Export Monitoring Report', function () {
 
     cy.get('[data-cy="export-monitoring-report-button"]').click()
 
-    cy.readFile(
-      `${Cypress.config('downloadsFolder')}/RPM_Dec_2019_csv.csv`
-    ).then((res) => {
-      const csv = csvJSON(res)
-      checkRPMAndRTMCsv(csv, ['99457', '99458'])
-    })
+    careManagementTypeSelectModal('RPM')
+
+    cy.readFile(`${Cypress.config('downloadsFolder')}/RPM_Dec_2019_1.csv`).then(
+      (res) => {
+        const csv = csvJSON(res)
+
+        for (let i = 0; i < rpmData.length; i += 1) {
+          Object.entries(rpmData[i]).forEach(([key, value]) => {
+            checkCsvValues(csv, i, key, value)
+          })
+        }
+      }
+    )
   })
 
   it('CCM CSV exports correctly', function () {
@@ -47,65 +60,19 @@ describe('Reports -> RPM -> Export Monitoring Report', function () {
     })
 
     cy.get('[data-cy="export-monitoring-report-button"]').click()
+    careManagementTypeSelectModal('CCM')
 
-    cy.readFile(
-      `${Cypress.config('downloadsFolder')}/CCM_Dec_2019_csv.csv`
-    ).then((res) => {
-      const csv = csvJSON(res)
+    cy.readFile(`${Cypress.config('downloadsFolder')}/CCM_Dec_2019_1.csv`).then(
+      (res) => {
+        const csv = csvJSON(res)
 
-      checkCsvData(csv, 0, 14, 'N/A')
-      checkCsvData(
-        csv,
-        0,
-        15,
-        '30 more calendar days; 20 minutes more of monitoring needed'
-      )
-      checkCsvData(csv, 0, 16, 'N/A')
-      checkCsvData(
-        csv,
-        0,
-        17,
-        '99490 requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed'
-      )
-      checkCsvData(csv, 0, 18, 'N/A')
-      checkCsvData(
-        csv,
-        0,
-        19,
-        '99439 requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed'
-      )
-
-      checkCsvData(csv, 1, 14, '01/31/2020')
-      checkCsvData(csv, 1, 15, 'N/A')
-      checkCsvData(csv, 1, 16, 'N/A')
-      checkCsvData(
-        csv,
-        1,
-        17,
-        '30 more calendar days; 15 minutes more of monitoring needed'
-      )
-      checkCsvData(csv, 1, 18, 'N/A')
-      checkCsvData(
-        csv,
-        1,
-        19,
-        '99439 requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed'
-      )
-
-      checkCsvData(csv, 2, 14, '01/31/2020')
-      checkCsvData(csv, 2, 15, 'N/A')
-      checkCsvData(csv, 2, 16, '01/31/2020')
-      checkCsvData(csv, 2, 17, 'N/A')
-      checkCsvData(csv, 2, 18, 'N/A')
-      checkCsvData(csv, 2, 19, '10 minutes more of monitoring needed')
-
-      checkCsvData(csv, 3, 14, 'N/A')
-      checkCsvData(csv, 3, 15, '01/31/2020')
-      checkCsvData(csv, 3, 16, 'N/A')
-      checkCsvData(csv, 3, 17, '01/31/2020')
-      checkCsvData(csv, 3, 18, 'N/A')
-      checkCsvData(csv, 3, 19, '01/31/2020')
-    })
+        for (let i = 0; i < ccmData.length; i += 1) {
+          Object.entries(ccmData[i]).forEach(([key, value]) => {
+            checkCsvValues(csv, i, key, value)
+          })
+        }
+      }
+    )
   })
 
   it('RTM CSV exports correctly', function () {
@@ -127,131 +94,63 @@ describe('Reports -> RPM -> Export Monitoring Report', function () {
     })
 
     cy.get('[data-cy="export-monitoring-report-button"]').click()
+    careManagementTypeSelectModal('RTM')
+
+    cy.readFile(`${Cypress.config('downloadsFolder')}/RTM_Dec_2019_1.csv`).then(
+      (res) => {
+        const csv = csvJSON(res)
+
+        for (let i = 0; i < rtmData.length; i += 1) {
+          Object.entries(rtmData[i]).forEach(([key, value]) => {
+            checkCsvValues(csv, i, key, value)
+          })
+        }
+      }
+    )
+  })
+
+  it('ALL CSV exports correctly', function () {
+    standardSetup({
+      apiOverrides: [
+        {
+          url: '/1.0/warehouse/care-management/billing/snapshot**',
+          fixture: 'api/warehouse/getAllBillingSnapshotMultiple'
+        }
+      ]
+    })
+
+    getCareManagementBillingRows({
+      serviceType: {
+        id: '2',
+        name: 'CCM',
+        code: 'ccm'
+      }
+    })
+
+    cy.get('[data-cy="export-monitoring-report-button"]').click()
+    cy.get('app-monitoring-report-dialog')
+      .find('.mat-select-trigger')
+      .trigger('click')
+      .wait(500)
+    cy.get('.mat-option').contains(`ALL`).trigger('click').tick(1000)
+    cy.get('app-monitoring-report-dialog').contains('Download').trigger('click')
 
     cy.readFile(
-      `${Cypress.config('downloadsFolder')}/RTM_Dec_2019_csv.csv`
+      `${Cypress.config('downloadsFolder')}/Monitoring_Report_Dec_2019_1.csv`
     ).then((res) => {
       const csv = csvJSON(res)
 
-      checkRPMAndRTMCsv(csv, ['98980', '98981'])
+      for (let i = 0; i < allServicesData.length; i += 1) {
+        Object.entries(allServicesData[i]).forEach(([key, value]) => {
+          checkCsvValues(csv, i, key, value)
+        })
+      }
     })
   })
 })
 
-function checkRPMAndRTMCsv(csv, requirements: string[]) {
-  checkCsvData(csv, 0, 14, 'N/A')
-  checkCsvData(csv, 0, 15, '30 more calendar days; ')
-  checkCsvData(csv, 0, 16, 'N/A')
-  checkCsvData(
-    csv,
-    0,
-    17,
-    '30 more calendar days; 15 more device transmissions needed'
-  )
-  checkCsvData(csv, 0, 18, 'N/A')
-  checkCsvData(
-    csv,
-    0,
-    19,
-    '30 more calendar days; 20 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
-  )
-  checkCsvData(csv, 0, 20, 'N/A')
-  checkCsvData(
-    csv,
-    0,
-    21,
-    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
-  )
-  checkCsvData(csv, 0, 22, 'N/A')
-  checkCsvData(
-    csv,
-    0,
-    23,
-    `${requirements[1]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
-  )
-
-  checkCsvData(csv, 1, 14, '01/31/2020')
-  checkCsvData(csv, 1, 15, 'N/A')
-  checkCsvData(csv, 1, 16, 'N/A')
-  checkCsvData(
-    csv,
-    1,
-    17,
-    '20 more calendar days; 15 more device transmissions needed'
-  )
-  checkCsvData(csv, 1, 18, 'N/A')
-  checkCsvData(
-    csv,
-    1,
-    19,
-    '30 more calendar days; 20 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
-  )
-  checkCsvData(csv, 1, 20, 'N/A')
-  checkCsvData(
-    csv,
-    1,
-    21,
-    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
-  )
-  checkCsvData(csv, 1, 22, 'N/A')
-  checkCsvData(
-    csv,
-    1,
-    23,
-    `${requirements[1]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
-  )
-
-  checkCsvData(csv, 2, 14, '01/31/2020')
-  checkCsvData(csv, 2, 15, 'N/A')
-  checkCsvData(csv, 2, 16, '01/31/2020')
-  checkCsvData(csv, 2, 17, 'N/A')
-  checkCsvData(csv, 2, 18, 'N/A')
-  checkCsvData(
-    csv,
-    2,
-    19,
-    '20 more calendar days; 10 minutes more of monitoring needed; 1 more live interactions (call/visit) needed'
-  )
-  checkCsvData(csv, 2, 20, 'N/A')
-  checkCsvData(
-    csv,
-    2,
-    21,
-    `${requirements[0]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
-  )
-  checkCsvData(csv, 2, 22, 'N/A')
-  checkCsvData(
-    csv,
-    2,
-    23,
-    `${requirements[1]} requirements not satisfied; 30 more calendar days; 20 minutes more of monitoring needed`
-  )
-
-  checkCsvData(csv, 3, 14, '01/31/2020')
-  checkCsvData(csv, 3, 15, 'N/A')
-  checkCsvData(csv, 3, 16, '01/31/2020')
-  checkCsvData(csv, 3, 17, 'N/A')
-  checkCsvData(csv, 3, 18, '01/31/2020')
-  checkCsvData(csv, 3, 19, 'N/A')
-  checkCsvData(csv, 3, 20, '01/31/2020')
-  checkCsvData(csv, 3, 21, 'N/A')
-  checkCsvData(csv, 3, 22, 'N/A')
-  checkCsvData(csv, 3, 23, '20 minutes more of monitoring needed')
-
-  checkCsvData(csv, 4, 14, '01/31/2020')
-  checkCsvData(csv, 4, 15, 'N/A')
-  checkCsvData(csv, 4, 16, '01/31/2020')
-  checkCsvData(csv, 4, 17, 'N/A')
-  checkCsvData(csv, 4, 18, '01/31/2020')
-  checkCsvData(csv, 4, 19, 'N/A')
-  checkCsvData(csv, 4, 20, '01/31/2020')
-  checkCsvData(csv, 4, 21, 'N/A')
-  checkCsvData(csv, 4, 22, 'N/A')
-  checkCsvData(csv, 4, 23, '')
-}
-
-function checkCsvData(csv, index: number, column: number, value: string) {
-  expect(Object.values(csv[index])[column]).to.equal(value)
+function checkCsvValues(csv, index, field: string, value: string) {
+  expect(csv[index][field]).to.equal(value)
 }
 
 function csvJSON(csv) {
@@ -285,4 +184,11 @@ function csvJSON(csv) {
     result.push(obj)
   }
   return result
+}
+
+function careManagementTypeSelectModal(serviceType: string) {
+  cy.get('app-monitoring-report-dialog')
+    .find('.mat-select')
+    .should('contain', serviceType)
+  cy.get('app-monitoring-report-dialog').contains('Download').trigger('click')
 }

@@ -1,0 +1,844 @@
+{
+  "data": [
+    {
+      "account": {
+        "id": "6708",
+        "firstName": "A",
+        "lastName": "A",
+        "dateOfBirth": "1993-04-25",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "7048",
+        "name": "CoachCare Clinic Test",
+        "hierarchyPath": ["7048", "31", "30"]
+      },
+      "billing": [
+        {
+          "code": "99439",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99490"]
+            }
+          }
+        },
+        {
+          "code": "99490",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 0
+              }
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "739",
+        "changedAt": "2020-02-01T15:11:07.174+00:00",
+        "preference": {
+          "id": "31",
+          "name": "CoachCare Clinic Test NY",
+          "hierarchyPath": ["31", "30"]
+        },
+        "startedAt": "2020-02-01T04:00:00+00:00",
+        "serviceType": {
+          "id": "2",
+          "name": "CCM",
+          "tag": "ccm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": false,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2020-02-01T04:00:00+00:00",
+        "educationProvidedAt": "2020-02-01T04:00:00+00:00",
+        "deviceProvidedAt": "2020-02-01T04:00:00+00:00",
+        "supervisingProvider": {
+          "id": "6",
+          "firstName": "Eric",
+          "lastName": "Di Bari"
+        },
+        "diagnosis": {
+          "primary": "test",
+          "secondary": "testasdsd"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "7470",
+        "firstName": "Zhang",
+        "lastName": "Xin",
+        "dateOfBirth": "1994-07-22",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
+      "billing": [
+        {
+          "code": "99439",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 2
+            },
+            "next": {
+              "earliestEligibleAt": "2020-01-01T04:00:00Z",
+              "alreadyEligibleCount": 2,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 1200,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": []
+            }
+          }
+        },
+        {
+          "code": "99490",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "701",
+        "changedAt": "2020-02-01T17:13:33.678+00:00",
+        "startedAt": "2020-02-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "2",
+          "name": "CCM",
+          "tag": "ccm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": false,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2020-02-01T10:00:00+00:00",
+        "educationProvidedAt": "22020-02-01T10:00:00+00:00",
+        "deviceProvidedAt": "2020-02-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "560",
+          "firstName": "Jeffrey",
+          "lastName": "Drakos"
+        },
+        "diagnosis": {
+          "primary": "sdd",
+          "secondary": "sdd"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "6708",
+        "firstName": "A",
+        "lastName": "A",
+        "dateOfBirth": "1993-04-25",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "7048",
+        "name": "CoachCare Clinic Test",
+        "hierarchyPath": ["7048", "31", "30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 25
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 25
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 1
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "606",
+        "changedAt": "2023-05-01T03:49:05.376+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "1",
+          "name": "Weight"
+        },
+        "startedAt": "2023-05-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-05-01T10:00:00+00:00",
+        "educationProvidedAt": "2023-05-01T10:00:00+00:00",
+        "deviceProvidedAt": "2023-05-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "2852",
+          "firstName": "Lascario",
+          "lastName": "Pacheco Arrieta"
+        },
+        "diagnosis": {
+          "primary": "Primary Diagnosis 123",
+          "secondary": "Secondary Diagnosis 123",
+          "other": "Insurance Information 12345"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "7470",
+        "firstName": "Zhang",
+        "lastName": "Xin",
+        "dateOfBirth": "1994-07-22",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
+      "billing": [
+        {
+          "code": "99453",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 0
+            }
+          }
+        },
+        {
+          "code": "99454",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-21T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 1
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "99457",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "99458",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["99457"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "636",
+        "changedAt": "2023-05-01T14:23:04.144+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2023-04-28T14:10:00+00:00",
+        "serviceType": {
+          "id": "1",
+          "name": "RPM",
+          "tag": "rpm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-04-28T14:10:00+00:00",
+        "educationProvidedAt": "2023-04-28T14:10:00+00:00",
+        "deviceProvidedAt": "2023-04-28T14:10:00+00:00",
+        "supervisingProvider": {
+          "id": "560",
+          "firstName": "Jeffrey",
+          "lastName": "Drakos"
+        },
+        "diagnosis": {
+          "primary": "Test"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "6708",
+        "firstName": "A",
+        "lastName": "A",
+        "dateOfBirth": "1993-04-25",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "7048",
+        "name": "CoachCare Clinic Test",
+        "hierarchyPath": ["7048", "31", "30"]
+      },
+      "billing": [
+        {
+          "code": "98975",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 25
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 25
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "98977",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 1
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "98980",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "98981",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["98980"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "606",
+        "changedAt": "2023-05-01T03:49:05.376+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "3",
+          "name": "Weight"
+        },
+        "startedAt": "2023-05-01T10:00:00+00:00",
+        "serviceType": {
+          "id": "3",
+          "name": "RTM",
+          "tag": "rtm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-05-01T10:00:00+00:00",
+        "educationProvidedAt": "2023-05-01T10:00:00+00:00",
+        "deviceProvidedAt": "2023-05-01T10:00:00+00:00",
+        "supervisingProvider": {
+          "id": "2852",
+          "firstName": "Lascario",
+          "lastName": "Pacheco Arrieta"
+        },
+        "diagnosis": {
+          "primary": "Primary Diagnosis 123",
+          "secondary": "Secondary Diagnosis 123",
+          "other": "Insurance Information 12345"
+        }
+      }
+    },
+    {
+      "account": {
+        "id": "7470",
+        "firstName": "Zhang",
+        "lastName": "Xin",
+        "dateOfBirth": "1994-07-22",
+        "timezone": "America/New_York"
+      },
+      "organization": {
+        "id": "30",
+        "name": "CoachCare",
+        "hierarchyPath": ["30"]
+      },
+      "billing": [
+        {
+          "code": "98975",
+          "eligibility": {
+            "last": {
+              "timestamp": "2020-02-01T00:00:00-04:00",
+              "count": 0
+            }
+          }
+        },
+        {
+          "code": "98977",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-21T04:00:00.000Z",
+              "transmissions": {
+                "distinctDates": {
+                  "required": 16,
+                  "count": 1
+                },
+                "measurements": {
+                  "automated": {
+                    "count": 0
+                  },
+                  "manual": {
+                    "count": 0
+                  }
+                },
+                "notification": {
+                  "count": 1
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "98980",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "liveInteraction": {
+                "count": 0,
+                "required": 1
+              }
+            }
+          }
+        },
+        {
+          "code": "98981",
+          "eligibility": {
+            "next": {
+              "earliestEligibleAt": "2020-01-31T04:00:00.000Z",
+              "alreadyEligibleCount": 0,
+              "monitoring": {
+                "total": {
+                  "seconds": {
+                    "tracked": 0,
+                    "required": 1200,
+                    "elapsed": 0
+                  }
+                },
+                "automated": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                },
+                "calls": {
+                  "seconds": {
+                    "elapsed": 0
+                  }
+                }
+              },
+              "relatedCodeRequirementsNotMet": ["98980"]
+            }
+          }
+        }
+      ],
+      "externalIdentifiers": [],
+      "state": {
+        "id": "636",
+        "changedAt": "2023-05-01T14:23:04.144+00:00",
+        "preference": {
+          "id": "30",
+          "name": "CoachCare",
+          "hierarchyPath": ["30"],
+          "taxIdentificationNumber": "98-7654321"
+        },
+        "plan": {
+          "id": "2",
+          "name": "Blood pressure"
+        },
+        "startedAt": "2023-04-28T14:10:00+00:00",
+        "serviceType": {
+          "id": "3",
+          "name": "RTM",
+          "tag": "rtm"
+        },
+        "isActive": true,
+        "conditions": {
+          "hasMedicalNecessity": true,
+          "patientConsented": true,
+          "receivedDevice": true,
+          "hadFaceToFace": true,
+          "goalsSet": true
+        },
+        "consentedAt": "2023-04-28T14:10:00+00:00",
+        "educationProvidedAt": "2023-04-28T14:10:00+00:00",
+        "deviceProvidedAt": "2023-04-28T14:10:00+00:00",
+        "supervisingProvider": {
+          "id": "560",
+          "firstName": "Jeffrey",
+          "lastName": "Drakos"
+        },
+        "diagnosis": {
+          "primary": "Test"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "totalCount": 6
+  }
+}
