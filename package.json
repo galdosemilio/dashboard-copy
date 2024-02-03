@@ -126,7 +126,7 @@
     "@spree/storefront-api-v2-sdk": "^6.0.6",
     "@stripe/stripe-js": "1.23.0",
     "@twilio/video-processors": "1.0.2",
-    "@types/lodash": "4.14.161",
+    "@types/lodash": "4.14.202",
     "@types/luxon": "1.27.0",
     "ang-jsoneditor": "1.10.5",
     "angularx-qrcode": "14.0.0",
